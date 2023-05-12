@@ -119,7 +119,7 @@ public class LevelSeven extends BaseLevel implements ILevel{
 
     @Override
     public ILevel GetPreviousLevel() {
-        return null;
+        return new LevelSix(Engine, GameImage, GameOptions);
     }
 
     @Override
@@ -154,11 +154,11 @@ public class LevelSeven extends BaseLevel implements ILevel{
 
     @Override
     public ArrayList<GridCell> GetOccupiedCells() {
-        return null;
+        return OccupiedCells;
     }
 
     @Override
     public void SetLevelRendered(boolean flag) {
-
+        IsLevelRendered = flag;
     }
 }

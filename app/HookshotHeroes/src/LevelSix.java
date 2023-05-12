@@ -118,7 +118,7 @@ public class LevelSix extends BaseLevel implements ILevel{
 
     @Override
     public GridCell GetExitGrid() {
-        return new GridCell(0, 27);
+        return new GridCell(0, 51);
     }
 
     @Override
