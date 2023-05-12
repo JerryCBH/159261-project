@@ -143,7 +143,7 @@ public class Levels {
         for (int x = 240; x < 480; x += environmentSpriteSize) {
             drawWallFrontWithCollision(x, 120);
         }
-        for (int y = 40; y < 120; y += environmentSpriteSize) {;
+        for (int y = 40; y < 120; y += environmentSpriteSize) {
             drawWallFrontWithCollision(240, y);
         }
         for (int y = 400; y < 560; y += environmentSpriteSize) {

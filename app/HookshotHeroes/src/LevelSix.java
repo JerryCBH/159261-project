@@ -88,11 +88,17 @@ public class LevelSix extends BaseLevel implements ILevel{
         drawWallFrontWithCollision(40, 320);
         drawWallFrontWithCollision(120, 280);
         drawWallFrontWithCollision(120, 320);
+
+        //Draw doors
+        Engine.drawImage(GameImage.DoorGreyOpen, 520,0);
+        doorCollision(520,0);
+        Engine.drawImage(GameImage.DoorGreyClosed, 280,560);
+        doorCollision(280,560);
     }
 
     @Override
     public ILevel GetNextLevel() {
-        return null;
+        return new LevelSeven(Engine, GameImage, GameOptions);
     }
 
     @Override
