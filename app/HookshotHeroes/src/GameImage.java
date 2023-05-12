@@ -25,15 +25,15 @@ public class GameImage {
         LoadPlayerSpriteSheet(engine);
 
         // Load environment images.
-        DoorGreyClosed = engine.loadImage("./environment/DoorGreyClosed.png");
-        DoorGreyOpen = engine.loadImage("./environment/DoorGreyOpen.png");
-        floor = engine.loadImage("./environment/floor.png");
-        lava = engine.loadImage("./environment/lava.png");
-        wallGreyLeftSide = engine.loadImage("./environment/wallGreyLeftSide.png");
-        wallGreyRightSide = engine.loadImage("./environment/wallGreyRightSide.png");
-        wallGreyFront = engine.loadImage("./environment/wallGreyFront.png");
-        DoorGreyOpenSide = engine.loadImage("./environment/DoorGreyOpenSide.png");
-        DoorGreyClosedSide = engine.loadImage("./environment/DoorGreyClosedSide.png");
+        DoorGreyClosed = engine.loadImage("environment/DoorGreyClosed.png");
+        DoorGreyOpen = engine.loadImage("environment/DoorGreyOpen.png");
+        floor = engine.loadImage("environment/floor.png");
+        lava = engine.loadImage("environment/lava.png");
+        wallGreyLeftSide = engine.loadImage("environment/wallGreyLeftSide.png");
+        wallGreyRightSide = engine.loadImage("environment/wallGreyRightSide.png");
+        wallGreyFront = engine.loadImage("environment/wallGreyFront.png");
+        DoorGreyOpenSide = engine.loadImage("environment/DoorGreyOpenSide.png");
+        DoorGreyClosedSide = engine.loadImage("environment/DoorGreyClosedSide.png");
     }
 
     // Load from sprite sheet.
