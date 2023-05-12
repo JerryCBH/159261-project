@@ -51,7 +51,7 @@ public class BaseLevel {
         Engine.drawRectangle(x, y, 40, 40);
 
         //Add collision logic here
-        AddOccupiedCell(x, y);
+        //AddOccupiedCell(x, y);
     }
 
     public void basicLevelEnvironment() {
@@ -82,7 +82,7 @@ public class BaseLevel {
 
     private void AddOccupiedCell(int x, int y){
         if (!IsLevelRendered) {
-           //OccupiedCells.add(new GridCell(y / CELL_WIDTH, x / CELL_HEIGHT));
+           OccupiedCells.add(new GridCell(y / CELL_WIDTH, x / CELL_HEIGHT));
         }
     }
 }
