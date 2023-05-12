@@ -7,9 +7,9 @@ import java.util.Random;
 public class BaseWorldBuilder {
     protected int startOffset = 5, endOffset = 5;
 
-    public World CreateWorld(HookshotHeroesGameEngine engine, GameImage gameImage, GameAudio gameAudio, GameOptions options){
+    public World CreateWorld(HookshotHeroesGameEngine engine, GameImage gameImage, GameAudio gameAudio, GameOptions options, ILevel level){
 
-        return new World(options.Width, options.Height, engine, gameImage, gameAudio, options);
+        return new World(options.Width, options.Height, engine, gameImage, gameAudio, options, level);
     }
 
     // Add objects to the world.

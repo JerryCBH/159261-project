@@ -24,7 +24,10 @@ public class World implements IWorld {
     // A FIFO queue for playing audios.
     public LinkedList<AudioRequest> AudioRequests;
 
-    public World(int width, int height, HookshotHeroesGameEngine engine, GameImage gameImage, GameAudio gameAudio, GameOptions options){
+    // Environment Levels.
+    public ILevel CurrentLevel;
+
+    public World(int width, int height, HookshotHeroesGameEngine engine, GameImage gameImage, GameAudio gameAudio, GameOptions options, ILevel level){
         Engine = engine;
         GameImage = gameImage;
         GameAudio = gameAudio;
@@ -32,11 +35,13 @@ public class World implements IWorld {
 
         // Level world grid
         // The map is divided into cells of 10px by 10px.
-        // Snake can move 1 cell at a time.
+        // Player can move 1 cell at a time.
         GridRows = height / CELL_HEIGHT;
         GridColumns = width / CELL_WIDTH;
         AnimationRequests = new ArrayList<>();
         AudioRequests = new LinkedList<>();
+
+        CurrentLevel = level;
     }
 
     public IWorldObject[] GetObjects() {
@@ -47,6 +52,10 @@ public class World implements IWorld {
     public void SetObjects(IWorldObject[] objects){
         Objects = new ArrayList<>();
         Collections.addAll(Objects, objects);
+    }
+
+    public void RenderLevel(){
+        CurrentLevel.RenderLevel();
     }
 
     public void RenderObjects(){
@@ -79,6 +88,30 @@ public class World implements IWorld {
     private void CheckCollision(ArrayList<CollisionCheckInfo> toCheck){
         // Go through each collected collision info and check if collision happened.
         for (CollisionCheckInfo collisionCheckInfo : toCheck) {
+            // Check exit grid
+            if (CheckGrid(collisionCheckInfo.Cell, CurrentLevel.GetExitGrid())){
+                var nextLevel = CurrentLevel.GetNextLevel();
+                if (nextLevel != null){
+                    Engine.InitializeLevel(Engine.GameOptions, nextLevel);
+                }
+                else{
+                    Engine.PauseEngine();
+                    JOptionPane.showMessageDialog(Engine.mFrame, "YOU WIN!!!");
+                    // Restart new game.
+                    Engine.InitializeWorld(Engine.GameOptions);
+                    Engine.ResumeEngine();
+                }
+                return;
+            }
+            // Check entry grid
+            if (CheckGrid(collisionCheckInfo.Cell, CurrentLevel.GetEntryGrid())){
+                var prevLevel = CurrentLevel.GetPreviousLevel();
+                if (prevLevel != null){
+                    prevLevel.SetStartPos(LevelStartPos.Top);
+                    Engine.InitializeLevel(Engine.GameOptions, prevLevel);
+                }
+                return;
+            }
             // Check going over the boundaries.
             var toRemove = CheckBoundaryCollision(collisionCheckInfo.Cell, collisionCheckInfo.Source);
             if (toRemove == null) {
@@ -124,6 +157,18 @@ public class World implements IWorld {
             }
         }
         return info;
+    }
+
+    private boolean CheckGrid(GridCell newCell, GridCell target){
+        var offsetY = 3;
+        var offsetX = 3;
+        var result = false;
+        if ((target.Row - offsetY <= newCell.Row && newCell.Row <= target.Row + offsetY)
+        && (target.Column - offsetX <= newCell.Column && newCell.Column <= target.Column + offsetX)
+        ){
+            result = true;
+        }
+        return result;
     }
 
     // Check if the object has moved beyond the grid boundaries.

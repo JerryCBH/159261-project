@@ -14,7 +14,7 @@ import java.io.IOException;
  */
 public class HookshotHeroesGameEngine extends GameEngine {
 
-    private final int _width = 1000, _height = 700, _fps = 60;
+    private final int _width = 600, _height = 600, _fps = 60;
     private final GameImage _gameImage;
     private final GameAudio _gameAudio;
     private IWorld _world;
@@ -47,10 +47,20 @@ public class HookshotHeroesGameEngine extends GameEngine {
     // Game options can be loaded from disk.
     public void InitializeWorld(GameOptions options){
         if(options.SinglePlayerMode){
-            _world = new SinglePlayerWorldBuilder().Build(this, _gameImage, _gameAudio, options);
+            _world = new SinglePlayerWorldBuilder().Build(this, _gameImage, _gameAudio, options, new LevelOne(this, _gameImage, options));
         }
         else {
-            _world = new DoublePlayerWorldBuilder().Build(this, _gameImage, _gameAudio, options);
+            _world = new DoublePlayerWorldBuilder().Build(this, _gameImage, _gameAudio, options, new LevelOne(this, _gameImage, options));
+        }
+    }
+
+    // Initialize the game world based on level.
+    public void InitializeLevel(GameOptions options, ILevel level){
+        if(options.SinglePlayerMode){
+            _world = new SinglePlayerWorldBuilder().Build(this, _gameImage, _gameAudio, options, level);
+        }
+        else {
+            _world = new DoublePlayerWorldBuilder().Build(this, _gameImage, _gameAudio, options, level);
         }
     }
 
@@ -80,6 +90,7 @@ public class HookshotHeroesGameEngine extends GameEngine {
         clearBackground(_width, _height);
 
         // Render objects, play animations or audios.
+        _world.RenderLevel();
         _world.RenderObjects();
         _world.PlayAnimation();
         _world.PlayAudio();

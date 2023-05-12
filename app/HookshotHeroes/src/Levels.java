@@ -1,101 +1,72 @@
 import java.awt.*;
 //From Here
 
-public class Levels extends GameEngine {
-    int height = 600;
-    int width = 600;
+public class Levels {
+    public HookshotHeroesGameEngine Engine;
+    public GameImage GameImage;
+    public GameOptions GameOptions;
     int environmentSpriteSize = 40;
-    Image DoorGreyClosed = loadImage("app/HookshotHeroes/resources/environment/DoorGreyClosed.png");
-    Image DoorGreyOpen = loadImage("app/HookshotHeroes/resources/environment/DoorGreyOpen.png");
-    Image floor = loadImage("app/HookshotHeroes/resources/environment/floor.png");
-    Image lava = loadImage("app/HookshotHeroes/resources/environment/lava.png");
-    Image wallGreyLeftSide = loadImage("app/HookshotHeroes/resources/environment/wallGreyLeftSide.png");
-    Image wallGreyRightSide = loadImage("app/HookshotHeroes/resources/environment/wallGreyRightSide.png");
-    Image wallGreyFront = loadImage("app/HookshotHeroes/resources/environment/wallGreyFront.png");
-    Image DoorGreyOpenSide = loadImage("app/HookshotHeroes/resources/environment/DoorGreyOpenSide.png");
-    Image DoorGreyClosedSide = loadImage("app/HookshotHeroes/resources/environment/DoorGreyClosedSide.png");
+
+    public Levels (HookshotHeroesGameEngine engine, GameImage gameImage, GameOptions gameOptions){
+        Engine = engine;
+        GameImage = gameImage;
+        GameOptions = gameOptions;
+    }
 
     public void drawWallFrontWithCollision(int x, int y) {
-        drawImage(wallGreyFront, x, y);
-        changeColor(Color.red); //Just to see visually
-        drawRectangle(x, y, 40, 40);
+        Engine.drawImage(GameImage.wallGreyFront, x, y);
+        Engine.changeColor(Color.red); //Just to see visually
+        Engine.drawRectangle(x, y, 40, 40);
 
         //Add collision logic here
     }
 
     public void wallSideCollision(int x, int y) {
-        changeColor(Color.red); // Just to see visually
-        drawRectangle(x, y, 40, 40);
+        Engine.changeColor(Color.red); // Just to see visually
+        Engine.drawRectangle(x, y, 40, 40);
 
         //Add collision logic here
     }
 
     public void doorCollision(int x, int y) {
-        changeColor(Color.green); // Just to see visually
-        drawRectangle(x, y, 40, 40);
+        Engine.changeColor(Color.green); // Just to see visually
+        Engine.drawRectangle(x, y, 40, 40);
 
         //Add collision logic here
     }
 
     public void drawLavaWithCollision(int x, int y) {
-        drawImage(lava, x, y);
-        changeColor(Color.pink); // Just to see visually
-        drawRectangle(x, y, 40, 40);
+        Engine.drawImage(GameImage.lava, x, y);
+        Engine.changeColor(Color.pink); // Just to see visually
+        Engine.drawRectangle(x, y, 40, 40);
 
         //Add collision logic here
     }
 
     public void basicLevelEnvironment() {
         //Floor
-        for (int y = 0; y < width; y += 100) {
-            for (int x = 0; x < height; x += 100) {
-                drawImage(floor, x, y);
+        for (int y = 0; y < GameOptions.Width; y += 100) {
+            for (int x = 0; x < GameOptions.Height; x += 100) {
+                Engine.drawImage(GameImage.floor, x, y);
             }
         }
 
-        for (int x = 0; x < 600; x += environmentSpriteSize) {
+        for (int x = 0; x < GameOptions.Width; x += environmentSpriteSize) {
             // Draw wall sprite on the top side
             drawWallFrontWithCollision(x, 0);
 
             // Draw wall sprite on the bottom side
-            drawWallFrontWithCollision(x, 560);
+            drawWallFrontWithCollision(x, GameOptions.Width - environmentSpriteSize);
         }
-        for (int y = 0; y < 560; y += environmentSpriteSize) {
+        for (int y = 0; y < GameOptions.Width - environmentSpriteSize; y += environmentSpriteSize) {
             // Draw wall sprite on the left side
-            drawImage(wallGreyLeftSide, 0, y);
+            Engine.drawImage(GameImage.wallGreyLeftSide, 0, y);
             wallSideCollision(0, y);
 
             // Draw wall sprite on the right side
-            drawImage(wallGreyRightSide, 560, y);
-            wallSideCollision(560, y);
+            Engine.drawImage(GameImage.wallGreyRightSide, GameOptions.Width - environmentSpriteSize, y);
+            wallSideCollision(GameOptions.Width - environmentSpriteSize, y);
         }
-    }
-
-    public static void main(String args[]) {
-        Levels game = new Levels();
-        createGame(game, 30);
-
-    }
-
-    @Override
-    public void update(double dt) {
-
-    }
-
-    @Override
-    public void paintComponent() {
-        setWindowSize(width,height);
-        clearBackground(width(), height());
-        levelOne();
-        //levelTwo();
-        //levelThree();
-        //levelFour();
-        //levelFive();
-        //levelSix();
-        //levelSeven();
-        //levelEight();
-        //levelNine();
-        //levelTen();
     }
 
     public void levelOne() {
@@ -115,9 +86,9 @@ public class Levels extends GameEngine {
         }
 
         //Draw doors
-        drawImage(DoorGreyOpen, 280,0);
+        Engine.drawImage(GameImage.DoorGreyOpen, 280,0);
         doorCollision(280,0);
-        drawImage(DoorGreyClosed, 280,560);
+        Engine.drawImage(GameImage.DoorGreyClosed, 280,560);
         doorCollision(280,560);
 
     }
@@ -127,17 +98,17 @@ public class Levels extends GameEngine {
 
         // Draw internal walls
         for (int x = 40; x < 440; x += environmentSpriteSize) {
-            drawImage(wallGreyFront, x, 160);
+            Engine.drawImage(GameImage.wallGreyFront, x, 160);
             drawWallFrontWithCollision(x, 160);
         }
         for (int x = 80; x < 160; x += environmentSpriteSize) {
-            drawImage(wallGreyFront, x, 240);
+            Engine.drawImage(GameImage.wallGreyFront, x, 240);
             drawWallFrontWithCollision(x, 240);
         }
         for (int x = 360; x < 440; x += environmentSpriteSize) {
-            drawImage(wallGreyFront, x, 200);
+            Engine.drawImage(GameImage.wallGreyFront, x, 200);
             drawWallFrontWithCollision(x, 200);
-            drawImage(wallGreyFront, x, 240);
+            Engine.drawImage(GameImage.wallGreyFront, x, 240);
             drawWallFrontWithCollision(x, 240);
         }
 
@@ -159,9 +130,9 @@ public class Levels extends GameEngine {
         }
 
         //Draw doors
-        drawImage(DoorGreyOpen, 280,0);
+        Engine.drawImage(GameImage.DoorGreyOpen, 280,0);
         doorCollision(280,0);
-        drawImage(DoorGreyClosed, 280,560);
+        Engine.drawImage(GameImage.DoorGreyClosed, 280,560);
         doorCollision(280,560);
     }
 
@@ -229,9 +200,9 @@ public class Levels extends GameEngine {
         drawLavaWithCollision(480, 400);
 
         //Draw doors
-        drawImage(DoorGreyOpen, 280,0);
+        Engine.drawImage(GameImage.DoorGreyOpen, 280,0);
         doorCollision(280,0);
-        drawImage(DoorGreyClosed, 280,560);
+        Engine.drawImage(GameImage.DoorGreyClosed, 280,560);
         doorCollision(280,560);
     }
 
@@ -239,11 +210,11 @@ public class Levels extends GameEngine {
         basicLevelEnvironment();
 
         //Draw doors
-        drawImage(DoorGreyOpen, 280,0);
+        Engine.drawImage(GameImage.DoorGreyOpen, 280,0);
         doorCollision(280,0);
-        drawImage(DoorGreyOpenSide, 560,280);
+        Engine.drawImage(GameImage.DoorGreyOpenSide, 560,280);
         doorCollision(560,280);
-        drawImage(DoorGreyClosed, 280,560);
+        Engine.drawImage(GameImage.DoorGreyClosed, 280,560);
         doorCollision(280,560);
     }
 
@@ -295,9 +266,9 @@ public class Levels extends GameEngine {
         drawLavaWithCollision(400, 240);
 
         //Draw doors
-        drawImage(DoorGreyClosedSide, 0,80);
+        Engine.drawImage(GameImage.DoorGreyClosedSide, 0,80);
         doorCollision(0,80);
-        drawImage(DoorGreyOpen, 280,0);
+        Engine.drawImage(GameImage.DoorGreyOpen, 280,0);
         doorCollision(280,0);
 
         //Draw inner walls

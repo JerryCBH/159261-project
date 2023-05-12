@@ -5,11 +5,12 @@ import java.awt.event.KeyEvent;
  ****************************************************************************************/
 public class SinglePlayerWorldBuilder extends BaseWorldBuilder implements IWorldBuilder{
     @Override
-    public IWorld Build(HookshotHeroesGameEngine engine, GameImage gameImage, GameAudio gameAudio, GameOptions options) {
-        var world = super.CreateWorld(engine, gameImage, gameAudio, options);
+    public IWorld Build(HookshotHeroesGameEngine engine, GameImage gameImage, GameAudio gameAudio, GameOptions options, ILevel level) {
+        var world = super.CreateWorld(engine, gameImage, gameAudio, options, level);
+        var grid = level.GetStartPos() == LevelStartPos.Top? level.GetTopStartingPos()[0] : level.GetBottomStartingPos()[0];
         world.SetObjects(new IWorldObject[]
                 {
-                        new Player("Player A", GridCell.GetRandomCell(startOffset, world.GridRows - endOffset, startOffset, world.GridColumns - endOffset),
+                        new Player("Player A", grid,
                                 new Skin(world.GameImage.PlayerUpSprites, world.GameImage.PlayerLeftRightSprites, world.GameImage.PlayerDownSprites, world.GameImage.Health, world.CELL_WIDTH, world.CELL_HEIGHT),
                                 new KeyBinding(KeyEvent.VK_W, KeyEvent.VK_A, KeyEvent.VK_D, KeyEvent.VK_S))
                 });

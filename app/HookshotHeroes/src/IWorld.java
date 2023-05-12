@@ -6,6 +6,7 @@ import java.awt.event.KeyEvent;
 public interface IWorld {
     IWorldObject[] GetObjects();
     void SetObjects(IWorldObject[] objects);
+    void RenderLevel();
     void RenderObjects();
     void HandleKeyEvents(KeyEvent event);
     int GetPlayerCount();

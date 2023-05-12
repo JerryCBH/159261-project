@@ -5,6 +5,7 @@ import java.awt.*;
  ****************************************************************************************/
 public class GameImage {
     public final Image SnakeHead, SnakeDot, Apple, Health, Mine, Broccoli, Explosion, Player;
+    public final Image DoorGreyClosed, DoorGreyOpen, floor, lava, wallGreyLeftSide, wallGreyRightSide, wallGreyFront, DoorGreyOpenSide, DoorGreyClosedSide;
     public Image[] ExplosionSprites;
     public Image[] PlayerLeftRightSprites;
     public Image[] PlayerUpSprites;
@@ -22,6 +23,17 @@ public class GameImage {
         Player = engine.loadImage("player.png");
         LoadExplosionSpriteSheet(engine);
         LoadPlayerSpriteSheet(engine);
+
+        // Load environment images.
+        DoorGreyClosed = engine.loadImage("./environment/DoorGreyClosed.png");
+        DoorGreyOpen = engine.loadImage("./environment/DoorGreyOpen.png");
+        floor = engine.loadImage("./environment/floor.png");
+        lava = engine.loadImage("./environment/lava.png");
+        wallGreyLeftSide = engine.loadImage("./environment/wallGreyLeftSide.png");
+        wallGreyRightSide = engine.loadImage("./environment/wallGreyRightSide.png");
+        wallGreyFront = engine.loadImage("./environment/wallGreyFront.png");
+        DoorGreyOpenSide = engine.loadImage("./environment/DoorGreyOpenSide.png");
+        DoorGreyClosedSide = engine.loadImage("./environment/DoorGreyClosedSide.png");
     }
 
     // Load from sprite sheet.
