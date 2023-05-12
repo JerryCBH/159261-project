@@ -12,10 +12,14 @@ public class DoublePlayerWorldBuilder extends BaseWorldBuilder implements IWorld
                 {
                         new Player("Player A", grids[0],
                                 new Skin(world.GameImage.PlayerUpSprites, world.GameImage.PlayerLeftRightSprites, world.GameImage.PlayerDownSprites, world.GameImage.Health, world.CELL_WIDTH, world.CELL_HEIGHT),
-                                new KeyBinding(KeyEvent.VK_W, KeyEvent.VK_A, KeyEvent.VK_D, KeyEvent.VK_S)),
+                                new KeyBinding(KeyEvent.VK_W, KeyEvent.VK_A, KeyEvent.VK_D, KeyEvent.VK_S),
+                                level.GetOccupiedCells()
+                        ),
                         new Player("Player B", grids[1],
                                 new Skin(world.GameImage.PlayerUpSprites, world.GameImage.PlayerLeftRightSprites, world.GameImage.PlayerDownSprites, world.GameImage.Health, world.CELL_WIDTH, world.CELL_HEIGHT),
-                                new KeyBinding(KeyEvent.VK_UP, KeyEvent.VK_LEFT, KeyEvent.VK_RIGHT, KeyEvent.VK_DOWN))
+                                new KeyBinding(KeyEvent.VK_UP, KeyEvent.VK_LEFT, KeyEvent.VK_RIGHT, KeyEvent.VK_DOWN),
+                                level.GetOccupiedCells()
+                                )
                 });
         super.AddObjects(world, WorldObjectType.Apple, 5);
         super.AddObjects(world, WorldObjectType.Mine, 5);

@@ -1,17 +1,24 @@
 import java.awt.*;
+import java.util.ArrayList;
 
 public class BaseLevel {
     public HookshotHeroesGameEngine Engine;
     public GameImage GameImage;
     public GameOptions GameOptions;
+
+    // Flag for level rendering
+    public boolean IsLevelRendered = false;
     int environmentSpriteSize = 40;
+    public final int CELL_WIDTH = 10, CELL_HEIGHT = 10;
 
     public LevelStartPos StartPos = LevelStartPos.Bottom;
+    public ArrayList<GridCell> OccupiedCells;
 
     public BaseLevel (HookshotHeroesGameEngine engine, GameImage gameImage, GameOptions gameOptions){
         Engine = engine;
         GameImage = gameImage;
         GameOptions = gameOptions;
+        OccupiedCells = new ArrayList<>();
     }
 
     public void drawWallFrontWithCollision(int x, int y) {
@@ -20,6 +27,7 @@ public class BaseLevel {
         Engine.drawRectangle(x, y, 40, 40);
 
         //Add collision logic here
+        AddOccupiedCell(x, y);
     }
 
     public void wallSideCollision(int x, int y) {
@@ -27,6 +35,7 @@ public class BaseLevel {
         Engine.drawRectangle(x, y, 40, 40);
 
         //Add collision logic here
+        AddOccupiedCell(x, y);
     }
 
     public void doorCollision(int x, int y) {
@@ -42,6 +51,7 @@ public class BaseLevel {
         Engine.drawRectangle(x, y, 40, 40);
 
         //Add collision logic here
+        AddOccupiedCell(x, y);
     }
 
     public void basicLevelEnvironment() {
@@ -67,6 +77,12 @@ public class BaseLevel {
             // Draw wall sprite on the right side
             Engine.drawImage(GameImage.wallGreyRightSide, GameOptions.Width - environmentSpriteSize, y);
             wallSideCollision(GameOptions.Width - environmentSpriteSize, y);
+        }
+    }
+
+    private void AddOccupiedCell(int x, int y){
+        if (!IsLevelRendered) {
+           //OccupiedCells.add(new GridCell(y / CELL_WIDTH, x / CELL_HEIGHT));
         }
     }
 }

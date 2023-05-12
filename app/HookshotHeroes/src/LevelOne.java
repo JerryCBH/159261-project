@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class LevelOne extends BaseLevel implements ILevel{
     public LevelOne (HookshotHeroesGameEngine engine, GameImage gameImage, GameOptions gameOptions){
         super(engine, gameImage, gameOptions);
@@ -64,5 +66,15 @@ public class LevelOne extends BaseLevel implements ILevel{
     @Override
     public void SetStartPos(LevelStartPos pos){
         super.StartPos = pos;
+    }
+
+    @Override
+    public ArrayList<GridCell> GetOccupiedCells() {
+        return OccupiedCells;
+    }
+
+    @Override
+    public void SetLevelRendered(boolean flag) {
+        IsLevelRendered = flag;
     }
 }

@@ -15,6 +15,8 @@ public class Player implements IWorldObject {
     private final Skin _skin;
     // Keyboard control binding. Each player can have different binding.
     private final KeyBinding _keyBinding;
+    // Occupied cells from level.
+    private final ArrayList<GridCell> _occupiedCells;
     private final String _name;
     private GridCell _lastCell = null;
     // Number of lives
@@ -22,7 +24,7 @@ public class Player implements IWorldObject {
     private int _spriteIndex = 0;
     private ObjectImage _image = null;
 
-    public Player(String name, GridCell startCell, Skin skin, KeyBinding keyBinding) {
+    public Player(String name, GridCell startCell, Skin skin, KeyBinding keyBinding, ArrayList<GridCell> occupiedCells) {
         _name = name;
         _skin = skin;
         _direction = PlayerDirection.Right;
@@ -30,6 +32,7 @@ public class Player implements IWorldObject {
         _body = new ArrayList<>();
         _body.add(new GridCell(startCell.Row, startCell.Column));
         _image = new ObjectImage(skin.LRSprites[0]);
+        _occupiedCells = occupiedCells;
     }
 
     // Move the player.
@@ -130,31 +133,69 @@ public class Player implements IWorldObject {
     }
 
     // Move up. Reduce row.
-    private GridCell MoveUp(){
+    private GridCell MoveUp() {
         var newCell = new GridCell(_body.get(0).Row - 1, _body.get(0).Column);
-        _body.set(0, newCell);
-        return newCell;
+        if (CanMoveTo(newCell)) {
+            _body.set(0, newCell);
+            return newCell;
+        }
+        else{
+            return _body.get(0);
+        }
     }
 
     // Move left. Reduce column.
     private GridCell MoveLeft(){
         var newCell = new GridCell(_body.get(0).Row, _body.get(0).Column - 1);
-        _body.set(0, newCell);
-        return newCell;
+        if (CanMoveTo(newCell)) {
+            _body.set(0, newCell);
+            return newCell;
+        }
+        else{
+            return _body.get(0);
+        }
     }
 
     // Move right. Increase column.
     private GridCell MoveRight(){
         var newCell = new GridCell(_body.get(0).Row, _body.get(0).Column + 1);
-        _body.set(0, newCell);
-        return newCell;
+        if (CanMoveTo(newCell)) {
+            _body.set(0, newCell);
+            return newCell;
+        }
+        else{
+            return _body.get(0);
+        }
     }
 
     // Move down. Increase row.
     private GridCell MoveDown(){
         var newCell = new GridCell(_body.get(0).Row + 1, _body.get(0).Column);
-        _body.set(0, newCell);
-        return newCell;
+        if (CanMoveTo(newCell)) {
+            _body.set(0, newCell);
+            return newCell;
+        }
+        else{
+            return _body.get(0);
+        }
+    }
+
+    // Check if we can move to this cell.
+    private boolean CanMoveTo(GridCell newCell){
+        var offsetYL = 0;
+        var offsetYU = 4;
+        var offsetXL = 0;
+        var offsetXU = 4;
+        var result = true;
+        for (GridCell target : _occupiedCells) {
+            if ((target.Row - offsetYL <= newCell.Row && newCell.Row <= target.Row + offsetYU)
+                    && (target.Column - offsetXL <= newCell.Column && newCell.Column <= target.Column + offsetXU)
+            ) {
+                result = false;
+                break;
+            }
+        }
+        return result;
     }
 
     // Render the snake by drawing skin images oon each occupied grid cell.

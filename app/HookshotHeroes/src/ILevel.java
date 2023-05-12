@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public interface ILevel {
     void RenderLevel();
     ILevel GetNextLevel();
@@ -8,4 +10,6 @@ public interface ILevel {
     GridCell GetEntryGrid();
     LevelStartPos GetStartPos();
     void SetStartPos(LevelStartPos pos);
+    ArrayList<GridCell> GetOccupiedCells();
+    void SetLevelRendered(boolean flag);
 }
