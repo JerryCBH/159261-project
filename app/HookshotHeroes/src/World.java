@@ -27,6 +27,9 @@ public class World implements IWorld {
     // Environment Levels.
     public ILevel CurrentLevel;
 
+    // Render flag.
+    public boolean IsLevelRendered = false;
+
     public World(int width, int height, HookshotHeroesGameEngine engine, GameImage gameImage, GameAudio gameAudio, GameOptions options, ILevel level){
         Engine = engine;
         GameImage = gameImage;
@@ -55,7 +58,9 @@ public class World implements IWorld {
     }
 
     public void RenderLevel(){
-        CurrentLevel.RenderLevel();
+        if (!IsLevelRendered) {
+            CurrentLevel.RenderLevel();
+        }
     }
 
     public void RenderObjects(){
