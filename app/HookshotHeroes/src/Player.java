@@ -181,18 +181,20 @@ public class Player implements IWorldObject {
     }
 
     // Check if we can move to this cell.
-    private boolean CanMoveTo(GridCell newCell){
+    private boolean CanMoveTo(GridCell newCell) {
         var offsetYL = 0;
         var offsetYU = 2;
         var offsetXL = 0;
         var offsetXU = 2;
         var result = true;
-        for (GridCell target : _occupiedCells) {
-            if ((target.Row - offsetYL <= newCell.Row && newCell.Row <= target.Row + offsetYU)
-                    && (target.Column - offsetXL <= newCell.Column && newCell.Column <= target.Column + offsetXU)
-            ) {
-                result = false;
-                break;
+        if (_occupiedCells != null) {
+            for (GridCell target : _occupiedCells) {
+                if ((target.Row - offsetYL <= newCell.Row && newCell.Row <= target.Row + offsetYU)
+                        && (target.Column - offsetXL <= newCell.Column && newCell.Column <= target.Column + offsetXU)
+                ) {
+                    result = false;
+                    break;
+                }
             }
         }
         return result;
