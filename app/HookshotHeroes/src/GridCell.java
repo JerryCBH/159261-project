@@ -26,17 +26,8 @@ public class GridCell {
         var r = new Random();
         var isEmpty = true;
         int row = 0, col = 0;
-        do {
-            row = r.nextInt(rUpper - rLower) + rLower;
-            col = r.nextInt(cUpper - cLower) + cLower;
-            for (GridCell grid : occupiedCells) {
-                if (grid.Row == row && grid.Column == col) {
-                    //isEmpty = false;
-                    break;
-                }
-            }
-        } while (!isEmpty);
-
+        row = r.nextInt(rUpper - rLower) + rLower;
+        col = r.nextInt(cUpper - cLower) + cLower;
         return new GridCell(row, col);
     }
 }
