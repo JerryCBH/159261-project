@@ -114,7 +114,7 @@ public class LevelFive extends BaseLevel implements ILevel {
 
     @Override
     public GridCell[] GetBottomStartingPos() {
-        return new GridCell[]{new GridCell(50, 23), new GridCell(50, 33)};
+        return new GridCell[]{new GridCell(50, 23), new GridCell(50, 27)};
     }
 
     @Override
