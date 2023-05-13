@@ -182,9 +182,9 @@ public class Player implements IWorldObject {
 
     // Check if we can move to this cell.
     private boolean CanMoveTo(GridCell newCell) {
-        var offsetYL = 0;
+        var offsetYL = 4;
         var offsetYU = 2;
-        var offsetXL = 0;
+        var offsetXL = 3;
         var offsetXU = 2;
         var result = true;
         if (_occupiedCells != null) {
