@@ -31,7 +31,7 @@ public class GridCell {
             col = r.nextInt(cUpper - cLower) + cLower;
             for (GridCell grid : occupiedCells) {
                 if (grid.Row == row && grid.Column == col) {
-                    isEmpty = false;
+                    //isEmpty = false;
                     break;
                 }
             }
