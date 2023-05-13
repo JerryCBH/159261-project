@@ -16,11 +16,11 @@ public class BaseWorldBuilder {
     public void AddObjects(World world, WorldObjectType type, int count) {
         for (int i = 0; i < count; i++) {
             if (type == WorldObjectType.Apple) {
-                world.Objects.add(new Apple("Apple", GridCell.GetRandomCell(startOffset, world.GridRows - endOffset, startOffset, world.GridColumns - endOffset),
+                world.Objects.add(new Apple("Apple", GridCell.GetRandomCell(startOffset, world.GridRows - endOffset, startOffset, world.GridColumns - endOffset, world.CurrentLevel.GetOccupiedCells()),
                         new Skin(world.GameImage.Apple, world.CELL_WIDTH, world.CELL_HEIGHT)));
             }
             if (type == WorldObjectType.Mine) {
-                world.Objects.add(new Mine("Mine", GridCell.GetRandomCell(startOffset, world.GridRows - endOffset, startOffset, world.GridColumns - endOffset),
+                world.Objects.add(new Mine("Mine", GridCell.GetRandomCell(startOffset, world.GridRows - endOffset, startOffset, world.GridColumns - endOffset, world.CurrentLevel.GetOccupiedCells()),
                         new Skin(world.GameImage.Mine, world.CELL_WIDTH, world.CELL_HEIGHT)));
             }
             if (type == WorldObjectType.Ball) {
@@ -36,7 +36,7 @@ public class BaseWorldBuilder {
                 world.Objects.add(ball);
             }
             if (type == WorldObjectType.Broccoli) {
-                world.Objects.add(new Broccoli("Broccoli", GridCell.GetRandomCell(startOffset, world.GridRows - endOffset, startOffset, world.GridColumns - endOffset),
+                world.Objects.add(new Broccoli("Broccoli", GridCell.GetRandomCell(startOffset, world.GridRows - endOffset, startOffset, world.GridColumns - endOffset, world.CurrentLevel.GetOccupiedCells()),
                         new Skin(world.GameImage.Broccoli, world.CELL_WIDTH, world.CELL_HEIGHT)));
             }
         }
