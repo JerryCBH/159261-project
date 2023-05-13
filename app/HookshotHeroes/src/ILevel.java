@@ -10,6 +10,8 @@ public interface ILevel {
     GridCell GetEntryGrid();
     LevelStartPos GetStartPos();
     void SetStartPos(LevelStartPos pos);
+    ArrayList<GridCell> GetWallCells();
+    ArrayList<GridCell> GetLavaCells();
     ArrayList<GridCell> GetOccupiedCells();
     void SetLevelRendered(boolean flag);
 }

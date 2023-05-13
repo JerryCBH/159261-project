@@ -6,6 +6,7 @@ import java.awt.event.KeyEvent;
 public class DoublePlayerWorldBuilder extends BaseWorldBuilder implements IWorldBuilder{
     @Override
     public IWorld Build(HookshotHeroesGameEngine engine, GameImage gameImage, GameAudio gameAudio, GameOptions options, ILevel level) {
+        level.RenderLevel();
         var world = super.CreateWorld(engine, gameImage, gameAudio, options, level);
         var grids = level.GetStartPos() == LevelStartPos.Top? level.GetTopStartingPos() : level.GetBottomStartingPos();
         world.SetObjects(new IWorldObject[]
@@ -13,12 +14,12 @@ public class DoublePlayerWorldBuilder extends BaseWorldBuilder implements IWorld
                         new Player("Player A", grids[0],
                                 new Skin(world.GameImage.PlayerUpSprites, world.GameImage.PlayerLeftRightSprites, world.GameImage.PlayerDownSprites, world.GameImage.Health, world.CELL_WIDTH, world.CELL_HEIGHT),
                                 new KeyBinding(KeyEvent.VK_W, KeyEvent.VK_A, KeyEvent.VK_D, KeyEvent.VK_S),
-                                level.GetOccupiedCells()
+                                level.GetWallCells()
                         ),
                         new Player("Player B", grids[1],
                                 new Skin(world.GameImage.PlayerUpSprites, world.GameImage.PlayerLeftRightSprites, world.GameImage.PlayerDownSprites, world.GameImage.Health, world.CELL_WIDTH, world.CELL_HEIGHT),
                                 new KeyBinding(KeyEvent.VK_UP, KeyEvent.VK_LEFT, KeyEvent.VK_RIGHT, KeyEvent.VK_DOWN),
-                                level.GetOccupiedCells()
+                                level.GetWallCells()
                                 )
                 });
         super.AddObjects(world, WorldObjectType.Apple, 5);

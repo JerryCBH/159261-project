@@ -126,24 +126,4 @@ public class LevelFive extends BaseLevel implements ILevel {
     public GridCell GetEntryGrid() {
         return new GridCell(56, 27);
     }
-
-    @Override
-    public LevelStartPos GetStartPos() {
-        return super.StartPos;
-    }
-
-    @Override
-    public void SetStartPos(LevelStartPos pos){
-        super.StartPos = pos;
-    }
-
-    @Override
-    public ArrayList<GridCell> GetOccupiedCells() {
-        return OccupiedCells;
-    }
-
-    @Override
-    public void SetLevelRendered(boolean flag) {
-        IsLevelRendered = flag;
-    }
 }

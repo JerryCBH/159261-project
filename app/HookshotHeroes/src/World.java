@@ -206,20 +206,23 @@ public class World implements IWorld {
                 // Play eat apple sound effects.
                 AudioRequests.add(new AudioRequest(WorldObjectType.Apple));
                 // Spawn new random apple.
-                collidedObject.SetGridCell(GridCell.GetRandomCell(offset, GridRows - offset, offset, GridColumns - offset));
+                //collidedObject.SetGridCell(GridCell.GetRandomCell(offset, GridRows - offset, offset, GridColumns - offset));
+                RemoveObject(collidedObject);
             }
             else if (type == WorldObjectType.Mine) {
                 // Play explosion sound effects.
                 AnimationRequests.add(new AnimationRequest(type, collidedObject.GetOccupiedCells()[0], 10));
                 AudioRequests.add(new AudioRequest(WorldObjectType.Mine));
                 // Spawn new random mine.
-                collidedObject.SetGridCell(GridCell.GetRandomCell(offset, GridRows - offset, offset, GridColumns - offset));
+                //collidedObject.SetGridCell(GridCell.GetRandomCell(offset, GridRows - offset, offset, GridColumns - offset));
+                RemoveObject(collidedObject);
             }
             else if (type == WorldObjectType.Broccoli) {
                 // Play explosion sound effects.
                 AudioRequests.add(new AudioRequest(WorldObjectType.Apple));
                 // Spawn new random broccoli.
-                collidedObject.SetGridCell(GridCell.GetRandomCell(offset, GridRows - offset, offset, GridColumns - offset));
+                //collidedObject.SetGridCell(GridCell.GetRandomCell(offset, GridRows - offset, offset, GridColumns - offset));
+                RemoveObject(collidedObject);
             }
         }
     }

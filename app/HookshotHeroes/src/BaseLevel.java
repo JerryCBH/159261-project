@@ -12,12 +12,16 @@ public class BaseLevel {
     public final int CELL_WIDTH = 10, CELL_HEIGHT = 10;
 
     public LevelStartPos StartPos = LevelStartPos.Bottom;
+    public ArrayList<GridCell> WallCells;
+    public ArrayList<GridCell> LavaCells;
     public ArrayList<GridCell> OccupiedCells;
 
     public BaseLevel (HookshotHeroesGameEngine engine, GameImage gameImage, GameOptions gameOptions){
         Engine = engine;
         GameImage = gameImage;
         GameOptions = gameOptions;
+        WallCells = new ArrayList<>();
+        LavaCells = new ArrayList<>();
         OccupiedCells = new ArrayList<>();
     }
 
@@ -27,7 +31,7 @@ public class BaseLevel {
         Engine.drawRectangle(x, y, 40, 40);
 
         //Add collision logic here
-        AddOccupiedCell(x, y);
+        AddWallCell(x, y);
     }
 
     public void wallSideCollision(int x, int y) {
@@ -35,7 +39,7 @@ public class BaseLevel {
         Engine.drawRectangle(x, y, 40, 40);
 
         //Add collision logic here
-        AddOccupiedCell(x, y);
+        AddWallCell(x, y);
     }
 
     public void doorCollision(int x, int y) {
@@ -51,7 +55,7 @@ public class BaseLevel {
         Engine.drawRectangle(x, y, 40, 40);
 
         //Add collision logic here
-        //AddOccupiedCell(x, y);
+        AddLavaCell(x, y);
     }
 
     public void basicLevelEnvironment() {
@@ -80,9 +84,41 @@ public class BaseLevel {
         }
     }
 
-    private void AddOccupiedCell(int x, int y){
+    private void AddWallCell(int x, int y){
         if (!IsLevelRendered) {
+           WallCells.add(new GridCell(y / CELL_WIDTH, x / CELL_HEIGHT));
            OccupiedCells.add(new GridCell(y / CELL_WIDTH, x / CELL_HEIGHT));
         }
+    }
+
+    private void AddLavaCell(int x, int y){
+        if (!IsLevelRendered) {
+            LavaCells.add(new GridCell(y / CELL_WIDTH, x / CELL_HEIGHT));
+            OccupiedCells.add(new GridCell(y / CELL_WIDTH, x / CELL_HEIGHT));
+        }
+    }
+
+    public LevelStartPos GetStartPos() {
+        return StartPos;
+    }
+
+    public void SetStartPos(LevelStartPos pos){
+        StartPos = pos;
+    }
+
+    public ArrayList<GridCell> GetWallCells() {
+        return WallCells;
+    }
+
+    public ArrayList<GridCell> GetLavaCells() {
+        return LavaCells;
+    }
+
+    public ArrayList<GridCell> GetOccupiedCells() {
+        return OccupiedCells;
+    }
+
+    public void SetLevelRendered(boolean flag) {
+        IsLevelRendered = flag;
     }
 }
