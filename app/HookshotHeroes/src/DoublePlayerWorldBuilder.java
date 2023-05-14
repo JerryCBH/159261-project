@@ -11,16 +11,16 @@ public class DoublePlayerWorldBuilder extends BaseWorldBuilder implements IWorld
         var grids = level.GetStartPos() == LevelStartPos.Top? level.GetTopStartingPos() : level.GetBottomStartingPos();
         world.SetObjects(new IWorldObject[]
                 {
-                        new Player("Player A", grids[0],
-                                new Skin(world.GameImage.PlayerUpSprites, world.GameImage.PlayerLeftRightSprites, world.GameImage.PlayerDownSprites, world.GameImage.Health, world.CELL_WIDTH, world.CELL_HEIGHT),
+                        new Player("Lidia", grids[0],
+                                new Skin(world.GameImage.LidiaUpSprites, world.GameImage.LidiaLeftSprites, world.GameImage.LidiaRightSprites, world.GameImage.LidiaDownSprites, world.GameImage.Health, world.CELL_WIDTH, world.CELL_HEIGHT),
                                 new KeyBinding(KeyEvent.VK_W, KeyEvent.VK_A, KeyEvent.VK_D, KeyEvent.VK_S),
                                 level.GetWallCells()
                         ),
-                        new Player("Player B", grids[1],
-                                new Skin(world.GameImage.PlayerUpSprites, world.GameImage.PlayerLeftRightSprites, world.GameImage.PlayerDownSprites, world.GameImage.Health, world.CELL_WIDTH, world.CELL_HEIGHT),
+                        new Player("Shura", grids[1],
+                                new Skin(world.GameImage.ShuraUpSprites, world.GameImage.ShuraLeftSprites, world.GameImage.ShuraRightSprites, world.GameImage.ShuraDownSprites, world.GameImage.Health, world.CELL_WIDTH, world.CELL_HEIGHT),
                                 new KeyBinding(KeyEvent.VK_UP, KeyEvent.VK_LEFT, KeyEvent.VK_RIGHT, KeyEvent.VK_DOWN),
                                 level.GetWallCells()
-                                )
+                        )
                 });
         super.AddObjects(world, WorldObjectType.Apple, 5);
         super.AddObjects(world, WorldObjectType.Mine, 5);

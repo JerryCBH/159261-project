@@ -31,7 +31,7 @@ public class Player implements IWorldObject {
         _keyBinding = keyBinding;
         _body = new ArrayList<>();
         _body.add(new GridCell(startCell.Row, startCell.Column));
-        _image = new ObjectImage(skin.LRSprites[0]);
+        _image = new ObjectImage(skin.DownSprites[0]);
         _occupiedCells = occupiedCells;
     }
 
@@ -50,12 +50,13 @@ public class Player implements IWorldObject {
             else if (keyCode == _keyBinding.Right) {
                 newCell = MoveRight();
                 _direction = PlayerDirection.Right;
-                IncrementSprite(_skin.LRSprites, true, false);
+                IncrementSprite(_skin.RightSprites, true, false);
             }
             else if (keyCode == _keyBinding.Left) {
                 newCell = MoveLeft();
                 _direction = PlayerDirection.Left;
-                IncrementSprite(_skin.LRSprites, true, true);
+                //IncrementSprite(_skin.LRSprites, true, true);
+                IncrementSprite(_skin.LeftSprites, true, false);
             }
             else if (keyCode == _keyBinding.Down) {
                 newCell = MoveDown();
@@ -67,7 +68,8 @@ public class Player implements IWorldObject {
             if (keyCode == _keyBinding.Left) {
                 newCell = MoveLeft();
                 _direction = PlayerDirection.Left;
-                IncrementSprite(_skin.LRSprites, false, true);
+                //IncrementSprite(_skin.LRSprites, false, true);
+                IncrementSprite(_skin.LeftSprites, false, false);
             }
             else if (keyCode == _keyBinding.Up) {
                 newCell = MoveUp();
@@ -82,14 +84,14 @@ public class Player implements IWorldObject {
             else if (keyCode == _keyBinding.Right) {
                 newCell = MoveRight();
                 _direction = PlayerDirection.Right;
-                IncrementSprite(_skin.LRSprites, true, false);
+                IncrementSprite(_skin.RightSprites, true, false);
             }
         }
         else if (_direction == PlayerDirection.Right){
             if (keyCode == _keyBinding.Right) {
                 newCell = MoveRight();
                 _direction = PlayerDirection.Right;
-                IncrementSprite(_skin.LRSprites, false, false);
+                IncrementSprite(_skin.RightSprites, false, false);
             }
             else if (keyCode == _keyBinding.Up) {
                 newCell = MoveUp();
@@ -104,7 +106,8 @@ public class Player implements IWorldObject {
             else if (keyCode == _keyBinding.Left) {
                 newCell = MoveLeft();
                 _direction = PlayerDirection.Left;
-                IncrementSprite(_skin.LRSprites, true, true);
+                //IncrementSprite(_skin.LRSprites, true, true);
+                IncrementSprite(_skin.LeftSprites, true, false);
             }
         }
         else if (_direction == PlayerDirection.Down){
@@ -116,12 +119,13 @@ public class Player implements IWorldObject {
             else if (keyCode == _keyBinding.Right) {
                 newCell = MoveRight();
                 _direction = PlayerDirection.Right;
-                IncrementSprite(_skin.LRSprites, true, false);
+                IncrementSprite(_skin.RightSprites, true, false);
             }
             else if (keyCode == _keyBinding.Left) {
                 newCell = MoveLeft();
                 _direction = PlayerDirection.Left;
-                IncrementSprite(_skin.LRSprites, true, true);
+                //IncrementSprite(_skin.LRSprites, true, true);
+                IncrementSprite(_skin.LeftSprites, true, false);
             }
             else if (keyCode == _keyBinding.Up) {
                 newCell = MoveUp();
@@ -206,11 +210,16 @@ public class Player implements IWorldObject {
         engine.changeColor(Color.white);
         DrawName(engine, _body.get(0));
         DrawHealth(engine, _body.get(0));
-        engine.drawImage(_image.Image,
+        /*engine.drawImage(_image.Image,
                 _image.Reflect? (_body.get(0).Column * _skin.CellWidth + GameImage.PLAYER_WIDTH) : (_body.get(0).Column * _skin.CellWidth + 5),
                 _body.get(0).Row * _skin.CellHeight + 5,
                 (_image.Reflect? -1 : 1) * (GameImage.PLAYER_WIDTH - 5),
-                GameImage.PLAYER_HEIGHT - 10);
+                GameImage.PLAYER_HEIGHT - 10);*/
+        engine.drawImage(_image.Image,
+                _image.Reflect? (_body.get(0).Column * _skin.CellWidth + GameImage.LIDIA_WIDTH) : (_body.get(0).Column * _skin.CellWidth + 5),
+                _body.get(0).Row * _skin.CellHeight + 5,
+                (_image.Reflect? -1 : 1) * (GameImage.LIDIA_WIDTH - 5),
+                GameImage.LIDIA_HEIGHT - 10);
     }
 
     // Get All cells occupied by the snake.
@@ -281,7 +290,7 @@ public class Player implements IWorldObject {
     // Draw health icons based on number of lives.
     private void DrawHealth(GameEngine engine, GridCell cell){
         var offsetV = -10;
-        var offsetH = 50;
+        var offsetH = 35;
         for(int i = 0; i < _lives; i++){
             engine.drawImage(_skin.Health, cell.Column * _skin.CellWidth + i * 10 + offsetH, cell.Row * _skin.CellHeight + offsetV, 10, 10);
         }
