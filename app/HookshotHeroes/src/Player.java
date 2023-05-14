@@ -240,9 +240,9 @@ public class Player implements IWorldObject {
             }
             toRemove = object;
         }
-        // If collided with another snake (or itself).
+        // If collided with another player (or itself).
         else if (type == WorldObjectType.Player) {
-            toRemove = this;
+            //toRemove = this;
         }
         // Collided with mine or bouncing ball, reduce health by 1.
         else if (type == WorldObjectType.Mine || type == WorldObjectType.Ball) {

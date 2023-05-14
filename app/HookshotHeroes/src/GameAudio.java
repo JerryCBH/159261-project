@@ -7,6 +7,7 @@ public class GameAudio {
     public final GameEngine.AudioClip Theme;
     public final GameEngine.AudioClip WalkAudio;
     public final GameEngine.AudioClip HitAudio;
+    public final GameEngine.AudioClip StepAudio;
 
     public GameAudio(HookshotHeroesGameEngine engine){
         Theme = engine.loadAudio("awesomeness.wav");
@@ -14,5 +15,6 @@ public class GameAudio {
         CrunchAudio = engine.loadAudio("crunch.wav");
         WalkAudio = engine.loadAudio("walk.wav");
         HitAudio = engine.loadAudio("hit.wav");
+        StepAudio = engine.loadAudio("step.wav");
     }
 }
