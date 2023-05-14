@@ -30,7 +30,6 @@ public class LevelThree extends BaseLevel implements ILevel {
             }
         }
         drawWallFrontWithCollision(320, 280);
-        drawWallFrontWithCollision(80, 520);
 
         // Draw Lava
         for (int y = 40; y < 320; y += environmentSpriteSize) {
@@ -73,6 +72,9 @@ public class LevelThree extends BaseLevel implements ILevel {
         doorCollision(280,0);
         Engine.drawImage(GameImage.DoorGreyClosed, 280,560);
         doorCollision(280,560);
+
+        //Draw chest
+        Engine.drawImage(GameImage.ChestBack, 80, 520);
     }
 
     @Override

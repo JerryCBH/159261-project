@@ -126,10 +126,13 @@ public class LevelNine extends BaseLevel implements ILevel{
         drawWallFrontWithCollision(320, 120);
 
         //Draw doors
-        Engine.drawImage(GameImage.DoorGreyOpenSide, 0,80);
+        Engine.drawImage(GameImage.DoorGreyOpenLeftSide, 0,80);
         doorCollision(0,80);
         Engine.drawImage(GameImage.DoorGreyClosed, 280,560);
         doorCollision(280,560);
+
+        //Draw chest
+        Engine.drawImage(GameImage.ChestSide, 40, 520);
     }
 
     @Override

@@ -9,10 +9,12 @@ public class LevelTen extends BaseLevel implements ILevel{
     public void RenderLevel() {
         basicLevelEnvironment();
 
-
         //Draw doors
         Engine.drawImage(GameImage.DoorGreyOpenSide, 560,280);
         doorCollision(560,280);
+
+        //Draw chest
+        Engine.drawImage(GameImage.ChestSide, 280, 280);
     }
 
     @Override
@@ -27,7 +29,7 @@ public class LevelTen extends BaseLevel implements ILevel{
 
     @Override
     public GridCell[] GetBottomStartingPos() {
-        return new GridCell[]{new GridCell(50, 23), new GridCell(50, 33)};
+        return new GridCell[]{new GridCell(25, 50), new GridCell(33, 50)};
     }
 
     @Override
@@ -37,7 +39,7 @@ public class LevelTen extends BaseLevel implements ILevel{
 
     @Override
     public GridCell GetExitGrid() {
-        return new GridCell(27, 52);
+        return new GridCell(27, 27);
     }
 
     @Override

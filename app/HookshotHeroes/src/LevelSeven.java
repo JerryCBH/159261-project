@@ -110,6 +110,10 @@ public class LevelSeven extends BaseLevel implements ILevel{
         doorCollision(280,0);
         Engine.drawImage(GameImage.DoorGreyClosed, 280,560);
         doorCollision(280,560);
+
+        //Draw chest
+        Engine.drawImage(GameImage.ChestSide, 40, 40);
+        Engine.drawImage(GameImage.ChestBack, 40, 520);
     }
 
     @Override
@@ -124,7 +128,7 @@ public class LevelSeven extends BaseLevel implements ILevel{
 
     @Override
     public GridCell[] GetBottomStartingPos() {
-        return new GridCell[]{new GridCell(50, 23), new GridCell(50, 33)};
+        return new GridCell[]{new GridCell(50, 27), new GridCell(50, 33)};
     }
 
     @Override

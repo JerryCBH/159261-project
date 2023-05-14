@@ -26,6 +26,9 @@ public class LevelOne extends BaseLevel implements ILevel{
         doorCollision(280,0);
         Engine.drawImage(GameImage.DoorGreyClosed, 280,560);
         doorCollision(280,560);
+
+        //Draw chest
+        Engine.drawImage(GameImage.ChestFront, 280, 440);
     }
 
     @Override
@@ -40,12 +43,12 @@ public class LevelOne extends BaseLevel implements ILevel{
 
     @Override
     public GridCell[] GetBottomStartingPos() {
-        return new GridCell[]{new GridCell(50, 23), new GridCell(50, 33)};
+        return new GridCell[]{new GridCell(50, 27), new GridCell(50, 33)};
     }
 
     @Override
     public GridCell[] GetTopStartingPos() {
-        return new GridCell[]{new GridCell(5, 23), new GridCell(5, 33)};
+        return new GridCell[]{new GridCell(5, 23), new GridCell(5, 35)};
     }
 
     @Override

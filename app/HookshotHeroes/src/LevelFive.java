@@ -53,12 +53,6 @@ public class LevelFive extends BaseLevel implements ILevel {
         drawLavaWithCollision(400, 200);
         drawLavaWithCollision(400, 240);
 
-        //Draw doors
-        Engine.drawImage(GameImage.DoorGreyClosedSide, 0,80);
-        doorCollision(0,80);
-        Engine.drawImage(GameImage.DoorGreyOpen, 280,0);
-        doorCollision(280,0);
-
         //Draw inner walls
         for (int x = 320; x < 520; x += environmentSpriteSize) {
             drawWallFrontWithCollision(x, 120);
@@ -87,7 +81,6 @@ public class LevelFive extends BaseLevel implements ILevel {
             drawWallFrontWithCollision(160, y);
         }
         drawWallFrontWithCollision(320, 80);
-        drawWallFrontWithCollision(40, 520);
 
         drawWallFrontWithCollision(520, 440);
 
@@ -95,6 +88,15 @@ public class LevelFive extends BaseLevel implements ILevel {
 
         drawWallFrontWithCollision(360, 320);
         drawWallFrontWithCollision(360, 360);
+
+        //Draw doors
+        Engine.drawImage(GameImage.DoorGreyClosedLeftSide, 0,80);
+        doorCollision(0,80);
+        Engine.drawImage(GameImage.DoorGreyOpen, 280,0);
+        doorCollision(280,0);
+
+        //Draw chest
+        Engine.drawImage(GameImage.ChestSide,40, 520);
     }
 
     @Override
@@ -114,7 +116,7 @@ public class LevelFive extends BaseLevel implements ILevel {
 
     @Override
     public GridCell[] GetBottomStartingPos() {
-        return new GridCell[]{new GridCell(50, 23), new GridCell(50, 27)};
+        return new GridCell[]{new GridCell(7, 3), new GridCell(50, 27)};
     }
 
     @Override
@@ -124,6 +126,6 @@ public class LevelFive extends BaseLevel implements ILevel {
 
     @Override
     public GridCell GetEntryGrid() {
-        return new GridCell(56, 27);
+        return new GridCell(0, 27);
     }
 }
