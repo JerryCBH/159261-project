@@ -17,9 +17,8 @@ public class SinglePlayerWorldBuilder extends BaseWorldBuilder implements IWorld
                                 level.GetWallCells()
                                 )
                 });
-        super.AddObjects(world, WorldObjectType.Apple, 1);
         super.AddObjects(world, WorldObjectType.Mine, 3);
-        super.AddObjects(world, WorldObjectType.Broccoli, 1);
+        super.AddObjects(world, WorldObjectType.Broccoli, 2);
         if (options.EnableBouncingBalls) {
             super.AddObjects(world, WorldObjectType.Ball, 5);
         }

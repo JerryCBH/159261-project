@@ -22,9 +22,8 @@ public class DoublePlayerWorldBuilder extends BaseWorldBuilder implements IWorld
                                 level.GetWallCells()
                         )
                 });
-        super.AddObjects(world, WorldObjectType.Apple, 5);
         super.AddObjects(world, WorldObjectType.Mine, 5);
-        super.AddObjects(world, WorldObjectType.Broccoli, 2);
+        super.AddObjects(world, WorldObjectType.Broccoli, 3);
         if (options.EnableBouncingBalls) {
             super.AddObjects(world, WorldObjectType.Ball, 5);
         }

@@ -6,5 +6,6 @@ public enum WorldObjectType {
     Apple,
     Mine,
     Ball,
-    Broccoli
+    Broccoli,
+    Carrot
 }
