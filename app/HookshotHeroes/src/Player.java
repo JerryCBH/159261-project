@@ -209,8 +209,8 @@ public class Player implements IWorldObject {
         engine.drawImage(_image.Image,
                 _image.Reflect? (_body.get(0).Column * _skin.CellWidth + GameImage.PLAYER_WIDTH) : (_body.get(0).Column * _skin.CellWidth + 5),
                 _body.get(0).Row * _skin.CellHeight + 5,
-                (_image.Reflect? -1 : 1) * GameImage.PLAYER_WIDTH,
-                GameImage.PLAYER_HEIGHT);
+                (_image.Reflect? -1 : 1) * (GameImage.PLAYER_WIDTH - 5),
+                GameImage.PLAYER_HEIGHT - 10);
     }
 
     // Get All cells occupied by the snake.
