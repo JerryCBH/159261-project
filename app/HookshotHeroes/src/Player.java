@@ -189,7 +189,7 @@ public class Player implements IWorldObject {
         var offsetYL = 4;
         var offsetYU = 2;
         var offsetXL = 3;
-        var offsetXU = 2;
+        var offsetXU = 1;
         var result = true;
         if (_occupiedCells != null) {
             for (GridCell target : _occupiedCells) {
@@ -218,8 +218,8 @@ public class Player implements IWorldObject {
         engine.drawImage(_image.Image,
                 _image.Reflect? (_body.get(0).Column * _skin.CellWidth + GameImage.LIDIA_WIDTH) : (_body.get(0).Column * _skin.CellWidth + 5),
                 _body.get(0).Row * _skin.CellHeight + 5,
-                (_image.Reflect? -1 : 1) * (GameImage.LIDIA_WIDTH - 5),
-                GameImage.LIDIA_HEIGHT - 10);
+                (_image.Reflect? -1 : 1) * (GameImage.LIDIA_WIDTH - 10),
+                GameImage.LIDIA_HEIGHT - 20);
     }
 
     // Get All cells occupied by the snake.
