@@ -96,8 +96,8 @@ public class LevelEight extends BaseLevel implements ILevel{
         //Draw doors
         Engine.drawImage(GameImage.DoorGreyOpen, 480,0);
         doorCollision(480,0);
-        Engine.drawImage(GameImage.DoorGreyOpenSide, 280,0);
-        doorCollision(280,0);
+        Engine.drawImage(GameImage.DoorGreyClosedLeftSide, 0,280);
+        doorCollision(0,280);
         Engine.drawImage(GameImage.DoorGreyClosed, 280,560);
         doorCollision(280,560);
     }
@@ -124,7 +124,7 @@ public class LevelEight extends BaseLevel implements ILevel{
 
     @Override
     public GridCell GetExitGrid() {
-        return new GridCell(0, 27);
+        return new GridCell(0, 50);
     }
 
     @Override

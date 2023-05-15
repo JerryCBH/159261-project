@@ -5,7 +5,7 @@ import java.awt.*;
  ****************************************************************************************/
 public class GameImage {
     public final Image SnakeHead, SnakeDot, Apple, Health, Mine, Broccoli, Explosion, Player, Lidia, Shura;
-    public final Image DoorGreyClosed, DoorGreyOpen, floor, lava, wallGreyLeftSide, wallGreyRightSide, wallGreyFront, DoorGreyOpenSide, DoorGreyClosedSide;
+    public final Image DoorGreyClosed, DoorGreyOpen, floor, lava, wallGreyLeftSide, wallGreyRightSide, wallGreyFront, DoorGreyOpenSide, DoorGreyClosedSide, DoorGreyClosedLeftSide, DoorGreyClosedRightSide, DoorGreyOpenLeftSide, ChestFront, ChestSide, ChestBack;
     public Image[] ExplosionSprites;
     public Image[] PlayerLeftRightSprites;
     public Image[] PlayerUpSprites;
@@ -41,6 +41,9 @@ public class GameImage {
         // Load environment images.
         DoorGreyClosed = engine.loadImage("environment/DoorGreyClosed.png");
         DoorGreyOpen = engine.loadImage("environment/DoorGreyOpen.png");
+        DoorGreyClosedLeftSide = engine.loadImage("environment/DoorGreyClosedLeftSide.png");
+        DoorGreyClosedRightSide = engine.loadImage("environment/DoorGreyClosedRightSide.png");
+        DoorGreyOpenLeftSide = engine.loadImage("environment/DoorGreyOpenLeftSide.png");
         floor = engine.loadImage("environment/floor.png");
         lava = engine.loadImage("environment/lava.png");
         wallGreyLeftSide = engine.loadImage("environment/wallGreyLeftSide.png");
@@ -48,6 +51,9 @@ public class GameImage {
         wallGreyFront = engine.loadImage("environment/wallGreyFront.png");
         DoorGreyOpenSide = engine.loadImage("environment/DoorGreyOpenSide.png");
         DoorGreyClosedSide = engine.loadImage("environment/DoorGreyClosedSide.png");
+        ChestFront = engine.loadImage("environment/ChestFront.png");
+        ChestBack = engine.loadImage("environment/ChestBack.png");
+        ChestSide = engine.loadImage("environment/ChestSide.png");
     }
 
     // Load from sprite sheet.
