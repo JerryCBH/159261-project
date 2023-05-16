@@ -80,6 +80,7 @@ public class HookshotHeroesGameEngine extends GameEngine {
     public void update(double dt) {
         if (!_pause){
             // Handle animations and sprites.
+            _world.UpdateObjects(dt);
             _world.UpdateAnimationRequests(dt);
         }
     }

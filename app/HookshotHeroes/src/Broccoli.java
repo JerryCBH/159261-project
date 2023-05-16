@@ -18,6 +18,11 @@ public class Broccoli implements IWorldObject {
     }
 
     @Override
+    public void Update(Double dt) {
+
+    }
+
+    @Override
     public GridCell[] GetOccupiedCells() {
         return new GridCell[] { _cell };
     }

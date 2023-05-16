@@ -1,5 +1,6 @@
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Objects;
 
 /****************************************************************************************
  * This class is the Player class.
@@ -7,6 +8,8 @@ import java.util.ArrayList;
 public class Player implements IWorldObject {
     // Player health.
     public static final int MAX_LIFE = 5;
+    public static final int GRAPPLE_ADVANCE = 4;
+    public static final int GRAPPLE_LENGTH = 16;
     // A list of cells occupied by the player.
     private final ArrayList<GridCell> _body;
     // Direction of player.
@@ -19,10 +22,12 @@ public class Player implements IWorldObject {
     private final ArrayList<GridCell> _occupiedCells;
     private final String _name;
     private GridCell _lastCell = null;
+    private GridCell _grappleCell = null;
     // Number of lives
     private int _lives = 3;
     private int _spriteIndex = 0;
     private ObjectImage _image = null;
+    private boolean _isGrappling = false;
 
     public Player(String name, GridCell startCell, Skin skin, KeyBinding keyBinding, ArrayList<GridCell> occupiedCells) {
         _name = name;
@@ -40,97 +45,88 @@ public class Player implements IWorldObject {
     // Keyboard binding provides the key mappings.
     @Override
     public GridCell Move(int keyCode) {
+        if (keyCode == _keyBinding.Grapple) {
+            _isGrappling = true;
+            _grappleCell = new GridCell(_body.get(0).Row, _body.get(0).Column);
+        }
         GridCell newCell = null;
-        if (_direction == PlayerDirection.Up) {
-            if (keyCode == _keyBinding.Up) {
-                newCell = MoveUp();
-                _direction = PlayerDirection.Up;
-                IncrementSprite(_skin.UpSprites, false, false);
-            }
-            else if (keyCode == _keyBinding.Right) {
-                newCell = MoveRight();
-                _direction = PlayerDirection.Right;
-                IncrementSprite(_skin.RightSprites, true, false);
-            }
-            else if (keyCode == _keyBinding.Left) {
-                newCell = MoveLeft();
-                _direction = PlayerDirection.Left;
-                //IncrementSprite(_skin.LRSprites, true, true);
-                IncrementSprite(_skin.LeftSprites, true, false);
-            }
-            else if (keyCode == _keyBinding.Down) {
-                newCell = MoveDown();
-                _direction = PlayerDirection.Down;
-                IncrementSprite(_skin.DownSprites, true, false);
-            }
-        }
-        else if (_direction == PlayerDirection.Left){
-            if (keyCode == _keyBinding.Left) {
-                newCell = MoveLeft();
-                _direction = PlayerDirection.Left;
-                //IncrementSprite(_skin.LRSprites, false, true);
-                IncrementSprite(_skin.LeftSprites, false, false);
-            }
-            else if (keyCode == _keyBinding.Up) {
-                newCell = MoveUp();
-                _direction = PlayerDirection.Up;
-                IncrementSprite(_skin.UpSprites, true, false);
-            }
-            else if (keyCode == _keyBinding.Down) {
-                newCell = MoveDown();
-                _direction = PlayerDirection.Down;
-                IncrementSprite(_skin.DownSprites, true, false);
-            }
-            else if (keyCode == _keyBinding.Right) {
-                newCell = MoveRight();
-                _direction = PlayerDirection.Right;
-                IncrementSprite(_skin.RightSprites, true, false);
-            }
-        }
-        else if (_direction == PlayerDirection.Right){
-            if (keyCode == _keyBinding.Right) {
-                newCell = MoveRight();
-                _direction = PlayerDirection.Right;
-                IncrementSprite(_skin.RightSprites, false, false);
-            }
-            else if (keyCode == _keyBinding.Up) {
-                newCell = MoveUp();
-                _direction = PlayerDirection.Up;
-                IncrementSprite(_skin.UpSprites, true, false);
-            }
-            else if (keyCode == _keyBinding.Down) {
-                newCell = MoveDown();
-                _direction = PlayerDirection.Down;
-                IncrementSprite(_skin.DownSprites, true, false);
-            }
-            else if (keyCode == _keyBinding.Left) {
-                newCell = MoveLeft();
-                _direction = PlayerDirection.Left;
-                //IncrementSprite(_skin.LRSprites, true, true);
-                IncrementSprite(_skin.LeftSprites, true, false);
-            }
-        }
-        else if (_direction == PlayerDirection.Down){
-            if (keyCode == _keyBinding.Down) {
-                newCell = MoveDown();
-                _direction = PlayerDirection.Down;
-                IncrementSprite(_skin.DownSprites, false, false);
-            }
-            else if (keyCode == _keyBinding.Right) {
-                newCell = MoveRight();
-                _direction = PlayerDirection.Right;
-                IncrementSprite(_skin.RightSprites, true, false);
-            }
-            else if (keyCode == _keyBinding.Left) {
-                newCell = MoveLeft();
-                _direction = PlayerDirection.Left;
-                //IncrementSprite(_skin.LRSprites, true, true);
-                IncrementSprite(_skin.LeftSprites, true, false);
-            }
-            else if (keyCode == _keyBinding.Up) {
-                newCell = MoveUp();
-                _direction = PlayerDirection.Up;
-                IncrementSprite(_skin.UpSprites, true, false);
+        if (!_isGrappling) {
+            if (_direction == PlayerDirection.Up) {
+                if (keyCode == _keyBinding.Up) {
+                    newCell = MoveUp();
+                    _direction = PlayerDirection.Up;
+                    IncrementSprite(_skin.UpSprites, false, false);
+                } else if (keyCode == _keyBinding.Right) {
+                    newCell = MoveRight();
+                    _direction = PlayerDirection.Right;
+                    IncrementSprite(_skin.RightSprites, true, false);
+                } else if (keyCode == _keyBinding.Left) {
+                    newCell = MoveLeft();
+                    _direction = PlayerDirection.Left;
+                    //IncrementSprite(_skin.LRSprites, true, true);
+                    IncrementSprite(_skin.LeftSprites, true, false);
+                } else if (keyCode == _keyBinding.Down) {
+                    newCell = MoveDown();
+                    _direction = PlayerDirection.Down;
+                    IncrementSprite(_skin.DownSprites, true, false);
+                }
+            } else if (_direction == PlayerDirection.Left) {
+                if (keyCode == _keyBinding.Left) {
+                    newCell = MoveLeft();
+                    _direction = PlayerDirection.Left;
+                    //IncrementSprite(_skin.LRSprites, false, true);
+                    IncrementSprite(_skin.LeftSprites, false, false);
+                } else if (keyCode == _keyBinding.Up) {
+                    newCell = MoveUp();
+                    _direction = PlayerDirection.Up;
+                    IncrementSprite(_skin.UpSprites, true, false);
+                } else if (keyCode == _keyBinding.Down) {
+                    newCell = MoveDown();
+                    _direction = PlayerDirection.Down;
+                    IncrementSprite(_skin.DownSprites, true, false);
+                } else if (keyCode == _keyBinding.Right) {
+                    newCell = MoveRight();
+                    _direction = PlayerDirection.Right;
+                    IncrementSprite(_skin.RightSprites, true, false);
+                }
+            } else if (_direction == PlayerDirection.Right) {
+                if (keyCode == _keyBinding.Right) {
+                    newCell = MoveRight();
+                    _direction = PlayerDirection.Right;
+                    IncrementSprite(_skin.RightSprites, false, false);
+                } else if (keyCode == _keyBinding.Up) {
+                    newCell = MoveUp();
+                    _direction = PlayerDirection.Up;
+                    IncrementSprite(_skin.UpSprites, true, false);
+                } else if (keyCode == _keyBinding.Down) {
+                    newCell = MoveDown();
+                    _direction = PlayerDirection.Down;
+                    IncrementSprite(_skin.DownSprites, true, false);
+                } else if (keyCode == _keyBinding.Left) {
+                    newCell = MoveLeft();
+                    _direction = PlayerDirection.Left;
+                    //IncrementSprite(_skin.LRSprites, true, true);
+                    IncrementSprite(_skin.LeftSprites, true, false);
+                }
+            } else if (_direction == PlayerDirection.Down) {
+                if (keyCode == _keyBinding.Down) {
+                    newCell = MoveDown();
+                    _direction = PlayerDirection.Down;
+                    IncrementSprite(_skin.DownSprites, false, false);
+                } else if (keyCode == _keyBinding.Right) {
+                    newCell = MoveRight();
+                    _direction = PlayerDirection.Right;
+                    IncrementSprite(_skin.RightSprites, true, false);
+                } else if (keyCode == _keyBinding.Left) {
+                    newCell = MoveLeft();
+                    _direction = PlayerDirection.Left;
+                    //IncrementSprite(_skin.LRSprites, true, true);
+                    IncrementSprite(_skin.LeftSprites, true, false);
+                } else if (keyCode == _keyBinding.Up) {
+                    newCell = MoveUp();
+                    _direction = PlayerDirection.Up;
+                    IncrementSprite(_skin.UpSprites, true, false);
+                }
             }
         }
         return newCell;
@@ -204,9 +200,14 @@ public class Player implements IWorldObject {
         return result;
     }
 
-    // Render the snake by drawing skin images oon each occupied grid cell.
+    // Render the player.
     @Override
     public void Render(GameEngine engine) {
+        if(_isGrappling) {
+            engine.changeColor(Color.YELLOW);
+            engine.drawLine(_body.get(0).Column * _skin.CellWidth + 25, _body.get(0).Row * _skin.CellHeight + 35,
+                    _grappleCell.Column * _skin.CellWidth + 25, _grappleCell.Row * _skin.CellHeight + 35, 2);
+        }
         engine.changeColor(Color.white);
         DrawName(engine, _body.get(0));
         DrawHealth(engine, _body.get(0));
@@ -220,6 +221,69 @@ public class Player implements IWorldObject {
                 _body.get(0).Row * _skin.CellHeight + 5,
                 (_image.Reflect? -1 : 1) * (GameImage.LIDIA_WIDTH - 10),
                 GameImage.LIDIA_HEIGHT - 20);
+    }
+
+    @Override
+    public void Update(Double dt) {
+        var playerPos = _body.get(0);
+        if (_isGrappling) {
+            if (_direction == PlayerDirection.Up) {
+                if (!CanMoveTo(new GridCell(playerPos.Column, _grappleCell.Row - GRAPPLE_ADVANCE))
+                        && CanMoveTo(new GridCell(playerPos.Column, playerPos.Row - GRAPPLE_ADVANCE))) {
+                    playerPos.Row -= GRAPPLE_ADVANCE;
+                    if (playerPos.Row == _grappleCell.Row) {
+                        _isGrappling = false;
+                    }
+                } else if (_grappleCell.Row != playerPos.Row - GRAPPLE_LENGTH &&
+                        CanMoveTo(new GridCell(playerPos.Column, playerPos.Row - GRAPPLE_ADVANCE))) {
+                    _grappleCell.Row -= GRAPPLE_ADVANCE;
+                } else {
+                    _isGrappling = false;
+                }
+            }
+            if (_direction == PlayerDirection.Down) {
+                if (!CanMoveTo(new GridCell(playerPos.Column, _grappleCell.Row + GRAPPLE_ADVANCE))
+                        && CanMoveTo(new GridCell(playerPos.Column, playerPos.Row + GRAPPLE_ADVANCE))) {
+                    playerPos.Row += GRAPPLE_ADVANCE;
+                    if (playerPos.Row  == _grappleCell.Row) {
+                        _isGrappling = false;
+                    }
+                } else if (_grappleCell.Row != playerPos.Row + GRAPPLE_LENGTH &&
+                        CanMoveTo(new GridCell(playerPos.Column, playerPos.Row + GRAPPLE_ADVANCE))) {
+                    _grappleCell.Row += GRAPPLE_ADVANCE;
+                } else {
+                    _isGrappling = false;
+                }
+            }
+            if (_direction == PlayerDirection.Left) {
+                if (!CanMoveTo(new GridCell(_grappleCell.Column - GRAPPLE_ADVANCE, playerPos.Row))
+                        && CanMoveTo(new GridCell(playerPos.Column - GRAPPLE_ADVANCE, playerPos.Row))) {
+                    playerPos.Column -= GRAPPLE_ADVANCE;
+                    if (playerPos.Column == _grappleCell.Column) {
+                        _isGrappling = false;
+                    }
+                } else if (_grappleCell.Column != playerPos.Column - GRAPPLE_LENGTH
+                        && CanMoveTo(new GridCell(playerPos.Column - GRAPPLE_ADVANCE, playerPos.Row))) {
+                    _grappleCell.Column -= GRAPPLE_ADVANCE;
+                } else {
+                    _isGrappling = false;
+                }
+            }
+            if (_direction == PlayerDirection.Right) {
+                if (!CanMoveTo(new GridCell(_grappleCell.Column + GRAPPLE_ADVANCE, playerPos.Row))
+                        && CanMoveTo(new GridCell(playerPos.Column + GRAPPLE_ADVANCE, playerPos.Row))) {
+                    playerPos.Column += GRAPPLE_ADVANCE;
+                    if (playerPos.Column == _grappleCell.Column) {
+                        _isGrappling = false;
+                    }
+                } else if (_grappleCell.Column != playerPos.Column + GRAPPLE_LENGTH
+                        && CanMoveTo(new GridCell(playerPos.Column + GRAPPLE_ADVANCE, playerPos.Row))) {
+                    _grappleCell.Column += GRAPPLE_ADVANCE;
+                } else {
+                    _isGrappling = false;
+                }
+            }
+        }
     }
 
     // Get All cells occupied by the snake.

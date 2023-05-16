@@ -6,10 +6,12 @@ public class KeyBinding {
     public int Left;
     public int Right;
     public int Down;
-    public KeyBinding(int up, int left, int right, int down){
+    public int Grapple;
+    public KeyBinding(int up, int left, int right, int down, int grapple){
         Up = up;
         Left = left;
         Right = right;
         Down = down;
+        Grapple = grapple;
     }
 }

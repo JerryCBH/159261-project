@@ -65,6 +65,13 @@ public class World implements IWorld {
         }
     }
 
+    @Override
+    public void UpdateObjects(double dt) {
+        for (IWorldObject object : Objects) {
+            object.Update(dt);
+        }
+    }
+
     public void HandleKeyEvents(KeyEvent event){
         var toCheck = MoveObjects(event);
         CheckCollision(toCheck);

@@ -62,6 +62,11 @@ public class Ball implements IWorldObject{
         _cell = cell;
     }
 
+    @Override
+    public void Update(Double dt) {
+
+    }
+
     // Check ball collision.
     public static boolean CheckCollision(Ball ball1, Ball ball2){
         var diffX = ball1.Position.X - ball2.Position.X;

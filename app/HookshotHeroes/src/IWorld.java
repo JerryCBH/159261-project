@@ -8,6 +8,7 @@ public interface IWorld {
     void SetObjects(IWorldObject[] objects);
     void RenderLevel();
     void RenderObjects();
+    void UpdateObjects(double dt);
     void HandleKeyEvents(KeyEvent event);
     int GetPlayerCount();
     void UpdateAnimationRequests(double dt);
