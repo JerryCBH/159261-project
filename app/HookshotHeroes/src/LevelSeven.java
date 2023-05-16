@@ -19,7 +19,7 @@ public class LevelSeven extends BaseLevel implements ILevel{
         for (int x = 120; x < 240; x += environmentSpriteSize) {
             drawLavaWithCollision(x, 360);
         }
-        for (int x = 360; x < 480; x += environmentSpriteSize) {
+        for (int x = 400; x < 480; x += environmentSpriteSize) {
             drawLavaWithCollision(x, 400);
         }
         for (int x = 320; x < 440; x += environmentSpriteSize) {
@@ -34,7 +34,7 @@ public class LevelSeven extends BaseLevel implements ILevel{
         for (int y = 480; y < 560; y += environmentSpriteSize) {
             drawLavaWithCollision(80, y);
         }
-        for (int x = 280; x < 560; x += environmentSpriteSize) {
+        for (int x = 320; x < 560; x += environmentSpriteSize) {
             for (int y = 80; y < 160; y += environmentSpriteSize) {
                 drawLavaWithCollision(x, y);
             }
@@ -50,9 +50,11 @@ public class LevelSeven extends BaseLevel implements ILevel{
             }
         }
         drawLavaWithCollision(200, 480);
-        drawLavaWithCollision(480, 440);
-        drawLavaWithCollision(440, 280);
         drawLavaWithCollision(160, 480);
+        drawLavaWithCollision(280, 120);
+        drawLavaWithCollision(440, 280);
+        drawLavaWithCollision(400, 480);
+        drawLavaWithCollision(440, 480);
 
         //Draw internal walls
         for (int y = 200; y < 360; y += environmentSpriteSize) {
@@ -89,7 +91,7 @@ public class LevelSeven extends BaseLevel implements ILevel{
             drawWallFrontWithCollision(x, 480);
         }
         for (int x = 480; x < 560; x += environmentSpriteSize) {
-            drawWallFrontWithCollision(x, 400);
+            drawWallFrontWithCollision(x, 440);
         }
         for (int x = 240; x < 400; x += environmentSpriteSize) {
             drawWallFrontWithCollision(x, 320);
@@ -104,6 +106,7 @@ public class LevelSeven extends BaseLevel implements ILevel{
         drawWallFrontWithCollision(40, 360);
         drawWallFrontWithCollision(360, 280);
         drawWallFrontWithCollision(360, 440);
+        drawWallFrontWithCollision(280, 80);
 
         //Draw doors
         Engine.drawImage(GameImage.DoorGreyOpen, 280,0);

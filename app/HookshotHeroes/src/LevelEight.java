@@ -30,7 +30,7 @@ public class LevelEight extends BaseLevel implements ILevel{
                 drawLavaWithCollision(x, y);
             }
         }
-        for (int y = 360; y < 480; y += environmentSpriteSize) {
+        for (int y = 4000; y < 520; y += environmentSpriteSize) {
             drawLavaWithCollision(40, y);
         }
         for (int y = 200; y < 320; y += environmentSpriteSize) {

@@ -25,14 +25,16 @@ public class LevelThree extends BaseLevel implements ILevel {
             drawWallFrontWithCollision(x, 240);
         }
         for (int y = 320; y <= 360; y += 40) {
-            for (int x = 20; x <= 40; x += 20) {
+            for (int x = 40; x <= 40; x += 40) {
                 drawWallFrontWithCollision(x, y);
             }
         }
         drawWallFrontWithCollision(320, 280);
+        drawWallFrontWithCollision(40, 280);
+        drawWallFrontWithCollision(80, 280);
 
         // Draw Lava
-        for (int y = 40; y < 320; y += environmentSpriteSize) {
+        for (int y = 40; y < 280; y += environmentSpriteSize) {
             for (int x = 40; x < 220; x += environmentSpriteSize) {
                 drawLavaWithCollision(x, y);
             }
@@ -64,6 +66,9 @@ public class LevelThree extends BaseLevel implements ILevel {
             for (int x = 480; x <= 540; x += environmentSpriteSize) {
                 drawLavaWithCollision(x, y);
             }
+        }
+        for (int x = 120; x < 240; x += environmentSpriteSize) {
+            drawLavaWithCollision(x, 280);
         }
         drawLavaWithCollision(480, 400);
 

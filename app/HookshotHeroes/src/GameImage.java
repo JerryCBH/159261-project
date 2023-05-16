@@ -4,7 +4,7 @@ import java.awt.*;
  * This class load the game's images.
  ****************************************************************************************/
 public class GameImage {
-    public final Image SnakeHead, SnakeDot, Apple, Health, Mine, Broccoli, Explosion, Player, Lidia, Shura;
+    public final Image SnakeHead, SnakeDot, Apple, Health, Mine, Broccoli, Explosion, Player, Lidia, Shura, Minotaur;
     public final Image DoorGreyClosed, DoorGreyOpen, floor, lava, wallGreyLeftSide, wallGreyRightSide, wallGreyFront, DoorGreyOpenSide, DoorGreyClosedSide, DoorGreyClosedLeftSide, DoorGreyClosedRightSide, DoorGreyOpenLeftSide, ChestFront, ChestSide, ChestBack;
     public Image[] ExplosionSprites;
     public Image[] PlayerLeftRightSprites;
@@ -18,10 +18,16 @@ public class GameImage {
     public Image[] ShuraRightSprites;
     public Image[] ShuraUpSprites;
     public Image[] ShuraDownSprites;
+    public Image[] MinotaurUpSprites;
+    public Image[] MinotaurDownSprites;
+    public Image[] MinotaurLeftSprites;
+    public Image[] MinotaurRightSprites;
     public static final int PLAYER_WIDTH = 48;
     public static final int PLAYER_HEIGHT = 56;
     public static final int LIDIA_WIDTH = 64;
     public static final int LIDIA_HEIGHT = 64;
+    public static final int Minotaur_WIDTH = 48;
+    public static final int Minotaur_HEIGHT = 64;
     public GameImage(HookshotHeroesGameEngine engine){
         SnakeHead = engine.loadImage("head.png");
         SnakeDot = engine.loadImage("dot.png");
@@ -33,6 +39,7 @@ public class GameImage {
         Player = engine.loadImage("player.png");
         Lidia = engine.loadImage("lidia.png");
         Shura = engine.loadImage("shura.png");
+        Minotaur = engine.loadImage("minotaur.png");
         LoadExplosionSpriteSheet(engine);
         LoadPlayerSpriteSheet(engine);
         LoadLidiaSpriteSheet(engine);
@@ -117,6 +124,25 @@ public class GameImage {
         ShuraRightSprites = new Image[9];
         for (int j = 0; j < 9; j++) {
             ShuraRightSprites[j] = engine.subImage(Shura, j*LIDIA_WIDTH, LIDIA_HEIGHT*3, LIDIA_WIDTH, LIDIA_HEIGHT);
+        }
+    }
+
+    private void LoadMinotaurSpriteSheet(HookshotHeroesGameEngine engine) {
+        MinotaurDownSprites = new Image[3];
+        for (int j = 0; j < 2; j ++) {
+            MinotaurUpSprites[j] = engine.subImage(Minotaur, j*Minotaur_WIDTH, 0, Minotaur_WIDTH, Minotaur_HEIGHT);
+        }
+        MinotaurLeftSprites = new Image[3];
+        for (int j = 0; j < 2; j ++) {
+            MinotaurUpSprites[j] = engine.subImage(Minotaur, j*Minotaur_WIDTH, Minotaur_HEIGHT*2, Minotaur_WIDTH, Minotaur_HEIGHT);
+        }
+        MinotaurRightSprites = new Image[3];
+        for (int j = 0; j < 2; j ++) {
+            MinotaurUpSprites[j] = engine.subImage(Minotaur, j*Minotaur_WIDTH, Minotaur_HEIGHT*3, Minotaur_WIDTH, Minotaur_HEIGHT);
+        }
+        MinotaurUpSprites = new Image[3];
+        for (int j = 0; j < 2; j ++) {
+            MinotaurUpSprites[j] = engine.subImage(Minotaur, j*Minotaur_WIDTH, Minotaur_HEIGHT*4, Minotaur_WIDTH, Minotaur_HEIGHT);
         }
     }
 }

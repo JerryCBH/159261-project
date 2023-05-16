@@ -95,6 +95,7 @@ public class HookshotHeroesGameEngine extends GameEngine {
         _world.RenderObjects();
         _world.PlayAnimation();
         _world.PlayAudio();
+
     }
 
     @Override

@@ -28,7 +28,7 @@ public class BaseLevel {
     public void drawWallFrontWithCollision(int x, int y) {
         Engine.drawImage(GameImage.wallGreyFront, x, y);
         Engine.changeColor(Color.red); //Just to see visually
-        Engine.drawRectangle(x, y, 40, 40);
+        Engine.drawRectangle(x, y, 40, 20);
 
         //Add collision logic here
         AddWallCell(x, y);

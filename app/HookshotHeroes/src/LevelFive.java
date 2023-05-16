@@ -36,7 +36,7 @@ public class LevelFive extends BaseLevel implements ILevel {
         for (int y = 240; y < 360; y += environmentSpriteSize) {
             drawLavaWithCollision(280, y);
         }
-        for (int x = 120; x < 280; x += environmentSpriteSize) {
+        for (int x = 120; x < 240; x += environmentSpriteSize) {
             drawLavaWithCollision(x, 360);
         }
         for (int x = 120; x < 240; x += environmentSpriteSize) {
@@ -66,7 +66,7 @@ public class LevelFive extends BaseLevel implements ILevel {
         for (int x = 40; x < 280; x += environmentSpriteSize) {
             drawWallFrontWithCollision(x, 240);
         }
-        for (int x = 80; x < 280; x += environmentSpriteSize) {
+        for (int x = 120; x < 280; x += environmentSpriteSize) {
             drawWallFrontWithCollision(x, 320);
         }
         for (int y = 320; y < 560; y += environmentSpriteSize) {
@@ -88,6 +88,11 @@ public class LevelFive extends BaseLevel implements ILevel {
 
         drawWallFrontWithCollision(360, 320);
         drawWallFrontWithCollision(360, 360);
+
+        drawWallFrontWithCollision(280, 400);
+        drawWallFrontWithCollision(40, 320);
+        drawWallFrontWithCollision(40, 360);
+        drawWallFrontWithCollision(280, 520);
 
         //Draw doors
         Engine.drawImage(GameImage.DoorGreyClosedLeftSide, 0,80);
