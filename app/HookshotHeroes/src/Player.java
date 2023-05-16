@@ -228,56 +228,56 @@ public class Player implements IWorldObject {
         var playerPos = _body.get(0);
         if (_isGrappling) {
             if (_direction == PlayerDirection.Up) {
-                if (!CanMoveTo(new GridCell(playerPos.Column, _grappleCell.Row - GRAPPLE_ADVANCE))
-                        && CanMoveTo(new GridCell(playerPos.Column, playerPos.Row - GRAPPLE_ADVANCE))) {
+                if (!CanMoveTo(new GridCell( _grappleCell.Row - GRAPPLE_ADVANCE, playerPos.Column))
+                        && CanMoveTo(new GridCell( playerPos.Row - GRAPPLE_ADVANCE, playerPos.Column))) {
                     playerPos.Row -= GRAPPLE_ADVANCE;
                     if (playerPos.Row == _grappleCell.Row) {
                         _isGrappling = false;
                     }
                 } else if (_grappleCell.Row != playerPos.Row - GRAPPLE_LENGTH &&
-                        CanMoveTo(new GridCell(playerPos.Column, playerPos.Row - GRAPPLE_ADVANCE))) {
+                        CanMoveTo(new GridCell( playerPos.Row - GRAPPLE_ADVANCE, playerPos.Column))) {
                     _grappleCell.Row -= GRAPPLE_ADVANCE;
                 } else {
                     _isGrappling = false;
                 }
             }
             if (_direction == PlayerDirection.Down) {
-                if (!CanMoveTo(new GridCell(playerPos.Column, _grappleCell.Row + GRAPPLE_ADVANCE))
-                        && CanMoveTo(new GridCell(playerPos.Column, playerPos.Row + GRAPPLE_ADVANCE))) {
+                if (!CanMoveTo(new GridCell( _grappleCell.Row + GRAPPLE_ADVANCE, playerPos.Column))
+                        && CanMoveTo(new GridCell( playerPos.Row + GRAPPLE_ADVANCE, playerPos.Column))) {
                     playerPos.Row += GRAPPLE_ADVANCE;
                     if (playerPos.Row  == _grappleCell.Row) {
                         _isGrappling = false;
                     }
                 } else if (_grappleCell.Row != playerPos.Row + GRAPPLE_LENGTH &&
-                        CanMoveTo(new GridCell(playerPos.Column, playerPos.Row + GRAPPLE_ADVANCE))) {
+                        CanMoveTo(new GridCell( playerPos.Row + GRAPPLE_ADVANCE, playerPos.Column))) {
                     _grappleCell.Row += GRAPPLE_ADVANCE;
                 } else {
                     _isGrappling = false;
                 }
             }
             if (_direction == PlayerDirection.Left) {
-                if (!CanMoveTo(new GridCell(_grappleCell.Column - GRAPPLE_ADVANCE, playerPos.Row))
-                        && CanMoveTo(new GridCell(playerPos.Column - GRAPPLE_ADVANCE, playerPos.Row))) {
+                if (!CanMoveTo(new GridCell(playerPos.Row, _grappleCell.Column - GRAPPLE_ADVANCE))
+                        && CanMoveTo(new GridCell(playerPos.Row, playerPos.Column - GRAPPLE_ADVANCE))) {
                     playerPos.Column -= GRAPPLE_ADVANCE;
                     if (playerPos.Column == _grappleCell.Column) {
                         _isGrappling = false;
                     }
                 } else if (_grappleCell.Column != playerPos.Column - GRAPPLE_LENGTH
-                        && CanMoveTo(new GridCell(playerPos.Column - GRAPPLE_ADVANCE, playerPos.Row))) {
+                        && CanMoveTo(new GridCell(playerPos.Row, playerPos.Column - GRAPPLE_ADVANCE))) {
                     _grappleCell.Column -= GRAPPLE_ADVANCE;
                 } else {
                     _isGrappling = false;
                 }
             }
             if (_direction == PlayerDirection.Right) {
-                if (!CanMoveTo(new GridCell(_grappleCell.Column + GRAPPLE_ADVANCE, playerPos.Row))
-                        && CanMoveTo(new GridCell(playerPos.Column + GRAPPLE_ADVANCE, playerPos.Row))) {
+                if (!CanMoveTo(new GridCell(playerPos.Row, _grappleCell.Column + GRAPPLE_ADVANCE))
+                        && CanMoveTo(new GridCell(playerPos.Row, playerPos.Column + GRAPPLE_ADVANCE))) {
                     playerPos.Column += GRAPPLE_ADVANCE;
                     if (playerPos.Column == _grappleCell.Column) {
                         _isGrappling = false;
                     }
                 } else if (_grappleCell.Column != playerPos.Column + GRAPPLE_LENGTH
-                        && CanMoveTo(new GridCell(playerPos.Column + GRAPPLE_ADVANCE, playerPos.Row))) {
+                        && CanMoveTo(new GridCell(playerPos.Row, playerPos.Column + GRAPPLE_ADVANCE))) {
                     _grappleCell.Column += GRAPPLE_ADVANCE;
                 } else {
                     _isGrappling = false;
