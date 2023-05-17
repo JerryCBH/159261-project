@@ -14,7 +14,7 @@ import java.io.IOException;
  */
 public class HookshotHeroesGameEngine extends GameEngine {
 
-    private final int _width = 600, _height = 600, _fps = 60;
+    private final int _width = 600, _height = 600, _fps = 120;
     private final GameImage _gameImage;
     private final GameAudio _gameAudio;
     private IWorld _world;
