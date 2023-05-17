@@ -8,8 +8,8 @@ import java.util.Objects;
 public class Player implements IWorldObject {
     // Player health.
     public static final int MAX_LIFE = 5;
-    public static final int GRAPPLE_ADVANCE = 4;
-    public static final int GRAPPLE_LENGTH = 16;
+    public static final int GRAPPLE_ADVANCE = 1;
+    public static final int GRAPPLE_LENGTH = 17;
     // A list of cells occupied by the player.
     private final ArrayList<GridCell> _body;
     // Direction of player.
