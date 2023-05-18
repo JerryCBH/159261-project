@@ -14,7 +14,7 @@ public class SinglePlayerWorldBuilder extends BaseWorldBuilder implements IWorld
                         new Player("Lidia", grid,
                                 new Skin(world.GameImage.LidiaUpSprites, world.GameImage.LidiaLeftSprites, world.GameImage.LidiaRightSprites, world.GameImage.LidiaDownSprites, world.GameImage.Health, world.CELL_WIDTH, world.CELL_HEIGHT),
                                 new KeyBinding(KeyEvent.VK_W, KeyEvent.VK_A, KeyEvent.VK_D, KeyEvent.VK_S, KeyEvent.VK_X),
-                                level.GetWallCells(), world.AudioRequests
+                                level.GetWallCells(), level.GetOccupiedCells(), world.AudioRequests
                                 )
                 });
         super.AddObjects(world, WorldObjectType.Mine, 3);
