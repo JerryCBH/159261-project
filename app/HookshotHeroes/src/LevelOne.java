@@ -60,4 +60,9 @@ public class LevelOne extends BaseLevel implements ILevel{
     public GridCell GetEntryGrid() {
         return new GridCell(56, 27);
     }
+
+    @Override
+    public String GetLevelName() {
+        return "Level 1";
+    }
 }

@@ -234,6 +234,11 @@ public class World implements IWorld {
         }
     }
 
+    @Override
+    public ILevel GetLevel() {
+        return CurrentLevel;
+    }
+
     // Remove object from the gaming world.
     private void RemoveObject(IWorldObject toRemove){
         if(toRemove != null) {

@@ -9,7 +9,7 @@ public class Player implements IWorldObject {
     // Player health.
     public static final int MAX_LIFE = 5;
     public static final int GRAPPLE_ADVANCE = 1;
-    public static final int GRAPPLE_LENGTH = 17;
+    public static final int GRAPPLE_LENGTH = 19;
     // A list of cells occupied by the player.
     private final ArrayList<GridCell> _body;
     // Direction of player.
@@ -183,7 +183,7 @@ public class Player implements IWorldObject {
     // Check if we can move to this cell.
     private boolean CanMoveTo(GridCell newCell) {
         var offsetYL = 4;
-        var offsetYU = 2;
+        var offsetYU = 0;
         var offsetXL = 3;
         var offsetXU = 1;
         var result = true;

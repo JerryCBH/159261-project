@@ -15,4 +15,5 @@ public interface IWorld {
     void PlayAnimation();
     void PlayAudio();
     void HandleCollision(IWorldObject collidedObject);
+    ILevel GetLevel();
 }

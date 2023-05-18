@@ -6,6 +6,7 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.io.BufferedInputStream;
 import java.io.IOException;
+import java.util.Date;
 
 /***********************************************
  * =============================================
@@ -14,12 +15,15 @@ import java.io.IOException;
  */
 public class HookshotHeroesGameEngine extends GameEngine {
 
-    private final int _width = 600, _height = 600, _fps = 120;
+    private final int _width = 600, _height = 650, _fps = 120;
     private final GameImage _gameImage;
     private final GameAudio _gameAudio;
     private IWorld _world;
     private Boolean _pause = false;
     private final JMenuBar _menuBar;
+
+    private StopWatch _stopWatch;
+
     public GameOptions GameOptions;
 
     public static void main(String[] args){
@@ -41,6 +45,8 @@ public class HookshotHeroesGameEngine extends GameEngine {
         // Build the default menu bar.
         var _menuBarBuilder = new DefaultMenuBarBuilder();
         _menuBar = _menuBarBuilder.BuildMenuBar(this);
+
+        _stopWatch = new StopWatch();
     }
 
     // Initialize the game world based on game options.
@@ -52,6 +58,7 @@ public class HookshotHeroesGameEngine extends GameEngine {
         else {
             _world = new DoublePlayerWorldBuilder().Build(this, _gameImage, _gameAudio, options, new LevelOne(this, _gameImage, options));
         }
+        _stopWatch.Reset();
     }
 
     // Initialize the game world based on level.
@@ -96,6 +103,8 @@ public class HookshotHeroesGameEngine extends GameEngine {
         _world.PlayAnimation();
         _world.PlayAudio();
 
+        drawText(10, 615, _world.GetLevel().GetLevelName() + " Time: " + _stopWatch.GetTimeInSeconds(), "Arial", 12);
+
     }
 
     @Override
@@ -112,11 +121,13 @@ public class HookshotHeroesGameEngine extends GameEngine {
     // Pause the game engine during message popups.
     public void PauseEngine(){
         _pause = true;
+        _stopWatch.Stop();
     }
 
     // Resumes the game engine.
     public void ResumeEngine(){
         _pause = false;
+        _stopWatch.Start();
     }
 
     // Get the current frame for animation.

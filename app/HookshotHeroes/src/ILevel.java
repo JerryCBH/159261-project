@@ -14,4 +14,5 @@ public interface ILevel {
     ArrayList<GridCell> GetLavaCells();
     ArrayList<GridCell> GetOccupiedCells();
     void SetLevelRendered(boolean flag);
+    String GetLevelName();
 }

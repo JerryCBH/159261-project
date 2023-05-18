@@ -65,7 +65,7 @@ public class LevelTwo extends BaseLevel implements ILevel{
 
     @Override
     public GridCell[] GetBottomStartingPos() {
-        return new GridCell[]{new GridCell(50, 27), new GridCell(50, 33)};
+        return new GridCell[]{new GridCell(50, 27), new GridCell(50, 30)};
     }
 
     @Override
@@ -76,5 +76,10 @@ public class LevelTwo extends BaseLevel implements ILevel{
     @Override
     public GridCell GetEntryGrid() {
         return new GridCell(56, 27);
+    }
+
+    @Override
+    public String GetLevelName() {
+        return "Level 2";
     }
 }
