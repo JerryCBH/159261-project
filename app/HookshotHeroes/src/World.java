@@ -310,6 +310,10 @@ public class World implements IWorld {
                 // Snake
                 Engine.playAudio(GameAudio.HitAudio, GameOptions.SoundEffectsVolume);
             }
+            else if (request.Type == WorldObjectType.Grapple) {
+                // Snake
+                Engine.playAudio(GameAudio.WhipAudio, GameOptions.SoundEffectsVolume);
+            }
         }
     }
 

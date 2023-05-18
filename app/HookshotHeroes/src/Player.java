@@ -1,5 +1,6 @@
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.Objects;
 
 /****************************************************************************************
@@ -28,8 +29,9 @@ public class Player implements IWorldObject {
     private int _spriteIndex = 0;
     private ObjectImage _image = null;
     private boolean _isGrappling = false;
+    private LinkedList<AudioRequest> _audioRequests;
 
-    public Player(String name, GridCell startCell, Skin skin, KeyBinding keyBinding, ArrayList<GridCell> occupiedCells) {
+    public Player(String name, GridCell startCell, Skin skin, KeyBinding keyBinding, ArrayList<GridCell> occupiedCells, LinkedList<AudioRequest> audioRequests) {
         _name = name;
         _skin = skin;
         _direction = PlayerDirection.Right;
@@ -38,6 +40,7 @@ public class Player implements IWorldObject {
         _body.add(new GridCell(startCell.Row, startCell.Column));
         _image = new ObjectImage(skin.DownSprites[0]);
         _occupiedCells = occupiedCells;
+        _audioRequests = audioRequests;
     }
 
     // Move the player.
@@ -48,6 +51,7 @@ public class Player implements IWorldObject {
         if (keyCode == _keyBinding.Grapple) {
             _isGrappling = true;
             _grappleCell = new GridCell(_body.get(0).Row, _body.get(0).Column);
+            _audioRequests.add(new AudioRequest(WorldObjectType.Grapple));
         }
         GridCell newCell = null;
         if (!_isGrappling) {
