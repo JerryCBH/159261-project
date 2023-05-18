@@ -12,7 +12,7 @@ public class LevelThree extends BaseLevel implements ILevel {
         for (int x = 240; x < 480; x += environmentSpriteSize) {
             drawWallFrontWithCollision(x, 120);
         }
-        for (int y = 40; y < 120; y += environmentSpriteSize) {;
+        for (int y = 40; y < 120; y += environmentSpriteSize) {
             drawWallFrontWithCollision(240, y);
         }
         for (int y = 400; y < 560; y += environmentSpriteSize) {
@@ -21,7 +21,7 @@ public class LevelThree extends BaseLevel implements ILevel {
         for (int x = 240; x < 480; x += environmentSpriteSize) {
             drawWallFrontWithCollision(x, 400);
         }
-        for (int x = 320; x < 600; x += environmentSpriteSize) {
+        for (int x = 320; x < 560; x += environmentSpriteSize) {
             drawWallFrontWithCollision(x, 240);
         }
         for (int y = 320; y <= 360; y += 40) {
