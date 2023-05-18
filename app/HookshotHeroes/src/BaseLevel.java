@@ -48,7 +48,9 @@ public class BaseLevel {
 
     public void drawLavaWithCollision(int x, int y) {
         Engine.drawImage(GameImage.lava, x, y);
+        Engine.changeColor(Color.pink);
         Engine.drawRectangle(x, y, 40, 40);
+        Engine.changeColor(Color.BLACK);
 
         //Add collision logic here
         AddLavaCell(x, y);
