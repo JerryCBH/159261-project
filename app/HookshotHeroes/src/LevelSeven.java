@@ -54,7 +54,10 @@ public class LevelSeven extends BaseLevel implements ILevel{
         drawLavaWithCollision(280, 120);
         drawLavaWithCollision(440, 280);
         drawLavaWithCollision(400, 480);
-        drawLavaWithCollision(440, 480);
+        drawLavaWithCollision(400, 480);
+        drawLavaWithCollision(480, 360);
+        drawLavaWithCollision(480, 400);
+
 
         //Draw internal walls
         for (int y = 200; y < 360; y += environmentSpriteSize) {

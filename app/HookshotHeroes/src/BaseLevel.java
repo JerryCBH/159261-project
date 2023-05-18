@@ -27,15 +27,13 @@ public class BaseLevel {
 
     public void drawWallFrontWithCollision(int x, int y) {
         Engine.drawImage(GameImage.wallGreyFront, x, y);
-        Engine.changeColor(Color.red); //Just to see visually
-        Engine.drawRectangle(x, y, 40, 20);
+        Engine.drawRectangle(x, y, 40, 40);
 
         //Add collision logic here
         AddWallCell(x, y);
     }
 
     public void wallSideCollision(int x, int y) {
-        Engine.changeColor(Color.red); // Just to see visually
         Engine.drawRectangle(x, y, 40, 40);
 
         //Add collision logic here
@@ -43,7 +41,6 @@ public class BaseLevel {
     }
 
     public void doorCollision(int x, int y) {
-        Engine.changeColor(Color.green); // Just to see visually
         Engine.drawRectangle(x, y, 40, 40);
 
         //Add collision logic here
@@ -51,7 +48,6 @@ public class BaseLevel {
 
     public void drawLavaWithCollision(int x, int y) {
         Engine.drawImage(GameImage.lava, x, y);
-        Engine.changeColor(Color.pink); // Just to see visually
         Engine.drawRectangle(x, y, 40, 40);
 
         //Add collision logic here
