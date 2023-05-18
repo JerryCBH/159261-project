@@ -21,6 +21,9 @@ public class World implements IWorld {
     // A list of animations to play.
     public ArrayList<AnimationRequest> AnimationRequests;
 
+    // Elimination list
+    public LinkedList<IWorldObject> EliminationRequests;
+
     // A FIFO queue for playing audios.
     public LinkedList<AudioRequest> AudioRequests;
 
@@ -40,6 +43,7 @@ public class World implements IWorld {
         GridColumns = width / CELL_WIDTH;
         AnimationRequests = new ArrayList<>();
         AudioRequests = new LinkedList<>();
+        EliminationRequests = new LinkedList<>();
 
         CurrentLevel = level;
     }
@@ -69,6 +73,10 @@ public class World implements IWorld {
     public void UpdateObjects(double dt) {
         for (IWorldObject object : Objects) {
             object.Update(dt);
+        }
+        if (EliminationRequests.size() > 0) {
+            var player = EliminationRequests.pop();
+            HandleElimination(player);
         }
     }
 
@@ -197,17 +205,7 @@ public class World implements IWorld {
         if (collidedObject != null) {
             var type = collidedObject.WhoAmI();
             if (type == WorldObjectType.Player) {
-                // Player game over.
-                Engine.PauseEngine();
-                JOptionPane.showMessageDialog(Engine.mFrame, collidedObject.GetName() + " eliminated!!!");
-                Engine.ResumeEngine();
-                RemoveObject(collidedObject);
-                // Game over - no players left.
-                if (GetPlayerCount() == 0) {
-                    JOptionPane.showMessageDialog(Engine.mFrame, "Game Over!!!");
-                    // Restart new game.
-                    Engine.InitializeWorld(Engine.GameOptions);
-                }
+                HandleElimination(collidedObject);
             }
             else if (type == WorldObjectType.Apple) {
                 // Play eat apple sound effects.
@@ -231,6 +229,20 @@ public class World implements IWorld {
                 //collidedObject.SetGridCell(GridCell.GetRandomCell(offset, GridRows - offset, offset, GridColumns - offset));
                 RemoveObject(collidedObject);
             }
+        }
+    }
+
+    public void HandleElimination(IWorldObject player){
+        // Player game over.
+        Engine.PauseEngine();
+        JOptionPane.showMessageDialog(Engine.mFrame, player.GetName() + " eliminated!!!");
+        Engine.ResumeEngine();
+        RemoveObject(player);
+        // Game over - no players left.
+        if (GetPlayerCount() == 0) {
+            JOptionPane.showMessageDialog(Engine.mFrame, "Game Over!!!");
+            // Restart new game.
+            Engine.InitializeWorld(Engine.GameOptions);
         }
     }
 

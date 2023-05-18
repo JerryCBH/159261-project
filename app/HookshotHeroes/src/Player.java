@@ -19,6 +19,7 @@ public class Player implements IWorldObject {
     // Keyboard control binding. Each player can have different binding.
     private final KeyBinding _keyBinding;
     // Occupied cells from level.
+    private final ArrayList<GridCell> _lavaCells;
     private final ArrayList<GridCell> _wallCells;
     private final ArrayList<GridCell> _occupiedCells;
     private final String _name;
@@ -30,10 +31,11 @@ public class Player implements IWorldObject {
     private ObjectImage _image = null;
     private boolean _isGrappling = false;
     private LinkedList<AudioRequest> _audioRequests;
+    private LinkedList<IWorldObject> _eliminationRequests;
 
     public Player(String name, GridCell startCell, Skin skin, KeyBinding keyBinding,
-                  ArrayList<GridCell> wallCells, ArrayList<GridCell> occupiedCells,
-                  LinkedList<AudioRequest> audioRequests) {
+                  ArrayList<GridCell> wallCells, ArrayList<GridCell> lavaCells, ArrayList<GridCell> occupiedCells,
+                  LinkedList<AudioRequest> audioRequests, LinkedList<IWorldObject> eliminationRequests) {
         _name = name;
         _skin = skin;
         _direction = PlayerDirection.Right;
@@ -42,8 +44,10 @@ public class Player implements IWorldObject {
         _body.add(new GridCell(startCell.Row, startCell.Column));
         _image = new ObjectImage(skin.DownSprites[0]);
         _wallCells = wallCells;
+        _lavaCells = lavaCells;
         _occupiedCells = occupiedCells;
         _audioRequests = audioRequests;
+        _eliminationRequests = eliminationRequests;
     }
 
     // Move the player.
@@ -288,6 +292,15 @@ public class Player implements IWorldObject {
                     _grappleCell.Column += GRAPPLE_ADVANCE;
                 } else {
                     _isGrappling = false;
+                }
+            }
+        }
+        else {
+            if (!CanMoveTo(playerPos, _lavaCells)) {
+                _lives -= 1;
+                _audioRequests.add(new AudioRequest(WorldObjectType.Ball));
+                if (_lives <= 0) {
+                    _eliminationRequests.push(this);
                 }
             }
         }
