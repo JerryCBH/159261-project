@@ -23,7 +23,9 @@ public class Coin implements IWorldObject{
             _idx = 0;
         }
         engine.drawImage(_skin.StaticSprites[_idx / offset], _cell.Column * _skin.CellWidth + 5, _cell.Row * _skin.CellHeight + 5);
-        _idx++;
+        if (!((HookshotHeroesGameEngine) engine).IsPause()) {
+            _idx++;
+        }
     }
 
     @Override

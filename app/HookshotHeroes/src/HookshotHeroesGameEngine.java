@@ -127,6 +127,10 @@ public class HookshotHeroesGameEngine extends GameEngine {
         _stopWatch.Start();
     }
 
+    public boolean IsPause(){
+        return _pause;
+    }
+
     // Get the current frame for animation.
     public int GetFrameIndex(double time, double scale, int totalImages) {
         return (int) Math.floor(((time % scale) / scale) * totalImages);
