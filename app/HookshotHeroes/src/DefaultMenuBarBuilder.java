@@ -12,6 +12,10 @@ public class DefaultMenuBarBuilder implements IMenuBarBuilder{
     @Override
     public JMenuBar BuildMenuBar(HookshotHeroesGameEngine engine) {
         var options = new GameOptions();
+        options.EnableMusic = engine.GameOptions.EnableMusic;
+        options.DoublePlayerMode = engine.GameOptions.DoublePlayerMode;
+        options.SinglePlayerMode = engine.GameOptions.SinglePlayerMode;
+        options.EnableBouncingBalls = engine.GameOptions.EnableBouncingBalls;
 
         var menuBar = new JMenuBar();
         var menuFile = new JMenu("File");
