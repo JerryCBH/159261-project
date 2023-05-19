@@ -6,7 +6,7 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.io.BufferedInputStream;
 import java.io.IOException;
-import java.util.Date;
+import java.util.ArrayList;
 
 /***********************************************
  * =============================================
@@ -19,20 +19,12 @@ public class HookshotHeroesGameEngine extends GameEngine {
     private final GameImage _gameImage;
     private final GameAudio _gameAudio;
     private IWorld _world;
-    private Boolean _pause = false, _initialised = false;
+    private Boolean _pause = false;
     private final JMenuBar _menuBar;
 
     private StopWatch _stopWatch;
 
     public GameOptions GameOptions;
-
-    /*
-    public static void main(String[] args){
-        // Create the game engine.
-        var theGame = new HookshotHeroesGameEngine();
-        createGame(theGame, theGame._fps);
-    }
-    */
 
     public HookshotHeroesGameEngine(GameOptions options){
         // Create Game Image to handle all the sprite images.
@@ -55,21 +47,21 @@ public class HookshotHeroesGameEngine extends GameEngine {
     // Game options can be loaded from disk.
     public void InitializeWorld(GameOptions options){
         if(options.SinglePlayerMode){
-            _world = new SinglePlayerWorldBuilder().Build(this, _gameImage, _gameAudio, options, new LevelOne(this, _gameImage, options));
+            _world = new SinglePlayerWorldBuilder().Build(this, _gameImage, _gameAudio, options, new LevelOne(this, _gameImage, options), null);
         }
         else {
-            _world = new DoublePlayerWorldBuilder().Build(this, _gameImage, _gameAudio, options, new LevelOne(this, _gameImage, options));
+            _world = new DoublePlayerWorldBuilder().Build(this, _gameImage, _gameAudio, options, new LevelOne(this, _gameImage, options), null);
         }
         _stopWatch.Reset();
     }
 
     // Initialize the game world based on level.
-    public void InitializeLevel(GameOptions options, ILevel level){
+    public void InitializeLevel(GameOptions options, ILevel level, ArrayList<Player> players){
         if(options.SinglePlayerMode){
-            _world = new SinglePlayerWorldBuilder().Build(this, _gameImage, _gameAudio, options, level);
+            _world = new SinglePlayerWorldBuilder().Build(this, _gameImage, _gameAudio, options, level, players);
         }
         else {
-            _world = new DoublePlayerWorldBuilder().Build(this, _gameImage, _gameAudio, options, level);
+            _world = new DoublePlayerWorldBuilder().Build(this, _gameImage, _gameAudio, options, level, players);
         }
     }
 
@@ -106,7 +98,10 @@ public class HookshotHeroesGameEngine extends GameEngine {
         _world.PlayAudio();
 
         drawText(10, 615, _world.GetLevel().GetLevelName() + " Time: " + _stopWatch.GetTimeInSeconds(), "Arial", 12);
-
+        var players = _world.GetPlayers();
+        for (int i = 0; i < players.size(); i++) {
+            drawText(350 + i * 120, 615, players.get(i).GetName() + "'s score: " + players.get(i).Score, "Arial", 12);
+        }
     }
 
     @Override

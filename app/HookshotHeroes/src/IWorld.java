@@ -1,4 +1,5 @@
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 
 /****************************************************************************************
  * Interface for game worlds
@@ -16,4 +17,5 @@ public interface IWorld {
     void PlayAudio();
     void HandleCollision(IWorldObject collidedObject);
     ILevel GetLevel();
+    ArrayList<Player> GetPlayers();
 }

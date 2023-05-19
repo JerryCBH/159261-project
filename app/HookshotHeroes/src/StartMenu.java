@@ -40,7 +40,7 @@ public class StartMenu{
         JPanel buttonPanel = new JPanel(new GridLayout(4, 1));
 
         easyModeButton = new JButton("1 Player");
-        normalModeButton = new JButton("2 Player");
+        normalModeButton = new JButton("2 Players");
         helpButton = new JButton("Help");
         quitButton = new JButton("Quit");
 

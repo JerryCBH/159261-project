@@ -106,9 +106,10 @@ public class World implements IWorld {
         for (CollisionCheckInfo collisionCheckInfo : toCheck) {
             // Check exit grid
             if (CheckGrid(collisionCheckInfo.Cell, CurrentLevel.GetExitGrid())){
+                ((Player)collisionCheckInfo.Source).Score += Player.PLAYER_LEVEL_SCORE;
                 var nextLevel = CurrentLevel.GetNextLevel();
                 if (nextLevel != null){
-                    Engine.InitializeLevel(Engine.GameOptions, nextLevel);
+                    Engine.InitializeLevel(Engine.GameOptions, nextLevel, GetPlayers());
                 }
                 else{
                     Engine.PauseEngine();
@@ -124,7 +125,7 @@ public class World implements IWorld {
                 var prevLevel = CurrentLevel.GetPreviousLevel();
                 if (prevLevel != null){
                     prevLevel.SetStartPos(LevelStartPos.Top);
-                    Engine.InitializeLevel(Engine.GameOptions, prevLevel);
+                    Engine.InitializeLevel(Engine.GameOptions, prevLevel, GetPlayers());
                 }
                 return;
             }
@@ -269,7 +270,7 @@ public class World implements IWorld {
         }
     }
 
-    // Get the number of snakes.
+    // Get the number of players.
     public int GetPlayerCount(){
         var count = 0;
         for (IWorldObject object : Objects) {
@@ -278,6 +279,17 @@ public class World implements IWorld {
             }
         }
         return count;
+    }
+
+    // Get the players.
+    public ArrayList<Player> GetPlayers() {
+        var players = new ArrayList<Player>();
+        for (IWorldObject object : Objects) {
+            if (object.WhoAmI() == WorldObjectType.Player) {
+                players.add((Player) object);
+            }
+        }
+        return players;
     }
 
     // Update each animation request on the amount of time played.
