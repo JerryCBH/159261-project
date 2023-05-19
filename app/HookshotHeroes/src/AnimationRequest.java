@@ -8,6 +8,10 @@ public class AnimationRequest {
     public WorldObjectType Type;
     // Time to play the animation.
     public double SecondsToPlay;
+    // Text / speech.
+    public String Text;
+    // The player.
+    public Player Player;
     public AnimationRequest(WorldObjectType type, GridCell cell, double seconds){
         Type = type;
         Cell = cell;

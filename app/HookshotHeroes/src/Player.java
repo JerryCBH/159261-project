@@ -1,4 +1,5 @@
 import java.awt.*;
+import java.awt.geom.GeneralPath;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
@@ -35,11 +36,12 @@ public class Player implements IWorldObject {
     private boolean _isGrappling = false;
     public LinkedList<AudioRequest> AudioRequests;
     public LinkedList<IWorldObject> EliminationRequests;
+    public ArrayList<AnimationRequest> AnimationRequests;
     public int Score = 0;
 
     public Player(String name, GridCell startCell, Skin skin, KeyBinding keyBinding,
                   ArrayList<GridCell> wallCells, ArrayList<GridCell> lavaCells, ArrayList<GridCell> occupiedCells,
-                  LinkedList<AudioRequest> audioRequests, LinkedList<IWorldObject> eliminationRequests) {
+                  LinkedList<AudioRequest> audioRequests, LinkedList<IWorldObject> eliminationRequests, ArrayList<AnimationRequest> animationRequests) {
         _name = name;
         _skin = skin;
         _direction = PlayerDirection.Right;
@@ -52,6 +54,7 @@ public class Player implements IWorldObject {
         OccupiedCells = occupiedCells;
         AudioRequests = audioRequests;
         EliminationRequests = eliminationRequests;
+        AnimationRequests = animationRequests;
     }
 
     // Move the player.
@@ -335,6 +338,7 @@ public class Player implements IWorldObject {
         // Collided with mine or bouncing ball, reduce health by 1.
         else if (type == WorldObjectType.Mine || type == WorldObjectType.Ball) {
             _lives -= 1;
+            Say("Ouch!!");
             // No more health. The player is removed from the game.
             if (_lives <= 0) {
                 toRemove = this;
@@ -344,11 +348,13 @@ public class Player implements IWorldObject {
                 }
             }
         } else if (type == WorldObjectType.Broccoli) {
+            Say("Yummy!!");
             if(_lives < MAX_LIFE) {
                 _lives += 1;
             }
             toRemove = object;
         } else if (type == WorldObjectType.Coin) {
+            Say("nice!!");
             Score += PLAYER_COIN_SCORE;
             toRemove = object;
         }
@@ -370,6 +376,13 @@ public class Player implements IWorldObject {
     @Override
     public void SetGridCell(GridCell cell) {
         _body.set(0, cell);
+    }
+
+    public void Say(String text){
+        var speech = new AnimationRequest(WorldObjectType.SpeechBubble, _body.get(0), 2);
+        speech.Text = text;
+        speech.Player = this;
+        AnimationRequests.add(speech);
     }
 
     // Draw player identifier.

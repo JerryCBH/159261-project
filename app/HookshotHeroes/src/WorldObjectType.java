@@ -8,5 +8,6 @@ public enum WorldObjectType {
     Ball,
     Broccoli,
     Grapple,
-    Coin
+    Coin,
+    SpeechBubble
 }

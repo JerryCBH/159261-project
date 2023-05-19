@@ -19,6 +19,7 @@ public class DoublePlayerWorldBuilder extends BaseWorldBuilder implements IWorld
                 p.OccupiedCells = level.GetOccupiedCells();
                 p.AudioRequests = world.AudioRequests;
                 p.EliminationRequests = world.EliminationRequests;
+                p.AnimationRequests = world.AnimationRequests;
             }
             players.get(0).SetGridCell(grids[0]);
             players.get(1).SetGridCell(grids[1]);
@@ -33,12 +34,12 @@ public class DoublePlayerWorldBuilder extends BaseWorldBuilder implements IWorld
                             new Player("Lidia", grids[0],
                                     new Skin(world.GameImage.LidiaUpSprites, world.GameImage.LidiaLeftSprites, world.GameImage.LidiaRightSprites, world.GameImage.LidiaDownSprites, world.GameImage.Health, world.CELL_WIDTH, world.CELL_HEIGHT),
                                     new KeyBinding(KeyEvent.VK_W, KeyEvent.VK_A, KeyEvent.VK_D, KeyEvent.VK_S, KeyEvent.VK_X),
-                                    level.GetWallCells(), level.GetLavaCells(), level.GetOccupiedCells(), world.AudioRequests, world.EliminationRequests
+                                    level.GetWallCells(), level.GetLavaCells(), level.GetOccupiedCells(), world.AudioRequests, world.EliminationRequests, world.AnimationRequests
                             ),
                             new Player("Shura", grids[1],
                                     new Skin(world.GameImage.ShuraUpSprites, world.GameImage.ShuraLeftSprites, world.GameImage.ShuraRightSprites, world.GameImage.ShuraDownSprites, world.GameImage.Health, world.CELL_WIDTH, world.CELL_HEIGHT),
                                     new KeyBinding(KeyEvent.VK_UP, KeyEvent.VK_LEFT, KeyEvent.VK_RIGHT, KeyEvent.VK_DOWN, KeyEvent.VK_PERIOD),
-                                    level.GetWallCells(), level.GetLavaCells(), level.GetOccupiedCells(), world.AudioRequests, world.EliminationRequests
+                                    level.GetWallCells(), level.GetLavaCells(), level.GetOccupiedCells(), world.AudioRequests, world.EliminationRequests, world.AnimationRequests
                             )
                     });
         }

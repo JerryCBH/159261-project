@@ -20,12 +20,13 @@ public class SinglePlayerWorldBuilder extends BaseWorldBuilder implements IWorld
             player.OccupiedCells = level.GetOccupiedCells();
             player.AudioRequests = world.AudioRequests;
             player.EliminationRequests = world.EliminationRequests;
+            player.AnimationRequests = world.AnimationRequests;
             player.SetGridCell(grid);
         } else {
             player = new Player("Lidia", grid,
                     new Skin(world.GameImage.LidiaUpSprites, world.GameImage.LidiaLeftSprites, world.GameImage.LidiaRightSprites, world.GameImage.LidiaDownSprites, world.GameImage.Health, world.CELL_WIDTH, world.CELL_HEIGHT),
                     new KeyBinding(KeyEvent.VK_W, KeyEvent.VK_A, KeyEvent.VK_D, KeyEvent.VK_S, KeyEvent.VK_X),
-                    level.GetWallCells(), level.GetLavaCells(), level.GetOccupiedCells(), world.AudioRequests, world.EliminationRequests
+                    level.GetWallCells(), level.GetLavaCells(), level.GetOccupiedCells(), world.AudioRequests, world.EliminationRequests, world.AnimationRequests
             );
         }
         world.SetObjects(new IWorldObject[]

@@ -1,5 +1,7 @@
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.awt.geom.GeneralPath;
 import java.util.*;
 
 /****************************************************************************************
@@ -313,6 +315,9 @@ public class World implements IWorld {
                 var idx = Engine.GetFrameIndex(request.time, request.SecondsToPlay, GameImage.ExplosionSprites.length);
                 Engine.drawImage(GameImage.ExplosionSprites[idx], request.Cell.Column * CELL_HEIGHT - 10, request.Cell.Row * CELL_WIDTH - 30, 50, 50);
             }
+            if (request.Type == WorldObjectType.SpeechBubble) {
+                DrawSpeechBubble(Engine, request.Player.GetOccupiedCells()[0], request.Text);
+            }
         }
 
         // Clean up
@@ -344,6 +349,37 @@ public class World implements IWorld {
                 Engine.playAudio(GameAudio.CoinAudio, GameOptions.MovementVolume);
             }
         }
+    }
+
+    public void DrawSpeechBubble(GameEngine engine, GridCell cell, String text){
+        var offsetX = 50;
+        var offsetY = 0;
+        engine.saveCurrentTransform();
+        var graphics2D = engine.mGraphics;
+        graphics2D.translate(cell.Column * CELL_WIDTH + offsetX, cell.Row * CELL_HEIGHT + offsetY);
+        RenderingHints qualityHints = new RenderingHints(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        qualityHints.put(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+        graphics2D.setRenderingHints(qualityHints);
+        graphics2D.setPaint(new Color(80, 150, 180));
+        int width = 100;
+        int height = 25;
+        GeneralPath path = new GeneralPath();
+        path.moveTo(5, 10);
+        path.curveTo(5, 10, 7, 5, 0, 0);
+        path.curveTo(0, 0, 12, 0, 12, 5);
+        path.curveTo(12, 5, 12, 0, 20, 0);
+        path.lineTo(width - 10, 0);
+        path.curveTo(width - 10, 0, width, 0, width, 10);
+        path.lineTo(width, height - 10);
+        path.curveTo(width, height - 10, width, height, width - 10, height);
+        path.lineTo(15, height);
+        path.curveTo(15, height, 5, height, 5, height - 10);
+        path.lineTo(5, 15);
+        path.closePath();
+        graphics2D.fill(path);
+        engine.changeColor(Color.white);
+        engine.drawText(10, 15, text, "Arial", 10);
+        engine.restoreLastTransform();
     }
 
     // Update the balls.
