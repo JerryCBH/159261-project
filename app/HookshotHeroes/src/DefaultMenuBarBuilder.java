@@ -66,7 +66,7 @@ public class DefaultMenuBarBuilder implements IMenuBarBuilder{
         radioPanel.add(singleGameButton);
         radioPanel.add(doubleGameButton);
         radioPanel.add(enableMusic);
-        radioPanel.add(enableBalls);
+        //radioPanel.add(enableBalls);
 
         var configPanel = new JPanel();
         configPanel.add(radioPanel, BorderLayout.LINE_START);
