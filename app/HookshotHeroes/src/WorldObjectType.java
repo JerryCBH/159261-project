@@ -7,5 +7,6 @@ public enum WorldObjectType {
     Mine,
     Ball,
     Broccoli,
-    Grapple
+    Grapple,
+    Coin
 }

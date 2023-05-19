@@ -22,6 +22,7 @@ public class GameImage {
     public Image[] MinotaurDownSprites;
     public Image[] MinotaurLeftSprites;
     public Image[] MinotaurRightSprites;
+    public Image[] CoinSprites;
     public static final int PLAYER_WIDTH = 48;
     public static final int PLAYER_HEIGHT = 56;
     public static final int LIDIA_WIDTH = 64;
@@ -44,6 +45,7 @@ public class GameImage {
         LoadPlayerSpriteSheet(engine);
         LoadLidiaSpriteSheet(engine);
         LoadShuraSpriteSheet(engine);
+        LoadCoinSpriteSheet(engine);
 
         // Load environment images.
         DoorGreyClosed = engine.loadImage("environment/DoorGreyClosed.png");
@@ -143,6 +145,13 @@ public class GameImage {
         MinotaurUpSprites = new Image[3];
         for (int j = 0; j < 2; j ++) {
             MinotaurUpSprites[j] = engine.subImage(Minotaur, j*Minotaur_WIDTH, Minotaur_HEIGHT*4, Minotaur_WIDTH, Minotaur_HEIGHT);
+        }
+    }
+
+    private void LoadCoinSpriteSheet(HookshotHeroesGameEngine engine){
+        CoinSprites = new Image[9];
+        for (int j = 1; j <= 9; j++) {
+            CoinSprites[j - 1] = engine.loadImage("goldCoin" + j + ".png");
         }
     }
 }

@@ -34,6 +34,7 @@ public class SinglePlayerWorldBuilder extends BaseWorldBuilder implements IWorld
                 });
         super.AddObjects(world, WorldObjectType.Mine, 3);
         super.AddObjects(world, WorldObjectType.Broccoli, 2);
+        super.AddObjects(world, WorldObjectType.Coin, 10);
         if (options.EnableBouncingBalls) {
             super.AddObjects(world, WorldObjectType.Ball, 5);
         }

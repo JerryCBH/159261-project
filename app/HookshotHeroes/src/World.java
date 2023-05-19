@@ -230,6 +230,11 @@ public class World implements IWorld {
                 //collidedObject.SetGridCell(GridCell.GetRandomCell(offset, GridRows - offset, offset, GridColumns - offset));
                 RemoveObject(collidedObject);
             }
+            else if (type == WorldObjectType.Coin) {
+                // Play explosion sound effects.
+                AudioRequests.add(new AudioRequest(WorldObjectType.Coin));
+                RemoveObject(collidedObject);
+            }
         }
     }
 
@@ -327,16 +332,16 @@ public class World implements IWorld {
                 Engine.playAudio(GameAudio.CrunchAudio, GameOptions.SoundEffectsVolume);
             }
             else if (request.Type == WorldObjectType.Player) {
-                // Snake
                 Engine.playAudio(GameAudio.WalkAudio, GameOptions.MovementVolume);
             }
             else if (request.Type == WorldObjectType.Ball) {
-                // Snake
                 Engine.playAudio(GameAudio.HitAudio, GameOptions.SoundEffectsVolume);
             }
             else if (request.Type == WorldObjectType.Grapple) {
-                // Snake
                 Engine.playAudio(GameAudio.WhipAudio, GameOptions.SoundEffectsVolume);
+            }
+            else if (request.Type == WorldObjectType.Coin) {
+                Engine.playAudio(GameAudio.CoinAudio, GameOptions.MovementVolume);
             }
         }
     }

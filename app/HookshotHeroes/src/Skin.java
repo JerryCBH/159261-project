@@ -5,7 +5,7 @@ import java.awt.*;
  ****************************************************************************************/
 public class Skin {
     public Image Head, Body, Health;
-    public Image[] UpSprites, LRSprites, DownSprites, LeftSprites, RightSprites;
+    public Image[] UpSprites, LRSprites, DownSprites, LeftSprites, RightSprites, StaticSprites;
     public int CellWidth, CellHeight;
     public Skin(Image body, int width, int height){
         Body = body;
@@ -29,5 +29,11 @@ public class Skin {
         LeftSprites = lSprites;
         RightSprites = rSprites;
         DownSprites = downSprites;
+    }
+
+    public Skin(Image[] staticSprites, int width, int height){
+        CellWidth = width;
+        CellHeight = height;
+        StaticSprites = staticSprites;
     }
 }

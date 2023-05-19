@@ -348,6 +348,9 @@ public class Player implements IWorldObject {
                 _lives += 1;
             }
             toRemove = object;
+        } else if (type == WorldObjectType.Coin) {
+            Score += PLAYER_COIN_SCORE;
+            toRemove = object;
         }
         return toRemove;
     }

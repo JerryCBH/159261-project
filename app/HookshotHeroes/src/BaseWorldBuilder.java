@@ -6,7 +6,7 @@ import java.util.Random;
  * This class is the world builder base class.
  ****************************************************************************************/
 public class BaseWorldBuilder {
-    protected int startOffset = 5, endOffset = 5;
+    protected int startOffset = 5, endOffset = 10;
 
     public World CreateWorld(HookshotHeroesGameEngine engine, GameImage gameImage, GameAudio gameAudio, GameOptions options, ILevel level){
 
@@ -42,6 +42,11 @@ public class BaseWorldBuilder {
                 world.Objects.add(new Broccoli(java.util.UUID.randomUUID().toString(), GridCell.GetRandomCell(startOffset, world.GridRows - endOffset, startOffset, world.GridColumns - endOffset,
                         world.CurrentLevel.GetOccupiedCells()),
                         new Skin(world.GameImage.Broccoli, world.CELL_WIDTH, world.CELL_HEIGHT)));
+            }
+            if (type == WorldObjectType.Coin) {
+                world.Objects.add(new Coin(java.util.UUID.randomUUID().toString(), GridCell.GetRandomCell(startOffset, world.GridRows - endOffset, startOffset, world.GridColumns - endOffset,
+                        world.CurrentLevel.GetOccupiedCells()),
+                        new Skin(world.GameImage.CoinSprites, world.CELL_WIDTH, world.CELL_HEIGHT)));
             }
         }
     }
