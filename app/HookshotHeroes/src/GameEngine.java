@@ -142,6 +142,7 @@ public abstract class GameEngine implements KeyListener, MouseListener, MouseMot
 		// Create graphics transform stack
 		mTransforms = new Stack<AffineTransform>();
 
+		/*
 		// Create window
 		SwingUtilities.invokeLater(new Runnable() {
 			@Override
@@ -150,6 +151,7 @@ public abstract class GameEngine implements KeyListener, MouseListener, MouseMot
 				setupWindow(500,500);
 			}
 		});
+		*/
 	}
 
 	// Create Game Function

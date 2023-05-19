@@ -1,3 +1,4 @@
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -5,7 +6,7 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 
-public class StartMenu extends GameEngine {
+public class StartMenu{
     private JFrame frame;
     private JPanel panel;
     private JButton easyModeButton;
@@ -15,17 +16,18 @@ public class StartMenu extends GameEngine {
     private Image mainImage;
     private Image gameTitle;
 
-    public StartMenu(HookshotHeroesGameEngine engine) {
-        mainImage = engine.loadImage("MainImage.png");
-        gameTitle = engine.loadImage("GameTitle.png");
+    public StartMenu() {
+        mainImage = loadImage("MainImage.png");
+        gameTitle = loadImage("GameTitle.png");
     }
 
     public void show() {
         // UI Menu
         frame = new JFrame("Hookshot Heroes");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(300, 600); // Increased the height to accommodate the buttons
-        frame.setLocationRelativeTo(null);
+        frame.setSize(300, 600);
+        frame.setLocation(200,200);
+        frame.setResizable(false);
 
         // Create a panel with a BorderLayout
         panel = new JPanel(new BorderLayout());
@@ -45,11 +47,13 @@ public class StartMenu extends GameEngine {
         easyModeButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Start the normal mode game
-                var theGame = new HookshotHeroesGameEngine();
-                createGame(theGame, 120);
+                // Start single player mode game
+                var options = new GameOptions();
+                options.SinglePlayerMode = true;
+
+                var theGame = new HookshotHeroesGameEngine(options);
+                theGame.createGame(theGame, 120);
                 frame.dispose(); // Close the start menu window;
-                mFrame.dispose();
             }
         });
 
@@ -57,8 +61,14 @@ public class StartMenu extends GameEngine {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Start the 2 player mode game
+                // Start single player mode game
+                var options = new GameOptions();
+                options.SinglePlayerMode = false;
+                options.DoublePlayerMode = true;
+
+                var theGame = new HookshotHeroesGameEngine(options);
+                theGame.createGame(theGame, 120);
                 frame.dispose(); // Close the start menu window
-                mFrame.dispose();
             }
         });
 
@@ -102,20 +112,25 @@ public class StartMenu extends GameEngine {
         frame.setVisible(true);
     }
 
+    public Image loadImage(String filename) {
+        try {
+            var stream = getClass().getResourceAsStream(filename);
+
+            if (stream != null) {
+                return ImageIO.read(stream);
+            }
+        } catch (IOException e) {
+            // Show Error Message
+            System.out.println("Error: could not load image " + filename);
+            System.exit(1);
+        }
+
+        // Return null
+        return null;
+    }
+
     public static void main(String[] args) {
-        HookshotHeroesGameEngine engine = new HookshotHeroesGameEngine();
-        StartMenu startMenu = new StartMenu(engine);
+        StartMenu startMenu = new StartMenu();
         startMenu.show();
-    }
-
-    @Override
-    public void update(double dt) {
-        // Implementation of the update method
-
-    }
-
-    @Override
-    public void paintComponent() {
-        // Implementation of the paintComponent method
     }
 }

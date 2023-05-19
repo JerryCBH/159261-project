@@ -6,7 +6,6 @@ import java.awt.event.KeyEvent;
 public class SinglePlayerWorldBuilder extends BaseWorldBuilder implements IWorldBuilder{
     @Override
     public IWorld Build(HookshotHeroesGameEngine engine, GameImage gameImage, GameAudio gameAudio, GameOptions options, ILevel level) {
-        level.RenderLevel();
         var world = super.CreateWorld(engine, gameImage, gameAudio, options, level);
         var grid = level.GetStartPos() == LevelStartPos.Top? level.GetTopStartingPos()[0] : level.GetBottomStartingPos()[0];
         world.SetObjects(new IWorldObject[]

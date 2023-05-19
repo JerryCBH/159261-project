@@ -6,7 +6,6 @@ import java.awt.event.KeyEvent;
 public class DoublePlayerWorldBuilder extends BaseWorldBuilder implements IWorldBuilder{
     @Override
     public IWorld Build(HookshotHeroesGameEngine engine, GameImage gameImage, GameAudio gameAudio, GameOptions options, ILevel level) {
-        level.RenderLevel();
         var world = super.CreateWorld(engine, gameImage, gameAudio, options, level);
         var grids = level.GetStartPos() == LevelStartPos.Top? level.GetTopStartingPos() : level.GetBottomStartingPos();
         world.SetObjects(new IWorldObject[]

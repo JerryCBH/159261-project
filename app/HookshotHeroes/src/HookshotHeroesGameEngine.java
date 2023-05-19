@@ -19,26 +19,28 @@ public class HookshotHeroesGameEngine extends GameEngine {
     private final GameImage _gameImage;
     private final GameAudio _gameAudio;
     private IWorld _world;
-    private Boolean _pause = false;
+    private Boolean _pause = false, _initialised = false;
     private final JMenuBar _menuBar;
 
     private StopWatch _stopWatch;
 
     public GameOptions GameOptions;
 
+    /*
     public static void main(String[] args){
         // Create the game engine.
         var theGame = new HookshotHeroesGameEngine();
         createGame(theGame, theGame._fps);
     }
+    */
 
-    public HookshotHeroesGameEngine(){
+    public HookshotHeroesGameEngine(GameOptions options){
         // Create Game Image to handle all the sprite images.
         _gameImage = new GameImage(this);
         // Create Game Audio to handle all the sound clips.
         _gameAudio = new GameAudio(this);
         // Load default game options.
-        GameOptions = new GameOptions();
+        GameOptions = options;
         GameOptions.Width = _width;
         GameOptions.Height = _height;
 
@@ -73,7 +75,7 @@ public class HookshotHeroesGameEngine extends GameEngine {
 
     @Override
     public void init(){
-        setWindowSize(_width, _height);
+        setupWindow(_width, _height);
         mFrame.setTitle("Hookshot Heroes");
         mFrame.setResizable(false);
         mFrame.setJMenuBar(_menuBar);
