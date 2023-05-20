@@ -361,7 +361,7 @@ public class World implements IWorld {
         qualityHints.put(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
         graphics2D.setRenderingHints(qualityHints);
         graphics2D.setPaint(new Color(80, 150, 180));
-        int width = 5 * text.length() + 5;
+        int width = 5 * text.length() + 10;
         int height = 25;
         GeneralPath path = new GeneralPath();
         path.moveTo(5, 10);

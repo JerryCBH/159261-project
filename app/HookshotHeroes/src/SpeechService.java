@@ -1,12 +1,11 @@
 import java.util.ArrayList;
-import java.util.Dictionary;
-import java.util.Enumeration;
 import java.util.HashMap;
 
 public class SpeechService {
-    public static final String CHATGPT_HAPPY_PROMPT = "say a word when you feel happy or getting rich";
-    public static final String CHATGPT_DANGER_PROMPT = "say a word when you stepped on a nail";
-    public static final String CHATGPT_HEALTH_PROMPT = "say a word when you eat yummy food or recovered health";
+    public static Boolean EnableChatGPT = true;
+    public static final String CHATGPT_HAPPY_PROMPT = "say a short sentence when you feel happy or getting rich";
+    public static final String CHATGPT_DANGER_PROMPT = "say something when you stepped on a nail";
+    public static final String CHATGPT_HEALTH_PROMPT = "say a short sentence when you eat yummy food or recovered health";
     public static final HashMap<SpeechType, String> Conversations;
 
     static {
@@ -16,10 +15,10 @@ public class SpeechService {
         Conversations.put(SpeechType.Danger, "Ouch!!");
     }
 
-    public static void Say(SpeechType type, ArrayList<AnimationRequest> requests, Player player, Boolean enableChatGPT) {
+    public static void Say(SpeechType type, ArrayList<AnimationRequest> requests, Player player) {
         String message = "";
         if (type == SpeechType.Happy) {
-            if (enableChatGPT) {
+            if (EnableChatGPT) {
                 try {
                     var response = ChatGPTConnector.SendRequestToChatGPT(CHATGPT_HAPPY_PROMPT);
                     message = ChatGPTConnector.ExtractGeneratedMessage(response);
@@ -34,7 +33,7 @@ public class SpeechService {
                 message = Conversations.get(SpeechType.Happy);
             }
         } else if (type == SpeechType.Health) {
-            if (enableChatGPT) {
+            if (EnableChatGPT) {
                 try {
                     var response = ChatGPTConnector.SendRequestToChatGPT(CHATGPT_HEALTH_PROMPT);
                     message = ChatGPTConnector.ExtractGeneratedMessage(response);
@@ -49,7 +48,7 @@ public class SpeechService {
                 message = Conversations.get(SpeechType.Health);
             }
         } else if (type == SpeechType.Danger) {
-            if (enableChatGPT) {
+            if (EnableChatGPT) {
                 try {
                     var response = ChatGPTConnector.SendRequestToChatGPT(CHATGPT_DANGER_PROMPT);
                     message = ChatGPTConnector.ExtractGeneratedMessage(response);

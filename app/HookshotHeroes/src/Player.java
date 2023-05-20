@@ -340,7 +340,7 @@ public class Player implements IWorldObject {
         else if (type == WorldObjectType.Mine || type == WorldObjectType.Ball) {
             _lives -= 1;
             CompletableFuture.runAsync(() -> {
-                SpeechService.Say(SpeechType.Danger, AnimationRequests, this, true);
+                SpeechService.Say(SpeechType.Danger, AnimationRequests, this);
             });
             // No more health. The player is removed from the game.
             if (_lives <= 0) {
@@ -352,7 +352,7 @@ public class Player implements IWorldObject {
             }
         } else if (type == WorldObjectType.Broccoli) {
             CompletableFuture.runAsync(() -> {
-                SpeechService.Say(SpeechType.Health, AnimationRequests, this, true);
+                SpeechService.Say(SpeechType.Health, AnimationRequests, this);
             });
             if(_lives < MAX_LIFE) {
                 _lives += 1;
@@ -360,7 +360,7 @@ public class Player implements IWorldObject {
             toRemove = object;
         } else if (type == WorldObjectType.Coin) {
             CompletableFuture.runAsync(() -> {
-                SpeechService.Say(SpeechType.Happy, AnimationRequests, this, true);
+                SpeechService.Say(SpeechType.Happy, AnimationRequests, this);
             });
             Score += PLAYER_COIN_SCORE;
             toRemove = object;

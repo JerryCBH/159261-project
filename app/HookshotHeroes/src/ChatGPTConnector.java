@@ -12,11 +12,8 @@ public class ChatGPTConnector {
 
     public static String SendRequestToChatGPT(String prompt) {
         try {
-            System.out.println("Before HTTP Client Chatgpt...");
 
             OkHttpClient client = new OkHttpClient();
-
-            System.out.println("After HTTP Client Chatgpt...");
 
             // Prepare the request body
             JSONObject json = new JSONObject();
@@ -26,7 +23,7 @@ public class ChatGPTConnector {
 
             RequestBody body = RequestBody.create(json.toString(), MediaType.get("application/json"));
 
-            System.out.println("Create request for Chatgpt...");
+            //System.out.println("Create request for Chatgpt...");
 
             // Prepare the request
             Request request = new Request.Builder()
@@ -36,12 +33,8 @@ public class ChatGPTConnector {
                     .post(body)
                     .build();
 
-            System.out.println("Calling Chatgpt...");
-
             // Send the request and get the response
             Response response = client.newCall(request).execute();
-
-            System.out.println("Receving response from Chatgpt...");
 
             return response.body().string();
         } catch (Exception e) {
