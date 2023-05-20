@@ -128,28 +128,21 @@ public class DefaultMenuBarBuilder implements IMenuBarBuilder{
                 engine.PauseEngine();
                 JOptionPane.showMessageDialog(engine.mFrame, """
                         How to play
+                                                
+                        Lidia controls:
+                        Up => W
+                        Left => A
+                        Right => D
+                        Down => S
+                        Grapple => X
                         
-                        The rules:
+                        Shura controls:
+                        Up => Up Arrow
+                        Left => Left Arrow
+                        Right => Right Arrow
+                        Down => Down Arrow
+                        Grapple => .
                         
-                        * Players control movement of snakes. Each snake has a starting health of 3 hearts.
-                        * Beware of mines. Stepping on a mine will reduce snake health by 1 heart.
-                        * Eat apples to grow your size. Snake has starting size of 3 and maximum size of 20 segments.
-                        * Eat broccoli to replenish health. Maximum health is 5 stars.
-                        * If your snake goes over the screen boundaries or colliding with itself or other snakes, the game ends.
-                        * If snake's health is 0, the game ends.
-                        * You can turn on / off bouncing balls from game configuration.
-                        * If a bouncing ball hit the snake, health is reduced by 1 heart.
-                        * There are 5 apples, 5 mines and 5 balls.
-                        * There are 1 broccoli for single player game and 2 for double player game.
-                        * Food and items regenerates randomly after consumption.
-                        
-                        Single / Double Player Game:
-                        Play A controls:
-                        Up => W, Left => A, Right => D, Down => S
-                        Play B controls:
-                        Up => Up Arrow, Left => Left Arrow, Right => Right Arrow, Down => Down Arrow
-                        
-                        Game restarts automatically if all players are eliminated.
                         
                         """);
                 engine.ResumeEngine();
@@ -163,8 +156,10 @@ public class DefaultMenuBarBuilder implements IMenuBarBuilder{
                         Icons, sprites and sound effects: https://opengameart.org/
                         Music: https://opengameart.org/content/menu-music
                         
-                        Copyright (c) 2023 Jerry Hsiung
-
+                        Lidia and Shura sprite models:
+                        https://opengameart.org/content/lpc-heroine
+                        https://opengameart.org/content/lpc-heroine-2
+                        
                         Permission is hereby granted, free of charge, to any person obtaining a copy
                         of this software and associated documentation files (the "Software"), to deal
                         in the Software without restriction, including without limitation the rights
