@@ -4,7 +4,7 @@ import java.util.Enumeration;
 import java.util.HashMap;
 
 public class SpeechService {
-    public static final String CHATGPT_HAPPY_PROMPT = "say a word when you feel happy";
+    public static final String CHATGPT_HAPPY_PROMPT = "say a word when you feel happy or getting rich";
     public static final String CHATGPT_DANGER_PROMPT = "say a word when you stepped on a nail";
     public static final String CHATGPT_HEALTH_PROMPT = "say a word when you eat yummy food or recovered health";
     public static final HashMap<SpeechType, String> Conversations;
@@ -65,7 +65,7 @@ public class SpeechService {
             }
         }
 
-        var speech = new AnimationRequest(WorldObjectType.SpeechBubble, player.GetOccupiedCells()[0], 2);
+        var speech = new AnimationRequest(WorldObjectType.SpeechBubble, player.GetOccupiedCells()[0], 5);
         speech.Text = message;
         speech.Player = player;
         requests.add(speech);
