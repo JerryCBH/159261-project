@@ -48,6 +48,11 @@ public class BaseWorldBuilder {
                         world.CurrentLevel.GetOccupiedCells()),
                         new Skin(world.GameImage.CoinSprites, world.CELL_WIDTH, world.CELL_HEIGHT)));
             }
+            if (type == WorldObjectType.Cabbage) {
+                world.Objects.add(new Cabbage(java.util.UUID.randomUUID().toString(), GridCell.GetRandomCell(startOffset, world.GridRows - endOffset, startOffset, world.GridColumns - endOffset,
+                        world.CurrentLevel.GetOccupiedCells()),
+                        new Skin(world.GameImage.Cabbage, world.CELL_WIDTH, world.CELL_HEIGHT)));
+            }
         }
     }
 }

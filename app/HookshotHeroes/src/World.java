@@ -210,7 +210,7 @@ public class World implements IWorld {
             if (type == WorldObjectType.Player) {
                 HandleElimination(collidedObject);
             }
-            else if (type == WorldObjectType.Apple) {
+            else if (type == WorldObjectType.Apple || type == WorldObjectType.Broccoli || type == WorldObjectType.Cabbage) {
                 // Play eat apple sound effects.
                 AudioRequests.add(new AudioRequest(WorldObjectType.Apple));
                 // Spawn new random apple.
@@ -222,13 +222,6 @@ public class World implements IWorld {
                 AnimationRequests.add(new AnimationRequest(type, collidedObject.GetOccupiedCells()[0], 10));
                 AudioRequests.add(new AudioRequest(WorldObjectType.Mine));
                 // Spawn new random mine.
-                //collidedObject.SetGridCell(GridCell.GetRandomCell(offset, GridRows - offset, offset, GridColumns - offset));
-                RemoveObject(collidedObject);
-            }
-            else if (type == WorldObjectType.Broccoli) {
-                // Play explosion sound effects.
-                AudioRequests.add(new AudioRequest(WorldObjectType.Apple));
-                // Spawn new random broccoli.
                 //collidedObject.SetGridCell(GridCell.GetRandomCell(offset, GridRows - offset, offset, GridColumns - offset));
                 RemoveObject(collidedObject);
             }

@@ -4,7 +4,7 @@ import java.awt.*;
  * This class load the game's images.
  ****************************************************************************************/
 public class GameImage {
-    public final Image SnakeHead, SnakeDot, Apple, Health, Mine, Broccoli, Explosion, Player, Lidia, Shura, Minotaur;
+    public final Image SnakeHead, SnakeDot, Apple, Health, Mine, Broccoli, Explosion, Player, Lidia, Shura, Minotaur, Barrels, Cabbage;
     public final Image DoorGreyClosed, DoorGreyOpen, floor, lava, wallGreyLeftSide, wallGreyRightSide, wallGreyFront, DoorGreyOpenSide, DoorGreyClosedSide, DoorGreyClosedLeftSide, DoorGreyClosedRightSide, DoorGreyOpenLeftSide, ChestFront, ChestSide, ChestBack;
     public Image[] ExplosionSprites;
     public Image[] PlayerLeftRightSprites;
@@ -29,6 +29,8 @@ public class GameImage {
     public static final int LIDIA_HEIGHT = 64;
     public static final int Minotaur_WIDTH = 48;
     public static final int Minotaur_HEIGHT = 64;
+    public static final int BARREL_HEIGHT = 32;
+    public static final int BARREL_WIDTH = 32;
     public GameImage(HookshotHeroesGameEngine engine){
         SnakeHead = engine.loadImage("head.png");
         SnakeDot = engine.loadImage("dot.png");
@@ -41,6 +43,8 @@ public class GameImage {
         Lidia = engine.loadImage("lidia.png");
         Shura = engine.loadImage("shura.png");
         Minotaur = engine.loadImage("minotaur.png");
+        Barrels = engine.loadImage("barrels.png");
+        Cabbage = engine.subImage(Barrels, 64, 32, BARREL_WIDTH, BARREL_HEIGHT);
         LoadExplosionSpriteSheet(engine);
         LoadPlayerSpriteSheet(engine);
         LoadLidiaSpriteSheet(engine);

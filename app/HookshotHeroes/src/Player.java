@@ -350,7 +350,7 @@ public class Player implements IWorldObject {
                     toRemove = object;
                 }
             }
-        } else if (type == WorldObjectType.Broccoli) {
+        } else if (type == WorldObjectType.Broccoli || type == WorldObjectType.Cabbage) {
             CompletableFuture.runAsync(() -> {
                 SpeechService.Say(SpeechType.Health, AnimationRequests, this);
             });
