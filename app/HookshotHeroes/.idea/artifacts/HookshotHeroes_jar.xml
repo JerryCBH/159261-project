@@ -3,6 +3,8 @@
     <output-path>$PROJECT_DIR$/out/artifacts/HookshotHeroes_jar</output-path>
     <root id="archive" name="HookshotHeroes.jar">
       <element id="module-output" name="HookshotHeroes" />
+      <element id="library" level="project" name="json" />
+      <element id="library" level="project" name="squareup.okhttp3.okhttp" />
     </root>
   </artifact>
 </component>
