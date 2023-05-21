@@ -316,6 +316,9 @@ public class World implements IWorld {
     // Play the animation based on object type.
     public void PlayAnimation() {
         try {
+            ArrayList<AnimationRequest> lidiaList = new ArrayList<>();
+            ArrayList<AnimationRequest> shuraList = new ArrayList<>();
+
             for (AnimationRequest request : AnimationRequests) {
                 // Only support explosion animation.
                 if (request.Type == WorldObjectType.Mine) {
@@ -323,8 +326,21 @@ public class World implements IWorld {
                     Engine.drawImage(GameImage.ExplosionSprites[idx], request.Cell.Column * CELL_HEIGHT - 10, request.Cell.Row * CELL_WIDTH - 30, 50, 50);
                 }
                 if (request.Type == WorldObjectType.SpeechBubble) {
-                    DrawSpeechBubble(Engine, request.Player.GetOccupiedCells()[0], request.Text);
+                    if (request.Player != null && request.Player.GetName() == "Lidia"){
+                        lidiaList.add(request);
+                    } else if (request.Player != null && request.Player.GetName() == "Shura"){
+                        shuraList.add(request);
+                    }
                 }
+            }
+            // Show speech bubbles in sequence.
+            for (int i = 0; i < lidiaList.size(); i++) {
+                var grid = new GridCell(lidiaList.get(i).Player.GetOccupiedCells()[0].Row + 5*i, lidiaList.get(i).Player.GetOccupiedCells()[0].Column);
+                DrawSpeechBubble(Engine,  grid, lidiaList.get(i).Text);
+            }
+            for (int i = 0; i < shuraList.size(); i++) {
+                var grid = new GridCell(shuraList.get(i).Player.GetOccupiedCells()[0].Row + 5*i, shuraList.get(i).Player.GetOccupiedCells()[0].Column);
+                DrawSpeechBubble(Engine,  grid, shuraList.get(i).Text);
             }
 
             // Clean up
@@ -374,8 +390,10 @@ public class World implements IWorld {
         qualityHints.put(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
         graphics2D.setRenderingHints(qualityHints);
         graphics2D.setPaint(new Color(80, 150, 180));
-        int width = 5 * text.length() + 10;
-        int height = 25;
+        // Get lines from text.
+        var lines = StringUtils.GetLines(text, 5);
+        int width = (lines.size() == 1)? 5 * text.length() + 10 : 135;
+        int height = 25 + 10 * (lines.size() - 1);
         GeneralPath path = new GeneralPath();
         path.moveTo(5, 10);
         path.curveTo(5, 10, 7, 5, 0, 0);
@@ -391,7 +409,11 @@ public class World implements IWorld {
         path.closePath();
         graphics2D.fill(path);
         engine.changeColor(Color.white);
-        engine.drawText(10, 15, text, "Arial", 10);
+
+        for(int i = 0; i < lines.size(); i++){
+            engine.drawText(10, 15 + i*10, lines.get(i), "Arial", 10);
+        }
+
         engine.restoreLastTransform();
     }
 

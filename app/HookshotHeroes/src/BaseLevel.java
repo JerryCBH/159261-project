@@ -2,6 +2,8 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class BaseLevel {
+
+    // Game references and options.
     public HookshotHeroesGameEngine Engine;
     public GameImage GameImage;
     public GameOptions GameOptions;
@@ -15,6 +17,7 @@ public class BaseLevel {
     public ArrayList<GridCell> WallCells;
     public ArrayList<GridCell> LavaCells;
     public ArrayList<GridCell> OccupiedCells;
+    public ArrayList<Chest> Chests;
 
     public BaseLevel (HookshotHeroesGameEngine engine, GameImage gameImage, GameOptions gameOptions){
         Engine = engine;
@@ -23,6 +26,7 @@ public class BaseLevel {
         WallCells = new ArrayList<>();
         LavaCells = new ArrayList<>();
         OccupiedCells = new ArrayList<>();
+        Chests = new ArrayList<>();
     }
 
     public void drawWallFrontWithCollision(int x, int y) {
@@ -118,5 +122,11 @@ public class BaseLevel {
 
     public void SetLevelRendered(boolean flag) {
         IsLevelRendered = flag;
+    }
+    public ArrayList<Chest> GetChests(){
+        return Chests;
+    }
+    public void AddChest(GridCell cell){
+
     }
 }

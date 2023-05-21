@@ -39,8 +39,8 @@ public class StartMenu{
         // Create a sub-panel with a GridLayout for the buttons
         JPanel buttonPanel = new JPanel(new GridLayout(4, 1));
 
-        easyModeButton = new JButton("1 Player");
-        normalModeButton = new JButton("2 Players");
+        easyModeButton = new JButton("Single Player Game");
+        normalModeButton = new JButton("Double Player Game");
         helpButton = new JButton("Help");
         quitButton = new JButton("Quit");
 

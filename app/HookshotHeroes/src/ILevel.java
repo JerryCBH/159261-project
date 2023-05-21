@@ -15,4 +15,5 @@ public interface ILevel {
     ArrayList<GridCell> GetOccupiedCells();
     void SetLevelRendered(boolean flag);
     String GetLevelName();
+    ArrayList<Chest> GetChests();
 }
