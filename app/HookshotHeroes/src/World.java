@@ -60,6 +60,10 @@ public class World implements IWorld {
         Collections.addAll(Objects, objects);
     }
 
+    public void SetObjects(ArrayList<IWorldObject> objects){
+        Objects = objects;
+    }
+
     public void RenderLevel() {
         CurrentLevel.RenderLevel();
         CurrentLevel.SetLevelRendered(true);
@@ -89,14 +93,16 @@ public class World implements IWorld {
 
     // Advances movable objects by 1 grid at a time.
     // The new grid cell to move to will be checked for any collisions.
-    private ArrayList<CollisionCheckInfo> MoveObjects(KeyEvent event){
+    private ArrayList<CollisionCheckInfo> MoveObjects(KeyEvent event) {
         var toCheck = new ArrayList<CollisionCheckInfo>();
         // Advance each player in the world and gather the collision info.
         for (IWorldObject object : Objects) {
-            var newCell = object.Move(event.getKeyCode());
-            if (newCell != null) {
-                AudioRequests.add(new AudioRequest(WorldObjectType.Player));
-                toCheck.add(new CollisionCheckInfo(newCell, object));
+            if (object.WhoAmI() == WorldObjectType.Player) {
+                var newCell = object.Move(event.getKeyCode());
+                if (newCell != null) {
+                    AudioRequests.add(new AudioRequest(WorldObjectType.Player));
+                    toCheck.add(new CollisionCheckInfo(newCell, object));
+                }
             }
         }
         return toCheck;
@@ -248,7 +254,7 @@ public class World implements IWorld {
             }
         }
         if (player.WhoAmI() == WorldObjectType.Mine || player.WhoAmI() == WorldObjectType.Cabbage
-                || player.WhoAmI() == WorldObjectType.Coin) {
+                || player.WhoAmI() == WorldObjectType.Coin || player.WhoAmI() == WorldObjectType.Minotaur) {
             RemoveObject(player);
         }
     }
@@ -308,20 +314,24 @@ public class World implements IWorld {
     }
 
     // Play the animation based on object type.
-    public void PlayAnimation(){
-        for (AnimationRequest request : AnimationRequests) {
-            // Only support explosion animation.
-            if (request.Type == WorldObjectType.Mine) {
-                var idx = Engine.GetFrameIndex(request.time, request.SecondsToPlay, GameImage.ExplosionSprites.length);
-                Engine.drawImage(GameImage.ExplosionSprites[idx], request.Cell.Column * CELL_HEIGHT - 10, request.Cell.Row * CELL_WIDTH - 30, 50, 50);
+    public void PlayAnimation() {
+        try {
+            for (AnimationRequest request : AnimationRequests) {
+                // Only support explosion animation.
+                if (request.Type == WorldObjectType.Mine) {
+                    var idx = Engine.GetFrameIndex(request.time, request.SecondsToPlay, GameImage.ExplosionSprites.length);
+                    Engine.drawImage(GameImage.ExplosionSprites[idx], request.Cell.Column * CELL_HEIGHT - 10, request.Cell.Row * CELL_WIDTH - 30, 50, 50);
+                }
+                if (request.Type == WorldObjectType.SpeechBubble) {
+                    DrawSpeechBubble(Engine, request.Player.GetOccupiedCells()[0], request.Text);
+                }
             }
-            if (request.Type == WorldObjectType.SpeechBubble) {
-                DrawSpeechBubble(Engine, request.Player.GetOccupiedCells()[0], request.Text);
-            }
-        }
 
-        // Clean up
-        RemoveAnimationRequests();
+            // Clean up
+            RemoveAnimationRequests();
+        } catch (Exception ex) {
+
+        }
     }
 
     // Play audio effects.
@@ -347,6 +357,9 @@ public class World implements IWorld {
             }
             else if (request.Type == WorldObjectType.Coin) {
                 Engine.playAudio(GameAudio.CoinAudio, GameOptions.MovementVolume);
+            }
+            else if (request.Type == WorldObjectType.Minotaur){
+                Engine.playAudio(GameAudio.MonsterDamageAudio, GameOptions.SoundEffectsVolume);
             }
         }
     }

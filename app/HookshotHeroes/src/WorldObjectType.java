@@ -10,5 +10,6 @@ public enum WorldObjectType {
     Grapple,
     Coin,
     SpeechBubble,
-    Cabbage
+    Cabbage,
+    Minotaur
 }

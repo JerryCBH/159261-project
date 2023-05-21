@@ -7,6 +7,7 @@ import java.util.ArrayList;
 public interface IWorld {
     IWorldObject[] GetObjects();
     void SetObjects(IWorldObject[] objects);
+    void SetObjects(ArrayList<IWorldObject> objects);
     void RenderLevel();
     void RenderObjects();
     void UpdateObjects(double dt);

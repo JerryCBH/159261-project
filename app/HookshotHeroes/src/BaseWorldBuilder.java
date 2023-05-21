@@ -1,4 +1,5 @@
 import java.awt.*;
+import java.awt.event.KeyEvent;
 import java.util.Collections;
 import java.util.Random;
 
@@ -8,7 +9,7 @@ import java.util.Random;
 public class BaseWorldBuilder {
     protected int startOffset = 5, endOffset = 10;
 
-    public World CreateWorld(HookshotHeroesGameEngine engine, GameImage gameImage, GameAudio gameAudio, GameOptions options, ILevel level){
+    public World CreateWorld(HookshotHeroesGameEngine engine, GameImage gameImage, GameAudio gameAudio, GameOptions options, ILevel level) {
 
         return new World(options.Width, options.Height, engine, gameImage, gameAudio, options, level);
     }
@@ -32,7 +33,7 @@ public class BaseWorldBuilder {
                 var radius = 10;
                 var r = new Random();
                 var ball = new Ball("Ball" + i, radius, world.CELL_WIDTH, world.CELL_HEIGHT);
-                ball.Position = new Vector2D(startX + radius*3*i, startY);
+                ball.Position = new Vector2D(startX + radius * 3 * i, startY);
                 ball.Velocity = new Vector2D(r.nextDouble(500), r.nextDouble(500));
                 ball.Acceleration = new Vector2D(0, Ball.G);
                 ball.Color = new Color(r.nextInt(256), r.nextInt(256), r.nextInt(256));
@@ -52,6 +53,13 @@ public class BaseWorldBuilder {
                 world.Objects.add(new Cabbage(java.util.UUID.randomUUID().toString(), GridCell.GetRandomCell(startOffset, world.GridRows - endOffset, startOffset, world.GridColumns - endOffset,
                         world.CurrentLevel.GetOccupiedCells()),
                         new Skin(world.GameImage.Cabbage, world.CELL_WIDTH, world.CELL_HEIGHT)));
+            }
+            if (type == WorldObjectType.Minotaur) {
+                world.Objects.add(new Minotaur("Minotaur", new GridCell(25, 25),
+                        new Skin(world.GameImage.MinotaurUpSprites, world.GameImage.MinotaurLeftSprites, world.GameImage.MinotaurRightSprites, world.GameImage.MinotaurDownSprites, world.GameImage.Health, world.CELL_WIDTH, world.CELL_HEIGHT),
+                        new KeyBinding(KeyEvent.VK_UP, KeyEvent.VK_LEFT, KeyEvent.VK_RIGHT, KeyEvent.VK_DOWN, KeyEvent.VK_PERIOD),
+                        world.CurrentLevel.GetWallCells(), world.CurrentLevel.GetLavaCells(), world.CurrentLevel.GetOccupiedCells(), world.AudioRequests, world.EliminationRequests, world.AnimationRequests, world
+                ));
             }
         }
     }

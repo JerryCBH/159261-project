@@ -1,5 +1,6 @@
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+import java.util.Objects;
 
 /****************************************************************************************
  * This class creates a single player game world.
@@ -30,15 +31,18 @@ public class SinglePlayerWorldBuilder extends BaseWorldBuilder implements IWorld
                     level.GetWallCells(), level.GetLavaCells(), level.GetOccupiedCells(), world.AudioRequests, world.EliminationRequests, world.AnimationRequests, world
             );
         }
-        world.SetObjects(new IWorldObject[]
-                {
-                        player
-                });
+        var objects = new ArrayList<IWorldObject>();
+        objects.add(player);
+        world.SetObjects(objects);
+
         super.AddObjects(world, WorldObjectType.Mine, 3);
         super.AddObjects(world, WorldObjectType.Cabbage, 2);
         super.AddObjects(world, WorldObjectType.Coin, 10);
         if (options.EnableBouncingBalls) {
             super.AddObjects(world, WorldObjectType.Ball, 5);
+        }
+        if (level instanceof LevelFour){
+            super.AddObjects(world, WorldObjectType.Minotaur, 1);
         }
         return world;
     }

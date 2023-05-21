@@ -46,4 +46,9 @@ public class Broccoli implements IWorldObject {
     public void SetGridCell(GridCell cell) {
         _cell = cell;
     }
+
+    @Override
+    public void HandleDamage() {
+
+    }
 }

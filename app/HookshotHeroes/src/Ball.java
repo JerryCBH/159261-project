@@ -63,6 +63,11 @@ public class Ball implements IWorldObject{
     }
 
     @Override
+    public void HandleDamage() {
+
+    }
+
+    @Override
     public void Update(Double dt) {
 
     }

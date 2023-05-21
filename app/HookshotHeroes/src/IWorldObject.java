@@ -10,4 +10,5 @@ public interface IWorldObject {
     WorldObjectType WhoAmI();
     String GetName();
     void SetGridCell(GridCell cell);
+    void HandleDamage();
 }

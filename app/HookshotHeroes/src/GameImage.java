@@ -55,6 +55,7 @@ public class GameImage {
         LoadShuraSpriteSheet(engine);
         LoadCoinSpriteSheet(engine);
         LoadBombSpriteSheet(engine);
+        LoadMinotaurSpriteSheet(engine);
 
         // Load environment images.
         DoorGreyClosed = engine.loadImage("environment/DoorGreyClosed.png");
@@ -140,20 +141,20 @@ public class GameImage {
 
     private void LoadMinotaurSpriteSheet(HookshotHeroesGameEngine engine) {
         MinotaurDownSprites = new Image[3];
-        for (int j = 0; j < 2; j ++) {
-            MinotaurUpSprites[j] = engine.subImage(Minotaur, j*Minotaur_WIDTH, 0, Minotaur_WIDTH, Minotaur_HEIGHT);
+        for (int j = 0; j < 3; j ++) {
+            MinotaurDownSprites[j] = engine.subImage(Minotaur, j*Minotaur_WIDTH, 0, Minotaur_WIDTH, Minotaur_HEIGHT);
         }
         MinotaurLeftSprites = new Image[3];
-        for (int j = 0; j < 2; j ++) {
-            MinotaurUpSprites[j] = engine.subImage(Minotaur, j*Minotaur_WIDTH, Minotaur_HEIGHT*2, Minotaur_WIDTH, Minotaur_HEIGHT);
+        for (int j = 0; j < 3; j ++) {
+            MinotaurLeftSprites[j] = engine.subImage(Minotaur, j*Minotaur_WIDTH, Minotaur_HEIGHT, Minotaur_WIDTH, Minotaur_HEIGHT);
         }
         MinotaurRightSprites = new Image[3];
-        for (int j = 0; j < 2; j ++) {
-            MinotaurUpSprites[j] = engine.subImage(Minotaur, j*Minotaur_WIDTH, Minotaur_HEIGHT*3, Minotaur_WIDTH, Minotaur_HEIGHT);
+        for (int j = 0; j < 3; j ++) {
+            MinotaurRightSprites[j] = engine.subImage(Minotaur, j*Minotaur_WIDTH, Minotaur_HEIGHT*2, Minotaur_WIDTH, Minotaur_HEIGHT);
         }
         MinotaurUpSprites = new Image[3];
-        for (int j = 0; j < 2; j ++) {
-            MinotaurUpSprites[j] = engine.subImage(Minotaur, j*Minotaur_WIDTH, Minotaur_HEIGHT*4, Minotaur_WIDTH, Minotaur_HEIGHT);
+        for (int j = 0; j < 3; j ++) {
+            MinotaurUpSprites[j] = engine.subImage(Minotaur, j*Minotaur_WIDTH, Minotaur_HEIGHT*3, Minotaur_WIDTH, Minotaur_HEIGHT);
         }
     }
 
