@@ -12,6 +12,10 @@ public class Player implements IWorldObject {
     public static final int MAX_LIFE = 5;
     public static final int GRAPPLE_ADVANCE = 1;
     public static final int GRAPPLE_LENGTH = 19;
+    public static final int GRAPPLE_CHAIN_GAP = 10;
+    public static final int GRAPPLE_CHAIN_RADIUS = 2;
+    public static final int GRAPPLE_CHAIN_WIDTH = 1;
+    public static final int GRAPPLE_RADIUS = 5;
     public static final int PLAYER_LEVEL_SCORE = 100;
     public static final int PLAYER_COIN_SCORE = 10;
     public static final int PLAYER_HIT_SCORE = 10;
@@ -256,9 +260,27 @@ public class Player implements IWorldObject {
         if(_isGrappling) {
             engine.changeColor(Color.YELLOW);
             engine.drawLine(_body.get(0).Column * _skin.CellWidth + 25, _body.get(0).Row * _skin.CellHeight + 35,
-                    _grappleCell.Column * _skin.CellWidth + 25, _grappleCell.Row * _skin.CellHeight + 35, 2);
+                    _grappleCell.Column * _skin.CellWidth + 25, _grappleCell.Row * _skin.CellHeight + 35, GRAPPLE_CHAIN_WIDTH);
 
-            engine.drawCircle(_grappleCell.Column * _skin.CellWidth + 25, _grappleCell.Row * _skin.CellHeight + 35, 5);
+            engine.drawCircle(_grappleCell.Column * _skin.CellWidth + 25, _grappleCell.Row * _skin.CellHeight + 35, GRAPPLE_RADIUS);
+
+            var chainh = Math.abs(_grappleCell.Column * _skin.CellWidth - _body.get(0).Column * _skin.CellWidth);
+            var chainv = Math.abs(_grappleCell.Row * _skin.CellHeight - _body.get(0).Row * _skin.CellHeight);
+            var numberOfChains = Math.max(chainh, chainv) / GRAPPLE_CHAIN_GAP;
+
+            for (int i = 0; i < numberOfChains; i++){
+                if (_direction == PlayerDirection.Up) {
+                    engine.drawCircle(_body.get(0).Column * _skin.CellWidth + 25, _body.get(0).Row * _skin.CellHeight + 35 - i * GRAPPLE_CHAIN_GAP, GRAPPLE_CHAIN_RADIUS);
+                } else if (_direction == PlayerDirection.Down) {
+                    engine.drawCircle(_body.get(0).Column * _skin.CellWidth + 25, _body.get(0).Row * _skin.CellHeight + 35 + i * GRAPPLE_CHAIN_GAP, GRAPPLE_CHAIN_RADIUS);
+                }
+                if (_direction == PlayerDirection.Left) {
+                    engine.drawCircle(_body.get(0).Column * _skin.CellWidth + 25 - i * GRAPPLE_CHAIN_GAP, _body.get(0).Row * _skin.CellHeight + 35, GRAPPLE_CHAIN_RADIUS);
+                }
+                if (_direction == PlayerDirection.Right) {
+                    engine.drawCircle(_body.get(0).Column * _skin.CellWidth + 25 + i * GRAPPLE_CHAIN_GAP, _body.get(0).Row * _skin.CellHeight + 35, GRAPPLE_CHAIN_RADIUS);
+                }
+            }
         }
         engine.changeColor(Color.white);
         DrawName(engine, _body.get(0));
