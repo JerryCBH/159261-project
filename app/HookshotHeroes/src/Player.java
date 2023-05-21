@@ -257,6 +257,8 @@ public class Player implements IWorldObject {
             engine.changeColor(Color.YELLOW);
             engine.drawLine(_body.get(0).Column * _skin.CellWidth + 25, _body.get(0).Row * _skin.CellHeight + 35,
                     _grappleCell.Column * _skin.CellWidth + 25, _grappleCell.Row * _skin.CellHeight + 35, 2);
+
+            engine.drawCircle(_grappleCell.Column * _skin.CellWidth + 25, _grappleCell.Row * _skin.CellHeight + 35, 5);
         }
         engine.changeColor(Color.white);
         DrawName(engine, _body.get(0));
