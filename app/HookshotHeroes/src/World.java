@@ -116,19 +116,20 @@ public class World implements IWorld {
         for (CollisionCheckInfo collisionCheckInfo : toCheck) {
             // Check exit grid
             if (CheckGrid(collisionCheckInfo.Cell, CurrentLevel.GetExitGrid())){
-                ((Player)collisionCheckInfo.Source).Score += Player.PLAYER_LEVEL_SCORE;
-                var nextLevel = CurrentLevel.GetNextLevel();
-                if (nextLevel != null){
-                    Engine.InitializeLevel(Engine.GameOptions, nextLevel, GetPlayers());
+                if (CurrentLevel.CanExit(this)) {
+                    ((Player) collisionCheckInfo.Source).Score += Player.PLAYER_LEVEL_SCORE;
+                    var nextLevel = CurrentLevel.GetNextLevel();
+                    if (nextLevel != null) {
+                        Engine.InitializeLevel(Engine.GameOptions, nextLevel, GetPlayers());
+                    } else {
+                        Engine.PauseEngine();
+                        JOptionPane.showMessageDialog(Engine.mFrame, "YOU WIN!!!");
+                        // Restart new game.
+                        Engine.InitializeWorld(Engine.GameOptions);
+                        Engine.ResumeEngine();
+                    }
+                    return;
                 }
-                else{
-                    Engine.PauseEngine();
-                    JOptionPane.showMessageDialog(Engine.mFrame, "YOU WIN!!!");
-                    // Restart new game.
-                    Engine.InitializeWorld(Engine.GameOptions);
-                    Engine.ResumeEngine();
-                }
-                return;
             }
             // Check entry grid
             if (CheckGrid(collisionCheckInfo.Cell, CurrentLevel.GetEntryGrid())){
