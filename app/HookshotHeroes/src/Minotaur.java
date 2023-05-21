@@ -13,7 +13,8 @@ import java.util.concurrent.CompletableFuture;
 public class Minotaur implements IWorldObject {
     // Player health.
     public static final int MAX_LIFE = 10;
-
+    // Vissibility range.
+    public static final int SIGHT = 19;
     // A list of cells occupied by the player.
     private final ArrayList<GridCell> _body;
     // Direction of player.
@@ -37,7 +38,7 @@ public class Minotaur implements IWorldObject {
     public LinkedList<IWorldObject> EliminationRequests;
     public ArrayList<AnimationRequest> AnimationRequests;
     public IWorld World;
-    private double _time = 0;
+    public final NPCSimpleStateMachine StateMachine;
 
     public Minotaur(String name, GridCell startCell, Skin skin, KeyBinding keyBinding,
                   ArrayList<GridCell> wallCells, ArrayList<GridCell> lavaCells, ArrayList<GridCell> occupiedCells,
@@ -57,6 +58,7 @@ public class Minotaur implements IWorldObject {
         EliminationRequests = eliminationRequests;
         AnimationRequests = animationRequests;
         World = world;
+        StateMachine = new NPCSimpleStateMachine();
     }
 
     // Move the player.
@@ -230,28 +232,7 @@ public class Minotaur implements IWorldObject {
 
     @Override
     public void Update(Double dt) {
-        GridCell nextCell = null;
-        if (_time > 0.5){
-            _time = 0;
-            Random r = new Random();
-            var nextMove = r.nextInt(1, 5);
-            if (nextMove == 1) {
-                nextCell = Move(KeyEvent.VK_UP);
-            }
-            else if (nextMove == 2) {
-                nextCell = Move(KeyEvent.VK_RIGHT);
-            }
-            else if (nextMove == 3) {
-                nextCell = Move(KeyEvent.VK_DOWN);
-            }
-            else if (nextMove == 4) {
-                nextCell = Move(KeyEvent.VK_LEFT);
-            }
-            CheckObjectCollision(nextCell);
-        }
-        else{
-            _time += dt;
-        }
+        StateMachine.Execute(dt, World, this);
     }
 
     // Check grapple collisions with enemies.
