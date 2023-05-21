@@ -5,6 +5,7 @@ public class Mine implements IWorldObject{
     private final String _name;
     private GridCell _cell;
     private final Skin _skin;
+    private int _idx = 0;
     public Mine(String name, GridCell cell, Skin skin){
         _name = name;
         _cell = cell;
@@ -17,7 +18,14 @@ public class Mine implements IWorldObject{
 
     @Override
     public void Render(GameEngine engine) {
-        engine.drawImage(_skin.Body, _cell.Column * _skin.CellWidth + 5, _cell.Row * _skin.CellHeight + 5, 15, 15);
+        var offset = 10;
+        if (_idx / offset >= _skin.StaticSprites.length) {
+            _idx = 0;
+        }
+        engine.drawImage(_skin.StaticSprites[_idx / offset], _cell.Column * _skin.CellWidth + 5, _cell.Row * _skin.CellHeight + 5);
+        if (!((HookshotHeroesGameEngine) engine).IsPause()) {
+            _idx++;
+        }
     }
 
     @Override

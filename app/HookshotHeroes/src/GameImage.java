@@ -4,7 +4,7 @@ import java.awt.*;
  * This class load the game's images.
  ****************************************************************************************/
 public class GameImage {
-    public final Image SnakeHead, SnakeDot, Apple, Health, Mine, Broccoli, Explosion, Player, Lidia, Shura, Minotaur, Barrels, Cabbage;
+    public final Image SnakeHead, SnakeDot, Apple, Health, Mine, Broccoli, Explosion, Player, Lidia, Shura, Minotaur, Barrels, Cabbage, Bomb;
     public final Image DoorGreyClosed, DoorGreyOpen, floor, lava, wallGreyLeftSide, wallGreyRightSide, wallGreyFront, DoorGreyOpenSide, DoorGreyClosedSide, DoorGreyClosedLeftSide, DoorGreyClosedRightSide, DoorGreyOpenLeftSide, ChestFront, ChestSide, ChestBack;
     public Image[] ExplosionSprites;
     public Image[] PlayerLeftRightSprites;
@@ -23,6 +23,7 @@ public class GameImage {
     public Image[] MinotaurLeftSprites;
     public Image[] MinotaurRightSprites;
     public Image[] CoinSprites;
+    public Image[] BombSprites;
     public static final int PLAYER_WIDTH = 48;
     public static final int PLAYER_HEIGHT = 56;
     public static final int LIDIA_WIDTH = 64;
@@ -31,6 +32,8 @@ public class GameImage {
     public static final int Minotaur_HEIGHT = 64;
     public static final int BARREL_HEIGHT = 32;
     public static final int BARREL_WIDTH = 32;
+    public static final int BOMB_WIDTH = 20;
+    public static final int BOMB_HEIGHT = 26;
     public GameImage(HookshotHeroesGameEngine engine){
         SnakeHead = engine.loadImage("head.png");
         SnakeDot = engine.loadImage("dot.png");
@@ -44,12 +47,14 @@ public class GameImage {
         Shura = engine.loadImage("shura.png");
         Minotaur = engine.loadImage("minotaur.png");
         Barrels = engine.loadImage("barrels.png");
+        Bomb = engine.loadImage("bomb.png");
         Cabbage = engine.subImage(Barrels, 64, 32, BARREL_WIDTH, BARREL_HEIGHT);
         LoadExplosionSpriteSheet(engine);
         LoadPlayerSpriteSheet(engine);
         LoadLidiaSpriteSheet(engine);
         LoadShuraSpriteSheet(engine);
         LoadCoinSpriteSheet(engine);
+        LoadBombSpriteSheet(engine);
 
         // Load environment images.
         DoorGreyClosed = engine.loadImage("environment/DoorGreyClosed.png");
@@ -156,6 +161,13 @@ public class GameImage {
         CoinSprites = new Image[9];
         for (int j = 1; j <= 9; j++) {
             CoinSprites[j - 1] = engine.loadImage("goldCoin" + j + ".png");
+        }
+    }
+
+    private void LoadBombSpriteSheet(HookshotHeroesGameEngine engine){
+        BombSprites = new Image[4];
+        for (int j = 0; j < 4; j++) {
+            BombSprites[j] = engine.subImage(Bomb, j*BOMB_WIDTH, 0, BOMB_WIDTH, BOMB_HEIGHT);
         }
     }
 }

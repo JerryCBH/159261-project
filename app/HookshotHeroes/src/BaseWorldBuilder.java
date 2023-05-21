@@ -24,7 +24,7 @@ public class BaseWorldBuilder {
             if (type == WorldObjectType.Mine) {
                 world.Objects.add(new Mine(java.util.UUID.randomUUID().toString(), GridCell.GetRandomCell(startOffset, world.GridRows - endOffset, startOffset, world.GridColumns - endOffset,
                         world.CurrentLevel.GetOccupiedCells()),
-                        new Skin(world.GameImage.Mine, world.CELL_WIDTH, world.CELL_HEIGHT)));
+                        new Skin(world.GameImage.BombSprites, world.CELL_WIDTH, world.CELL_HEIGHT)));
             }
             if (type == WorldObjectType.Ball) {
                 var startX = 10;
