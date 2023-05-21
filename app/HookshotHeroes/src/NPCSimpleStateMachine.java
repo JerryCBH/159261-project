@@ -4,12 +4,21 @@ import java.util.Arrays;
 import java.util.Random;
 import java.util.concurrent.CompletableFuture;
 
+/****************************************************************************************
+ * This class is a simple implementation of a NPC State Machine.
+ ****************************************************************************************/
 public class NPCSimpleStateMachine {
     private double _time = 0;
+
+    // Time of NPC reaction during patrol.
     public final double PATROL_REACTION_TIME = 0.5;
-    public final double SEEK_REACTION_TIME = 0.1;
+    // Time of NPC reaction during pursuit.
+    public final double SEEK_REACTION_TIME = 0.15;
+    // NPC current state.
     public NPCStates State = NPCStates.Patrol;
 
+    // Run the State Machine.
+    // This implementation only have two states.
     public GridCell Execute(double dt, IWorld world, IWorldObject npc){
         GridCell nextCell = null;
         if (npc.WhoAmI() == WorldObjectType.Minotaur) {
