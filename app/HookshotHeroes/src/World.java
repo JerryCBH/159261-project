@@ -233,17 +233,22 @@ public class World implements IWorld {
         }
     }
 
-    public void HandleElimination(IWorldObject player){
-        // Player game over.
-        Engine.PauseEngine();
-        JOptionPane.showMessageDialog(Engine.mFrame, player.GetName() + " eliminated!!!");
-        Engine.ResumeEngine();
-        RemoveObject(player);
-        // Game over - no players left.
-        if (GetPlayerCount() == 0) {
-            JOptionPane.showMessageDialog(Engine.mFrame, "Game Over!!!");
-            // Restart new game.
-            Engine.InitializeWorld(Engine.GameOptions);
+    public void HandleElimination(IWorldObject player) {
+        if (player.WhoAmI() == WorldObjectType.Player) {
+            // Player game over.
+            Engine.PauseEngine();
+            JOptionPane.showMessageDialog(Engine.mFrame, player.GetName() + " eliminated!!!");
+            Engine.ResumeEngine();
+            RemoveObject(player);
+            // Game over - no players left.
+            if (GetPlayerCount() == 0) {
+                JOptionPane.showMessageDialog(Engine.mFrame, "Game Over!!!");
+                // Restart new game.
+                Engine.InitializeWorld(Engine.GameOptions);
+            }
+        }
+        if (player.WhoAmI() == WorldObjectType.Mine) {
+            RemoveObject(player);
         }
     }
 
@@ -253,8 +258,9 @@ public class World implements IWorld {
     }
 
     // Remove object from the gaming world.
-    private void RemoveObject(IWorldObject toRemove){
-        if(toRemove != null) {
+    @Override
+    public void RemoveObject(IWorldObject toRemove) {
+        if (toRemove != null) {
             Objects.removeIf(iWorldObject -> iWorldObject.GetName().equals(toRemove.GetName()));
         }
     }

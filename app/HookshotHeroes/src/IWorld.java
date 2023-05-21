@@ -18,4 +18,5 @@ public interface IWorld {
     void HandleCollision(IWorldObject collidedObject);
     ILevel GetLevel();
     ArrayList<Player> GetPlayers();
+    void RemoveObject(IWorldObject toRemove);
 }
