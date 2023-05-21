@@ -247,7 +247,8 @@ public class World implements IWorld {
                 Engine.InitializeWorld(Engine.GameOptions);
             }
         }
-        if (player.WhoAmI() == WorldObjectType.Mine) {
+        if (player.WhoAmI() == WorldObjectType.Mine || player.WhoAmI() == WorldObjectType.Cabbage
+                || player.WhoAmI() == WorldObjectType.Coin) {
             RemoveObject(player);
         }
     }

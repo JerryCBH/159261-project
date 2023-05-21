@@ -1,5 +1,4 @@
 import java.awt.*;
-import java.awt.geom.GeneralPath;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
@@ -260,7 +259,7 @@ public class Player implements IWorldObject {
                 } else if (_grappleCell.Row != playerPos.Row - GRAPPLE_LENGTH &&
                         CanMoveTo(new GridCell( playerPos.Row - GRAPPLE_ADVANCE, playerPos.Column), WallCells)) {
                     _grappleCell.Row -= GRAPPLE_ADVANCE;
-                    CheckEnemyCollision(_grappleCell);
+                    CheckObjectCollision(_grappleCell);
                 } else {
                     _isGrappling = false;
                 }
@@ -275,7 +274,7 @@ public class Player implements IWorldObject {
                 } else if (_grappleCell.Row != playerPos.Row + GRAPPLE_LENGTH &&
                         CanMoveTo(new GridCell( playerPos.Row + GRAPPLE_ADVANCE, playerPos.Column), WallCells)) {
                     _grappleCell.Row += GRAPPLE_ADVANCE;
-                    CheckEnemyCollision(_grappleCell);
+                    CheckObjectCollision(_grappleCell);
                 } else {
                     _isGrappling = false;
                 }
@@ -290,7 +289,7 @@ public class Player implements IWorldObject {
                 } else if (_grappleCell.Column != playerPos.Column - GRAPPLE_LENGTH
                         && CanMoveTo(new GridCell(playerPos.Row, playerPos.Column - GRAPPLE_ADVANCE), WallCells)) {
                     _grappleCell.Column -= GRAPPLE_ADVANCE;
-                    CheckEnemyCollision(_grappleCell);
+                    CheckObjectCollision(_grappleCell);
                 } else {
                     _isGrappling = false;
                 }
@@ -305,7 +304,7 @@ public class Player implements IWorldObject {
                 } else if (_grappleCell.Column != playerPos.Column + GRAPPLE_LENGTH
                         && CanMoveTo(new GridCell(playerPos.Row, playerPos.Column + GRAPPLE_ADVANCE), WallCells)) {
                     _grappleCell.Column += GRAPPLE_ADVANCE;
-                    CheckEnemyCollision(_grappleCell);
+                    CheckObjectCollision(_grappleCell);
                 } else {
                     _isGrappling = false;
                 }
@@ -323,13 +322,38 @@ public class Player implements IWorldObject {
     }
 
     // Check grapple collisions with enemies.
-    public void CheckEnemyCollision(GridCell currentCell) {
+    public void CheckObjectCollision(GridCell currentCell) {
         for (IWorldObject object : World.GetObjects()) {
             if (object.WhoAmI() == WorldObjectType.Mine) {
                 if (!CanMoveTo(currentCell, new ArrayList<>(Arrays.asList(object.GetOccupiedCells())))) {
                     // Play explosion sound effects.
+                    CompletableFuture.runAsync(() -> {
+                        SpeechService.Say(SpeechType.Victory, AnimationRequests, this);
+                    });
                     AnimationRequests.add(new AnimationRequest(WorldObjectType.Mine, object.GetOccupiedCells()[0], 10));
                     AudioRequests.add(new AudioRequest(WorldObjectType.Mine));
+                    EliminationRequests.push(object);
+                }
+            }
+            if (object.WhoAmI() == WorldObjectType.Coin) {
+                if (!CanMoveTo(currentCell, new ArrayList<>(Arrays.asList(object.GetOccupiedCells())))) {
+                    CompletableFuture.runAsync(() -> {
+                        SpeechService.Say(SpeechType.Happy, AnimationRequests, this);
+                    });
+                    Score += PLAYER_COIN_SCORE;
+                    AudioRequests.add(new AudioRequest(WorldObjectType.Coin));
+                    EliminationRequests.push(object);
+                }
+            }
+            if (object.WhoAmI() == WorldObjectType.Cabbage) {
+                if (!CanMoveTo(currentCell, new ArrayList<>(Arrays.asList(object.GetOccupiedCells())))) {
+                    CompletableFuture.runAsync(() -> {
+                        SpeechService.Say(SpeechType.Health, AnimationRequests, this);
+                    });
+                    if (_lives < MAX_LIFE){
+                        _lives++;
+                    }
+                    AudioRequests.add(new AudioRequest(WorldObjectType.Cabbage));
                     EliminationRequests.push(object);
                 }
             }

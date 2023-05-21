@@ -6,6 +6,7 @@ public class SpeechService {
     public static final String CHATGPT_HAPPY_PROMPT = "say a short sentence when you feel happy or getting rich";
     public static final String CHATGPT_DANGER_PROMPT = "say something when you stepped on a nail";
     public static final String CHATGPT_HEALTH_PROMPT = "say a short sentence when you eat yummy food or recovered health";
+    public static final String CHATGPT_VICTORY_PROMPT = "say a short sentence when you defeat an enemy";
     public static final HashMap<SpeechType, String> Conversations;
 
     static {
@@ -13,6 +14,7 @@ public class SpeechService {
         Conversations.put(SpeechType.Happy, "Nice!!");
         Conversations.put(SpeechType.Health, "Yummy!!");
         Conversations.put(SpeechType.Danger, "Ouch!!");
+        Conversations.put(SpeechType.Victory, "Take that!!");
     }
 
     public static void Say(SpeechType type, ArrayList<AnimationRequest> requests, Player player) {
@@ -62,7 +64,23 @@ public class SpeechService {
             } else {
                 message = Conversations.get(SpeechType.Danger);
             }
+        } else if (type == SpeechType.Victory) {
+            if (EnableChatGPT) {
+                try {
+                    var response = ChatGPTConnector.SendRequestToChatGPT(CHATGPT_VICTORY_PROMPT);
+                    message = ChatGPTConnector.ExtractGeneratedMessage(response);
+                    if (!(message != null && !message.trim().isEmpty())){
+                        message = Conversations.get(SpeechType.Victory);
+                    }
+                } catch (Exception ex) {
+                    System.out.println("ChatGPT error: " + ex.getMessage());
+                    message = Conversations.get(SpeechType.Victory);
+                }
+            } else {
+                message = Conversations.get(SpeechType.Victory);
+            }
         }
+
 
         var speech = new AnimationRequest(WorldObjectType.SpeechBubble, player.GetOccupiedCells()[0], 5);
         speech.Text = message;
