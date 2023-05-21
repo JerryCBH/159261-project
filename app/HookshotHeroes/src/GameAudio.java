@@ -4,13 +4,13 @@
 public class GameAudio {
     public final GameEngine.AudioClip ExplosionAudio;
     public final GameEngine.AudioClip CrunchAudio;
-    public final GameEngine.AudioClip Theme;
     public final GameEngine.AudioClip WalkAudio;
     public final GameEngine.AudioClip HitAudio;
     public final GameEngine.AudioClip StepAudio;
     public final GameEngine.AudioClip WhipAudio;
     public final GameEngine.AudioClip CoinAudio;
     public final GameEngine.AudioClip MonsterDamageAudio;
+    public GameEngine.AudioClip Theme;
 
     public GameAudio(HookshotHeroesGameEngine engine){
         Theme = engine.loadAudio("awesomeness.wav");
@@ -22,5 +22,13 @@ public class GameAudio {
         WhipAudio = engine.loadAudio("whip.wav");
         CoinAudio = engine.loadAudio("coin.wav");
         MonsterDamageAudio = engine.loadAudio("monsterdamage.wav");
+    }
+
+    public void ApplyTheme(HookshotHeroesGameEngine engine, String theme, float volume){
+        engine.GameOptions.EnableMusic = false;
+        engine.ToggleMusic();
+        Theme = engine.loadAudio(theme);
+        engine.GameOptions.EnableMusic = true;
+        engine.ToggleMusic(volume);
     }
 }

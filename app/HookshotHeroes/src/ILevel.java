@@ -16,4 +16,5 @@ public interface ILevel {
     void SetLevelRendered(boolean flag);
     String GetLevelName();
     ArrayList<Chest> GetChests();
+    void ApplyLevelMusic(GameAudio gameAudio);
 }

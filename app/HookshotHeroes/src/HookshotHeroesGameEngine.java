@@ -138,8 +138,13 @@ public class HookshotHeroesGameEngine extends GameEngine {
 
     // Turn the background music on/off.
     public void ToggleMusic(){
+        ToggleMusic(GameOptions.MasterVolume);
+    }
+
+    // Turn the background music on/off.
+    public void ToggleMusic(float volume){
         if(GameOptions.EnableMusic){
-            startAudioLoop(_gameAudio.Theme, GameOptions.MasterVolume);
+            startAudioLoop(_gameAudio.Theme, volume);
         }
         else{
             stopAudioLoop(_gameAudio.Theme);
