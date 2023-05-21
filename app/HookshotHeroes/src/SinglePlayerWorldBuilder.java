@@ -21,6 +21,7 @@ public class SinglePlayerWorldBuilder extends BaseWorldBuilder implements IWorld
             player.AudioRequests = world.AudioRequests;
             player.EliminationRequests = world.EliminationRequests;
             player.AnimationRequests = world.AnimationRequests;
+            player.World = world;
             player.SetGridCell(grid);
         } else {
             player = new Player("Lidia", grid,

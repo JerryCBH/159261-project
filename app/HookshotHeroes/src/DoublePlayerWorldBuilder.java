@@ -20,6 +20,7 @@ public class DoublePlayerWorldBuilder extends BaseWorldBuilder implements IWorld
                 p.AudioRequests = world.AudioRequests;
                 p.EliminationRequests = world.EliminationRequests;
                 p.AnimationRequests = world.AnimationRequests;
+                p.World = world;
             }
             players.get(0).SetGridCell(grids[0]);
             players.get(1).SetGridCell(grids[1]);
