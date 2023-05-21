@@ -45,7 +45,7 @@ public class NPCSimpleStateMachine {
                 if (_time > SEEK_REACTION_TIME) {
                     _time = 0;
                     var player = GetClosestPlayer(world, npc);
-                    nextCell = DoShortestMovement(world, npc, player);
+                    nextCell = DoOptimalMovement(world, npc, player);
                     minotaur.CheckObjectCollision(nextCell);
                 } else {
                     _time += dt;
@@ -57,6 +57,8 @@ public class NPCSimpleStateMachine {
         return nextCell;
     }
 
+    // Check if we should change state.
+    // If a player is in range then start chasing.
     public void CheckPlayersRange(IWorld world, IWorldObject npc, int sight){
         double min = Double.MAX_VALUE;
         for (IWorldObject object : world.GetObjects()) {
@@ -76,6 +78,7 @@ public class NPCSimpleStateMachine {
         }
     }
 
+    // Get the closest player.
     public IWorldObject GetClosestPlayer(IWorld world, IWorldObject npc){
         double min = Double.MAX_VALUE;
         IWorldObject player = null;
@@ -93,7 +96,8 @@ public class NPCSimpleStateMachine {
         return player;
     }
 
-    public GridCell DoShortestMovement(IWorld world, IWorldObject npc, IWorldObject player){
+    // Perform the optimal movement that gets to the player the quickest.
+    public GridCell DoOptimalMovement(IWorld world, IWorldObject npc, IWorldObject player){
         GridCell nextCell = null;
         double min = Double.MAX_VALUE;
         var minIdx = 0;
