@@ -389,6 +389,7 @@ public class Player implements IWorldObject {
                     AudioRequests.add(new AudioRequest(WorldObjectType.Grapple));
                     object.HandleDamage();
                     Score += PLAYER_HIT_SCORE;
+                    _isGrappling = false;
                 }
             }
         }
