@@ -56,6 +56,8 @@ public class DoublePlayerWorldBuilder extends BaseWorldBuilder implements IWorld
             level.ApplyLevelMusic(gameAudio);
         } else if (level instanceof LevelFive) {
             level.ApplyLevelMusic(gameAudio);
+        } else if (level instanceof LevelOne) {
+            level.ApplyLevelMusic(gameAudio);
         }
         return world;
     }

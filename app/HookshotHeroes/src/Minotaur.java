@@ -230,22 +230,24 @@ public class Minotaur implements IWorldObject {
 
     @Override
     public void Update(Double dt) {
+        GridCell nextCell = null;
         if (_time > 0.5){
             _time = 0;
             Random r = new Random();
             var nextMove = r.nextInt(1, 5);
             if (nextMove == 1) {
-                Move(KeyEvent.VK_UP);
+                nextCell = Move(KeyEvent.VK_UP);
             }
             else if (nextMove == 2) {
-                Move(KeyEvent.VK_RIGHT);
+                nextCell = Move(KeyEvent.VK_RIGHT);
             }
             else if (nextMove == 3) {
-                Move(KeyEvent.VK_DOWN);
+                nextCell = Move(KeyEvent.VK_DOWN);
             }
             else if (nextMove == 4) {
-                Move(KeyEvent.VK_LEFT);
+                nextCell = Move(KeyEvent.VK_LEFT);
             }
+            CheckObjectCollision(nextCell);
         }
         else{
             _time += dt;
@@ -254,7 +256,13 @@ public class Minotaur implements IWorldObject {
 
     // Check grapple collisions with enemies.
     public void CheckObjectCollision(GridCell currentCell) {
-
+        for (IWorldObject object : World.GetObjects()) {
+            if (object.WhoAmI() == WorldObjectType.Player) {
+                if (!CanMoveTo(currentCell, new ArrayList<>(Arrays.asList(object.GetOccupiedCells())))) {
+                    object.HandleDamage();
+                }
+            }
+        }
     }
 
     // Get All cells occupied by the snake.
@@ -269,9 +277,9 @@ public class Minotaur implements IWorldObject {
         IWorldObject toRemove = null;
         var type = object.WhoAmI();
 
-        // If collided with another player (or itself).
+        // If collided with another player.
         if (type == WorldObjectType.Player) {
-            //toRemove = this;
+            object.HandleDamage();
         }
 
         return toRemove;

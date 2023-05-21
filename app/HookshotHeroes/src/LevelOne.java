@@ -66,4 +66,9 @@ public class LevelOne extends BaseLevel implements ILevel{
     public String GetLevelName() {
         return "Level 1";
     }
+
+    @Override
+    public void ApplyLevelMusic(GameAudio gameAudio){
+        gameAudio.ApplyTheme(Engine, "awesomeness.wav", GameOptions.MasterVolume);
+    }
 }
