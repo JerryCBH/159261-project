@@ -12,6 +12,8 @@ public class AnimationRequest {
     public String Text;
     // The player.
     public Player Player;
+    // The chest.
+    public Chest Chest;
     public AnimationRequest(WorldObjectType type, GridCell cell, double seconds){
         Type = type;
         Cell = cell;

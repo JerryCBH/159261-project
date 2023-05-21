@@ -4,7 +4,7 @@ import java.awt.*;
  * This class load the game's images.
  ****************************************************************************************/
 public class GameImage {
-    public final Image SnakeHead, SnakeDot, Apple, Health, Mine, Broccoli, Explosion, Player, Lidia, Shura, Minotaur, Barrels, Cabbage, Bomb;
+    public final Image SnakeHead, SnakeDot, Apple, Health, Mine, Broccoli, Explosion, Player, Lidia, Shura, Minotaur, Barrels, Cabbage, Bomb, Chests;
     public final Image DoorGreyClosed, DoorGreyOpen, floor, lava, wallGreyLeftSide, wallGreyRightSide, wallGreyFront, DoorGreyOpenSide, DoorGreyClosedSide, DoorGreyClosedLeftSide, DoorGreyClosedRightSide, DoorGreyOpenLeftSide, ChestFront, ChestSide, ChestBack;
     public Image[] ExplosionSprites;
     public Image[] PlayerLeftRightSprites;
@@ -24,6 +24,7 @@ public class GameImage {
     public Image[] MinotaurRightSprites;
     public Image[] CoinSprites;
     public Image[] BombSprites;
+    public Image[] SpecialChestSprites;
     public static final int PLAYER_WIDTH = 48;
     public static final int PLAYER_HEIGHT = 56;
     public static final int LIDIA_WIDTH = 64;
@@ -49,6 +50,7 @@ public class GameImage {
         Barrels = engine.loadImage("barrels.png");
         Bomb = engine.loadImage("bomb.png");
         Cabbage = engine.subImage(Barrels, 64, 32, BARREL_WIDTH, BARREL_HEIGHT);
+        Chests = engine.loadImage("environment/chests.png");
         LoadExplosionSpriteSheet(engine);
         LoadPlayerSpriteSheet(engine);
         LoadLidiaSpriteSheet(engine);
@@ -56,6 +58,7 @@ public class GameImage {
         LoadCoinSpriteSheet(engine);
         LoadBombSpriteSheet(engine);
         LoadMinotaurSpriteSheet(engine);
+        LoadSpecialChestSpriteSheet(engine);
 
         // Load environment images.
         DoorGreyClosed = engine.loadImage("environment/DoorGreyClosed.png");
@@ -170,5 +173,11 @@ public class GameImage {
         for (int j = 0; j < 4; j++) {
             BombSprites[j] = engine.subImage(Bomb, j*BOMB_WIDTH, 0, BOMB_WIDTH, BOMB_HEIGHT);
         }
+    }
+
+    private void LoadSpecialChestSpriteSheet(HookshotHeroesGameEngine engine){
+        SpecialChestSprites = new Image[2];
+        SpecialChestSprites[0] = engine.subImage(Chests, 291, 67, 25, 25);
+        SpecialChestSprites[1] = engine.subImage(Chests, 291, 95, 25, 29);
     }
 }

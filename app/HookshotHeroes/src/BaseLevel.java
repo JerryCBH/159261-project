@@ -126,7 +126,7 @@ public class BaseLevel {
     public ArrayList<Chest> GetChests(){
         return Chests;
     }
-    public void AddChest(GridCell cell){
-
+    public void AddChest(int x, int y, boolean hasMessage, String message, boolean isTalkingChest){
+        Chests.add(new Chest(new GridCell(y / CELL_WIDTH, x / CELL_HEIGHT), hasMessage, message, isTalkingChest));
     }
 }

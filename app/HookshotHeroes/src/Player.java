@@ -150,6 +150,10 @@ public class Player implements IWorldObject {
                     IncrementSprite(_skin.UpSprites, true, false);
                 }
             }
+            // Check chests
+            if (newCell != null) {
+                CheckChests(newCell, World.GetLevel().GetChests());
+            }
         }
         return newCell;
     }
@@ -222,6 +226,30 @@ public class Player implements IWorldObject {
         return result;
     }
 
+    // Check chests.
+    private void CheckChests(GridCell newCell, ArrayList<Chest> Chests) {
+        for (Chest chest : Chests){
+            var loc = new ArrayList<GridCell>();
+            loc.add(chest.GetCell());
+            if (!CanMoveTo(newCell, loc)){
+                if (chest.HasMessage) {
+                    var speech = new AnimationRequest(WorldObjectType.ChestBubble, chest.GetCell(), 10);
+                    speech.Text = chest.Message;
+                    speech.Player = null;
+                    speech.Chest = chest;
+                    AnimationRequests.add(speech);
+                }
+                if (!chest.IsOpened) {
+                    chest.IsOpened = true;
+                    Score += chest.CHEST_SCORES;
+                    if (_lives <= 5) {
+                        _lives += chest.CHEST_LIVES;
+                    }
+                }
+            }
+        }
+    }
+
     // Render the player.
     @Override
     public void Render(GameEngine engine) {
@@ -233,11 +261,6 @@ public class Player implements IWorldObject {
         engine.changeColor(Color.white);
         DrawName(engine, _body.get(0));
         DrawHealth(engine, _body.get(0));
-        /*engine.drawImage(_image.Image,
-                _image.Reflect? (_body.get(0).Column * _skin.CellWidth + GameImage.PLAYER_WIDTH) : (_body.get(0).Column * _skin.CellWidth + 5),
-                _body.get(0).Row * _skin.CellHeight + 5,
-                (_image.Reflect? -1 : 1) * (GameImage.PLAYER_WIDTH - 5),
-                GameImage.PLAYER_HEIGHT - 10);*/
         engine.drawImage(_image.Image,
                 _image.Reflect? (_body.get(0).Column * _skin.CellWidth + GameImage.LIDIA_WIDTH) : (_body.get(0).Column * _skin.CellWidth + 5),
                 _body.get(0).Row * _skin.CellHeight + 5,

@@ -32,6 +32,8 @@ public class World implements IWorld {
     // Environment Levels.
     public ILevel CurrentLevel;
 
+    private int _idx = 0;
+
     public World(int width, int height, HookshotHeroesGameEngine engine, GameImage gameImage, GameAudio gameAudio, GameOptions options, ILevel level){
         Engine = engine;
         GameImage = gameImage;
@@ -326,11 +328,14 @@ public class World implements IWorld {
                     Engine.drawImage(GameImage.ExplosionSprites[idx], request.Cell.Column * CELL_HEIGHT - 10, request.Cell.Row * CELL_WIDTH - 30, 50, 50);
                 }
                 if (request.Type == WorldObjectType.SpeechBubble) {
-                    if (request.Player != null && request.Player.GetName() == "Lidia"){
+                    if (request.Player != null && request.Player.GetName() == "Lidia") {
                         lidiaList.add(request);
-                    } else if (request.Player != null && request.Player.GetName() == "Shura"){
+                    } else if (request.Player != null && request.Player.GetName() == "Shura") {
                         shuraList.add(request);
                     }
+                }
+                if (request.Type == WorldObjectType.ChestBubble) {
+                    DrawChestBubble(Engine, request.Chest);
                 }
             }
             // Show speech bubbles in sequence.
@@ -415,6 +420,54 @@ public class World implements IWorld {
         }
 
         engine.restoreLastTransform();
+    }
+
+    public void DrawChestBubble(GameEngine engine, Chest chest){
+        var offsetX = 35;
+        var offsetY = 10;
+        engine.saveCurrentTransform();
+        var graphics2D = engine.mGraphics;
+        graphics2D.translate(chest.GetCell().Column * CELL_WIDTH + offsetX, chest.GetCell().Row * CELL_HEIGHT + offsetY);
+        RenderingHints qualityHints = new RenderingHints(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        qualityHints.put(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+        graphics2D.setRenderingHints(qualityHints);
+        graphics2D.setPaint(Color.darkGray);
+        // Get lines from text.
+        var lines = StringUtils.GetLines(chest.Message, 5);
+        int width = (lines.size() == 1)? 5 * chest.Message.length() + 10 : 200;
+        int height = 25 + 10 * (lines.size() - 1);
+        GeneralPath path = new GeneralPath();
+        path.moveTo(5, 10);
+        path.curveTo(5, 10, 7, 5, 0, 0);
+        path.curveTo(0, 0, 12, 0, 12, 5);
+        path.curveTo(12, 5, 12, 0, 20, 0);
+        path.lineTo(width - 10, 0);
+        path.curveTo(width - 10, 0, width, 0, width, 10);
+        path.lineTo(width, height - 10);
+        path.curveTo(width, height - 10, width, height, width - 10, height);
+        path.lineTo(15, height);
+        path.curveTo(15, height, 5, height, 5, height - 10);
+        path.lineTo(5, 15);
+        path.closePath();
+        graphics2D.fill(path);
+        engine.changeColor(Color.white);
+
+        for(int i = 0; i < lines.size(); i++){
+            engine.drawText(10, 15 + i*10, lines.get(i), "Arial", 12);
+        }
+
+        engine.restoreLastTransform();
+
+        if (chest.IsTalkingChest) {
+            var offset = 100;
+            if (_idx / offset >= GameImage.SpecialChestSprites.length) {
+                _idx = 0;
+            }
+            engine.drawImage(GameImage.SpecialChestSprites[_idx / offset], chest.GetCell().Column * CELL_WIDTH, chest.GetCell().Row * CELL_HEIGHT);
+            if (!((HookshotHeroesGameEngine) engine).IsPause()) {
+                _idx++;
+            }
+        }
     }
 
     // Update the balls.

@@ -3,6 +3,11 @@ import java.util.ArrayList;
 public class LevelOne extends BaseLevel implements ILevel{
     public LevelOne (HookshotHeroesGameEngine engine, GameImage gameImage, GameOptions gameOptions){
         super(engine, gameImage, gameOptions);
+        InitializeChests();
+    }
+
+    private void InitializeChests(){
+        AddChest(290, 440, true, "Welcome!! Use X key or . key to launch grapple. You can use grapple to jump across lava / attack enemy and fetch items. Each level has chests that gives you extra score and health. Food barrels can also replenish your health. Beware of bombs.", true);
     }
 
     @Override
@@ -28,7 +33,7 @@ public class LevelOne extends BaseLevel implements ILevel{
         doorCollision(280,560);
 
         //Draw chest
-        Engine.drawImage(GameImage.ChestFront, 280, 440);
+        Engine.drawImage(GameImage.SpecialChestSprites[0], 290, 440);
     }
 
     @Override
