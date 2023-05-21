@@ -14,7 +14,7 @@ public class Player implements IWorldObject {
     public static final int GRAPPLE_LENGTH = 19;
     public static final int PLAYER_LEVEL_SCORE = 100;
     public static final int PLAYER_COIN_SCORE = 10;
-    public static final int PLAYER_CHEST_SCORE = 50;
+    public static final int PLAYER_HIT_SCORE = 10;
     // A list of cells occupied by the player.
     private final ArrayList<GridCell> _body;
     // Direction of player.
@@ -356,6 +356,7 @@ public class Player implements IWorldObject {
                     AnimationRequests.add(new AnimationRequest(WorldObjectType.Mine, object.GetOccupiedCells()[0], 10));
                     AudioRequests.add(new AudioRequest(WorldObjectType.Mine));
                     EliminationRequests.push(object);
+                    Score += PLAYER_HIT_SCORE;
                 }
             }
             if (object.WhoAmI() == WorldObjectType.Coin) {
@@ -387,6 +388,7 @@ public class Player implements IWorldObject {
                     });
                     AudioRequests.add(new AudioRequest(WorldObjectType.Grapple));
                     object.HandleDamage();
+                    Score += PLAYER_HIT_SCORE;
                 }
             }
         }

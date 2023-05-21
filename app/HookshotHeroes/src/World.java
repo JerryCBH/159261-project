@@ -434,7 +434,7 @@ public class World implements IWorld {
         graphics2D.setPaint(Color.darkGray);
         // Get lines from text.
         var lines = StringUtils.GetLines(chest.Message, 5);
-        int width = (lines.size() == 1)? 5 * chest.Message.length() + 10 : 200;
+        int width = (lines.size() == 1)? 5 * chest.Message.length() + 30 : 200;
         int height = 25 + 10 * (lines.size() - 1);
         GeneralPath path = new GeneralPath();
         path.moveTo(5, 10);

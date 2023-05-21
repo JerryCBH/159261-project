@@ -3,6 +3,7 @@ import java.util.ArrayList;
 public class LevelThree extends BaseLevel implements ILevel {
     public LevelThree (HookshotHeroesGameEngine engine, GameImage gameImage, GameOptions gameOptions){
         super(engine, gameImage, gameOptions);
+        AddChest(80, 520, true, "You made it!", false);
     }
     @Override
     public void RenderLevel() {

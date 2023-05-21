@@ -3,6 +3,7 @@ import java.util.ArrayList;
 public class LevelTen extends BaseLevel implements ILevel{
     public LevelTen (HookshotHeroesGameEngine engine, GameImage gameImage, GameOptions gameOptions){
         super(engine, gameImage, gameOptions);
+        AddChest(290, 280, true, "Well done!!", true);
     }
 
     @Override
@@ -14,7 +15,7 @@ public class LevelTen extends BaseLevel implements ILevel{
         doorCollision(560,280);
 
         //Draw chest
-        Engine.drawImage(GameImage.ChestSide, 280, 280);
+        Engine.drawImage(GameImage.SpecialChestSprites[0], 290, 280);
     }
 
     @Override
