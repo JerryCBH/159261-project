@@ -125,8 +125,14 @@ public class LevelSix extends BaseLevel implements ILevel{
     }
 
     @Override
-    public GridCell GetExitGrid() {
-        return new GridCell(0, 51);
+    public GridCell[] GetExitGrid() {
+        return new GridCell[]{ new GridCell(0, 51)};
+    }
+
+    @Override
+    public NextLevelInfo[] GetNextLevelInfo() {
+        var exit1 = new NextLevelInfo(new GridCell(0, 51), new LevelSeven(Engine, GameImage, GameOptions));
+        return new NextLevelInfo[]{ exit1 };
     }
 
     @Override
@@ -137,5 +143,10 @@ public class LevelSix extends BaseLevel implements ILevel{
     @Override
     public String GetLevelName() {
         return "Level 6";
+    }
+
+    @Override
+    public void ApplyLevelMusic(GameAudio gameAudio){
+        gameAudio.ApplyTheme(Engine, "awesomeness.wav", GameOptions.MasterVolume);
     }
 }

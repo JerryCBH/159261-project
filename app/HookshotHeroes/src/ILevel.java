@@ -6,7 +6,8 @@ public interface ILevel {
     ILevel GetPreviousLevel();
     GridCell[] GetTopStartingPos();
     GridCell[] GetBottomStartingPos();
-    GridCell GetExitGrid();
+    GridCell[] GetExitGrid();
+    NextLevelInfo[] GetNextLevelInfo();
     GridCell GetEntryGrid();
     LevelStartPos GetStartPos();
     void SetStartPos(LevelStartPos pos);

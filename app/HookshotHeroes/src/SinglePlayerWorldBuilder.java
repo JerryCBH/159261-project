@@ -46,6 +46,8 @@ public class SinglePlayerWorldBuilder extends BaseWorldBuilder implements IWorld
             level.ApplyLevelMusic(gameAudio);
         } else if (level instanceof LevelFive) {
             level.ApplyLevelMusic(gameAudio);
+        } else if (level instanceof LevelSix) {
+            level.ApplyLevelMusic(gameAudio);
         } else if (level instanceof LevelOne) {
             level.ApplyLevelMusic(gameAudio);
         }

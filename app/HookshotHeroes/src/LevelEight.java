@@ -123,8 +123,14 @@ public class LevelEight extends BaseLevel implements ILevel{
     }
 
     @Override
-    public GridCell GetExitGrid() {
-        return new GridCell(0, 50);
+    public GridCell[] GetExitGrid() {
+        return new GridCell[]{new GridCell(0, 50)};
+    }
+
+    @Override
+    public NextLevelInfo[] GetNextLevelInfo() {
+        var exit1 = new NextLevelInfo(new GridCell(0, 50), new LevelNine(Engine, GameImage, GameOptions));
+        return new NextLevelInfo[]{ exit1 };
     }
 
     @Override

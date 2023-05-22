@@ -115,20 +115,23 @@ public class World implements IWorld {
         // Go through each collected collision info and check if collision happened.
         for (CollisionCheckInfo collisionCheckInfo : toCheck) {
             // Check exit grid
-            if (CheckGrid(collisionCheckInfo.Cell, CurrentLevel.GetExitGrid())){
-                if (CurrentLevel.CanExit(this)) {
-                    ((Player) collisionCheckInfo.Source).Score += Player.PLAYER_LEVEL_SCORE;
-                    var nextLevel = CurrentLevel.GetNextLevel();
-                    if (nextLevel != null) {
-                        Engine.InitializeLevel(Engine.GameOptions, nextLevel, GetPlayers());
-                    } else {
-                        Engine.PauseEngine();
-                        JOptionPane.showMessageDialog(Engine.mFrame, "YOU WIN!!!");
-                        // Restart new game.
-                        Engine.InitializeWorld(Engine.GameOptions);
-                        Engine.ResumeEngine();
+            var exits = CurrentLevel.GetNextLevelInfo();
+            for (int i = 0; i < exits.length; i++) {
+                if (CheckGrid(collisionCheckInfo.Cell, exits[i].Exit)){
+                    if (CurrentLevel.CanExit(this)) {
+                        ((Player) collisionCheckInfo.Source).Score += Player.PLAYER_LEVEL_SCORE;
+                        var nextLevel = exits[i].NextLevel;
+                        if (nextLevel != null) {
+                            Engine.InitializeLevel(Engine.GameOptions, nextLevel, GetPlayers());
+                        } else {
+                            Engine.PauseEngine();
+                            JOptionPane.showMessageDialog(Engine.mFrame, "YOU WIN!!!");
+                            // Restart new game.
+                            Engine.InitializeWorld(Engine.GameOptions);
+                            Engine.ResumeEngine();
+                        }
+                        return;
                     }
-                    return;
                 }
             }
             // Check entry grid

@@ -39,8 +39,14 @@ public class LevelTen extends BaseLevel implements ILevel{
     }
 
     @Override
-    public GridCell GetExitGrid() {
-        return new GridCell(27, 27);
+    public GridCell[] GetExitGrid() {
+        return new GridCell[]{ new GridCell(27, 27)};
+    }
+
+    @Override
+    public NextLevelInfo[] GetNextLevelInfo() {
+        var exit1 = new NextLevelInfo(new GridCell(27, 27), null);
+        return new NextLevelInfo[]{ exit1 };
     }
 
     @Override

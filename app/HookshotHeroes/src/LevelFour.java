@@ -38,8 +38,15 @@ public class LevelFour extends BaseLevel implements ILevel{
     }
 
     @Override
-    public GridCell GetExitGrid() {
-        return new GridCell(0, 27);
+    public GridCell[] GetExitGrid() {
+        return new GridCell[]{ new GridCell(0, 27), new GridCell(27, 52)};
+    }
+
+    @Override
+    public NextLevelInfo[] GetNextLevelInfo() {
+        var exit1 = new NextLevelInfo(new GridCell(0, 27), new LevelSix(Engine, GameImage, GameOptions));
+        var exit2 = new NextLevelInfo(new GridCell(27, 52), new LevelFive(Engine, GameImage, GameOptions));
+        return new NextLevelInfo[]{ exit1, exit2};
     }
 
     @Override
