@@ -288,7 +288,6 @@ public class Minotaur implements IWorldObject {
         if (_lives <= 0) {
             EliminationRequests.push(this);
             IsDead = true;
-            System.out.println("Is Dead" + IsDead); //Just for checking
         }
     }
 

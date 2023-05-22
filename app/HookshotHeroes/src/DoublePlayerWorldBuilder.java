@@ -12,7 +12,7 @@ public class DoublePlayerWorldBuilder extends BaseWorldBuilder implements IWorld
         var world = super.CreateWorld(engine, gameImage, gameAudio, options, level);
         var grids = level.GetStartPos() == LevelStartPos.Top ? level.GetTopStartingPos() : level.GetBottomStartingPos();
 
-        if (players != null && players.size() > 1) {
+        if (players != null && players.size() > 0) {
             for (var p : players) {
                 p.WallCells = level.GetWallCells();
                 p.LavaCells = level.GetLavaCells();
