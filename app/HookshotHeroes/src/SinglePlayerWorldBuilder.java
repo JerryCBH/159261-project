@@ -1,6 +1,5 @@
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
-import java.util.Objects;
 
 /****************************************************************************************
  * This class creates a single player game world.
@@ -44,9 +43,15 @@ public class SinglePlayerWorldBuilder extends BaseWorldBuilder implements IWorld
         if (level instanceof LevelFour) {
             super.AddObjects(world, WorldObjectType.Minotaur, 1);
             level.ApplyLevelMusic(gameAudio);
+        } else if (level instanceof LevelTen) {
+            super.AddObjects(world, WorldObjectType.MinotaurWithAxe, 1);
+            level.ApplyLevelMusic(gameAudio);
         } else if (level instanceof LevelFive) {
             level.ApplyLevelMusic(gameAudio);
-        } else if (level instanceof LevelOne) {
+        } else if (level instanceof LevelSix) {
+            level.ApplyLevelMusic(gameAudio);
+        }
+        else if (level instanceof LevelOne) {
             level.ApplyLevelMusic(gameAudio);
         }
         return world;

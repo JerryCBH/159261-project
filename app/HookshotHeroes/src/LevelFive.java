@@ -1,5 +1,3 @@
-import java.util.ArrayList;
-
 public class LevelFive extends BaseLevel implements ILevel {
     public LevelFive (HookshotHeroesGameEngine engine, GameImage gameImage, GameOptions gameOptions){
         super(engine, gameImage, gameOptions);
@@ -49,7 +47,6 @@ public class LevelFive extends BaseLevel implements ILevel {
 
         drawLavaWithCollision(240, 40);
         drawLavaWithCollision(240, 80);
-        drawLavaWithCollision(280, 80);
 
         drawLavaWithCollision(400, 200);
         drawLavaWithCollision(400, 240);
@@ -93,7 +90,9 @@ public class LevelFive extends BaseLevel implements ILevel {
         drawWallFrontWithCollision(280, 400);
         drawWallFrontWithCollision(40, 320);
         drawWallFrontWithCollision(40, 360);
+        drawWallFrontWithCollision(40, 520);
         drawWallFrontWithCollision(280, 520);
+        drawWallFrontWithCollision(280, 80);
 
         //Draw doors
         Engine.drawImage(GameImage.DoorGreyClosedLeftSide, 0,80);
@@ -102,7 +101,7 @@ public class LevelFive extends BaseLevel implements ILevel {
         doorCollision(280,0);
 
         //Draw chest
-        Engine.drawImage(GameImage.ChestSide,40, 520);
+        Engine.drawImage(GameImage.ChestSide,80, 520);
     }
 
     @Override

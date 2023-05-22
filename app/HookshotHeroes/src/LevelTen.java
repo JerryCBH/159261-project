@@ -1,5 +1,3 @@
-import java.util.ArrayList;
-
 public class LevelTen extends BaseLevel implements ILevel{
     public LevelTen (HookshotHeroesGameEngine engine, GameImage gameImage, GameOptions gameOptions){
         super(engine, gameImage, gameOptions);
@@ -15,7 +13,9 @@ public class LevelTen extends BaseLevel implements ILevel{
         doorCollision(560,280);
 
         //Draw chest
-        Engine.drawImage(GameImage.SpecialChestSprites[0], 290, 280);
+        if (MinotaurWithAxe.IsDead == true) {
+            Engine.drawImage(GameImage.SpecialChestSprites[0], 290, 280);
+        }
     }
 
     @Override

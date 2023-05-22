@@ -46,8 +46,6 @@ public class BaseLevel {
 
     public void doorCollision(int x, int y) {
         Engine.drawRectangle(x, y, 40, 40);
-
-        //Add collision logic here
     }
 
     public void drawLavaWithCollision(int x, int y) {

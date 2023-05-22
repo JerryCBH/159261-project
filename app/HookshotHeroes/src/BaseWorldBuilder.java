@@ -1,6 +1,5 @@
 import java.awt.*;
 import java.awt.event.KeyEvent;
-import java.util.Collections;
 import java.util.Random;
 
 /****************************************************************************************
@@ -56,6 +55,13 @@ public class BaseWorldBuilder {
             }
             if (type == WorldObjectType.Minotaur) {
                 world.Objects.add(new Minotaur("Minotaur", new GridCell(25, 25),
+                        new Skin(world.GameImage.MinotaurUpSprites, world.GameImage.MinotaurLeftSprites, world.GameImage.MinotaurRightSprites, world.GameImage.MinotaurDownSprites, world.GameImage.Health, world.CELL_WIDTH, world.CELL_HEIGHT),
+                        new KeyBinding(KeyEvent.VK_UP, KeyEvent.VK_LEFT, KeyEvent.VK_RIGHT, KeyEvent.VK_DOWN, KeyEvent.VK_PERIOD),
+                        world.CurrentLevel.GetWallCells(), world.CurrentLevel.GetLavaCells(), world.CurrentLevel.GetOccupiedCells(), world.AudioRequests, world.EliminationRequests, world.AnimationRequests, world
+                ));
+            }
+            if (type == WorldObjectType.MinotaurWithAxe) {
+                world.Objects.add(new Minotaur("MinotaurWithAxe", new GridCell(25, 25),
                         new Skin(world.GameImage.MinotaurUpSprites, world.GameImage.MinotaurLeftSprites, world.GameImage.MinotaurRightSprites, world.GameImage.MinotaurDownSprites, world.GameImage.Health, world.CELL_WIDTH, world.CELL_HEIGHT),
                         new KeyBinding(KeyEvent.VK_UP, KeyEvent.VK_LEFT, KeyEvent.VK_RIGHT, KeyEvent.VK_DOWN, KeyEvent.VK_PERIOD),
                         world.CurrentLevel.GetWallCells(), world.CurrentLevel.GetLavaCells(), world.CurrentLevel.GetOccupiedCells(), world.AudioRequests, world.EliminationRequests, world.AnimationRequests, world
