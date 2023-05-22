@@ -1,11 +1,7 @@
 import java.awt.*;
-import java.awt.event.KeyEvent;
-import java.security.Key;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
-import java.util.Random;
-import java.util.concurrent.CompletableFuture;
 
 /****************************************************************************************
  * This class is the Minotaur class.
@@ -39,6 +35,7 @@ public class Minotaur implements IWorldObject {
     public ArrayList<AnimationRequest> AnimationRequests;
     public IWorld World;
     public final NPCSimpleStateMachine StateMachine;
+    public static boolean IsDead = false;
 
     public Minotaur(String name, GridCell startCell, Skin skin, KeyBinding keyBinding,
                   ArrayList<GridCell> wallCells, ArrayList<GridCell> lavaCells, ArrayList<GridCell> occupiedCells,
@@ -290,6 +287,8 @@ public class Minotaur implements IWorldObject {
         // No more health. The player is removed from the game.
         if (_lives <= 0) {
             EliminationRequests.push(this);
+            IsDead = true;
+            System.out.println("Is Dead" + IsDead); //Just for checking
         }
     }
 

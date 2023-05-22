@@ -1,5 +1,3 @@
-import java.util.ArrayList;
-
 public class LevelThree extends BaseLevel implements ILevel {
     public LevelThree (HookshotHeroesGameEngine engine, GameImage gameImage, GameOptions gameOptions){
         super(engine, gameImage, gameOptions);
@@ -33,6 +31,8 @@ public class LevelThree extends BaseLevel implements ILevel {
         drawWallFrontWithCollision(320, 280);
         drawWallFrontWithCollision(40, 280);
         drawWallFrontWithCollision(80, 280);
+        drawWallFrontWithCollision(320, 320);
+        drawWallFrontWithCollision(280, 320);
 
         // Draw Lava
         for (int y = 40; y < 280; y += environmentSpriteSize) {

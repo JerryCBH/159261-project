@@ -1,6 +1,6 @@
-import java.util.ArrayList;
-
 public class LevelFour extends BaseLevel implements ILevel{
+    public boolean DoorEnterTop = true;
+    public boolean DoorEnterRight = true;
     public LevelFour (HookshotHeroesGameEngine engine, GameImage gameImage, GameOptions gameOptions){
         super(engine, gameImage, gameOptions);
     }
@@ -9,18 +9,31 @@ public class LevelFour extends BaseLevel implements ILevel{
         basicLevelEnvironment();
 
         //Draw doors
-        Engine.drawImage(GameImage.DoorGreyOpen, 280,0);
-        doorCollision(280,0);
-        Engine.drawImage(GameImage.DoorGreyOpenSide, 560,280);
-        doorCollision(560,280);
+        if (Minotaur.IsDead == true) {
+            Engine.drawImage(GameImage.DoorGreyOpen, 280, 0);
+            doorCollision(280, 0);
+            Engine.drawImage(GameImage.DoorGreyOpenSide, 560, 280);
+            doorCollision(560, 280);
+        } else {
+            Engine.drawImage(GameImage.DoorGreyClosed, 280, 0);
+            Engine.drawImage(GameImage.DoorGreyClosedRightSide, 560, 280);
+        }
         Engine.drawImage(GameImage.DoorGreyClosed, 280,560);
         doorCollision(280,560);
     }
 
     @Override
     public ILevel GetNextLevel() {
-        return new LevelFive(Engine, GameImage, GameOptions);
+        if (DoorEnterTop == true) {
+            return new LevelSix(Engine, GameImage, GameOptions);
+        } else if (DoorEnterRight == true) {
+            return new LevelFive(Engine, GameImage, GameOptions);
+        } else {
+            // Return null or the appropriate fallback level if no specific condition is met.
+            return null;
+        }
     }
+
 
     @Override
     public ILevel GetPreviousLevel() {

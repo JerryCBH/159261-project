@@ -14,6 +14,7 @@ public class GameAudio {
 
     public GameAudio(HookshotHeroesGameEngine engine){
         Theme = engine.loadAudio("awesomeness.wav");
+        Theme = engine.loadAudio("Atmosphere.wav");
         ExplosionAudio = engine.loadAudio("explosion.wav");
         CrunchAudio = engine.loadAudio("crunch.wav");
         WalkAudio = engine.loadAudio("walk.wav");

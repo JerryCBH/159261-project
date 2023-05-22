@@ -51,8 +51,11 @@ public class DoublePlayerWorldBuilder extends BaseWorldBuilder implements IWorld
         if (options.EnableBouncingBalls) {
             super.AddObjects(world, WorldObjectType.Ball, 5);
         }
-        if (level instanceof LevelFour){
+        if (level instanceof LevelFour) {
             super.AddObjects(world, WorldObjectType.Minotaur, 1);
+            level.ApplyLevelMusic(gameAudio);
+        } else if (level instanceof LevelTen) {
+            super.AddObjects(world, WorldObjectType.MinotaurWithAxe, 1);
             level.ApplyLevelMusic(gameAudio);
         } else if (level instanceof LevelFive) {
             level.ApplyLevelMusic(gameAudio);

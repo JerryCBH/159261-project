@@ -1,8 +1,6 @@
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Random;
-import java.util.concurrent.CompletableFuture;
 
 /****************************************************************************************
  * This class is a simple implementation of a NPC State Machine.
@@ -53,9 +51,12 @@ public class NPCSimpleStateMachine {
             }
             // Check players range
             CheckPlayersRange(world, npc, Minotaur.SIGHT);
+            CheckPlayersRange(world,npc,MinotaurWithAxe.SIGHT);
         }
         return nextCell;
     }
+
+
 
     // Check if we should change state.
     // If a player is in range then start chasing.

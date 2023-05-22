@@ -4,7 +4,7 @@ import java.awt.*;
  * This class load the game's images.
  ****************************************************************************************/
 public class GameImage {
-    public final Image SnakeHead, SnakeDot, Apple, Health, Mine, Broccoli, Explosion, Player, Lidia, Shura, Minotaur, Barrels, Cabbage, Bomb, Chests;
+    public final Image SnakeHead, SnakeDot, Apple, Health, Mine, Broccoli, Explosion, Player, Lidia, Shura, Minotaur, MinotaurWithAxe, Barrels, Cabbage, Bomb, Chests;
     public final Image DoorGreyClosed, DoorGreyOpen, floor, lava, wallGreyLeftSide, wallGreyRightSide, wallGreyFront, DoorGreyOpenSide, DoorGreyClosedSide, DoorGreyClosedLeftSide, DoorGreyClosedRightSide, DoorGreyOpenLeftSide, ChestFront, ChestSide, ChestBack;
     public Image[] ExplosionSprites;
     public Image[] PlayerLeftRightSprites;
@@ -22,6 +22,10 @@ public class GameImage {
     public Image[] MinotaurDownSprites;
     public Image[] MinotaurLeftSprites;
     public Image[] MinotaurRightSprites;
+    public Image[] MinotaurWithAxeUpSprites;
+    public Image[] MinotaurWithAxeDownSprites;
+    public Image[] MinotaurWithAxeLeftSprites;
+    public Image[] MinotaurWithAxeRightSprites;
     public Image[] CoinSprites;
     public Image[] BombSprites;
     public Image[] SpecialChestSprites;
@@ -29,8 +33,12 @@ public class GameImage {
     public static final int PLAYER_HEIGHT = 56;
     public static final int LIDIA_WIDTH = 64;
     public static final int LIDIA_HEIGHT = 64;
+
     public static final int Minotaur_WIDTH = 48;
     public static final int Minotaur_HEIGHT = 64;
+    public static final int MinotaurWithAxe_WIDTH = 137;
+    public static final int MinotaurWithAxe_HEIGHT = 95;
+
     public static final int BARREL_HEIGHT = 32;
     public static final int BARREL_WIDTH = 32;
     public static final int BOMB_WIDTH = 20;
@@ -47,6 +55,7 @@ public class GameImage {
         Lidia = engine.loadImage("lidia.png");
         Shura = engine.loadImage("shura.png");
         Minotaur = engine.loadImage("minotaur.png");
+        MinotaurWithAxe = engine.loadImage("minotaurWithAxe.png");
         Barrels = engine.loadImage("barrels.png");
         Bomb = engine.loadImage("bomb.png");
         Cabbage = engine.subImage(Barrels, 64, 32, BARREL_WIDTH, BARREL_HEIGHT);
@@ -58,6 +67,7 @@ public class GameImage {
         LoadCoinSpriteSheet(engine);
         LoadBombSpriteSheet(engine);
         LoadMinotaurSpriteSheet(engine);
+        LoadMinotaurWithAxeSpriteSheet(engine);
         LoadSpecialChestSpriteSheet(engine);
 
         // Load environment images.
@@ -158,6 +168,24 @@ public class GameImage {
         MinotaurUpSprites = new Image[3];
         for (int j = 0; j < 3; j ++) {
             MinotaurUpSprites[j] = engine.subImage(Minotaur, j*Minotaur_WIDTH, Minotaur_HEIGHT*3, Minotaur_WIDTH, Minotaur_HEIGHT);
+        }
+    }
+    private void LoadMinotaurWithAxeSpriteSheet(HookshotHeroesGameEngine engine) {
+        MinotaurWithAxeDownSprites = new Image[4];
+        for (int j = 0; j < 4; j ++) {
+            MinotaurWithAxeDownSprites[j] = engine.subImage(MinotaurWithAxe, j* MinotaurWithAxe_WIDTH, 0, MinotaurWithAxe_WIDTH, MinotaurWithAxe_HEIGHT);
+        }
+        MinotaurWithAxeLeftSprites = new Image[4];
+        for (int j = 0; j < 4; j ++) {
+            MinotaurWithAxeLeftSprites[j] = engine.subImage(MinotaurWithAxe, j*MinotaurWithAxe_WIDTH, MinotaurWithAxe_HEIGHT, MinotaurWithAxe_WIDTH, MinotaurWithAxe_HEIGHT);
+        }
+        MinotaurWithAxeRightSprites = new Image[4];
+        for (int j = 0; j < 4; j ++) {
+            MinotaurWithAxeRightSprites[j] = engine.subImage(MinotaurWithAxe, j*MinotaurWithAxe_WIDTH, MinotaurWithAxe_HEIGHT*2, MinotaurWithAxe_WIDTH, MinotaurWithAxe_HEIGHT);
+        }
+        MinotaurWithAxeUpSprites = new Image[4];
+        for (int j = 0; j < 4; j ++) {
+            MinotaurWithAxeUpSprites[j] = engine.subImage(MinotaurWithAxe, j*MinotaurWithAxe_WIDTH, MinotaurWithAxe_HEIGHT*3, MinotaurWithAxe_WIDTH, MinotaurWithAxe_HEIGHT);
         }
     }
 
