@@ -14,6 +14,8 @@ public class AnimationRequest {
     public Player Player;
     // The chest.
     public Chest Chest;
+    // Notification Type.
+    public NotificationType NotificationType;
     public AnimationRequest(WorldObjectType type, GridCell cell, double seconds){
         Type = type;
         Cell = cell;
