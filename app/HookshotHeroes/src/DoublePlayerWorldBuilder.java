@@ -12,7 +12,7 @@ public class DoublePlayerWorldBuilder extends BaseWorldBuilder implements IWorld
         var world = super.CreateWorld(engine, gameImage, gameAudio, options, level);
         var grids = level.GetStartPos() == LevelStartPos.Top ? level.GetTopStartingPos() : level.GetBottomStartingPos();
 
-        if (players != null && players.size() > 0) {
+        if (players != null && players.size() > 1) {
             for (var p : players) {
                 p.WallCells = level.GetWallCells();
                 p.LavaCells = level.GetLavaCells();
@@ -30,19 +30,46 @@ public class DoublePlayerWorldBuilder extends BaseWorldBuilder implements IWorld
                             players.get(1)
                     });
         } else {
-            world.SetObjects(new IWorldObject[]
-                    {
-                            new Player("Lidia", grids[0],
-                                    new Skin(world.GameImage.LidiaUpSprites, world.GameImage.LidiaLeftSprites, world.GameImage.LidiaRightSprites, world.GameImage.LidiaDownSprites, world.GameImage.Health, world.CELL_WIDTH, world.CELL_HEIGHT),
-                                    new KeyBinding(KeyEvent.VK_W, KeyEvent.VK_A, KeyEvent.VK_D, KeyEvent.VK_S, KeyEvent.VK_X),
-                                    level.GetWallCells(), level.GetLavaCells(), level.GetOccupiedCells(), world.AudioRequests, world.EliminationRequests, world.AnimationRequests, world
-                            ),
-                            new Player("Shura", grids[1],
-                                    new Skin(world.GameImage.ShuraUpSprites, world.GameImage.ShuraLeftSprites, world.GameImage.ShuraRightSprites, world.GameImage.ShuraDownSprites, world.GameImage.Health, world.CELL_WIDTH, world.CELL_HEIGHT),
-                                    new KeyBinding(KeyEvent.VK_UP, KeyEvent.VK_LEFT, KeyEvent.VK_RIGHT, KeyEvent.VK_DOWN, KeyEvent.VK_PERIOD),
-                                    level.GetWallCells(), level.GetLavaCells(), level.GetOccupiedCells(), world.AudioRequests, world.EliminationRequests, world.AnimationRequests, world
-                            )
-                    });
+            Player Lidia = new Player("Lidia", grids[0],
+                    new Skin(world.GameImage.LidiaUpSprites, world.GameImage.LidiaLeftSprites, world.GameImage.LidiaRightSprites, world.GameImage.LidiaDownSprites, world.GameImage.Health, world.CELL_WIDTH, world.CELL_HEIGHT),
+                    new KeyBinding(KeyEvent.VK_W, KeyEvent.VK_A, KeyEvent.VK_D, KeyEvent.VK_S, KeyEvent.VK_X),
+                    level.GetWallCells(), level.GetLavaCells(), level.GetOccupiedCells(), world.AudioRequests, world.EliminationRequests, world.AnimationRequests, world
+            );
+            Player Shura = new Player("Shura", grids[1],
+                    new Skin(world.GameImage.ShuraUpSprites, world.GameImage.ShuraLeftSprites, world.GameImage.ShuraRightSprites, world.GameImage.ShuraDownSprites, world.GameImage.Health, world.CELL_WIDTH, world.CELL_HEIGHT),
+                    new KeyBinding(KeyEvent.VK_UP, KeyEvent.VK_LEFT, KeyEvent.VK_RIGHT, KeyEvent.VK_DOWN, KeyEvent.VK_PERIOD),
+                    level.GetWallCells(), level.GetLavaCells(), level.GetOccupiedCells(), world.AudioRequests, world.EliminationRequests, world.AnimationRequests, world
+            );
+
+            if (players != null && players.size() == 1) {
+                var survivor = players.get(0);
+                survivor.SetGridCell(grids[0]);
+                survivor.WallCells = level.GetWallCells();
+                survivor.LavaCells = level.GetLavaCells();
+                survivor.OccupiedCells = level.GetOccupiedCells();
+                survivor.AudioRequests = world.AudioRequests;
+                survivor.EliminationRequests = world.EliminationRequests;
+                survivor.AnimationRequests = world.AnimationRequests;
+                survivor.World = world;
+
+                Player newPlayer;
+                if (survivor.GetName() == "Lidia") {
+                    newPlayer = Shura;
+                } else {
+                    newPlayer = Lidia;
+                }
+                world.SetObjects(new IWorldObject[]
+                        {
+                                survivor,
+                                newPlayer
+                        });
+            } else {
+                world.SetObjects(new IWorldObject[]
+                        {
+                                Lidia,
+                                Shura
+                        });
+            }
         }
 
         super.AddObjects(world, WorldObjectType.Mine, 5);

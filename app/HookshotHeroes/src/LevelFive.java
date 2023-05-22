@@ -147,6 +147,6 @@ public class LevelFive extends BaseLevel implements ILevel {
 
     @Override
     public void ApplyLevelMusic(GameAudio gameAudio){
-        gameAudio.ApplyTheme(Engine, "awesomeness.wav", GameOptions.MasterVolume);
+        gameAudio.ApplyTheme(Engine, "Atmosphere.wav", GameOptions.MasterVolume);
     }
 }
