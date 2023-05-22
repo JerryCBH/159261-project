@@ -115,7 +115,7 @@ public class LevelEight extends BaseLevel implements ILevel{
         if (LevelSeven.FromLevelSeven == true) {
             return new GridCell[]{new GridCell(50, 27), new GridCell(50, 31)};
         } else {
-            return new GridCell[]{new GridCell(27, 5), new GridCell(25, 10)};
+            return new GridCell[]{new GridCell(27, 5), new GridCell(25, 7)};
         }
     }
 

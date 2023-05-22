@@ -152,6 +152,7 @@ public class LevelSeven extends BaseLevel implements ILevel{
 
     @Override
     public NextLevelInfo[] GetNextLevelInfo() {
+        FromLevelSeven = true;
         var exit1 = new NextLevelInfo(new GridCell(0, 27), new LevelEight(Engine, GameImage, GameOptions));
         return new NextLevelInfo[]{ exit1 };
     }
