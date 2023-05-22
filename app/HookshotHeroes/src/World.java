@@ -501,6 +501,7 @@ public class World implements IWorld {
         if (type == NotificationType.Score) {
             engine.changeColor(Color.GREEN);
             engine.drawText(cell.Column * CELL_WIDTH + offsetX, cell.Row * CELL_HEIGHT + offsetY, text, "Arial", 12);
+            engine.changeColor(Color.WHITE);
         } else if (type == NotificationType.Health) {
             engine.changeColor(Color.RED);
             engine.drawText(cell.Column * CELL_WIDTH + offsetX, cell.Row * CELL_HEIGHT + offsetY, text, "Arial", 12);
