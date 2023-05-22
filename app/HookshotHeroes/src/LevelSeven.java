@@ -1,11 +1,11 @@
-import java.util.ArrayList;
-
 public class LevelSeven extends BaseLevel implements ILevel{
     public LevelSeven (HookshotHeroesGameEngine engine, GameImage gameImage, GameOptions gameOptions){
         super(engine, gameImage, gameOptions);
         AddChest(40, 40, true, "You made it!", false);
         AddChest(40, 520, true, "You made it!", false);
     }
+
+    public static boolean FromLevelSeven = false;
 
     @Override
     public void RenderLevel() {
@@ -126,12 +126,13 @@ public class LevelSeven extends BaseLevel implements ILevel{
 
     @Override
     public ILevel GetNextLevel() {
+        FromLevelSeven = true;
         return new LevelEight(Engine, GameImage, GameOptions);
     }
 
     @Override
     public ILevel GetPreviousLevel() {
-        return new LevelSix(Engine, GameImage, GameOptions);
+        return new LevelFive(Engine, GameImage, GameOptions);
     }
 
     @Override

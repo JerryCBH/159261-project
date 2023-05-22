@@ -1,5 +1,3 @@
-import java.util.ArrayList;
-
 public class LevelEight extends BaseLevel implements ILevel{
     public LevelEight (HookshotHeroesGameEngine engine, GameImage gameImage, GameOptions gameOptions){
         super(engine, gameImage, gameOptions);
@@ -114,7 +112,11 @@ public class LevelEight extends BaseLevel implements ILevel{
 
     @Override
     public GridCell[] GetBottomStartingPos() {
-        return new GridCell[]{new GridCell(50, 27), new GridCell(50, 31)};
+        if (LevelSeven.FromLevelSeven == true) {
+            return new GridCell[]{new GridCell(50, 27), new GridCell(50, 31)};
+        } else {
+            return new GridCell[]{new GridCell(27, 5), new GridCell(25, 10)};
+        }
     }
 
     @Override

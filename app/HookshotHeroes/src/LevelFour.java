@@ -9,7 +9,7 @@ public class LevelFour extends BaseLevel implements ILevel{
         basicLevelEnvironment();
 
         //Draw doors
-        if (Minotaur.IsDead == true) {
+        if (Minotaur.MinotaurIsDead == true) {
             Engine.drawImage(GameImage.DoorGreyOpen, 280, 0);
             doorCollision(280, 0);
             Engine.drawImage(GameImage.DoorGreyOpenSide, 560, 280);
@@ -25,11 +25,12 @@ public class LevelFour extends BaseLevel implements ILevel{
     @Override
     public ILevel GetNextLevel() {
         if (DoorEnterTop == true) {
+            Minotaur.MinotaurIsDead = false;
             return new LevelSix(Engine, GameImage, GameOptions);
         } else if (DoorEnterRight == true) {
+            Minotaur.MinotaurIsDead = false;
             return new LevelFive(Engine, GameImage, GameOptions);
         } else {
-            // Return null or the appropriate fallback level if no specific condition is met.
             return null;
         }
     }

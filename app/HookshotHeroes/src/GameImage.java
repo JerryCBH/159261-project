@@ -36,8 +36,8 @@ public class GameImage {
 
     public static final int Minotaur_WIDTH = 48;
     public static final int Minotaur_HEIGHT = 64;
-    public static final int MinotaurWithAxe_WIDTH = 137;
-    public static final int MinotaurWithAxe_HEIGHT = 95;
+    public static final int MinotaurWithAxe_WIDTH = 45;
+    public static final int MinotaurWithAxe_HEIGHT = 58;
 
     public static final int BARREL_HEIGHT = 32;
     public static final int BARREL_WIDTH = 32;
@@ -171,20 +171,20 @@ public class GameImage {
         }
     }
     private void LoadMinotaurWithAxeSpriteSheet(HookshotHeroesGameEngine engine) {
-        MinotaurWithAxeDownSprites = new Image[4];
-        for (int j = 0; j < 4; j ++) {
+        MinotaurWithAxeDownSprites = new Image[2];
+        for (int j = 0; j < 2; j ++) {
             MinotaurWithAxeDownSprites[j] = engine.subImage(MinotaurWithAxe, j* MinotaurWithAxe_WIDTH, 0, MinotaurWithAxe_WIDTH, MinotaurWithAxe_HEIGHT);
         }
-        MinotaurWithAxeLeftSprites = new Image[4];
-        for (int j = 0; j < 4; j ++) {
-            MinotaurWithAxeLeftSprites[j] = engine.subImage(MinotaurWithAxe, j*MinotaurWithAxe_WIDTH, MinotaurWithAxe_HEIGHT, MinotaurWithAxe_WIDTH, MinotaurWithAxe_HEIGHT);
+        MinotaurWithAxeLeftSprites = new Image[2];
+        for (int j = 0; j < 2; j ++) {
+            MinotaurWithAxeLeftSprites[j] = engine.subImage(MinotaurWithAxe, j*MinotaurWithAxe_WIDTH, MinotaurWithAxe_HEIGHT*2, MinotaurWithAxe_WIDTH, MinotaurWithAxe_HEIGHT);
         }
-        MinotaurWithAxeRightSprites = new Image[4];
-        for (int j = 0; j < 4; j ++) {
-            MinotaurWithAxeRightSprites[j] = engine.subImage(MinotaurWithAxe, j*MinotaurWithAxe_WIDTH, MinotaurWithAxe_HEIGHT*2, MinotaurWithAxe_WIDTH, MinotaurWithAxe_HEIGHT);
+        MinotaurWithAxeRightSprites = new Image[2];
+        for (int j = 0; j < 2; j ++) {
+            MinotaurWithAxeRightSprites[j] = engine.subImage(MinotaurWithAxe, j*MinotaurWithAxe_WIDTH, MinotaurWithAxe_HEIGHT, MinotaurWithAxe_WIDTH, MinotaurWithAxe_HEIGHT);
         }
-        MinotaurWithAxeUpSprites = new Image[4];
-        for (int j = 0; j < 4; j ++) {
+        MinotaurWithAxeUpSprites = new Image[2];
+        for (int j = 0; j < 2; j ++) {
             MinotaurWithAxeUpSprites[j] = engine.subImage(MinotaurWithAxe, j*MinotaurWithAxe_WIDTH, MinotaurWithAxe_HEIGHT*3, MinotaurWithAxe_WIDTH, MinotaurWithAxe_HEIGHT);
         }
     }

@@ -1,5 +1,3 @@
-import java.util.ArrayList;
-
 public class LevelSix extends BaseLevel implements ILevel{
     public LevelSix (HookshotHeroesGameEngine engine, GameImage gameImage, GameOptions gameOptions){
         super(engine, gameImage, gameOptions);
@@ -106,12 +104,12 @@ public class LevelSix extends BaseLevel implements ILevel{
 
     @Override
     public ILevel GetNextLevel() {
-        return new LevelSeven(Engine, GameImage, GameOptions);
+        return new LevelEight(Engine, GameImage, GameOptions);
     }
 
     @Override
     public ILevel GetPreviousLevel() {
-        return new LevelFive(Engine, GameImage, GameOptions);
+        return new LevelFour(Engine, GameImage, GameOptions);
     }
 
     @Override
@@ -131,7 +129,7 @@ public class LevelSix extends BaseLevel implements ILevel{
 
     @Override
     public NextLevelInfo[] GetNextLevelInfo() {
-        var exit1 = new NextLevelInfo(new GridCell(0, 51), new LevelSeven(Engine, GameImage, GameOptions));
+        var exit1 = new NextLevelInfo(new GridCell(0, 51), new LevelEight(Engine, GameImage, GameOptions));
         return new NextLevelInfo[]{ exit1 };
     }
 

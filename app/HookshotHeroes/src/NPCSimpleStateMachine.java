@@ -77,6 +77,15 @@ public class NPCSimpleStateMachine {
         } else {
             State = NPCStates.Patrol;
         }
+
+        if (min <= sight) {
+            State = NPCStates.Seek;
+            if (npc instanceof MinotaurWithAxe) {
+                ((MinotaurWithAxe) npc).FireProjectile();
+            }
+        } else {
+            State = NPCStates.Patrol;
+        }
     }
 
     // Get the closest player.
@@ -136,4 +145,6 @@ public class NPCSimpleStateMachine {
 
         return nextCell;
     }
+
+
 }

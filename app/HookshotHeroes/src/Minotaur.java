@@ -9,7 +9,7 @@ import java.util.LinkedList;
 public class Minotaur implements IWorldObject {
     // Player health.
     public static final int MAX_LIFE = 10;
-    // Vissibility range.
+    // Visibility range.
     public static final int SIGHT = 19;
     // A list of cells occupied by the player.
     private final ArrayList<GridCell> _body;
@@ -35,7 +35,7 @@ public class Minotaur implements IWorldObject {
     public ArrayList<AnimationRequest> AnimationRequests;
     public IWorld World;
     public final NPCSimpleStateMachine StateMachine;
-    public static boolean IsDead = false;
+    public static boolean MinotaurIsDead = false;
 
     public Minotaur(String name, GridCell startCell, Skin skin, KeyBinding keyBinding,
                   ArrayList<GridCell> wallCells, ArrayList<GridCell> lavaCells, ArrayList<GridCell> occupiedCells,
@@ -287,7 +287,7 @@ public class Minotaur implements IWorldObject {
         // No more health. The player is removed from the game.
         if (_lives <= 0) {
             EliminationRequests.push(this);
-            IsDead = true;
+            MinotaurIsDead = true;
         }
     }
 

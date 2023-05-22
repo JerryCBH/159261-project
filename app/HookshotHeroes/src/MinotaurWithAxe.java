@@ -9,8 +9,8 @@ import java.util.LinkedList;
 public class MinotaurWithAxe implements IWorldObject {
     // Player health.
     public static final int MAX_LIFE = 10;
-    // Vissibility range.
-    public static final int SIGHT = 19;
+    // Visibility range.
+    public static final int SIGHT = 25;
     // A list of cells occupied by the player.
     private final ArrayList<GridCell> _body;
     // Direction of player.
@@ -35,7 +35,12 @@ public class MinotaurWithAxe implements IWorldObject {
     public ArrayList<AnimationRequest> AnimationRequests;
     public IWorld World;
     public final NPCSimpleStateMachine StateMachine;
-    public static boolean IsDead = false;
+    public static boolean MinotaurWithAxeIsDead = false;
+    private double x;
+    private double y;
+    private double velocityX;
+    private double velocityY;
+
 
     public MinotaurWithAxe(String name, GridCell startCell, Skin skin, KeyBinding keyBinding,
                            ArrayList<GridCell> wallCells, ArrayList<GridCell> lavaCells, ArrayList<GridCell> occupiedCells,
@@ -287,7 +292,7 @@ public class MinotaurWithAxe implements IWorldObject {
         // No more health. The player is removed from the game.
         if (_lives <= 0) {
             EliminationRequests.push(this);
-            IsDead = true;
+            MinotaurWithAxeIsDead = true;
         }
     }
 
@@ -315,5 +320,58 @@ public class MinotaurWithAxe implements IWorldObject {
         _image.Image = sprites[_spriteIndex];
         _image.Reflect = reflect;
     }
-}
+
+    public void FireProjectile() {
+        double x = _body.get(0).Column * _skin.CellWidth + _skin.CellWidth / 2.0;
+        double y = _body.get(0).Row * _skin.CellHeight + _skin.CellHeight / 2.0;
+
+        // Determine the direction the body is facing
+        PlayerDirection direction = _direction;
+
+        // Adjust the x and y coordinates based on the direction
+        switch (direction) {
+            case Up:
+                y -= _skin.CellHeight / 2.0;
+                break;
+            case Down:
+                y += _skin.CellHeight / 2.0;
+                break;
+            case Left:
+                x -= _skin.CellWidth / 2.0;
+                break;
+            case Right:
+                x += _skin.CellWidth / 2.0;
+                break;
+        }
+
+        // Create a projectile with an initial velocity
+        double projectileVelocity = 5.0; // Adjust the velocity as needed
+        double velocityX = 0.0;
+        double velocityY = 0.0;
+
+        switch (direction) {
+            case Up:
+                velocityY = -projectileVelocity;
+                break;
+            case Down:
+                velocityY = projectileVelocity;
+                break;
+            case Left:
+                velocityX = -projectileVelocity;
+                break;
+            case Right:
+                velocityX = projectileVelocity;
+                break;
+        }
+
+        //Projectile projectile = new Projectile(x, y, velocityX, velocityY);
+
+        // Update and draw the projectile until it is off-screen
+        //while (isOnScreen(projectile.getX(), projectile.getY())) {
+            //projectile.update();
+            // Draw the projectile
+            //System.out.println("Fire");
+            // engine.drawSolidCircle(projectile.getX(), projectile.getY(), 10);
+        }
+    }
 

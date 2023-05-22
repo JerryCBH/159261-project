@@ -106,7 +106,7 @@ public class LevelFive extends BaseLevel implements ILevel {
 
     @Override
     public ILevel GetNextLevel() {
-        return new LevelSix(Engine, GameImage, GameOptions);
+        return new LevelSeven(Engine, GameImage, GameOptions);
     }
 
     @Override
@@ -131,7 +131,7 @@ public class LevelFive extends BaseLevel implements ILevel {
 
     @Override
     public NextLevelInfo[] GetNextLevelInfo() {
-        var exit1 = new NextLevelInfo(new GridCell(0, 27), new LevelSix(Engine, GameImage, GameOptions));
+        var exit1 = new NextLevelInfo(new GridCell(0, 27), new LevelSeven(Engine, GameImage, GameOptions));
         return new NextLevelInfo[]{ exit1 };
     }
 

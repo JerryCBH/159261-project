@@ -62,7 +62,7 @@ public class BaseWorldBuilder {
             }
             if (type == WorldObjectType.MinotaurWithAxe) {
                 world.Objects.add(new Minotaur("MinotaurWithAxe", new GridCell(25, 25),
-                        new Skin(world.GameImage.MinotaurUpSprites, world.GameImage.MinotaurLeftSprites, world.GameImage.MinotaurRightSprites, world.GameImage.MinotaurDownSprites, world.GameImage.Health, world.CELL_WIDTH, world.CELL_HEIGHT),
+                        new Skin(world.GameImage.MinotaurWithAxeUpSprites, world.GameImage.MinotaurWithAxeLeftSprites, world.GameImage.MinotaurWithAxeRightSprites, world.GameImage.MinotaurWithAxeDownSprites, world.GameImage.Health, world.CELL_WIDTH, world.CELL_HEIGHT),
                         new KeyBinding(KeyEvent.VK_UP, KeyEvent.VK_LEFT, KeyEvent.VK_RIGHT, KeyEvent.VK_DOWN, KeyEvent.VK_PERIOD),
                         world.CurrentLevel.GetWallCells(), world.CurrentLevel.GetLavaCells(), world.CurrentLevel.GetOccupiedCells(), world.AudioRequests, world.EliminationRequests, world.AnimationRequests, world
                 ));

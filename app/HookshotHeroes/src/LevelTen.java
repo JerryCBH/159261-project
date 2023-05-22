@@ -1,7 +1,12 @@
 public class LevelTen extends BaseLevel implements ILevel{
     public LevelTen (HookshotHeroesGameEngine engine, GameImage gameImage, GameOptions gameOptions){
         super(engine, gameImage, gameOptions);
-        AddChest(290, 280, true, "Well done!!", true);
+
+        //Draw chest
+        if (MinotaurWithAxe.MinotaurWithAxeIsDead == true) {
+            Engine.drawImage(GameImage.SpecialChestSprites[0], 290, 280);
+            AddChest(290, 280, true, "Well done!!", true);
+        }
     }
 
     @Override
@@ -11,11 +16,6 @@ public class LevelTen extends BaseLevel implements ILevel{
         //Draw doors
         Engine.drawImage(GameImage.DoorGreyOpenSide, 560,280);
         doorCollision(560,280);
-
-        //Draw chest
-        if (MinotaurWithAxe.IsDead == true) {
-            Engine.drawImage(GameImage.SpecialChestSprites[0], 290, 280);
-        }
     }
 
     @Override
@@ -58,4 +58,5 @@ public class LevelTen extends BaseLevel implements ILevel{
     public String GetLevelName() {
         return "Level 10";
     }
+
 }
