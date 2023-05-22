@@ -282,7 +282,7 @@ public class Minotaur implements IWorldObject {
 
     @Override
     public void HandleDamage() {
-        //AudioRequests.add(new AudioRequest(WorldObjectType.Minotaur));
+        AudioRequests.add(new AudioRequest(WorldObjectType.Minotaur));
         _lives -= 1;
         // No more health. The player is removed from the game.
         if (_lives <= 0) {
