@@ -499,12 +499,12 @@ public class World implements IWorld {
         var offsetX = -30;
         var offsetY = 0;
         if (type == NotificationType.Score) {
-            engine.changeColor(Color.white);
+            engine.changeColor(Color.GREEN);
             engine.drawText(cell.Column * CELL_WIDTH + offsetX, cell.Row * CELL_HEIGHT + offsetY, text, "Arial", 12);
         } else if (type == NotificationType.Health) {
             engine.changeColor(Color.RED);
             engine.drawText(cell.Column * CELL_WIDTH + offsetX, cell.Row * CELL_HEIGHT + offsetY, text, "Arial", 12);
-            engine.drawImage(GameImage.Health, cell.Column * CELL_WIDTH + offsetX + 15, cell.Row * CELL_HEIGHT - 10, 10, 10);
+            engine.drawImage(GameImage.Health, cell.Column * CELL_WIDTH + offsetX + 15, cell.Row * CELL_HEIGHT - 9, 10, 10);
             engine.changeColor(Color.white);
         }
     }
