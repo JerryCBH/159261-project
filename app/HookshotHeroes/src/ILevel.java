@@ -17,4 +17,5 @@ public interface ILevel {
     String GetLevelName();
     ArrayList<Chest> GetChests();
     void ApplyLevelMusic(GameAudio gameAudio);
+    boolean CanExit(IWorld world);
 }

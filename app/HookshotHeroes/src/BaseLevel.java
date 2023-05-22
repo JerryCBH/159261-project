@@ -132,4 +132,8 @@ public class BaseLevel {
 
     public void ApplyLevelMusic(GameAudio gameAudio){
     }
+
+    public boolean CanExit(IWorld world){
+        return true;
+    }
 }

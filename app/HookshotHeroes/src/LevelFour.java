@@ -69,4 +69,14 @@ public class LevelFour extends BaseLevel implements ILevel{
     public void ApplyLevelMusic(GameAudio gameAudio){
         gameAudio.ApplyTheme(Engine, "lava.wav", GameOptions.MasterVolume);
     }
+
+    @Override
+    public boolean CanExit(IWorld world) {
+        for (IWorldObject object : world.GetObjects()) {
+            if (object.WhoAmI() == WorldObjectType.Minotaur) {
+                return false;
+            }
+        }
+        return true;
+    }
 }

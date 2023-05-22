@@ -116,19 +116,20 @@ public class World implements IWorld {
         for (CollisionCheckInfo collisionCheckInfo : toCheck) {
             // Check exit grid
             if (CheckGrid(collisionCheckInfo.Cell, CurrentLevel.GetExitGrid())){
-                ((Player)collisionCheckInfo.Source).Score += Player.PLAYER_LEVEL_SCORE;
-                var nextLevel = CurrentLevel.GetNextLevel();
-                if (nextLevel != null){
-                    Engine.InitializeLevel(Engine.GameOptions, nextLevel, GetPlayers());
+                if (CurrentLevel.CanExit(this)) {
+                    ((Player) collisionCheckInfo.Source).Score += Player.PLAYER_LEVEL_SCORE;
+                    var nextLevel = CurrentLevel.GetNextLevel();
+                    if (nextLevel != null) {
+                        Engine.InitializeLevel(Engine.GameOptions, nextLevel, GetPlayers());
+                    } else {
+                        Engine.PauseEngine();
+                        JOptionPane.showMessageDialog(Engine.mFrame, "YOU WIN!!!");
+                        // Restart new game.
+                        Engine.InitializeWorld(Engine.GameOptions);
+                        Engine.ResumeEngine();
+                    }
+                    return;
                 }
-                else{
-                    Engine.PauseEngine();
-                    JOptionPane.showMessageDialog(Engine.mFrame, "YOU WIN!!!");
-                    // Restart new game.
-                    Engine.InitializeWorld(Engine.GameOptions);
-                    Engine.ResumeEngine();
-                }
-                return;
             }
             // Check entry grid
             if (CheckGrid(collisionCheckInfo.Cell, CurrentLevel.GetEntryGrid())){
@@ -320,6 +321,8 @@ public class World implements IWorld {
         try {
             ArrayList<AnimationRequest> lidiaList = new ArrayList<>();
             ArrayList<AnimationRequest> shuraList = new ArrayList<>();
+            ArrayList<AnimationRequest> lidiaNotifications = new ArrayList<>();
+            ArrayList<AnimationRequest> shuraNotifications = new ArrayList<>();
 
             for (AnimationRequest request : AnimationRequests) {
                 // Only support explosion animation.
@@ -334,19 +337,24 @@ public class World implements IWorld {
                         shuraList.add(request);
                     }
                 }
+                if (request.Type == WorldObjectType.Notification) {
+                    if (request.Player != null && request.Player.GetName() == "Lidia") {
+                        lidiaNotifications.add(request);
+                    } else if (request.Player != null && request.Player.GetName() == "Shura") {
+                        shuraNotifications.add(request);
+                    }
+                }
                 if (request.Type == WorldObjectType.ChestBubble) {
                     DrawChestBubble(Engine, request.Chest);
                 }
             }
             // Show speech bubbles in sequence.
-            for (int i = 0; i < lidiaList.size(); i++) {
-                var grid = new GridCell(lidiaList.get(i).Player.GetOccupiedCells()[0].Row + 5*i, lidiaList.get(i).Player.GetOccupiedCells()[0].Column);
-                DrawSpeechBubble(Engine,  grid, lidiaList.get(i).Text);
-            }
-            for (int i = 0; i < shuraList.size(); i++) {
-                var grid = new GridCell(shuraList.get(i).Player.GetOccupiedCells()[0].Row + 5*i, shuraList.get(i).Player.GetOccupiedCells()[0].Column);
-                DrawSpeechBubble(Engine,  grid, shuraList.get(i).Text);
-            }
+            DrawSpeechBubblesFromList(lidiaList);
+            DrawSpeechBubblesFromList(shuraList);
+
+            // Show notification in sequence.
+            DrawNotificationsFromList(lidiaNotifications);
+            DrawNotificationsFromList(shuraNotifications);
 
             // Clean up
             RemoveAnimationRequests();
@@ -382,6 +390,20 @@ public class World implements IWorld {
             else if (request.Type == WorldObjectType.Minotaur){
                 Engine.playAudio(GameAudio.MonsterDamageAudio, GameOptions.SoundEffectsVolume);
             }
+        }
+    }
+
+    public void DrawSpeechBubblesFromList(ArrayList<AnimationRequest> requests){
+        for (int i = 0; i < requests.size(); i++) {
+            var grid = new GridCell(requests.get(i).Player.GetOccupiedCells()[0].Row + 5 * i, requests.get(i).Player.GetOccupiedCells()[0].Column);
+            DrawSpeechBubble(Engine,  grid, requests.get(i).Text);
+        }
+    }
+
+    public void DrawNotificationsFromList(ArrayList<AnimationRequest> requests) {
+        for (int i = 0; i < requests.size(); i++) {
+            var grid = new GridCell(requests.get(i).Player.GetOccupiedCells()[0].Row + 2 * i, requests.get(i).Player.GetOccupiedCells()[0].Column);
+            DrawNotification(Engine, grid, requests.get(i).NotificationType, requests.get(i).Text);
         }
     }
 
@@ -467,6 +489,20 @@ public class World implements IWorld {
             if (!((HookshotHeroesGameEngine) engine).IsPause()) {
                 _idx++;
             }
+        }
+    }
+
+    public void DrawNotification(GameEngine engine, GridCell cell, NotificationType type, String text){
+        var offsetX = -30;
+        var offsetY = 0;
+        if (type == NotificationType.Score) {
+            engine.changeColor(Color.white);
+            engine.drawText(cell.Column * CELL_WIDTH + offsetX, cell.Row * CELL_HEIGHT + offsetY, text, "Arial", 12);
+        } else if (type == NotificationType.Health) {
+            engine.changeColor(Color.RED);
+            engine.drawText(cell.Column * CELL_WIDTH + offsetX, cell.Row * CELL_HEIGHT + offsetY, text, "Arial", 12);
+            engine.drawImage(GameImage.Health, cell.Column * CELL_WIDTH + offsetX + 15, cell.Row * CELL_HEIGHT - 10, 10, 10);
+            engine.changeColor(Color.white);
         }
     }
 

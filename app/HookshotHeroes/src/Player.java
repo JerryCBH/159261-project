@@ -12,6 +12,10 @@ public class Player implements IWorldObject {
     public static final int MAX_LIFE = 5;
     public static final int GRAPPLE_ADVANCE = 1;
     public static final int GRAPPLE_LENGTH = 19;
+    public static final int GRAPPLE_CHAIN_GAP = 10;
+    public static final int GRAPPLE_CHAIN_RADIUS = 2;
+    public static final int GRAPPLE_CHAIN_WIDTH = 1;
+    public static final int GRAPPLE_RADIUS = 5;
     public static final int PLAYER_LEVEL_SCORE = 100;
     public static final int PLAYER_COIN_SCORE = 10;
     public static final int PLAYER_HIT_SCORE = 10;
@@ -242,8 +246,10 @@ public class Player implements IWorldObject {
                 if (!chest.IsOpened) {
                     chest.IsOpened = true;
                     Score += chest.CHEST_SCORES;
+                    DrawNotification(newCell, NotificationType.Score, chest.CHEST_SCORES);
                     if (_lives <= 5) {
                         _lives += chest.CHEST_LIVES;
+                        DrawNotification(newCell, NotificationType.Health, chest.CHEST_LIVES);
                     }
                 }
             }
@@ -256,7 +262,27 @@ public class Player implements IWorldObject {
         if(_isGrappling) {
             engine.changeColor(Color.YELLOW);
             engine.drawLine(_body.get(0).Column * _skin.CellWidth + 25, _body.get(0).Row * _skin.CellHeight + 35,
-                    _grappleCell.Column * _skin.CellWidth + 25, _grappleCell.Row * _skin.CellHeight + 35, 2);
+                    _grappleCell.Column * _skin.CellWidth + 25, _grappleCell.Row * _skin.CellHeight + 35, GRAPPLE_CHAIN_WIDTH);
+
+            engine.drawCircle(_grappleCell.Column * _skin.CellWidth + 25, _grappleCell.Row * _skin.CellHeight + 35, GRAPPLE_RADIUS);
+
+            var chainh = Math.abs(_grappleCell.Column * _skin.CellWidth - _body.get(0).Column * _skin.CellWidth);
+            var chainv = Math.abs(_grappleCell.Row * _skin.CellHeight - _body.get(0).Row * _skin.CellHeight);
+            var numberOfChains = Math.max(chainh, chainv) / GRAPPLE_CHAIN_GAP;
+
+            for (int i = 0; i < numberOfChains; i++){
+                if (_direction == PlayerDirection.Up) {
+                    engine.drawCircle(_body.get(0).Column * _skin.CellWidth + 25, _body.get(0).Row * _skin.CellHeight + 35 - i * GRAPPLE_CHAIN_GAP, GRAPPLE_CHAIN_RADIUS);
+                } else if (_direction == PlayerDirection.Down) {
+                    engine.drawCircle(_body.get(0).Column * _skin.CellWidth + 25, _body.get(0).Row * _skin.CellHeight + 35 + i * GRAPPLE_CHAIN_GAP, GRAPPLE_CHAIN_RADIUS);
+                }
+                if (_direction == PlayerDirection.Left) {
+                    engine.drawCircle(_body.get(0).Column * _skin.CellWidth + 25 - i * GRAPPLE_CHAIN_GAP, _body.get(0).Row * _skin.CellHeight + 35, GRAPPLE_CHAIN_RADIUS);
+                }
+                if (_direction == PlayerDirection.Right) {
+                    engine.drawCircle(_body.get(0).Column * _skin.CellWidth + 25 + i * GRAPPLE_CHAIN_GAP, _body.get(0).Row * _skin.CellHeight + 35, GRAPPLE_CHAIN_RADIUS);
+                }
+            }
         }
         engine.changeColor(Color.white);
         DrawName(engine, _body.get(0));
@@ -337,6 +363,7 @@ public class Player implements IWorldObject {
             if (!CanMoveTo(playerPos, LavaCells)) {
                 _lives -= 1;
                 AudioRequests.add(new AudioRequest(WorldObjectType.Ball));
+                DrawNotification(playerPos, NotificationType.Health, -1);
                 if (_lives <= 0) {
                     EliminationRequests.push(this);
                 }
@@ -357,6 +384,7 @@ public class Player implements IWorldObject {
                     AudioRequests.add(new AudioRequest(WorldObjectType.Mine));
                     EliminationRequests.push(object);
                     Score += PLAYER_HIT_SCORE;
+                    DrawNotification(currentCell, NotificationType.Score, PLAYER_HIT_SCORE);
                 }
             }
             if (object.WhoAmI() == WorldObjectType.Coin) {
@@ -365,6 +393,7 @@ public class Player implements IWorldObject {
                         SpeechService.Say(SpeechType.Happy, AnimationRequests, this);
                     });
                     Score += PLAYER_COIN_SCORE;
+                    DrawNotification(currentCell, NotificationType.Score, PLAYER_COIN_SCORE);
                     AudioRequests.add(new AudioRequest(WorldObjectType.Coin));
                     EliminationRequests.push(object);
                 }
@@ -379,6 +408,7 @@ public class Player implements IWorldObject {
                     }
                     AudioRequests.add(new AudioRequest(WorldObjectType.Cabbage));
                     EliminationRequests.push(object);
+                    DrawNotification(currentCell, NotificationType.Health, 1);
                 }
             }
             if (object.WhoAmI() == WorldObjectType.Minotaur) {
@@ -390,6 +420,7 @@ public class Player implements IWorldObject {
                     object.HandleDamage();
                     Score += PLAYER_HIT_SCORE;
                     _isGrappling = false;
+                    DrawNotification(currentCell, NotificationType.Score, PLAYER_HIT_SCORE);
                 }
             }
         }
@@ -410,6 +441,7 @@ public class Player implements IWorldObject {
         if (type == WorldObjectType.Apple) {
             if(_lives < MAX_LIFE) {
                 _lives += 1;
+                DrawNotification(object.GetOccupiedCells()[0], NotificationType.Health, 1);
             }
             toRemove = object;
         }
@@ -423,6 +455,7 @@ public class Player implements IWorldObject {
             CompletableFuture.runAsync(() -> {
                 SpeechService.Say(SpeechType.Danger, AnimationRequests, this);
             });
+            DrawNotification(object.GetOccupiedCells()[0], NotificationType.Health, -1);
             // No more health. The player is removed from the game.
             if (_lives <= 0) {
                 toRemove = this;
@@ -435,6 +468,7 @@ public class Player implements IWorldObject {
             CompletableFuture.runAsync(() -> {
                 SpeechService.Say(SpeechType.Health, AnimationRequests, this);
             });
+            DrawNotification(object.GetOccupiedCells()[0], NotificationType.Health, 1);
             if(_lives < MAX_LIFE) {
                 _lives += 1;
             }
@@ -443,6 +477,7 @@ public class Player implements IWorldObject {
             CompletableFuture.runAsync(() -> {
                 SpeechService.Say(SpeechType.Happy, AnimationRequests, this);
             });
+            DrawNotification(object.GetOccupiedCells()[0], NotificationType.Score, PLAYER_COIN_SCORE);
             Score += PLAYER_COIN_SCORE;
             toRemove = object;
         }
@@ -472,6 +507,7 @@ public class Player implements IWorldObject {
         CompletableFuture.runAsync(() -> {
             SpeechService.Say(SpeechType.Danger, AnimationRequests, this);
         });
+        DrawNotification(_body.get(0), NotificationType.Health, -1);
         // No more health. The player is removed from the game.
         if (_lives <= 0) {
             EliminationRequests.push(this);
@@ -491,6 +527,15 @@ public class Player implements IWorldObject {
         for(int i = 0; i < _lives; i++){
             engine.drawImage(_skin.Health, cell.Column * _skin.CellWidth + i * 10 + offsetH, cell.Row * _skin.CellHeight + offsetV, 10, 10);
         }
+    }
+
+    // Draw notifications to the left.
+    private void DrawNotification(GridCell cell, NotificationType type, int score){
+        var scoreNotification = new AnimationRequest(WorldObjectType.Notification, cell, 5);
+        scoreNotification.NotificationType = type;
+        scoreNotification.Text = (score > 0)? ("+" + score) : "" + score;
+        scoreNotification.Player = this;
+        AnimationRequests.add(scoreNotification);
     }
 
     // Get next sprite image.
