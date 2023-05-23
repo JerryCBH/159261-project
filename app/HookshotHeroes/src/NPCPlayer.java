@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.concurrent.CompletableFuture;
 
-public class AIPlayer extends Player implements IWorldObject{
+public class NPCPlayer extends Player implements IWorldObject{
     // Player health.
     public static final int MAX_LIFE = 5;
     public static final int GRAPPLE_ADVANCE = 1;
@@ -43,10 +43,10 @@ public class AIPlayer extends Player implements IWorldObject{
     public int Score = 0;
     public IStateMachine StateMachine;
 
-    public AIPlayer(String name, GridCell startCell, Skin skin, KeyBinding keyBinding,
-                  ArrayList<GridCell> wallCells, ArrayList<GridCell> lavaCells, ArrayList<GridCell> occupiedCells,
-                  LinkedList<AudioRequest> audioRequests, LinkedList<IWorldObject> eliminationRequests, ArrayList<AnimationRequest> animationRequests,
-                  IWorld world) {
+    public NPCPlayer(String name, GridCell startCell, Skin skin, KeyBinding keyBinding,
+                     ArrayList<GridCell> wallCells, ArrayList<GridCell> lavaCells, ArrayList<GridCell> occupiedCells,
+                     LinkedList<AudioRequest> audioRequests, LinkedList<IWorldObject> eliminationRequests, ArrayList<AnimationRequest> animationRequests,
+                     IWorld world) {
         super(name, startCell, skin, keyBinding, wallCells, lavaCells, occupiedCells, audioRequests, eliminationRequests, animationRequests, world);
         _name = name;
         _skin = skin;
@@ -346,19 +346,6 @@ public class AIPlayer extends Player implements IWorldObject{
     // Check grapple collisions with enemies.
     public void CheckObjectCollision(GridCell currentCell) {
         for (IWorldObject object : World.GetObjects()) {
-            if (object.WhoAmI() == WorldObjectType.Mine) {
-                if (!CanMoveTo(currentCell, new ArrayList<>(Arrays.asList(object.GetOccupiedCells())))) {
-                    // Play explosion sound effects.
-                    CompletableFuture.runAsync(() -> {
-                        SpeechService.Say(SpeechType.Victory, AnimationRequests, this);
-                    });
-                    AnimationRequests.add(new AnimationRequest(WorldObjectType.Mine, object.GetOccupiedCells()[0], 10));
-                    AudioRequests.add(new AudioRequest(WorldObjectType.Mine));
-                    EliminationRequests.push(object);
-                    Score += PLAYER_HIT_SCORE;
-                    DrawNotification(currentCell, NotificationType.Score, PLAYER_HIT_SCORE);
-                }
-            }
             if (object.WhoAmI() == WorldObjectType.Coin) {
                 if (!CanMoveTo(currentCell, new ArrayList<>(Arrays.asList(object.GetOccupiedCells())))) {
                     CompletableFuture.runAsync(() -> {
@@ -381,19 +368,6 @@ public class AIPlayer extends Player implements IWorldObject{
                     AudioRequests.add(new AudioRequest(WorldObjectType.Cabbage));
                     EliminationRequests.push(object);
                     DrawNotification(currentCell, NotificationType.Health, 1);
-                }
-            }
-            if (object.WhoAmI() == WorldObjectType.Minotaur || object.WhoAmI() == WorldObjectType.Skeleton
-                    || object.WhoAmI() == WorldObjectType.GhostWizard || object.WhoAmI() == WorldObjectType.FlyingTerror) {
-                if (!CanMoveTo(currentCell, new ArrayList<>(Arrays.asList(object.GetOccupiedCells())))) {
-                    CompletableFuture.runAsync(() -> {
-                        SpeechService.Say(SpeechType.Victory, AnimationRequests, this);
-                    });
-                    AudioRequests.add(new AudioRequest(WorldObjectType.Grapple));
-                    object.HandleDamage();
-                    Score += PLAYER_HIT_SCORE;
-                    _isGrappling = false;
-                    DrawNotification(currentCell, NotificationType.Score, PLAYER_HIT_SCORE);
                 }
             }
         }

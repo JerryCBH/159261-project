@@ -86,7 +86,7 @@ public class BaseWorldBuilder {
             }
             if (type == WorldObjectType.NPC) {
                 // Can move across lava grids.
-                world.Objects.add(new AIPlayer("Ava", world.CurrentLevel.GetBottomStartingPos()[0],
+                world.Objects.add(new NPCPlayer("Ava", world.CurrentLevel.GetBottomStartingPos()[0],
                         new Skin(world.GameImage.AvaUpSprites, world.GameImage.AvaLeftSprites, world.GameImage.AvaRightSprites, world.GameImage.AvaDownSprites, world.GameImage.Health, world.CELL_WIDTH, world.CELL_HEIGHT),
                         new KeyBinding(KeyEvent.VK_UP, KeyEvent.VK_LEFT, KeyEvent.VK_RIGHT, KeyEvent.VK_DOWN, KeyEvent.VK_PERIOD),
                         world.CurrentLevel.GetWallCells(), world.CurrentLevel.GetLavaCells(), world.CurrentLevel.GetOccupiedCells(), world.AudioRequests, world.EliminationRequests, world.AnimationRequests, world
