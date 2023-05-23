@@ -54,4 +54,9 @@ public class LevelTen extends BaseLevel implements ILevel{
         return "Level 10";
     }
 
+    @Override
+    public void ApplyLevelMusic(GameAudio gameAudio){
+        gameAudio.ApplyTheme(Engine, "lava.wav", GameOptions.MasterVolume);
+    }
+
 }
