@@ -249,14 +249,11 @@ public class FlyingTerror implements IWorldObject{
         var center = _body.get(0);
         var area = new ArrayList<GridCell>();
         area.add(center);
-        area.add(new GridCell(center.Row + 1, center.Column));
-        area.add(new GridCell(center.Row + 1, center.Column + 1));
-        area.add(new GridCell(center.Row + 1, center.Column - 1));
-        area.add(new GridCell(center.Row -1, center.Column));
-        area.add(new GridCell(center.Row -1, center.Column + 1));
-        area.add(new GridCell(center.Row -1, center.Column - 1));
-        area.add(new GridCell(center.Row, center.Column + 1));
-        area.add(new GridCell(center.Row, center.Column - 1));
+        for (int i = -3; i < 3; i++){
+            for (int j = -3; j < 3; j++){
+                area.add(new GridCell(center.Row + i, center.Column + j));
+            }
+        }
         return area.toArray(new GridCell[0]);
     }
 
