@@ -62,7 +62,7 @@ public class AIPlayer extends Player implements IWorldObject{
         EliminationRequests = eliminationRequests;
         AnimationRequests = animationRequests;
         World = world;
-        StateMachine = new NPCSimpleStateMachine();
+        StateMachine = new FollowerStateMachine();
     }
 
     // Move the player.
@@ -73,7 +73,7 @@ public class AIPlayer extends Player implements IWorldObject{
         if (keyCode == _keyBinding.Grapple) {
             _isGrappling = true;
             _grappleCell = new GridCell(_body.get(0).Row, _body.get(0).Column);
-            AudioRequests.add(new AudioRequest(WorldObjectType.Grapple));
+            //AudioRequests.add(new AudioRequest(WorldObjectType.Grapple));
         }
         GridCell newCell = null;
         if (!_isGrappling) {
@@ -260,7 +260,7 @@ public class AIPlayer extends Player implements IWorldObject{
         engine.drawImage(_image.Image,
                 _image.Reflect? (_body.get(0).Column * _skin.CellWidth + GameImage.LIDIA_WIDTH) : (_body.get(0).Column * _skin.CellWidth + 5),
                 _body.get(0).Row * _skin.CellHeight + 5,
-                (_image.Reflect? -1 : 1) * (GameImage.LIDIA_WIDTH - 10),
+                (_image.Reflect? -1 : 1) * (GameImage.LIDIA_WIDTH + 10),
                 GameImage.LIDIA_HEIGHT - 20);
     }
 

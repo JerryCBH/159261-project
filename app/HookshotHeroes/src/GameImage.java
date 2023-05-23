@@ -4,7 +4,7 @@ import java.awt.*;
  * This class load the game's images.
  ****************************************************************************************/
 public class GameImage {
-    public final Image SnakeHead, SnakeDot, Apple, Health, Mine, Broccoli, Explosion, Player, Lidia, Shura, Minotaur, MinotaurWithAxe, Barrels, Cabbage, Bomb, Chests, Skeleton, FlyingTerror;
+    public final Image SnakeHead, SnakeDot, Apple, Health, Mine, Broccoli, Explosion, Player, Lidia, Shura, Minotaur, MinotaurWithAxe, Barrels, Cabbage, Bomb, Chests, Skeleton, FlyingTerror, Ava;
     public final Image DoorGreyClosed, DoorGreyOpen, floor, lava, wallGreyLeftSide, wallGreyRightSide, wallGreyFront, DoorGreyOpenSide, DoorGreyClosedSide, DoorGreyClosedLeftSide, DoorGreyClosedRightSide, DoorGreyOpenLeftSide, ChestFront, ChestSide, ChestBack;
     public Image[] ExplosionSprites;
     public Image[] PlayerLeftRightSprites;
@@ -37,6 +37,10 @@ public class GameImage {
     public Image[] FTRightSprites;
     public Image[] FTUpSprites;
     public Image[] FTDownSprites;
+    public Image[] AvaLeftSprites;
+    public Image[] AvaRightSprites;
+    public Image[] AvaUpSprites;
+    public Image[] AvaDownSprites;
     public static final int PLAYER_WIDTH = 48;
     public static final int PLAYER_HEIGHT = 56;
     public static final int LIDIA_WIDTH = 64;
@@ -55,6 +59,8 @@ public class GameImage {
     public static final int SKELETON_HEIGHT = 64;
     public static final int FT_WIDTH = 128;
     public static final int FT_HEIGHT = 128;
+    public static final int AVA_WIDTH = 100;
+    public static final int AVA_HEIGHT = 100;
 
     public GameImage(HookshotHeroesGameEngine engine){
         SnakeHead = engine.loadImage("head.png");
@@ -75,6 +81,7 @@ public class GameImage {
         Chests = engine.loadImage("environment/chests.png");
         Skeleton = engine.loadImage("skeleton.png");
         FlyingTerror = engine.loadImage("flying_terror.png");
+        Ava = engine.loadImage("avalon.png");
 
         LoadExplosionSpriteSheet(engine);
         LoadPlayerSpriteSheet(engine);
@@ -87,6 +94,7 @@ public class GameImage {
         LoadSpecialChestSpriteSheet(engine);
         LoadSkeletonSpriteSheet(engine);
         LoadFTSpriteSheet(engine);
+        LoadAvaSpriteSheet(engine);
 
         // Load environment images.
         DoorGreyClosed = engine.loadImage("environment/DoorGreyClosed.png");
@@ -262,6 +270,25 @@ public class GameImage {
         FTLeftSprites = new Image[10];
         for (int j = 0; j < 10; j++) {
             FTLeftSprites[j] = engine.subImage(FlyingTerror, j*FT_WIDTH, 0, FT_WIDTH, FT_HEIGHT);
+        }
+    }
+
+    private void LoadAvaSpriteSheet(HookshotHeroesGameEngine engine){
+        AvaUpSprites = new Image[7];
+        for (int j = 0; j < 7; j++) {
+            AvaUpSprites[j] = engine.subImage(Ava, j*AVA_WIDTH, AVA_HEIGHT, AVA_WIDTH, AVA_HEIGHT);
+        }
+        AvaRightSprites = new Image[7];
+        for (int j = 0; j < 7; j++) {
+            AvaRightSprites[j] = engine.subImage(Ava, j*AVA_WIDTH, AVA_HEIGHT*2, AVA_WIDTH, AVA_HEIGHT);
+        }
+        AvaDownSprites = new Image[7];
+        for (int j = 0; j < 7; j++) {
+            AvaDownSprites[j] = engine.subImage(Ava, j*AVA_WIDTH, 0, AVA_WIDTH, AVA_HEIGHT);
+        }
+        AvaLeftSprites = new Image[7];
+        for (int j = 0; j < 7; j++) {
+            AvaLeftSprites[j] = engine.subImage(Ava, j*AVA_WIDTH, AVA_HEIGHT*3, AVA_WIDTH, AVA_HEIGHT);
         }
     }
 }
