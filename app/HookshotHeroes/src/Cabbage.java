@@ -51,4 +51,9 @@ public class Cabbage implements IWorldObject {
     public void HandleDamage() {
 
     }
+
+    @Override
+    public void CheckObjectCollision(GridCell currentCell) {
+
+    }
 }

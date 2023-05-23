@@ -44,7 +44,7 @@ public class SinglePlayerWorldBuilder extends BaseWorldBuilder implements IWorld
             super.AddObjects(world, WorldObjectType.Minotaur, 1);
             level.ApplyLevelMusic(gameAudio);
         } else if (level instanceof LevelTen) {
-            super.AddObjects(world, WorldObjectType.MinotaurWithAxe, 1);
+            super.AddObjects(world, WorldObjectType.GhostWizard, 1);
             level.ApplyLevelMusic(gameAudio);
         } else if (level instanceof LevelFive) {
             level.ApplyLevelMusic(gameAudio);
@@ -52,6 +52,9 @@ public class SinglePlayerWorldBuilder extends BaseWorldBuilder implements IWorld
             level.ApplyLevelMusic(gameAudio);
         } else if (level instanceof LevelOne) {
             level.ApplyLevelMusic(gameAudio);
+        }
+        if (!(level instanceof LevelFour) && !(level instanceof LevelTen) ){
+            super.AddObjects(world, WorldObjectType.Skeleton, 1);
         }
         return world;
     }

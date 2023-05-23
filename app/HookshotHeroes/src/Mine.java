@@ -61,4 +61,9 @@ public class Mine implements IWorldObject{
     public void HandleDamage() {
 
     }
+
+    @Override
+    public void CheckObjectCollision(GridCell currentCell) {
+
+    }
 }

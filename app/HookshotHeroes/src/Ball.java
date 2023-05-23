@@ -68,6 +68,11 @@ public class Ball implements IWorldObject{
     }
 
     @Override
+    public void CheckObjectCollision(GridCell currentCell) {
+
+    }
+
+    @Override
     public void Update(Double dt) {
 
     }

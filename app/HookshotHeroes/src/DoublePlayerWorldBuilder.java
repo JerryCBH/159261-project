@@ -75,6 +75,7 @@ public class DoublePlayerWorldBuilder extends BaseWorldBuilder implements IWorld
         super.AddObjects(world, WorldObjectType.Mine, 5);
         super.AddObjects(world, WorldObjectType.Cabbage, 3);
         super.AddObjects(world, WorldObjectType.Coin, 10);
+
         if (options.EnableBouncingBalls) {
             super.AddObjects(world, WorldObjectType.Ball, 5);
         }
@@ -82,7 +83,7 @@ public class DoublePlayerWorldBuilder extends BaseWorldBuilder implements IWorld
             super.AddObjects(world, WorldObjectType.Minotaur, 1);
             level.ApplyLevelMusic(gameAudio);
         } else if (level instanceof LevelTen) {
-            super.AddObjects(world, WorldObjectType.MinotaurWithAxe, 1);
+            super.AddObjects(world, WorldObjectType.GhostWizard, 1);
             level.ApplyLevelMusic(gameAudio);
         } else if (level instanceof LevelFive) {
             level.ApplyLevelMusic(gameAudio);
@@ -90,6 +91,9 @@ public class DoublePlayerWorldBuilder extends BaseWorldBuilder implements IWorld
             level.ApplyLevelMusic(gameAudio);
         } else if (level instanceof LevelOne) {
             level.ApplyLevelMusic(gameAudio);
+        }
+        if (!(level instanceof LevelFour) && !(level instanceof LevelTen) ){
+            super.AddObjects(world, WorldObjectType.Skeleton, 2);
         }
         return world;
     }

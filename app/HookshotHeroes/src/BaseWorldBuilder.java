@@ -1,5 +1,6 @@
 import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 import java.util.Random;
 
 /****************************************************************************************
@@ -60,11 +61,19 @@ public class BaseWorldBuilder {
                         world.CurrentLevel.GetWallCells(), world.CurrentLevel.GetLavaCells(), world.CurrentLevel.GetOccupiedCells(), world.AudioRequests, world.EliminationRequests, world.AnimationRequests, world
                 ));
             }
-            if (type == WorldObjectType.MinotaurWithAxe) {
-                world.Objects.add(new Minotaur("The Wizard", new GridCell(25, 25),
+            if (type == WorldObjectType.GhostWizard) {
+                world.Objects.add(new Minotaur("Ghost Wizard", new GridCell(25, 25),
                         new Skin(world.GameImage.MinotaurWithAxeUpSprites, world.GameImage.MinotaurWithAxeLeftSprites, world.GameImage.MinotaurWithAxeRightSprites, world.GameImage.MinotaurWithAxeDownSprites, world.GameImage.Health, world.CELL_WIDTH, world.CELL_HEIGHT),
                         new KeyBinding(KeyEvent.VK_UP, KeyEvent.VK_LEFT, KeyEvent.VK_RIGHT, KeyEvent.VK_DOWN, KeyEvent.VK_PERIOD),
                         world.CurrentLevel.GetWallCells(), world.CurrentLevel.GetLavaCells(), world.CurrentLevel.GetOccupiedCells(), world.AudioRequests, world.EliminationRequests, world.AnimationRequests, world
+                ));
+            }
+            if (type == WorldObjectType.Skeleton) {
+                // Can move across lava grids.
+                world.Objects.add(new Skeleton("Lava Guard", world.CurrentLevel.GetNextLevelInfo()[0].Exit,
+                        new Skin(world.GameImage.SkeletonUpSprites, world.GameImage.SkeletonLeftSprites, world.GameImage.SkeletonRightSprites, world.GameImage.SkeletonDownSprites, world.GameImage.Health, world.CELL_WIDTH, world.CELL_HEIGHT),
+                        new KeyBinding(KeyEvent.VK_UP, KeyEvent.VK_LEFT, KeyEvent.VK_RIGHT, KeyEvent.VK_DOWN, KeyEvent.VK_PERIOD),
+                        world.CurrentLevel.GetWallCells(), new ArrayList<>(), world.CurrentLevel.GetWallCells(), world.AudioRequests, world.EliminationRequests, world.AnimationRequests, world
                 ));
             }
         }

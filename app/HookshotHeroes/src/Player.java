@@ -411,7 +411,8 @@ public class Player implements IWorldObject {
                     DrawNotification(currentCell, NotificationType.Health, 1);
                 }
             }
-            if (object.WhoAmI() == WorldObjectType.Minotaur) {
+            if (object.WhoAmI() == WorldObjectType.Minotaur || object.WhoAmI() == WorldObjectType.Skeleton
+                    || object.WhoAmI() == WorldObjectType.GhostWizard) {
                 if (!CanMoveTo(currentCell, new ArrayList<>(Arrays.asList(object.GetOccupiedCells())))) {
                     CompletableFuture.runAsync(() -> {
                         SpeechService.Say(SpeechType.Victory, AnimationRequests, this);

@@ -262,7 +262,8 @@ public class World implements IWorld {
             }
         }
         if (player.WhoAmI() == WorldObjectType.Mine || player.WhoAmI() == WorldObjectType.Cabbage
-                || player.WhoAmI() == WorldObjectType.Coin || player.WhoAmI() == WorldObjectType.Minotaur) {
+                || player.WhoAmI() == WorldObjectType.Coin || player.WhoAmI() == WorldObjectType.Skeleton 
+                || player.WhoAmI() == WorldObjectType.Minotaur || player.WhoAmI() == WorldObjectType.GhostWizard) {
             RemoveObject(player);
         }
     }
@@ -394,6 +395,9 @@ public class World implements IWorld {
             }
             else if (request.Type == WorldObjectType.Minotaur){
                 Engine.playAudio(GameAudio.MonsterDamageAudio, GameOptions.SoundEffectsVolume);
+            }
+            else if (request.Type == WorldObjectType.Skeleton || request.Type == WorldObjectType.GhostWizard){
+                Engine.playAudio(GameAudio.SkeletonAudio, 0);
             }
         }
     }

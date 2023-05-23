@@ -4,7 +4,7 @@ import java.awt.*;
  * This class load the game's images.
  ****************************************************************************************/
 public class GameImage {
-    public final Image SnakeHead, SnakeDot, Apple, Health, Mine, Broccoli, Explosion, Player, Lidia, Shura, Minotaur, MinotaurWithAxe, Barrels, Cabbage, Bomb, Chests;
+    public final Image SnakeHead, SnakeDot, Apple, Health, Mine, Broccoli, Explosion, Player, Lidia, Shura, Minotaur, MinotaurWithAxe, Barrels, Cabbage, Bomb, Chests, Skeleton;
     public final Image DoorGreyClosed, DoorGreyOpen, floor, lava, wallGreyLeftSide, wallGreyRightSide, wallGreyFront, DoorGreyOpenSide, DoorGreyClosedSide, DoorGreyClosedLeftSide, DoorGreyClosedRightSide, DoorGreyOpenLeftSide, ChestFront, ChestSide, ChestBack;
     public Image[] ExplosionSprites;
     public Image[] PlayerLeftRightSprites;
@@ -29,6 +29,10 @@ public class GameImage {
     public Image[] CoinSprites;
     public Image[] BombSprites;
     public Image[] SpecialChestSprites;
+    public Image[] SkeletonLeftSprites;
+    public Image[] SkeletonRightSprites;
+    public Image[] SkeletonUpSprites;
+    public Image[] SkeletonDownSprites;
     public static final int PLAYER_WIDTH = 48;
     public static final int PLAYER_HEIGHT = 56;
     public static final int LIDIA_WIDTH = 64;
@@ -43,6 +47,9 @@ public class GameImage {
     public static final int BARREL_WIDTH = 32;
     public static final int BOMB_WIDTH = 20;
     public static final int BOMB_HEIGHT = 26;
+    public static final int SKELETON_WIDTH = 64;
+    public static final int SKELETON_HEIGHT = 64;
+
     public GameImage(HookshotHeroesGameEngine engine){
         SnakeHead = engine.loadImage("head.png");
         SnakeDot = engine.loadImage("dot.png");
@@ -60,6 +67,8 @@ public class GameImage {
         Bomb = engine.loadImage("bomb.png");
         Cabbage = engine.subImage(Barrels, 64, 32, BARREL_WIDTH, BARREL_HEIGHT);
         Chests = engine.loadImage("environment/chests.png");
+        Skeleton = engine.loadImage("skeleton.png");
+
         LoadExplosionSpriteSheet(engine);
         LoadPlayerSpriteSheet(engine);
         LoadLidiaSpriteSheet(engine);
@@ -69,6 +78,7 @@ public class GameImage {
         LoadMinotaurSpriteSheet(engine);
         LoadMinotaurWithAxeSpriteSheet(engine);
         LoadSpecialChestSpriteSheet(engine);
+        LoadSkeletonSpriteSheet(engine);
 
         // Load environment images.
         DoorGreyClosed = engine.loadImage("environment/DoorGreyClosed.png");
@@ -207,5 +217,24 @@ public class GameImage {
         SpecialChestSprites = new Image[2];
         SpecialChestSprites[0] = engine.subImage(Chests, 291, 67, 25, 25);
         SpecialChestSprites[1] = engine.subImage(Chests, 291, 95, 25, 29);
+    }
+
+    private void LoadSkeletonSpriteSheet(HookshotHeroesGameEngine engine){
+        SkeletonUpSprites = new Image[9];
+        for (int j = 0; j < 9; j++) {
+            SkeletonUpSprites[j] = engine.subImage(Skeleton, j*SKELETON_WIDTH, SKELETON_HEIGHT*8, SKELETON_WIDTH, SKELETON_HEIGHT);
+        }
+        SkeletonRightSprites = new Image[9];
+        for (int j = 0; j < 9; j++) {
+            SkeletonRightSprites[j] = engine.subImage(Skeleton, j*SKELETON_WIDTH, SKELETON_HEIGHT*11, SKELETON_WIDTH, SKELETON_HEIGHT);
+        }
+        SkeletonDownSprites = new Image[9];
+        for (int j = 0; j < 9; j++) {
+            SkeletonDownSprites[j] = engine.subImage(Skeleton, j*SKELETON_WIDTH, SKELETON_HEIGHT*10, SKELETON_WIDTH, SKELETON_HEIGHT);
+        }
+        SkeletonLeftSprites = new Image[9];
+        for (int j = 0; j < 9; j++) {
+            SkeletonLeftSprites[j] = engine.subImage(Skeleton, j*SKELETON_WIDTH, SKELETON_HEIGHT*9, SKELETON_WIDTH, SKELETON_HEIGHT);
+        }
     }
 }

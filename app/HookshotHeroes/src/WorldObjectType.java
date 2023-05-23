@@ -12,7 +12,8 @@ public enum WorldObjectType {
     SpeechBubble,
     Cabbage,
     Minotaur,
-    MinotaurWithAxe,
+    GhostWizard,
     ChestBubble,
-    Notification
+    Notification,
+    Skeleton
 }

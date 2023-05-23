@@ -4,13 +4,13 @@ import java.util.Arrays;
 import java.util.LinkedList;
 
 /****************************************************************************************
- * This class is the Minotaur class.
+ * This class is the Skeleton class.
  ****************************************************************************************/
-public class MinotaurWithAxe implements IWorldObject {
+public class Skeleton implements IWorldObject {
     // Player health.
-    public static final int MAX_LIFE = 10;
+    public static final int MAX_LIFE = 5;
     // Visibility range.
-    public static final int SIGHT = 25;
+    public static final int SIGHT = 19;
     // A list of cells occupied by the player.
     private final ArrayList<GridCell> _body;
     // Direction of player.
@@ -26,7 +26,7 @@ public class MinotaurWithAxe implements IWorldObject {
     private final String _name;
     private GridCell _lastCell = null;
     // Number of lives
-    private int _lives = 10;
+    private int _lives = 5;
     private int _spriteIndex = 0;
     private ObjectImage _image = null;
     private boolean _isGrappling = false;
@@ -34,17 +34,12 @@ public class MinotaurWithAxe implements IWorldObject {
     public LinkedList<IWorldObject> EliminationRequests;
     public ArrayList<AnimationRequest> AnimationRequests;
     public IWorld World;
-    public final NPCSimpleStateMachine StateMachine;
-    private double x;
-    private double y;
-    private double velocityX;
-    private double velocityY;
+    public final IStateMachine StateMachine;
 
-
-    public MinotaurWithAxe(String name, GridCell startCell, Skin skin, KeyBinding keyBinding,
-                           ArrayList<GridCell> wallCells, ArrayList<GridCell> lavaCells, ArrayList<GridCell> occupiedCells,
-                           LinkedList<AudioRequest> audioRequests, LinkedList<IWorldObject> eliminationRequests, ArrayList<AnimationRequest> animationRequests,
-                           IWorld world) {
+    public Skeleton(String name, GridCell startCell, Skin skin, KeyBinding keyBinding,
+                    ArrayList<GridCell> wallCells, ArrayList<GridCell> lavaCells, ArrayList<GridCell> occupiedCells,
+                    LinkedList<AudioRequest> audioRequests, LinkedList<IWorldObject> eliminationRequests, ArrayList<AnimationRequest> animationRequests,
+                    IWorld world) {
         _name = name;
         _skin = skin;
         _direction = PlayerDirection.Right;
@@ -59,7 +54,7 @@ public class MinotaurWithAxe implements IWorldObject {
         EliminationRequests = eliminationRequests;
         AnimationRequests = animationRequests;
         World = world;
-        StateMachine = new NPCSimpleStateMachine();
+        StateMachine = new SkeletonStateMachine();
     }
 
     // Move the player.
@@ -225,10 +220,10 @@ public class MinotaurWithAxe implements IWorldObject {
         DrawName(engine, _body.get(0));
         DrawHealth(engine, _body.get(0));
         engine.drawImage(_image.Image,
-                _image.Reflect? (_body.get(0).Column * _skin.CellWidth + GameImage.MinotaurWithAxe_WIDTH) : (_body.get(0).Column * _skin.CellWidth + 5),
+                _image.Reflect? (_body.get(0).Column * _skin.CellWidth + GameImage.Minotaur_WIDTH) : (_body.get(0).Column * _skin.CellWidth + 5),
                 _body.get(0).Row * _skin.CellHeight + 5,
-                (_image.Reflect? -1 : 1) * (GameImage.MinotaurWithAxe_WIDTH),
-                GameImage.MinotaurWithAxe_HEIGHT);
+                (_image.Reflect? -1 : 1) * (GameImage.SKELETON_WIDTH - 15),
+                GameImage.SKELETON_HEIGHT - 17);
     }
 
     @Override
@@ -270,7 +265,7 @@ public class MinotaurWithAxe implements IWorldObject {
     // Returns object's type.
     @Override
     public WorldObjectType WhoAmI() {
-        return WorldObjectType.MinotaurWithAxe;
+        return WorldObjectType.Skeleton;
     }
 
     // Get object's name.
@@ -286,12 +281,11 @@ public class MinotaurWithAxe implements IWorldObject {
 
     @Override
     public void HandleDamage() {
-        //AudioRequests.add(new AudioRequest(WorldObjectType.Minotaur));
+        AudioRequests.add(new AudioRequest(WorldObjectType.Skeleton));
         _lives -= 1;
         // No more health. The player is removed from the game.
         if (_lives <= 0) {
             EliminationRequests.push(this);
-            Minotaur.BossIsDead = true;
         }
     }
 
@@ -319,58 +313,4 @@ public class MinotaurWithAxe implements IWorldObject {
         _image.Image = sprites[_spriteIndex];
         _image.Reflect = reflect;
     }
-
-    public void FireProjectile() {
-        double x = _body.get(0).Column * _skin.CellWidth + _skin.CellWidth / 2.0;
-        double y = _body.get(0).Row * _skin.CellHeight + _skin.CellHeight / 2.0;
-
-        // Determine the direction the body is facing
-        PlayerDirection direction = _direction;
-
-        // Adjust the x and y coordinates based on the direction
-        switch (direction) {
-            case Up:
-                y -= _skin.CellHeight / 2.0;
-                break;
-            case Down:
-                y += _skin.CellHeight / 2.0;
-                break;
-            case Left:
-                x -= _skin.CellWidth / 2.0;
-                break;
-            case Right:
-                x += _skin.CellWidth / 2.0;
-                break;
-        }
-
-        // Create a projectile with an initial velocity
-        double projectileVelocity = 5.0; // Adjust the velocity as needed
-        double velocityX = 0.0;
-        double velocityY = 0.0;
-
-        switch (direction) {
-            case Up:
-                velocityY = -projectileVelocity;
-                break;
-            case Down:
-                velocityY = projectileVelocity;
-                break;
-            case Left:
-                velocityX = -projectileVelocity;
-                break;
-            case Right:
-                velocityX = projectileVelocity;
-                break;
-        }
-
-        //Projectile projectile = new Projectile(x, y, velocityX, velocityY);
-
-        // Update and draw the projectile until it is off-screen
-        //while (isOnScreen(projectile.getX(), projectile.getY())) {
-            //projectile.update();
-            // Draw the projectile
-            //System.out.println("Fire");
-            // engine.drawSolidCircle(projectile.getX(), projectile.getY(), 10);
-        }
-    }
-
+}

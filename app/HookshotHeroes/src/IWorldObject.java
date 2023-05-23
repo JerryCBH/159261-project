@@ -11,4 +11,5 @@ public interface IWorldObject {
     String GetName();
     void SetGridCell(GridCell cell);
     void HandleDamage();
+    void CheckObjectCollision(GridCell currentCell);
 }
