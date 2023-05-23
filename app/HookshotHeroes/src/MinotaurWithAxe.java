@@ -292,7 +292,6 @@ public class MinotaurWithAxe implements IWorldObject {
         if (_lives <= 0) {
             EliminationRequests.push(this);
             Minotaur.BossIsDead = true;
-            System.out.println("Minotaur With Axe is Dead? = " + Minotaur.BossIsDead);
         }
     }
 

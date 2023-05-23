@@ -1,7 +1,9 @@
 public class LevelThree extends BaseLevel implements ILevel {
+
     public LevelThree (HookshotHeroesGameEngine engine, GameImage gameImage, GameOptions gameOptions){
         super(engine, gameImage, gameOptions);
         AddChest(80, 520, true, "You made it!", false);
+        super.NextLevels = new NextLevelInfo[]{ new NextLevelInfo(new GridCell(0, 27), new LevelFour(Engine, GameImage, GameOptions)) };
     }
     @Override
     public void RenderLevel() {
@@ -106,12 +108,6 @@ public class LevelThree extends BaseLevel implements ILevel {
     @Override
     public GridCell[] GetExitGrid() {
         return new GridCell[]{ new GridCell(0, 27)};
-    }
-
-    @Override
-    public NextLevelInfo[] GetNextLevelInfo() {
-        var exit1 = new NextLevelInfo(new GridCell(0, 27), new LevelFour(Engine, GameImage, GameOptions));
-        return new NextLevelInfo[]{ exit1 };
     }
 
     @Override

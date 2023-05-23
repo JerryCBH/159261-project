@@ -1,8 +1,10 @@
 import java.util.ArrayList;
 
 public class LevelTwo extends BaseLevel implements ILevel{
+
     public LevelTwo (HookshotHeroesGameEngine engine, GameImage gameImage, GameOptions gameOptions){
         super(engine, gameImage, gameOptions);
+        super.NextLevels = new NextLevelInfo[]{ new NextLevelInfo(new GridCell(0, 27), new LevelThree(Engine, GameImage, GameOptions)) };
     }
     @Override
     public void RenderLevel() {
@@ -71,12 +73,6 @@ public class LevelTwo extends BaseLevel implements ILevel{
     @Override
     public GridCell[] GetExitGrid() {
         return new GridCell[]{ new GridCell(0, 27)};
-    }
-
-    @Override
-    public NextLevelInfo[] GetNextLevelInfo() {
-        var exit1 = new NextLevelInfo(new GridCell(0, 27), new LevelThree(Engine, GameImage, GameOptions));
-        return new NextLevelInfo[]{ exit1 };
     }
 
     @Override

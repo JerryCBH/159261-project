@@ -3,6 +3,7 @@ public class LevelSix extends BaseLevel implements ILevel{
         super(engine, gameImage, gameOptions);
         AddChest(240, 40, true, "You made it!", false);
         AddChest(80, 440, true, "You made it!", false);
+        super.NextLevels = new NextLevelInfo[]{ new NextLevelInfo(new GridCell(0, 51), new LevelEight(Engine, GameImage, GameOptions)) };
     }
     @Override
     public void RenderLevel() {
@@ -127,12 +128,6 @@ public class LevelSix extends BaseLevel implements ILevel{
     @Override
     public GridCell[] GetExitGrid() {
         return new GridCell[]{ new GridCell(0, 51)};
-    }
-
-    @Override
-    public NextLevelInfo[] GetNextLevelInfo() {
-        var exit1 = new NextLevelInfo(new GridCell(0, 51), new LevelEight(Engine, GameImage, GameOptions));
-        return new NextLevelInfo[]{ exit1 };
     }
 
     @Override

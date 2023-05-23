@@ -18,6 +18,7 @@ public class BaseLevel {
     public ArrayList<GridCell> LavaCells;
     public ArrayList<GridCell> OccupiedCells;
     public ArrayList<Chest> Chests;
+    public NextLevelInfo[] NextLevels = null;
 
     public BaseLevel (HookshotHeroesGameEngine engine, GameImage gameImage, GameOptions gameOptions){
         Engine = engine;
@@ -135,5 +136,9 @@ public class BaseLevel {
 
     public boolean CanExit(IWorld world){
         return true;
+    }
+
+    public NextLevelInfo[] GetNextLevelInfo() {
+        return NextLevels;
     }
 }

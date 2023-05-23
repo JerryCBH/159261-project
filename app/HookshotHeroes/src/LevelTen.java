@@ -1,8 +1,7 @@
 public class LevelTen extends BaseLevel implements ILevel{
     public LevelTen (HookshotHeroesGameEngine engine, GameImage gameImage, GameOptions gameOptions){
         super(engine, gameImage, gameOptions);
-        System.out.println("Is the Minotaur With Axe Dead? = " + Minotaur.BossIsDead);
-
+        super.NextLevels = new NextLevelInfo[] { new NextLevelInfo(new GridCell(27, 27), null) };
     }
 
     @Override
@@ -43,12 +42,6 @@ public class LevelTen extends BaseLevel implements ILevel{
     @Override
     public GridCell[] GetExitGrid() {
         return new GridCell[]{ new GridCell(27, 27)};
-    }
-
-    @Override
-    public NextLevelInfo[] GetNextLevelInfo() {
-        var exit1 = new NextLevelInfo(new GridCell(27, 27), null);
-        return new NextLevelInfo[]{ exit1 };
     }
 
     @Override

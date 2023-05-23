@@ -3,6 +3,10 @@ public class LevelFour extends BaseLevel implements ILevel{
     public boolean DoorEnterRight = true;
     public LevelFour (HookshotHeroesGameEngine engine, GameImage gameImage, GameOptions gameOptions){
         super(engine, gameImage, gameOptions);
+        super.NextLevels = new NextLevelInfo[] {
+                new NextLevelInfo(new GridCell(0, 27), new LevelSix(Engine, GameImage, GameOptions)),
+                new NextLevelInfo(new GridCell(27, 52), new LevelFive(Engine, GameImage, GameOptions))
+        };
     }
     @Override
     public void RenderLevel() {
@@ -54,13 +58,6 @@ public class LevelFour extends BaseLevel implements ILevel{
     @Override
     public GridCell[] GetExitGrid() {
         return new GridCell[]{ new GridCell(0, 27), new GridCell(27, 52)};
-    }
-
-    @Override
-    public NextLevelInfo[] GetNextLevelInfo() {
-        var exit1 = new NextLevelInfo(new GridCell(0, 27), new LevelSix(Engine, GameImage, GameOptions));
-        var exit2 = new NextLevelInfo(new GridCell(27, 52), new LevelFive(Engine, GameImage, GameOptions));
-        return new NextLevelInfo[]{ exit1, exit2};
     }
 
     @Override
