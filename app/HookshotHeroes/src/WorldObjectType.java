@@ -15,5 +15,6 @@ public enum WorldObjectType {
     GhostWizard,
     ChestBubble,
     Notification,
-    Skeleton
+    Skeleton,
+    FlyingTerror
 }

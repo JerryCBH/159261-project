@@ -12,6 +12,8 @@ public class NPCSimpleStateMachine implements IStateMachine {
     public double PATROL_REACTION_TIME = 0.5;
     // Time of NPC reaction during pursuit.
     public double SEEK_REACTION_TIME = 0.15;
+    // Sight of NPC
+    public int SIGHT = 19;
     // NPC current state.
     public NPCStates State = NPCStates.Patrol;
 
@@ -48,8 +50,7 @@ public class NPCSimpleStateMachine implements IStateMachine {
             }
         }
         // Check players range
-        CheckPlayersRange(world, npc, Minotaur.SIGHT);
-        CheckPlayersRange(world, npc, GhostWizard.SIGHT);
+        CheckPlayersRange(world, npc, SIGHT);
         return nextCell;
     }
 

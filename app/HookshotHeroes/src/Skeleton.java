@@ -26,7 +26,7 @@ public class Skeleton implements IWorldObject {
     private final String _name;
     private GridCell _lastCell = null;
     // Number of lives
-    private int _lives = 5;
+    private int _lives = 3;
     private int _spriteIndex = 0;
     private ObjectImage _image = null;
     private boolean _isGrappling = false;

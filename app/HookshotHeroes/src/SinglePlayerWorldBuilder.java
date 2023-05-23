@@ -53,8 +53,9 @@ public class SinglePlayerWorldBuilder extends BaseWorldBuilder implements IWorld
         } else if (level instanceof LevelOne) {
             level.ApplyLevelMusic(gameAudio);
         }
-        if (!(level instanceof LevelFour) && !(level instanceof LevelTen) ){
+        if (!(level instanceof LevelOne) && !(level instanceof LevelFour) && !(level instanceof LevelTen) ){
             super.AddObjects(world, WorldObjectType.Skeleton, 1);
+            super.AddObjects(world, WorldObjectType.FlyingTerror, 1);
         }
         return world;
     }

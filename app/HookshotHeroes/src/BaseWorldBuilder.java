@@ -76,6 +76,14 @@ public class BaseWorldBuilder {
                         world.CurrentLevel.GetWallCells(), new ArrayList<>(), world.CurrentLevel.GetWallCells(), world.AudioRequests, world.EliminationRequests, world.AnimationRequests, world
                 ));
             }
+            if (type == WorldObjectType.FlyingTerror) {
+                // Can move across lava grids.
+                world.Objects.add(new FlyingTerror("Flying Terror", world.CurrentLevel.GetNextLevelInfo()[0].Exit,
+                        new Skin(world.GameImage.FTUpSprites, world.GameImage.FTLeftSprites, world.GameImage.FTRightSprites, world.GameImage.FTDownSprites, world.GameImage.Health, world.CELL_WIDTH, world.CELL_HEIGHT),
+                        new KeyBinding(KeyEvent.VK_UP, KeyEvent.VK_LEFT, KeyEvent.VK_RIGHT, KeyEvent.VK_DOWN, KeyEvent.VK_PERIOD),
+                        new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), world.AudioRequests, world.EliminationRequests, world.AnimationRequests, world
+                ));
+            }
         }
     }
 }

@@ -92,8 +92,9 @@ public class DoublePlayerWorldBuilder extends BaseWorldBuilder implements IWorld
         } else if (level instanceof LevelOne) {
             level.ApplyLevelMusic(gameAudio);
         }
-        if (!(level instanceof LevelFour) && !(level instanceof LevelTen) ){
+        if (!(level instanceof LevelOne) && !(level instanceof LevelFour) && !(level instanceof LevelTen) ){
             super.AddObjects(world, WorldObjectType.Skeleton, 2);
+            super.AddObjects(world, WorldObjectType.FlyingTerror, 1);
         }
         return world;
     }

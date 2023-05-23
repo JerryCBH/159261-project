@@ -412,7 +412,7 @@ public class Player implements IWorldObject {
                 }
             }
             if (object.WhoAmI() == WorldObjectType.Minotaur || object.WhoAmI() == WorldObjectType.Skeleton
-                    || object.WhoAmI() == WorldObjectType.GhostWizard) {
+                    || object.WhoAmI() == WorldObjectType.GhostWizard || object.WhoAmI() == WorldObjectType.FlyingTerror) {
                 if (!CanMoveTo(currentCell, new ArrayList<>(Arrays.asList(object.GetOccupiedCells())))) {
                     CompletableFuture.runAsync(() -> {
                         SpeechService.Say(SpeechType.Victory, AnimationRequests, this);

@@ -11,6 +11,7 @@ public class GameAudio {
     public final GameEngine.AudioClip CoinAudio;
     public final GameEngine.AudioClip MonsterDamageAudio;
     public final GameEngine.AudioClip SkeletonAudio;
+    public final GameEngine.AudioClip FTAudio;
     public GameEngine.AudioClip Theme;
 
     public GameAudio(HookshotHeroesGameEngine engine){
@@ -25,6 +26,7 @@ public class GameAudio {
         CoinAudio = engine.loadAudio("coin.wav");
         MonsterDamageAudio = engine.loadAudio("monsterdamage.wav");
         SkeletonAudio = engine.loadAudio("skeleton.wav");
+        FTAudio = engine.loadAudio("FT.wav");
     }
 
     public void ApplyTheme(HookshotHeroesGameEngine engine, String theme, float volume){
