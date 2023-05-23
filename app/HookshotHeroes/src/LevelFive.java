@@ -102,6 +102,8 @@ public class LevelFive extends BaseLevel implements ILevel {
 
         //Draw chest
         Engine.drawImage(GameImage.ChestSide,80, 520);
+
+        Minotaur.BossIsDead = false;
     }
 
     @Override

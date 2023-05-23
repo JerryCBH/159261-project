@@ -1,12 +1,8 @@
 public class LevelTen extends BaseLevel implements ILevel{
     public LevelTen (HookshotHeroesGameEngine engine, GameImage gameImage, GameOptions gameOptions){
         super(engine, gameImage, gameOptions);
+        System.out.println("Is the Minotaur With Axe Dead? = " + Minotaur.BossIsDead);
 
-        //Draw chest
-        if (MinotaurWithAxe.MinotaurWithAxeIsDead == true) {
-            Engine.drawImage(GameImage.SpecialChestSprites[0], 290, 280);
-            AddChest(290, 280, true, "Well done!!", true);
-        }
     }
 
     @Override
@@ -16,6 +12,12 @@ public class LevelTen extends BaseLevel implements ILevel{
         //Draw doors
         Engine.drawImage(GameImage.DoorGreyOpenSide, 560,280);
         doorCollision(560,280);
+
+        //Draw chest
+        if (Minotaur.BossIsDead == true) {
+            Engine.drawImage(GameImage.SpecialChestSprites[0], 290, 280);
+            AddChest(290, 280, true, "Well done!!", true);
+        }
     }
 
     @Override

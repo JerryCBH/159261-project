@@ -257,8 +257,8 @@ public class World implements IWorld {
                 JOptionPane.showMessageDialog(Engine.mFrame, "Game Over!!!");
                 // Restart new game.
                 Engine.InitializeWorld(Engine.GameOptions);
-                Minotaur.MinotaurIsDead = false;
-                MinotaurWithAxe.MinotaurWithAxeIsDead = false;
+                Minotaur.BossIsDead = false;
+                LevelSeven.FromLevelSeven = false;
             }
         }
         if (player.WhoAmI() == WorldObjectType.Mine || player.WhoAmI() == WorldObjectType.Cabbage

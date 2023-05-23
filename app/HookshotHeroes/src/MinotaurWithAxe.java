@@ -35,7 +35,6 @@ public class MinotaurWithAxe implements IWorldObject {
     public ArrayList<AnimationRequest> AnimationRequests;
     public IWorld World;
     public final NPCSimpleStateMachine StateMachine;
-    public static boolean MinotaurWithAxeIsDead = false;
     private double x;
     private double y;
     private double velocityX;
@@ -292,7 +291,8 @@ public class MinotaurWithAxe implements IWorldObject {
         // No more health. The player is removed from the game.
         if (_lives <= 0) {
             EliminationRequests.push(this);
-            MinotaurWithAxeIsDead = true;
+            Minotaur.BossIsDead = true;
+            System.out.println("Minotaur With Axe is Dead? = " + Minotaur.BossIsDead);
         }
     }
 

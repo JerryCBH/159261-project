@@ -9,6 +9,8 @@ public class LevelSeven extends BaseLevel implements ILevel{
 
     @Override
     public void RenderLevel() {
+        FromLevelSeven = true;
+
         basicLevelEnvironment();
 
         //Draw lava
@@ -126,7 +128,6 @@ public class LevelSeven extends BaseLevel implements ILevel{
 
     @Override
     public ILevel GetNextLevel() {
-        FromLevelSeven = true;
         return new LevelEight(Engine, GameImage, GameOptions);
     }
 

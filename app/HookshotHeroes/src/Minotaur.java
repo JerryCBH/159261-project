@@ -35,7 +35,7 @@ public class Minotaur implements IWorldObject {
     public ArrayList<AnimationRequest> AnimationRequests;
     public IWorld World;
     public final NPCSimpleStateMachine StateMachine;
-    public static boolean MinotaurIsDead = false;
+    public static boolean BossIsDead = false;
 
     public Minotaur(String name, GridCell startCell, Skin skin, KeyBinding keyBinding,
                   ArrayList<GridCell> wallCells, ArrayList<GridCell> lavaCells, ArrayList<GridCell> occupiedCells,
@@ -287,7 +287,7 @@ public class Minotaur implements IWorldObject {
         // No more health. The player is removed from the game.
         if (_lives <= 0) {
             EliminationRequests.push(this);
-            MinotaurIsDead = true;
+            BossIsDead = true;
         }
     }
 

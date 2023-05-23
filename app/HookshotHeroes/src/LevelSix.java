@@ -100,6 +100,8 @@ public class LevelSix extends BaseLevel implements ILevel{
         //Draw chest
         Engine.drawImage(GameImage.ChestSide, 240, 40);
         Engine.drawImage(GameImage.ChestFront, 80, 440);
+
+        Minotaur.BossIsDead = false;
     }
 
     @Override
