@@ -230,7 +230,7 @@ public class AIPlayer extends Player implements IWorldObject{
     @Override
     public void Render(GameEngine engine) {
         if(_isGrappling) {
-            engine.changeColor(Color.YELLOW);
+            engine.changeColor(Color.GRAY);
             engine.drawLine(_body.get(0).Column * _skin.CellWidth + 25, _body.get(0).Row * _skin.CellHeight + 35,
                     _grappleCell.Column * _skin.CellWidth + 25, _grappleCell.Row * _skin.CellHeight + 35, GRAPPLE_CHAIN_WIDTH);
 
