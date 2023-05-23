@@ -264,7 +264,7 @@ public class World implements IWorld {
         if (player.WhoAmI() == WorldObjectType.Mine || player.WhoAmI() == WorldObjectType.Cabbage
                 || player.WhoAmI() == WorldObjectType.Coin || player.WhoAmI() == WorldObjectType.Skeleton 
                 || player.WhoAmI() == WorldObjectType.Minotaur || player.WhoAmI() == WorldObjectType.GhostWizard
-                || player.WhoAmI() == WorldObjectType.FlyingTerror) {
+                || player.WhoAmI() == WorldObjectType.FlyingTerror || player.WhoAmI() == WorldObjectType.NPC) {
             RemoveObject(player);
         }
     }

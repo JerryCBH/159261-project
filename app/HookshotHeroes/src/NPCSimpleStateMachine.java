@@ -44,7 +44,9 @@ public class NPCSimpleStateMachine implements IStateMachine {
                 _time = 0;
                 var player = GetClosestPlayer(world, npc);
                 nextCell = DoOptimalMovement(world, npc, player);
-                npc.CheckObjectCollision(nextCell);
+                if (nextCell != null) {
+                    npc.CheckObjectCollision(nextCell);
+                }
             } else {
                 _time += dt;
             }
@@ -131,6 +133,7 @@ public class NPCSimpleStateMachine implements IStateMachine {
             }
         }
 
+        var currentGrid = npc.GetOccupiedCells()[0];
         if (minIdx == 0) {
             nextCell = npc.Move(KeyEvent.VK_LEFT);
         } else if (minIdx == 1) {
@@ -139,6 +142,10 @@ public class NPCSimpleStateMachine implements IStateMachine {
             nextCell = npc.Move(KeyEvent.VK_RIGHT);
         } else if (minIdx == 3) {
             nextCell = npc.Move(KeyEvent.VK_UP);
+        }
+
+        if (nextCell != null && nextCell.Row == currentGrid.Row && nextCell.Column == currentGrid.Column){
+            nextCell = npc.Move(KeyEvent.VK_PERIOD);
         }
 
         return nextCell;
