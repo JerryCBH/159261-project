@@ -63,7 +63,8 @@ public class NPCSimpleStateMachine implements IStateMachine {
     public void CheckPlayersRange(IWorld world, IWorldObject npc, int sight){
         double min = Double.MAX_VALUE;
         for (IWorldObject object : world.GetObjects()) {
-            if (object.WhoAmI() == WorldObjectType.Player) {
+            if ((object.WhoAmI() == WorldObjectType.Player || object.WhoAmI() == WorldObjectType.NPC)
+                    && npc.GetName() != object.GetName()) {
                 var diffX = object.GetOccupiedCells()[0].Column - npc.GetOccupiedCells()[0].Column;
                 var diffY = object.GetOccupiedCells()[0].Row - npc.GetOccupiedCells()[0].Row;
                 var dist = Math.sqrt(diffX * diffX + diffY * diffY);
@@ -72,12 +73,6 @@ public class NPCSimpleStateMachine implements IStateMachine {
                 }
             }
         }
-        if (min <= sight) {
-            State = NPCStates.Seek;
-        } else {
-            State = NPCStates.Patrol;
-        }
-
         if (min <= sight) {
             State = NPCStates.Seek;
             if (npc instanceof GhostWizard) {
@@ -93,7 +88,8 @@ public class NPCSimpleStateMachine implements IStateMachine {
         double min = Double.MAX_VALUE;
         IWorldObject player = null;
         for (IWorldObject object : world.GetObjects()) {
-            if (object.WhoAmI() == WorldObjectType.Player) {
+            if ((object.WhoAmI() == WorldObjectType.Player || object.WhoAmI() == WorldObjectType.NPC)
+                    && npc.GetName() != object.GetName()) {
                 var diffX = object.GetOccupiedCells()[0].Column - npc.GetOccupiedCells()[0].Column;
                 var diffY = object.GetOccupiedCells()[0].Row - npc.GetOccupiedCells()[0].Row;
                 var dist = Math.sqrt(diffX * diffX + diffY * diffY);
