@@ -246,15 +246,15 @@ public class World implements IWorld {
     }
 
     public void HandleElimination(IWorldObject player) {
-        if (player.WhoAmI() == WorldObjectType.Player) {
+        if (player.WhoAmI() == WorldObjectType.Player || player.WhoAmI() == WorldObjectType.NPC) {
             // Player game over.
             Engine.PauseEngine();
             JOptionPane.showMessageDialog(Engine.mFrame, player.GetName() + " eliminated!!!");
             Engine.ResumeEngine();
             RemoveObject(player);
             // Game over - no players left.
-            if (GetPlayerCount() == 0) {
-                JOptionPane.showMessageDialog(Engine.mFrame, "Game Over!!!");
+            if (GetPlayerCount() == 0 || GameOptions.MissionMode && GetNPCPlayerCount() == 0) {
+                JOptionPane.showMessageDialog(Engine.mFrame, "Mission Failed!!!");
                 // Restart new game.
                 Engine.InitializeWorld(Engine.GameOptions);
                 Minotaur.BossIsDead = false;
@@ -304,6 +304,17 @@ public class World implements IWorld {
         return count;
     }
 
+    // Get the number of npc players.
+    public int GetNPCPlayerCount(){
+        var count = 0;
+        for (IWorldObject object : Objects) {
+            if (object.WhoAmI() == WorldObjectType.NPC) {
+                count++;
+            }
+        }
+        return count;
+    }
+
     // Get the players.
     public ArrayList<Player> GetPlayers() {
         var players = new ArrayList<Player>();
@@ -330,6 +341,8 @@ public class World implements IWorld {
             ArrayList<AnimationRequest> shuraList = new ArrayList<>();
             ArrayList<AnimationRequest> lidiaNotifications = new ArrayList<>();
             ArrayList<AnimationRequest> shuraNotifications = new ArrayList<>();
+            ArrayList<AnimationRequest> avaList = new ArrayList<>();
+            ArrayList<AnimationRequest> avaNotifications = new ArrayList<>();
 
             for (AnimationRequest request : AnimationRequests) {
                 // Only support explosion animation.
@@ -338,17 +351,21 @@ public class World implements IWorld {
                     Engine.drawImage(GameImage.ExplosionSprites[idx], request.Cell.Column * CELL_HEIGHT - 10, request.Cell.Row * CELL_WIDTH - 30, 50, 50);
                 }
                 if (request.Type == WorldObjectType.SpeechBubble) {
-                    if (request.Player != null && request.Player.GetName() == "Lidia") {
+                    if (request.Player != null && request.Player.GetName() == CharacterNames.LIDIA) {
                         lidiaList.add(request);
-                    } else if (request.Player != null && request.Player.GetName() == "Shura") {
+                    } else if (request.Player != null && request.Player.GetName() == CharacterNames.SHURA) {
                         shuraList.add(request);
+                    } else if (request.Player != null && request.Player.GetName() == CharacterNames.AVA) {
+                        avaList.add(request);
                     }
                 }
                 if (request.Type == WorldObjectType.Notification) {
-                    if (request.Player != null && request.Player.GetName() == "Lidia") {
+                    if (request.Player != null && request.Player.GetName() == CharacterNames.LIDIA) {
                         lidiaNotifications.add(request);
-                    } else if (request.Player != null && request.Player.GetName() == "Shura") {
+                    } else if (request.Player != null && request.Player.GetName() == CharacterNames.SHURA) {
                         shuraNotifications.add(request);
+                    } else if (request.Player != null && request.Player.GetName() == CharacterNames.AVA) {
+                        avaNotifications.add(request);
                     }
                 }
                 if (request.Type == WorldObjectType.ChestBubble) {
@@ -358,10 +375,12 @@ public class World implements IWorld {
             // Show speech bubbles in sequence.
             DrawSpeechBubblesFromList(lidiaList);
             DrawSpeechBubblesFromList(shuraList);
+            DrawSpeechBubblesFromList(avaList);
 
             // Show notification in sequence.
             DrawNotificationsFromList(lidiaNotifications);
             DrawNotificationsFromList(shuraNotifications);
+            DrawNotificationsFromList(avaNotifications);
 
             // Clean up
             RemoveAnimationRequests();

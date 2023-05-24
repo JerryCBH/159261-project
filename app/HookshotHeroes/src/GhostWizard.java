@@ -239,7 +239,7 @@ public class GhostWizard implements IWorldObject {
     // Check grapple collisions with enemies.
     public void CheckObjectCollision(GridCell currentCell) {
         for (IWorldObject object : World.GetObjects()) {
-            if (object.WhoAmI() == WorldObjectType.Player) {
+            if (object.WhoAmI() == WorldObjectType.Player || object.WhoAmI() == WorldObjectType.NPC) {
                 if (!CanMoveTo(currentCell, new ArrayList<>(Arrays.asList(object.GetOccupiedCells())))) {
                     object.HandleDamage();
                 }

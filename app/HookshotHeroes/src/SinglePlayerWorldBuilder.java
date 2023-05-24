@@ -24,7 +24,7 @@ public class SinglePlayerWorldBuilder extends BaseWorldBuilder implements IWorld
             player.World = world;
             player.SetGridCell(grid);
         } else {
-            player = new Player("Lidia", grid,
+            player = new Player(CharacterNames.LIDIA, grid,
                     new Skin(world.GameImage.LidiaUpSprites, world.GameImage.LidiaLeftSprites, world.GameImage.LidiaRightSprites, world.GameImage.LidiaDownSprites, world.GameImage.Health, world.CELL_WIDTH, world.CELL_HEIGHT),
                     new KeyBinding(KeyEvent.VK_W, KeyEvent.VK_A, KeyEvent.VK_D, KeyEvent.VK_S, KeyEvent.VK_X),
                     level.GetWallCells(), level.GetLavaCells(), level.GetOccupiedCells(), world.AudioRequests, world.EliminationRequests, world.AnimationRequests, world
@@ -37,7 +37,7 @@ public class SinglePlayerWorldBuilder extends BaseWorldBuilder implements IWorld
         super.AddObjects(world, WorldObjectType.Mine, 3);
         super.AddObjects(world, WorldObjectType.Cabbage, 2);
         super.AddObjects(world, WorldObjectType.Coin, 10);
-        //super.AddObjects(world, WorldObjectType.NPC, 1);
+        super.AddObjects(world, WorldObjectType.NPC, 1);
         if (options.EnableBouncingBalls) {
             super.AddObjects(world, WorldObjectType.Ball, 5);
         }

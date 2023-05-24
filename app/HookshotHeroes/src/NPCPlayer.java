@@ -346,6 +346,14 @@ public class NPCPlayer extends Player implements IWorldObject{
     // Check grapple collisions with enemies.
     public void CheckObjectCollision(GridCell currentCell) {
         for (IWorldObject object : World.GetObjects()) {
+            if (object.WhoAmI() == WorldObjectType.Mine) {
+                if (!CanMoveTo(currentCell, new ArrayList<>(Arrays.asList(object.GetOccupiedCells())))) {
+                    HandleDamage();
+                    AnimationRequests.add(new AnimationRequest(WorldObjectType.Mine, object.GetOccupiedCells()[0], 10));
+                    AudioRequests.add(new AudioRequest(WorldObjectType.Mine));
+                    EliminationRequests.push(object);
+                }
+            }
             if (object.WhoAmI() == WorldObjectType.Coin) {
                 if (!CanMoveTo(currentCell, new ArrayList<>(Arrays.asList(object.GetOccupiedCells())))) {
                     CompletableFuture.runAsync(() -> {
@@ -368,6 +376,12 @@ public class NPCPlayer extends Player implements IWorldObject{
                     AudioRequests.add(new AudioRequest(WorldObjectType.Cabbage));
                     EliminationRequests.push(object);
                     DrawNotification(currentCell, NotificationType.Health, 1);
+                }
+            }
+            if (object.WhoAmI() == WorldObjectType.Minotaur || object.WhoAmI() == WorldObjectType.Skeleton
+                    || object.WhoAmI() == WorldObjectType.GhostWizard || object.WhoAmI() == WorldObjectType.FlyingTerror) {
+                if (!CanMoveTo(currentCell, new ArrayList<>(Arrays.asList(object.GetOccupiedCells())))) {
+                    HandleDamage();
                 }
             }
         }
@@ -400,7 +414,7 @@ public class NPCPlayer extends Player implements IWorldObject{
         else if (type == WorldObjectType.Mine || type == WorldObjectType.Ball) {
             _lives -= 1;
             CompletableFuture.runAsync(() -> {
-                SpeechService.Say(SpeechType.Danger, AnimationRequests, this);
+                SpeechService.NPCSay(SpeechType.Danger, AnimationRequests, this);
             });
             DrawNotification(object.GetOccupiedCells()[0], NotificationType.Health, -1);
             // No more health. The player is removed from the game.
@@ -413,7 +427,7 @@ public class NPCPlayer extends Player implements IWorldObject{
             }
         } else if (type == WorldObjectType.Broccoli || type == WorldObjectType.Cabbage) {
             CompletableFuture.runAsync(() -> {
-                SpeechService.Say(SpeechType.Health, AnimationRequests, this);
+                SpeechService.NPCSay(SpeechType.Health, AnimationRequests, this);
             });
             DrawNotification(object.GetOccupiedCells()[0], NotificationType.Health, 1);
             if(_lives < MAX_LIFE) {
@@ -422,7 +436,7 @@ public class NPCPlayer extends Player implements IWorldObject{
             toRemove = object;
         } else if (type == WorldObjectType.Coin) {
             CompletableFuture.runAsync(() -> {
-                SpeechService.Say(SpeechType.Happy, AnimationRequests, this);
+                SpeechService.NPCSay(SpeechType.Happy, AnimationRequests, this);
             });
             DrawNotification(object.GetOccupiedCells()[0], NotificationType.Score, PLAYER_COIN_SCORE);
             Score += PLAYER_COIN_SCORE;
@@ -452,7 +466,7 @@ public class NPCPlayer extends Player implements IWorldObject{
     public void HandleDamage() {
         _lives -= 1;
         CompletableFuture.runAsync(() -> {
-            SpeechService.Say(SpeechType.Danger, AnimationRequests, this);
+            SpeechService.NPCSay(SpeechType.Danger, AnimationRequests, this);
         });
         DrawNotification(_body.get(0), NotificationType.Health, -1);
         // No more health. The player is removed from the game.

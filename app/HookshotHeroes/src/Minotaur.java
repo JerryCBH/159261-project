@@ -256,7 +256,7 @@ public class Minotaur implements IWorldObject {
         var type = object.WhoAmI();
 
         // If collided with another player.
-        if (type == WorldObjectType.Player) {
+        if (type == WorldObjectType.Player || object.WhoAmI() == WorldObjectType.NPC) {
             object.HandleDamage();
         }
 
