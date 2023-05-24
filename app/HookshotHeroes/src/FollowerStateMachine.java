@@ -1,14 +1,18 @@
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.concurrent.CompletableFuture;
 
 public class FollowerStateMachine implements IStateMachine{
     private double _time = 0;
+    private double _commentTime = 0;
 
     // Time of NPC reaction during patrol.
     public double PATROL_REACTION_TIME = 0.5;
     // Time of NPC reaction during pursuit.
     public double SEEK_REACTION_TIME = 0.15;
+    // Time it takes to make the next comment
+    public double COMMENT_REACTION_TIME = 15;
     // Sight of NPC
     public int SIGHT = 25;
     // Waiting range of NPC.
@@ -49,7 +53,7 @@ public class FollowerStateMachine implements IStateMachine{
                     npc.CheckObjectCollision(nextCell);
                     var closestPlayer = GetClosestPlayer(world, npc);
                     var dist = GetDistance(closestPlayer.GetOccupiedCells()[0], npc.GetOccupiedCells()[0]);
-                    if (dist <= 3){
+                    if (dist <= 5){
                         State = NPCStates.Wait;
                     }
                 }
@@ -64,6 +68,26 @@ public class FollowerStateMachine implements IStateMachine{
             } else {
                 _time += dt;
             }
+        }
+
+        // Make some comments
+        if (_commentTime > COMMENT_REACTION_TIME){
+            _commentTime = 0;
+            if (State == NPCStates.Patrol){
+                CompletableFuture.runAsync(() -> {
+                    SpeechService.NPCSay(SpeechType.NPCComment, ((Player)npc).AnimationRequests, (Player) npc);
+                });
+            } else if (State == NPCStates.Seek) {
+                CompletableFuture.runAsync(() -> {
+                    SpeechService.NPCSay(SpeechType.NPCWorried, ((Player)npc).AnimationRequests, (Player) npc);
+                });
+            } else {
+                CompletableFuture.runAsync(() -> {
+                    SpeechService.NPCSay(SpeechType.Happy, ((Player)npc).AnimationRequests, (Player) npc);
+                });
+            }
+        } else{
+            _commentTime += dt;
         }
         return nextCell;
     }

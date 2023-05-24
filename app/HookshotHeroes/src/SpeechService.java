@@ -7,7 +7,9 @@ public class SpeechService {
     public static final String CHATGPT_DANGER_PROMPT = "say something when you stepped on a nail";
     public static final String CHATGPT_HEALTH_PROMPT = "say a short sentence when you eat yummy food or recovered health";
     public static final String CHATGPT_VICTORY_PROMPT = "say a short sentence when you defeat an enemy";
-    public static final String CHATGPT_NPC_PROMPT = "say something when you want to get out of a dungeon";
+    public static final String CHATGPT_NPC_COMMENT_PROMPT = "say a short sentence when fighting side by side with your friend";
+    public static final String CHATGPT_NPC_JOKE_PROMPT = "say something funny";
+    public static final String CHATGPT_NPC_WORRIED_PROMPT = "say a short sentence when you are fighting your way out of a dungeon with your friend";
     public static final String MISSION_GUIDE_SARAH = "Warrior! Your mission is to help Ava escape the Dungeon. Ava will follow you along the way. Good luck!";
     public static final HashMap<SpeechType, String> Conversations;
 
@@ -17,6 +19,7 @@ public class SpeechService {
         Conversations.put(SpeechType.Health, "Yummy!!");
         Conversations.put(SpeechType.Danger, "Ouch!!");
         Conversations.put(SpeechType.Victory, "Take that!!");
+        Conversations.put(SpeechType.NPCComment, "Lets go!");
     }
 
     public static void Say(SpeechType type, ArrayList<AnimationRequest> requests, Player player) {
@@ -95,7 +98,7 @@ public class SpeechService {
         if (type == SpeechType.Happy) {
             if (EnableChatGPT) {
                 try {
-                    var response = ChatGPTConnector.SendRequestToChatGPT(CHATGPT_NPC_PROMPT);
+                    var response = ChatGPTConnector.SendRequestToChatGPT(CHATGPT_HAPPY_PROMPT);
                     message = ChatGPTConnector.ExtractGeneratedMessage(response);
                     if (!(message != null && !message.trim().isEmpty())){
                         message = Conversations.get(SpeechType.Happy);
@@ -140,7 +143,7 @@ public class SpeechService {
         } else if (type == SpeechType.Victory) {
             if (EnableChatGPT) {
                 try {
-                    var response = ChatGPTConnector.SendRequestToChatGPT(CHATGPT_NPC_PROMPT);
+                    var response = ChatGPTConnector.SendRequestToChatGPT(CHATGPT_VICTORY_PROMPT);
                     message = ChatGPTConnector.ExtractGeneratedMessage(response);
                     if (!(message != null && !message.trim().isEmpty())){
                         message = Conversations.get(SpeechType.Victory);
@@ -152,10 +155,56 @@ public class SpeechService {
             } else {
                 message = Conversations.get(SpeechType.Victory);
             }
+        } else if (type == SpeechType.NPCComment) {
+            if (EnableChatGPT) {
+                try {
+                    var response = ChatGPTConnector.SendRequestToChatGPT(CHATGPT_NPC_COMMENT_PROMPT);
+                    message = ChatGPTConnector.ExtractGeneratedMessage(response);
+                    if (!(message != null && !message.trim().isEmpty())){
+                        message = Conversations.get(SpeechType.NPCComment);
+                    }
+                } catch (Exception ex) {
+                    System.out.println("ChatGPT error: " + ex.getMessage());
+                    message = Conversations.get(SpeechType.NPCComment);
+                }
+            } else {
+                message = Conversations.get(SpeechType.NPCComment);
+            }
+        } else if (type == SpeechType.NPCWorried) {
+            if (EnableChatGPT) {
+                try {
+                    var response = ChatGPTConnector.SendRequestToChatGPT(CHATGPT_NPC_WORRIED_PROMPT);
+                    message = ChatGPTConnector.ExtractGeneratedMessage(response);
+                    if (!(message != null && !message.trim().isEmpty())){
+                        message = Conversations.get(SpeechType.NPCComment);
+                    }
+                } catch (Exception ex) {
+                    System.out.println("ChatGPT error: " + ex.getMessage());
+                    message = Conversations.get(SpeechType.NPCComment);
+                }
+            } else {
+                message = Conversations.get(SpeechType.NPCComment);
+            }
+        } else if (type == SpeechType.NPCJoke) {
+            if (EnableChatGPT) {
+                try {
+                    var response = ChatGPTConnector.SendRequestToChatGPT(CHATGPT_NPC_JOKE_PROMPT);
+                    message = ChatGPTConnector.ExtractGeneratedMessage(response);
+                    if (!(message != null && !message.trim().isEmpty())){
+                        message = Conversations.get(SpeechType.NPCComment);
+                    }
+                } catch (Exception ex) {
+                    System.out.println("ChatGPT error: " + ex.getMessage());
+                    message = Conversations.get(SpeechType.NPCComment);
+                }
+            } else {
+                message = Conversations.get(SpeechType.NPCComment);
+            }
         }
 
 
-        var speech = new AnimationRequest(WorldObjectType.SpeechBubble, player.GetOccupiedCells()[0], 5);
+
+        var speech = new AnimationRequest(WorldObjectType.SpeechBubble, player.GetOccupiedCells()[0], 10);
         speech.Text = message;
         speech.Player = player;
         requests.add(speech);

@@ -2,5 +2,8 @@ public enum SpeechType {
     Happy,
     Health,
     Danger,
-    Victory
+    Victory,
+    NPCComment,
+    NPCWorried,
+    NPCJoke
 }
