@@ -15,7 +15,6 @@ public class LevelTen extends BaseLevel implements ILevel{
         //Draw chest
         if (Minotaur.BossIsDead == true) {
             Engine.drawImage(GameImage.SpecialChestSprites[0], 290, 280);
-            AddChest(290, 280, true, "Well done!!", true);
         }
     }
 
