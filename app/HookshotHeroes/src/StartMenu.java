@@ -11,6 +11,7 @@ public class StartMenu{
     private JPanel panel;
     private JButton easyModeButton;
     private JButton normalModeButton;
+    private JButton missionModeButton;
     private JButton helpButton;
     private JButton quitButton;
     private Image mainImage;
@@ -37,10 +38,11 @@ public class StartMenu{
         panel.add(backgroundImageLabel, BorderLayout.CENTER);
 
         // Create a sub-panel with a GridLayout for the buttons
-        JPanel buttonPanel = new JPanel(new GridLayout(4, 1));
+        JPanel buttonPanel = new JPanel(new GridLayout(5, 1));
 
         easyModeButton = new JButton("Single Player Game");
         normalModeButton = new JButton("Double Player Game");
+        missionModeButton = new JButton("Mission Game");
         helpButton = new JButton("Help");
         quitButton = new JButton("Quit");
 
@@ -65,6 +67,21 @@ public class StartMenu{
                 var options = new GameOptions();
                 options.SinglePlayerMode = false;
                 options.DoublePlayerMode = true;
+
+                var theGame = new HookshotHeroesGameEngine(options);
+                theGame.createGame(theGame, 120);
+                frame.dispose(); // Close the start menu window
+            }
+        });
+
+        missionModeButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Start single player mission game
+                var options = new GameOptions();
+                options.SinglePlayerMode = true;
+                options.DoublePlayerMode = false;
+                options.MissionMode = true;
 
                 var theGame = new HookshotHeroesGameEngine(options);
                 theGame.createGame(theGame, 120);
@@ -97,6 +114,7 @@ public class StartMenu{
         // Add the buttons to the sub-panel
         buttonPanel.add(easyModeButton);
         buttonPanel.add(normalModeButton);
+        buttonPanel.add(missionModeButton);
         buttonPanel.add(helpButton);
         buttonPanel.add(quitButton);
 
