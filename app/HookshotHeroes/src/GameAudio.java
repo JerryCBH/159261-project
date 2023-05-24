@@ -30,10 +30,15 @@ public class GameAudio {
     }
 
     public void ApplyTheme(HookshotHeroesGameEngine engine, String theme, float volume){
-        engine.GameOptions.EnableMusic = false;
-        engine.ToggleMusic();
-        Theme = engine.loadAudio(theme);
-        engine.GameOptions.EnableMusic = true;
-        engine.ToggleMusic(volume);
+        if (!engine.GameOptions.EnableMusic){
+            Theme = engine.loadAudio(theme);
+        }
+        else{
+            engine.GameOptions.EnableMusic = false;
+            engine.ToggleMusic();
+            Theme = engine.loadAudio(theme);
+            engine.GameOptions.EnableMusic = true;
+            engine.ToggleMusic(volume);
+        }
     }
 }
