@@ -122,7 +122,7 @@ public class World implements IWorld {
                         ((Player) collisionCheckInfo.Source).Score += Player.PLAYER_LEVEL_SCORE;
                         var nextLevel = exits[i].NextLevel;
                         if (nextLevel != null) {
-                            Engine.InitializeLevel(Engine.GameOptions, nextLevel, GetPlayers());
+                            Engine.InitializeLevel(Engine.GameOptions, nextLevel, GetPlayers(), GetNPCPlayers());
                         } else {
                             Engine.PauseEngine();
                             JOptionPane.showMessageDialog(Engine.mFrame, "YOU WIN!!!");
@@ -139,7 +139,7 @@ public class World implements IWorld {
                 var prevLevel = CurrentLevel.GetPreviousLevel();
                 if (prevLevel != null){
                     prevLevel.SetStartPos(LevelStartPos.Top);
-                    Engine.InitializeLevel(Engine.GameOptions, prevLevel, GetPlayers());
+                    Engine.InitializeLevel(Engine.GameOptions, prevLevel, GetPlayers(), GetNPCPlayers());
                 }
                 return;
             }
@@ -320,6 +320,28 @@ public class World implements IWorld {
         var players = new ArrayList<Player>();
         for (IWorldObject object : Objects) {
             if (object.WhoAmI() == WorldObjectType.Player) {
+                players.add((Player) object);
+            }
+        }
+        return players;
+    }
+
+    // Get the npc players.
+    public ArrayList<Player> GetNPCPlayers() {
+        var players = new ArrayList<Player>();
+        for (IWorldObject object : Objects) {
+            if (object.WhoAmI() == WorldObjectType.NPC) {
+                players.add((Player) object);
+            }
+        }
+        return players;
+    }
+
+    // Get the npc players.
+    public ArrayList<Player> GetAllPlayers() {
+        var players = new ArrayList<Player>();
+        for (IWorldObject object : Objects) {
+            if (object.WhoAmI() == WorldObjectType.Player || object.WhoAmI() == WorldObjectType.NPC) {
                 players.add((Player) object);
             }
         }

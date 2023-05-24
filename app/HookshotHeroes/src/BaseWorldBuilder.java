@@ -94,4 +94,33 @@ public class BaseWorldBuilder {
             }
         }
     }
+
+    // Initialize NPC player
+    public void InitializeNPCPlayers(GameOptions options, World world, ArrayList<Player> npcplayers, GridCell grid){
+        Player npc;
+        if (options.MissionMode && npcplayers != null && npcplayers.size() > 0){
+
+            // Strange problems here, it seems the reference to the new occupied arrays are never copied to the npc object.
+            // Framework issue??
+            /*npc = npcplayers.get(0);
+            npc.WallCells = world.CurrentLevel.GetWallCells();
+            npc.LavaCells = world.CurrentLevel.GetLavaCells();
+            npc.OccupiedCells = world.CurrentLevel.GetOccupiedCells();
+            npc.AudioRequests = world.AudioRequests;
+            npc.EliminationRequests = world.EliminationRequests;
+            npc.AnimationRequests = world.AnimationRequests;
+            npc.World = world;
+            npc.SetGridCell(grid);
+            world.Objects.add(npc);*/
+
+            AddObjects(world, WorldObjectType.NPC, 1);
+            npc = npcplayers.get(0);
+            var npcnew = world.GetNPCPlayers().get(0);
+            npcnew.Score = npc.Score;
+            npcnew.SetHealth(npc.GetHealth());
+        }
+        else if (options.MissionMode && npcplayers == null){
+            AddObjects(world, WorldObjectType.NPC, 1);
+        }
+    }
 }

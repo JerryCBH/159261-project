@@ -5,5 +5,5 @@ import java.util.ArrayList;
  ****************************************************************************************/
 public interface IWorldBuilder {
     IWorld Build(HookshotHeroesGameEngine engine, GameImage gameImage, GameAudio gameAudio, GameOptions options,
-                 ILevel level, ArrayList<Player> players);
+                 ILevel level, ArrayList<Player> players, ArrayList<Player> npcplayers);
 }

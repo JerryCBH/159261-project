@@ -548,4 +548,14 @@ public class Player implements IWorldObject {
         _image.Image = sprites[_spriteIndex];
         _image.Reflect = reflect;
     }
+
+    // Get player health.
+    public int GetHealth(){
+        return _lives;
+    }
+
+    // Set player health. Only invoke from initialize world.
+    public void SetHealth(int lives){
+        _lives = lives;
+    }
 }

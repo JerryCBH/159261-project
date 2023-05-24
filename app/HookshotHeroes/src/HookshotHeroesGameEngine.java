@@ -47,21 +47,21 @@ public class HookshotHeroesGameEngine extends GameEngine {
     // Game options can be loaded from disk.
     public void InitializeWorld(GameOptions options){
         if(options.SinglePlayerMode){
-            _world = new SinglePlayerWorldBuilder().Build(this, _gameImage, _gameAudio, options, new LevelOne(this, _gameImage, options), null);
+            _world = new SinglePlayerWorldBuilder().Build(this, _gameImage, _gameAudio, options, new LevelOne(this, _gameImage, options), null, null);
         }
         else {
-            _world = new DoublePlayerWorldBuilder().Build(this, _gameImage, _gameAudio, options, new LevelOne(this, _gameImage, options), null);
+            _world = new DoublePlayerWorldBuilder().Build(this, _gameImage, _gameAudio, options, new LevelOne(this, _gameImage, options), null, null);
         }
         _stopWatch.Reset();
     }
 
     // Initialize the game world based on level.
-    public void InitializeLevel(GameOptions options, ILevel level, ArrayList<Player> players){
+    public void InitializeLevel(GameOptions options, ILevel level, ArrayList<Player> players, ArrayList<Player> npcplayers){
         if(options.SinglePlayerMode){
-            _world = new SinglePlayerWorldBuilder().Build(this, _gameImage, _gameAudio, options, level, players);
+            _world = new SinglePlayerWorldBuilder().Build(this, _gameImage, _gameAudio, options, level, players, npcplayers);
         }
         else {
-            _world = new DoublePlayerWorldBuilder().Build(this, _gameImage, _gameAudio, options, level, players);
+            _world = new DoublePlayerWorldBuilder().Build(this, _gameImage, _gameAudio, options, level, players, npcplayers);
         }
     }
 

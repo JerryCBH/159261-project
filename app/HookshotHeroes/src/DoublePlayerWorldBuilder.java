@@ -7,7 +7,7 @@ import java.util.ArrayList;
 public class DoublePlayerWorldBuilder extends BaseWorldBuilder implements IWorldBuilder{
     @Override
     public IWorld Build(HookshotHeroesGameEngine engine, GameImage gameImage, GameAudio gameAudio, GameOptions options,
-                        ILevel level, ArrayList<Player> players) {
+                        ILevel level, ArrayList<Player> players, ArrayList<Player> npcplayers) {
 
         var world = super.CreateWorld(engine, gameImage, gameAudio, options, level);
         var grids = level.GetStartPos() == LevelStartPos.Top ? level.GetTopStartingPos() : level.GetBottomStartingPos();
@@ -72,12 +72,12 @@ public class DoublePlayerWorldBuilder extends BaseWorldBuilder implements IWorld
             }
         }
 
+        InitializeNPCPlayers(options, world, npcplayers, grids[0]);
+
         super.AddObjects(world, WorldObjectType.Mine, 5);
         super.AddObjects(world, WorldObjectType.Cabbage, 3);
         super.AddObjects(world, WorldObjectType.Coin, 10);
-        if (options.MissionMode) {
-            super.AddObjects(world, WorldObjectType.NPC, 1);
-        }
+
         if (options.EnableBouncingBalls) {
             super.AddObjects(world, WorldObjectType.Ball, 5);
         }

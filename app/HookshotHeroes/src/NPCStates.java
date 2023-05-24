@@ -1,4 +1,5 @@
 public enum NPCStates {
     Patrol,
-    Seek
+    Seek,
+    Wait
 }

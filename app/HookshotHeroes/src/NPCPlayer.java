@@ -357,7 +357,7 @@ public class NPCPlayer extends Player implements IWorldObject{
             if (object.WhoAmI() == WorldObjectType.Coin) {
                 if (!CanMoveTo(currentCell, new ArrayList<>(Arrays.asList(object.GetOccupiedCells())))) {
                     CompletableFuture.runAsync(() -> {
-                        SpeechService.Say(SpeechType.Happy, AnimationRequests, this);
+                        SpeechService.NPCSay(SpeechType.Happy, AnimationRequests, this);
                     });
                     Score += PLAYER_COIN_SCORE;
                     DrawNotification(currentCell, NotificationType.Score, PLAYER_COIN_SCORE);
@@ -368,7 +368,7 @@ public class NPCPlayer extends Player implements IWorldObject{
             if (object.WhoAmI() == WorldObjectType.Cabbage) {
                 if (!CanMoveTo(currentCell, new ArrayList<>(Arrays.asList(object.GetOccupiedCells())))) {
                     CompletableFuture.runAsync(() -> {
-                        SpeechService.Say(SpeechType.Health, AnimationRequests, this);
+                        SpeechService.NPCSay(SpeechType.Health, AnimationRequests, this);
                     });
                     if (_lives < MAX_LIFE){
                         _lives++;
