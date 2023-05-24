@@ -32,7 +32,7 @@ public class BaseWorldBuilder {
                 var startY = 10;
                 var radius = 10;
                 var r = new Random();
-                var ball = new Ball("Ball" + i, radius, world.CELL_WIDTH, world.CELL_HEIGHT);
+                var ball = new Ball("Ball" + i, radius, world.CELL_WIDTH, world.CELL_HEIGHT, world.AudioRequests, world.AnimationRequests, world.EliminationRequests);
                 ball.Position = new Vector2D(startX + radius * 3 * i, startY);
                 ball.Velocity = new Vector2D(r.nextDouble(500), r.nextDouble(500));
                 ball.Acceleration = new Vector2D(0, Ball.G);
@@ -62,10 +62,10 @@ public class BaseWorldBuilder {
                 ));
             }
             if (type == WorldObjectType.GhostWizard) {
-                world.Objects.add(new Minotaur("Ghost Wizard", new GridCell(25, 25),
+                world.Objects.add(new GhostWizard("Ghost Wizard", new GridCell(25, 25),
                         new Skin(world.GameImage.MinotaurWithAxeUpSprites, world.GameImage.MinotaurWithAxeLeftSprites, world.GameImage.MinotaurWithAxeRightSprites, world.GameImage.MinotaurWithAxeDownSprites, world.GameImage.Health, world.CELL_WIDTH, world.CELL_HEIGHT),
                         new KeyBinding(KeyEvent.VK_UP, KeyEvent.VK_LEFT, KeyEvent.VK_RIGHT, KeyEvent.VK_DOWN, KeyEvent.VK_PERIOD),
-                        world.CurrentLevel.GetWallCells(), world.CurrentLevel.GetLavaCells(), world.CurrentLevel.GetOccupiedCells(), world.AudioRequests, world.EliminationRequests, world.AnimationRequests, world
+                        world.CurrentLevel.GetWallCells(), world.CurrentLevel.GetLavaCells(), world.CurrentLevel.GetOccupiedCells(), world.AudioRequests, world.EliminationRequests, world.AnimationRequests, world.SpawnRequests, world
                 ));
             }
             if (type == WorldObjectType.Skeleton) {

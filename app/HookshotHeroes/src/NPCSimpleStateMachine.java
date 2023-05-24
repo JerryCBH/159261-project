@@ -7,13 +7,16 @@ import java.util.Random;
  ****************************************************************************************/
 public class NPCSimpleStateMachine implements IStateMachine {
     private double _time = 0;
+    private double _projectileTime = 0;
 
     // Time of NPC reaction during patrol.
     public double PATROL_REACTION_TIME = 0.5;
     // Time of NPC reaction during pursuit.
     public double SEEK_REACTION_TIME = 0.15;
+    // Time to fire successive projectile shots.
+    public double FIRING_TIME = 3;
     // Sight of NPC
-    public int SIGHT = 19;
+    public int SIGHT = 20;
     // NPC current state.
     public NPCStates State = NPCStates.Patrol;
 
@@ -51,6 +54,14 @@ public class NPCSimpleStateMachine implements IStateMachine {
                 _time += dt;
             }
         }
+
+        if ((npc instanceof GhostWizard) && State == NPCStates.Seek && _projectileTime > FIRING_TIME) {
+            _projectileTime = 0;
+            ((GhostWizard) npc).FireProjectile();
+        } else{
+            _projectileTime += dt;
+        }
+
         // Check players range
         CheckPlayersRange(world, npc, SIGHT);
         return nextCell;
@@ -75,9 +86,6 @@ public class NPCSimpleStateMachine implements IStateMachine {
         }
         if (min <= sight) {
             State = NPCStates.Seek;
-            if (npc instanceof GhostWizard) {
-                ((GhostWizard) npc).FireProjectile();
-            }
         } else {
             State = NPCStates.Patrol;
         }

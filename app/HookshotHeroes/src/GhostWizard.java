@@ -2,6 +2,7 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
+import java.util.Random;
 
 /****************************************************************************************
  * This class is the GhostWizard class.
@@ -32,6 +33,7 @@ public class GhostWizard implements IWorldObject {
     private boolean _isGrappling = false;
     public LinkedList<AudioRequest> AudioRequests;
     public LinkedList<IWorldObject> EliminationRequests;
+    public LinkedList<IWorldObject> SpawnRequests;
     public ArrayList<AnimationRequest> AnimationRequests;
     public IWorld World;
     public final IStateMachine StateMachine;
@@ -44,7 +46,7 @@ public class GhostWizard implements IWorldObject {
     public GhostWizard(String name, GridCell startCell, Skin skin, KeyBinding keyBinding,
                        ArrayList<GridCell> wallCells, ArrayList<GridCell> lavaCells, ArrayList<GridCell> occupiedCells,
                        LinkedList<AudioRequest> audioRequests, LinkedList<IWorldObject> eliminationRequests, ArrayList<AnimationRequest> animationRequests,
-                       IWorld world) {
+                       LinkedList<IWorldObject> spawnRequests, IWorld world) {
         _name = name;
         _skin = skin;
         _direction = PlayerDirection.Right;
@@ -57,6 +59,7 @@ public class GhostWizard implements IWorldObject {
         OccupiedCells = occupiedCells;
         AudioRequests = audioRequests;
         EliminationRequests = eliminationRequests;
+        SpawnRequests = spawnRequests;
         AnimationRequests = animationRequests;
         World = world;
         StateMachine = new NPCSimpleStateMachine();
@@ -321,6 +324,18 @@ public class GhostWizard implements IWorldObject {
     }
 
     public void FireProjectile() {
+        var startX = _body.get(0).Column * _skin.CellWidth + GameImage.MinotaurWithAxe_WIDTH / 2;
+        var startY = _body.get(0).Row * _skin.CellHeight + GameImage.MinotaurWithAxe_HEIGHT / 2;
+        var radius = 5;
+        var r = new Random();
+        var ball = new Ball(java.util.UUID.randomUUID().toString(), radius, _skin.CellWidth, _skin.CellHeight, AudioRequests, AnimationRequests, EliminationRequests);
+        ball.Position = new Vector2D(startX, startY);
+        ball.Velocity = new Vector2D(r.nextDouble(500,1000), r.nextDouble(500, 1000));
+        ball.Acceleration = new Vector2D(0, Ball.G);
+        ball.Color = Color.RED;
+        SpawnRequests.add(ball);
+
+        /*
         double x = _body.get(0).Column * _skin.CellWidth + _skin.CellWidth / 2.0;
         double y = _body.get(0).Row * _skin.CellHeight + _skin.CellHeight / 2.0;
 
@@ -372,5 +387,7 @@ public class GhostWizard implements IWorldObject {
             //System.out.println("Fire");
             // engine.drawSolidCircle(projectile.getX(), projectile.getY(), 10);
         }
+         */
+    }
     }
 

@@ -23,11 +23,14 @@ public class World implements IWorld {
     // A list of animations to play.
     public ArrayList<AnimationRequest> AnimationRequests;
 
-    // Elimination list
+    // Elimination list.
     public LinkedList<IWorldObject> EliminationRequests;
 
     // A FIFO queue for playing audios.
     public LinkedList<AudioRequest> AudioRequests;
+
+    // Spawn new objects.
+    public LinkedList<IWorldObject> SpawnRequests;
 
     // Environment Levels.
     public ILevel CurrentLevel;
@@ -48,12 +51,17 @@ public class World implements IWorld {
         AnimationRequests = new ArrayList<>();
         AudioRequests = new LinkedList<>();
         EliminationRequests = new LinkedList<>();
+        SpawnRequests = new LinkedList<>();
 
         CurrentLevel = level;
     }
 
     public IWorldObject[] GetObjects() {
         return Objects.toArray(new IWorldObject[Objects.size()]);
+    }
+
+    public ArrayList<IWorldObject> GetObjectArrayList() {
+        return Objects;
     }
 
     // Set the objects in this gaming world.
@@ -85,6 +93,10 @@ public class World implements IWorld {
         if (EliminationRequests.size() > 0) {
             var player = EliminationRequests.pop();
             HandleElimination(player);
+        }
+        if (SpawnRequests.size() > 0) {
+            var object = SpawnRequests.pop();
+            HandleAddition(object);
         }
     }
 
@@ -264,9 +276,14 @@ public class World implements IWorld {
         if (player.WhoAmI() == WorldObjectType.Mine || player.WhoAmI() == WorldObjectType.Cabbage
                 || player.WhoAmI() == WorldObjectType.Coin || player.WhoAmI() == WorldObjectType.Skeleton 
                 || player.WhoAmI() == WorldObjectType.Minotaur || player.WhoAmI() == WorldObjectType.GhostWizard
-                || player.WhoAmI() == WorldObjectType.FlyingTerror || player.WhoAmI() == WorldObjectType.NPC) {
+                || player.WhoAmI() == WorldObjectType.FlyingTerror || player.WhoAmI() == WorldObjectType.NPC
+                || player.WhoAmI() == WorldObjectType.Ball) {
             RemoveObject(player);
         }
+    }
+
+    public void HandleAddition(IWorldObject object) {
+        Objects.add(object);
     }
 
     @Override
@@ -331,17 +348,6 @@ public class World implements IWorld {
         var players = new ArrayList<Player>();
         for (IWorldObject object : Objects) {
             if (object.WhoAmI() == WorldObjectType.NPC) {
-                players.add((Player) object);
-            }
-        }
-        return players;
-    }
-
-    // Get the npc players.
-    public ArrayList<Player> GetAllPlayers() {
-        var players = new ArrayList<Player>();
-        for (IWorldObject object : Objects) {
-            if (object.WhoAmI() == WorldObjectType.Player || object.WhoAmI() == WorldObjectType.NPC) {
                 players.add((Player) object);
             }
         }
