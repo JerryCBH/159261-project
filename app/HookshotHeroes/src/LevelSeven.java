@@ -1,6 +1,9 @@
 public class LevelSeven extends BaseLevel implements ILevel{
     public LevelSeven (HookshotHeroesGameEngine engine, GameImage gameImage, GameOptions gameOptions){
         super(engine, gameImage, gameOptions);
+        AddEmitter(550, 190);
+        AddEmitter(50, 205);
+        AddEmitter(450, 430);
         AddChest(40, 40, true, "You made it!", false);
         AddChest(40, 520, true, "You made it!", false);
         super.NextLevels = new NextLevelInfo[]{ new NextLevelInfo(new GridCell(0, 27), new LevelEight(Engine, GameImage, GameOptions)) };

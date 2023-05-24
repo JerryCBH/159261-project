@@ -4,6 +4,8 @@ public class LevelOne extends BaseLevel implements ILevel{
 
     public LevelOne (HookshotHeroesGameEngine engine, GameImage gameImage, GameOptions gameOptions){
         super(engine, gameImage, gameOptions);
+        AddEmitter(100, 300);
+        AddEmitter(500, 350);
         AddChest(290, 440, true, "Welcome Heroine!! Use X key or . key to launch grapple. You can use grapple to jump across lava / attack enemy and fetch items. Each level has chests that gives you extra score and health. Food barrels can also replenish your health. Beware of bombs.", true);
         super.NextLevels = new NextLevelInfo[]{ new NextLevelInfo(new GridCell(0, 27), new LevelTwo(Engine, GameImage, GameOptions)) };
     }

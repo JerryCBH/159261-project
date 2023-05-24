@@ -59,4 +59,13 @@ public class LevelTen extends BaseLevel implements ILevel{
         gameAudio.ApplyTheme(Engine, "lava.wav", GameOptions.MasterVolume);
     }
 
+    @Override
+    public boolean CanExit(IWorld world) {
+        for (IWorldObject object : world.GetObjects()) {
+            if (object.WhoAmI() == WorldObjectType.GhostWizard) {
+                return false;
+            }
+        }
+        return true;
+    }
 }

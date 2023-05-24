@@ -19,4 +19,7 @@ public interface ILevel {
     ArrayList<Chest> GetChests();
     void ApplyLevelMusic(GameAudio gameAudio);
     boolean CanExit(IWorld world);
+    void AddEmitter(int x, int y);
+    void Update(double dt);
+    void RenderEmitters();
 }

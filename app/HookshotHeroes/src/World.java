@@ -76,6 +76,7 @@ public class World implements IWorld {
 
     public void RenderLevel() {
         CurrentLevel.RenderLevel();
+        CurrentLevel.RenderEmitters();
         CurrentLevel.SetLevelRendered(true);
     }
 
@@ -90,6 +91,7 @@ public class World implements IWorld {
         for (IWorldObject object : Objects) {
             object.Update(dt);
         }
+        CurrentLevel.Update(dt);
         if (EliminationRequests.size() > 0) {
             var player = EliminationRequests.pop();
             HandleElimination(player);

@@ -20,6 +20,8 @@ public class BaseLevel {
     public ArrayList<Chest> Chests;
     public NextLevelInfo[] NextLevels = null;
 
+    public ArrayList<ParticleEmitter> Emitters;
+
     public BaseLevel (HookshotHeroesGameEngine engine, GameImage gameImage, GameOptions gameOptions){
         Engine = engine;
         GameImage = gameImage;
@@ -28,6 +30,7 @@ public class BaseLevel {
         LavaCells = new ArrayList<>();
         OccupiedCells = new ArrayList<>();
         Chests = new ArrayList<>();
+        Emitters = new ArrayList<>();
     }
 
     public void drawWallFrontWithCollision(int x, int y) {
@@ -140,5 +143,27 @@ public class BaseLevel {
 
     public NextLevelInfo[] GetNextLevelInfo() {
         return NextLevels;
+    }
+
+    public void AddEmitter(int x, int y) {
+        ParticleEmitter sm = new SmokeParticleEmitter(GameImage);
+        ParticleEmitter fi = new FireParticleEmitter();
+        sm.move(x, y);
+        fi.move(x, y);
+        Emitters.add(sm);
+        Emitters.add(fi);
+    }
+
+    public void Update(double dt) {
+        for (ParticleEmitter p : Emitters) {
+            p.update((float) dt);
+        }
+    }
+
+    public void RenderEmitters() {
+        for (ParticleEmitter p : Emitters) {
+            p.draw(Engine);
+        }
+        Engine.changeColor(Color.WHITE);
     }
 }

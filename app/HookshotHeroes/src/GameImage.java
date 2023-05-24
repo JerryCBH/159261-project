@@ -42,6 +42,7 @@ public class GameImage {
     public Image[] AvaUpSprites;
     public Image[] AvaDownSprites;
     public Image[] SarahSprites;
+    public Image[] Smokes;
     public static final int PLAYER_WIDTH = 48;
     public static final int PLAYER_HEIGHT = 56;
     public static final int LIDIA_WIDTH = 64;
@@ -100,6 +101,7 @@ public class GameImage {
         LoadFTSpriteSheet(engine);
         LoadAvaSpriteSheet(engine);
         LoadSarahSpriteSheet(engine);
+        LoadSmokes(engine);
 
         // Load environment images.
         DoorGreyClosed = engine.loadImage("environment/DoorGreyClosed.png");
@@ -302,5 +304,12 @@ public class GameImage {
         for (int j = 0; j < 7; j++) {
             AvaLeftSprites[j] = engine.subImage(Ava, j*AVA_WIDTH, AVA_HEIGHT*3, AVA_WIDTH, AVA_HEIGHT);
         }
+    }
+
+    private void LoadSmokes(HookshotHeroesGameEngine engine) {
+        Smokes = new Image[3];
+        Smokes[0] = engine.loadImage("smoke1.png");
+        Smokes[1] = engine.loadImage("smoke2.png");
+        Smokes[2] = engine.loadImage("smoke3.png");
     }
 }
