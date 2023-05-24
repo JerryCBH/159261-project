@@ -4,7 +4,7 @@ import java.awt.*;
  * This class load the game's images.
  ****************************************************************************************/
 public class GameImage {
-    public final Image SnakeHead, SnakeDot, Apple, Health, Mine, Broccoli, Explosion, Player, Lidia, Shura, Minotaur, MinotaurWithAxe, Barrels, Cabbage, Bomb, Chests, Skeleton, FlyingTerror, Ava;
+    public final Image SnakeHead, SnakeDot, Apple, Health, Mine, Broccoli, Explosion, Player, Lidia, Shura, Minotaur, MinotaurWithAxe, Barrels, Cabbage, Bomb, Chests, Skeleton, FlyingTerror, Ava, Sarah;
     public final Image DoorGreyClosed, DoorGreyOpen, floor, lava, wallGreyLeftSide, wallGreyRightSide, wallGreyFront, DoorGreyOpenSide, DoorGreyClosedSide, DoorGreyClosedLeftSide, DoorGreyClosedRightSide, DoorGreyOpenLeftSide, ChestFront, ChestSide, ChestBack;
     public Image[] ExplosionSprites;
     public Image[] PlayerLeftRightSprites;
@@ -41,6 +41,7 @@ public class GameImage {
     public Image[] AvaRightSprites;
     public Image[] AvaUpSprites;
     public Image[] AvaDownSprites;
+    public Image[] SarahSprites;
     public static final int PLAYER_WIDTH = 48;
     public static final int PLAYER_HEIGHT = 56;
     public static final int LIDIA_WIDTH = 64;
@@ -61,6 +62,8 @@ public class GameImage {
     public static final int FT_HEIGHT = 128;
     public static final int AVA_WIDTH = 100;
     public static final int AVA_HEIGHT = 100;
+    public static final int SARAH_WIDTH = 27;
+    public static final int SARAH_HEIGHT = 50;
 
     public GameImage(HookshotHeroesGameEngine engine){
         SnakeHead = engine.loadImage("head.png");
@@ -82,6 +85,7 @@ public class GameImage {
         Skeleton = engine.loadImage("skeleton.png");
         FlyingTerror = engine.loadImage("flying_terror.png");
         Ava = engine.loadImage("avalon.png");
+        Sarah = engine.loadImage("sarah.png");
 
         LoadExplosionSpriteSheet(engine);
         LoadPlayerSpriteSheet(engine);
@@ -95,6 +99,7 @@ public class GameImage {
         LoadSkeletonSpriteSheet(engine);
         LoadFTSpriteSheet(engine);
         LoadAvaSpriteSheet(engine);
+        LoadSarahSpriteSheet(engine);
 
         // Load environment images.
         DoorGreyClosed = engine.loadImage("environment/DoorGreyClosed.png");
@@ -226,6 +231,13 @@ public class GameImage {
         BombSprites = new Image[4];
         for (int j = 0; j < 4; j++) {
             BombSprites[j] = engine.subImage(Bomb, j*BOMB_WIDTH, 0, BOMB_WIDTH, BOMB_HEIGHT);
+        }
+    }
+
+    private void LoadSarahSpriteSheet(HookshotHeroesGameEngine engine){
+        SarahSprites = new Image[16];
+        for (int j = 0; j < 16; j++) {
+            SarahSprites[j] = engine.subImage(Sarah, j*SARAH_WIDTH, 0, SARAH_WIDTH, SARAH_HEIGHT);
         }
     }
 

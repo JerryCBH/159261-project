@@ -17,5 +17,7 @@ public enum WorldObjectType {
     Notification,
     Skeleton,
     FlyingTerror,
-    NPC
+    NPC,
+    Guide,
+    GuideBubble
 }

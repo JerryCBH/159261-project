@@ -157,6 +157,7 @@ public class Player implements IWorldObject {
             // Check chests
             if (newCell != null) {
                 CheckChests(newCell, World.GetLevel().GetChests());
+                CheckGuides(newCell);
             }
         }
         return newCell;
@@ -251,6 +252,24 @@ public class Player implements IWorldObject {
                         _lives += chest.CHEST_LIVES;
                         DrawNotification(newCell, NotificationType.Health, chest.CHEST_LIVES);
                     }
+                }
+            }
+        }
+    }
+
+    // Check if we are near a guide
+    private void CheckGuides(GridCell newCell) {
+        for (IWorldObject object : World.GetObjects()){
+            if (object.WhoAmI() == WorldObjectType.Guide) {
+                var loc = new ArrayList<GridCell>();
+                loc.add(object.GetOccupiedCells()[0]);
+                if (!CanMoveTo(newCell, loc)){
+                    var guide = (Guide)object;
+                        var speech = new AnimationRequest(WorldObjectType.GuideBubble, guide.GetOccupiedCells()[0], 10);
+                        speech.Text = guide.Message;
+                        speech.Player = null;
+                        speech.Guide = guide;
+                        AnimationRequests.add(speech);
                 }
             }
         }

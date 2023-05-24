@@ -8,6 +8,7 @@ public class SpeechService {
     public static final String CHATGPT_HEALTH_PROMPT = "say a short sentence when you eat yummy food or recovered health";
     public static final String CHATGPT_VICTORY_PROMPT = "say a short sentence when you defeat an enemy";
     public static final String CHATGPT_NPC_PROMPT = "say something when you want to get out of a dungeon";
+    public static final String MISSION_GUIDE_SARAH = "Warrior! Your mission is to help Ava escape the Dungeon. Ava will follow you along the way. Good luck!";
     public static final HashMap<SpeechType, String> Conversations;
 
     static {

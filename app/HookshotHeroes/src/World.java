@@ -393,6 +393,9 @@ public class World implements IWorld {
                 if (request.Type == WorldObjectType.ChestBubble) {
                     DrawChestBubble(Engine, request.Chest);
                 }
+                if (request.Type == WorldObjectType.GuideBubble) {
+                    DrawGuideBubble(Engine, request.Guide);
+                }
             }
             // Show speech bubbles in sequence.
             DrawSpeechBubblesFromList(lidiaList);
@@ -544,6 +547,43 @@ public class World implements IWorld {
                 _idx++;
             }
         }
+    }
+
+    public void DrawGuideBubble(GameEngine engine, Guide guide){
+        var offsetX = 35;
+        var offsetY = 10;
+        engine.saveCurrentTransform();
+        var graphics2D = engine.mGraphics;
+        graphics2D.translate(guide.GetOccupiedCells()[0].Column * CELL_WIDTH + offsetX, guide.GetOccupiedCells()[0].Row * CELL_HEIGHT + offsetY);
+        RenderingHints qualityHints = new RenderingHints(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        qualityHints.put(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+        graphics2D.setRenderingHints(qualityHints);
+        graphics2D.setPaint(Color.BLUE);
+        // Get lines from text.
+        var lines = StringUtils.GetLines(guide.Message, 5);
+        int width = (lines.size() == 1)? 5 * guide.Message.length() + 30 : 200;
+        int height = 25 + 10 * (lines.size() - 1);
+        GeneralPath path = new GeneralPath();
+        path.moveTo(5, 10);
+        path.curveTo(5, 10, 7, 5, 0, 0);
+        path.curveTo(0, 0, 12, 0, 12, 5);
+        path.curveTo(12, 5, 12, 0, 20, 0);
+        path.lineTo(width - 10, 0);
+        path.curveTo(width - 10, 0, width, 0, width, 10);
+        path.lineTo(width, height - 10);
+        path.curveTo(width, height - 10, width, height, width - 10, height);
+        path.lineTo(15, height);
+        path.curveTo(15, height, 5, height, 5, height - 10);
+        path.lineTo(5, 15);
+        path.closePath();
+        graphics2D.fill(path);
+        engine.changeColor(Color.white);
+
+        for(int i = 0; i < lines.size(); i++){
+            engine.drawText(10, 15 + i*10, lines.get(i), "Arial", 12);
+        }
+
+        engine.restoreLastTransform();
     }
 
     public void DrawNotification(GameEngine engine, GridCell cell, NotificationType type, String text){
