@@ -17,6 +17,7 @@ public class CountryRoad extends BaseLevel implements ILevel{
 
             // Draw wall sprite on the bottom side
             drawGrassWithCollision(x, GameOptions.Width - environmentSpriteSize);
+            drawCastleWallFrontWithCollision(x, GameOptions.Width - environmentSpriteSize);
         }
         for (int y = 0; y < GameOptions.Width - environmentSpriteSize; y += environmentSpriteSize) {
             // Draw wall sprite on the left side
@@ -60,6 +61,9 @@ public class CountryRoad extends BaseLevel implements ILevel{
         super.AddWallCell(500, 150);
         Engine.drawImage(GameImage.Bags, 390, 220);
         super.AddWallCell(390, 220);
+
+        Engine.drawImage(GameImage.CastleDoor, 290,565);
+        Engine.drawImage(GameImage.CastleDoor, 305,565);
     }
 
     @Override

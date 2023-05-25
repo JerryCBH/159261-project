@@ -408,10 +408,15 @@ public class World implements IWorld {
 
     // Update each animation request on the amount of time played.
     public void UpdateAnimationRequests(double dt){
-        for (AnimationRequest request : AnimationRequests) {
-            request.time += dt;
+        try {
+            for (AnimationRequest request : AnimationRequests) {
+                request.time += dt;
+            }
+            UpdateBalls(dt);
         }
-        UpdateBalls(dt);
+        catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
     }
 
     // Play the animation based on object type.
