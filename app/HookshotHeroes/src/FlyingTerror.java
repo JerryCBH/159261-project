@@ -220,7 +220,7 @@ public class FlyingTerror implements IWorldObject{
         DrawName(engine, _body.get(0));
         DrawHealth(engine, _body.get(0));
         engine.drawImage(_image.Image,
-                _image.Reflect? (_body.get(0).Column * _skin.CellWidth + GameImage.FT_WIDTH) : (_body.get(0).Column * _skin.CellWidth + 5),
+                _image.Reflect? (_body.get(0).Column * _skin.CellWidth + GameImage.FT_WIDTH) : (_body.get(0).Column * _skin.CellWidth - 20),
                 _body.get(0).Row * _skin.CellHeight + 5,
                 (_image.Reflect? -1 : 1) * (GameImage.FT_WIDTH),
                 GameImage.FT_HEIGHT);
