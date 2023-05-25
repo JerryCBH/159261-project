@@ -37,9 +37,11 @@ public class SinglePlayerWorldBuilder extends BaseWorldBuilder implements IWorld
 
         InitializeNPCPlayers(options, world, npcplayers, grid);
 
-        super.AddObjects(world, WorldObjectType.Mine, 3);
-        super.AddObjects(world, WorldObjectType.Cabbage, 2);
-        super.AddObjects(world, WorldObjectType.Coin, 10);
+        if (!(level instanceof HeroWelcome) && !(level instanceof CountryRoad) ) {
+            super.AddObjects(world, WorldObjectType.Mine, 3);
+            super.AddObjects(world, WorldObjectType.Cabbage, 2);
+            super.AddObjects(world, WorldObjectType.Coin, 10);
+        }
 
         if (options.EnableBouncingBalls) {
             super.AddObjects(world, WorldObjectType.Ball, 5);
@@ -60,9 +62,22 @@ public class SinglePlayerWorldBuilder extends BaseWorldBuilder implements IWorld
                 super.AddObjects(world, WorldObjectType.Guide, 1);
             }
         }
-        if (!(level instanceof LevelOne) && !(level instanceof LevelFour) && !(level instanceof LevelTen) ){
+        if (!(level instanceof LevelOne) && !(level instanceof LevelFour) && !(level instanceof LevelTen) && !(level instanceof HeroWelcome) && !(level instanceof CountryRoad) ){
             super.AddObjects(world, WorldObjectType.Skeleton, 1);
             super.AddObjects(world, WorldObjectType.FlyingTerror, 1);
+        }
+        if (level instanceof HeroWelcome) {
+            super.AddBGC(world, NPCType.King, 1);
+            super.AddBGC(world, NPCType.Queen, 1);
+            super.AddBGC(world, NPCType.Princess, 1);
+            super.AddBGC(world, NPCType.Prince, 1);
+            super.AddBGC(world, NPCType.Aristocrat, 5);
+        }
+        if (level instanceof CountryRoad) {
+            super.AddBGC(world, NPCType.Child, 9);
+            super.AddBGC(world, NPCType.Old, 5);
+            super.AddBGC(world, NPCType.Townfolk, 15);
+            level.ApplyLevelMusic(gameAudio);
         }
         return world;
     }

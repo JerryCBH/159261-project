@@ -126,4 +126,73 @@ public class BaseWorldBuilder {
             AddObjects(world, WorldObjectType.NPC, 1);
         }
     }
+
+    public void AddBGC(World world, NPCType type, int count){
+        for (int i = 0; i < count; i++) {
+            if (type == NPCType.Aristocrat) {
+                var sprites = world.GameImage.GetRandomNPC(world.GameImage.Aristocrats);
+                world.Objects.add(new BGCPlayer("Aristocrat", GridCell.GetRandomCell(startOffset, world.GridRows - endOffset, startOffset, world.GridColumns - endOffset, world.CurrentLevel.GetOccupiedCells()),
+                        new Skin(sprites.UpSprites, sprites.LeftSprites, sprites.RightSprites, sprites.DownSprites, world.GameImage.Health, world.CELL_WIDTH, world.CELL_HEIGHT),
+                        new KeyBinding(KeyEvent.VK_UP, KeyEvent.VK_LEFT, KeyEvent.VK_RIGHT, KeyEvent.VK_DOWN, KeyEvent.VK_PERIOD),
+                        world.CurrentLevel.GetWallCells(), world.CurrentLevel.GetLavaCells(), world.CurrentLevel.GetOccupiedCells(), world.AudioRequests, world.EliminationRequests, world.AnimationRequests, world, new BGCSimpleStateMachine()
+                ));
+            }
+            if (type == NPCType.King) {
+                var sprites = world.GameImage.GetRandomNPC(world.GameImage.Kings);
+                world.Objects.add(new BGCPlayer("King", new GridCell(0, 27),
+                        new Skin(sprites.UpSprites, sprites.LeftSprites, sprites.RightSprites, sprites.DownSprites, world.GameImage.Health, world.CELL_WIDTH, world.CELL_HEIGHT),
+                        new KeyBinding(KeyEvent.VK_UP, KeyEvent.VK_LEFT, KeyEvent.VK_RIGHT, KeyEvent.VK_DOWN, KeyEvent.VK_PERIOD),
+                        world.CurrentLevel.GetWallCells(), world.CurrentLevel.GetLavaCells(), world.CurrentLevel.GetOccupiedCells(), world.AudioRequests, world.EliminationRequests, world.AnimationRequests, world, new BGCSimpleStateMachine()
+                ));
+            }
+            if (type == NPCType.Queen) {
+                var sprites = world.GameImage.GetRandomNPC(world.GameImage.Queens);
+                world.Objects.add(new BGCPlayer("Queen", new GridCell(0, 27),
+                        new Skin(sprites.UpSprites, sprites.LeftSprites, sprites.RightSprites, sprites.DownSprites, world.GameImage.Health, world.CELL_WIDTH, world.CELL_HEIGHT),
+                        new KeyBinding(KeyEvent.VK_UP, KeyEvent.VK_LEFT, KeyEvent.VK_RIGHT, KeyEvent.VK_DOWN, KeyEvent.VK_PERIOD),
+                        world.CurrentLevel.GetWallCells(), world.CurrentLevel.GetLavaCells(), world.CurrentLevel.GetOccupiedCells(), world.AudioRequests, world.EliminationRequests, world.AnimationRequests, world, new BGCSimpleStateMachine()
+                ));
+            }
+            if (type == NPCType.Prince) {
+                var sprites = world.GameImage.GetRandomNPC(world.GameImage.Princes);
+                world.Objects.add(new BGCPlayer("Prince", new GridCell(2, 25),
+                        new Skin(sprites.UpSprites, sprites.LeftSprites, sprites.RightSprites, sprites.DownSprites, world.GameImage.Health, world.CELL_WIDTH, world.CELL_HEIGHT),
+                        new KeyBinding(KeyEvent.VK_UP, KeyEvent.VK_LEFT, KeyEvent.VK_RIGHT, KeyEvent.VK_DOWN, KeyEvent.VK_PERIOD),
+                        world.CurrentLevel.GetWallCells(), world.CurrentLevel.GetLavaCells(), world.CurrentLevel.GetOccupiedCells(), world.AudioRequests, world.EliminationRequests, world.AnimationRequests, world, new BGCSimpleStateMachine()
+                ));
+            }
+            if (type == NPCType.Princess) {
+                var sprites = world.GameImage.GetRandomNPC(world.GameImage.Princesses);
+                world.Objects.add(new BGCPlayer("Princess", new GridCell(2, 33),
+                        new Skin(sprites.UpSprites, sprites.LeftSprites, sprites.RightSprites, sprites.DownSprites, world.GameImage.Health, world.CELL_WIDTH, world.CELL_HEIGHT),
+                        new KeyBinding(KeyEvent.VK_UP, KeyEvent.VK_LEFT, KeyEvent.VK_RIGHT, KeyEvent.VK_DOWN, KeyEvent.VK_PERIOD),
+                        world.CurrentLevel.GetWallCells(), world.CurrentLevel.GetLavaCells(), world.CurrentLevel.GetOccupiedCells(), world.AudioRequests, world.EliminationRequests, world.AnimationRequests, world, new BGCSimpleStateMachine()
+                ));
+            }
+            if (type == NPCType.Child) {
+                var sprites = world.GameImage.GetRandomNPC(world.GameImage.Kids);
+                world.Objects.add(new BGCPlayer("Child", new GridCell(3, 20 + i*2),
+                        new Skin(sprites.UpSprites, sprites.LeftSprites, sprites.RightSprites, sprites.DownSprites, world.GameImage.Health, world.CELL_WIDTH, world.CELL_HEIGHT),
+                        new KeyBinding(KeyEvent.VK_UP, KeyEvent.VK_LEFT, KeyEvent.VK_RIGHT, KeyEvent.VK_DOWN, KeyEvent.VK_PERIOD),
+                        world.CurrentLevel.GetWallCells(), world.CurrentLevel.GetLavaCells(), world.CurrentLevel.GetOccupiedCells(), world.AudioRequests, world.EliminationRequests, world.AnimationRequests, world, new BGCSimpleStateMachine()
+                ));
+            }
+            if (type == NPCType.Old) {
+                var sprites = world.GameImage.GetRandomNPC(world.GameImage.Seniors);
+                world.Objects.add(new BGCPlayer("Senior", new GridCell(2, 20 + i*2),
+                        new Skin(sprites.UpSprites, sprites.LeftSprites, sprites.RightSprites, sprites.DownSprites, world.GameImage.Health, world.CELL_WIDTH, world.CELL_HEIGHT),
+                        new KeyBinding(KeyEvent.VK_UP, KeyEvent.VK_LEFT, KeyEvent.VK_RIGHT, KeyEvent.VK_DOWN, KeyEvent.VK_PERIOD),
+                        world.CurrentLevel.GetWallCells(), world.CurrentLevel.GetLavaCells(), world.CurrentLevel.GetOccupiedCells(), world.AudioRequests, world.EliminationRequests, world.AnimationRequests, world, new BGCSimpleStateMachine()
+                ));
+            }
+            if (type == NPCType.Townfolk) {
+                var sprites = world.GameImage.GetRandomNPC(world.GameImage.People);
+                world.Objects.add(new BGCPlayer("Townfolk", new GridCell(5, 10 + i*2),
+                        new Skin(sprites.UpSprites, sprites.LeftSprites, sprites.RightSprites, sprites.DownSprites, world.GameImage.Health, world.CELL_WIDTH, world.CELL_HEIGHT),
+                        new KeyBinding(KeyEvent.VK_UP, KeyEvent.VK_LEFT, KeyEvent.VK_RIGHT, KeyEvent.VK_DOWN, KeyEvent.VK_PERIOD),
+                        world.CurrentLevel.GetWallCells(), world.CurrentLevel.GetLavaCells(), world.CurrentLevel.GetOccupiedCells(), world.AudioRequests, world.EliminationRequests, world.AnimationRequests, world, new BGCSimpleStateMachine()
+                ));
+            }
+        }
+    }
 }

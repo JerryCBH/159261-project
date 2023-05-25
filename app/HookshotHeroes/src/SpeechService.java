@@ -7,6 +7,7 @@ public class SpeechService {
     public static final String CHATGPT_DANGER_PROMPT = "say something when you stepped on a nail";
     public static final String CHATGPT_HEALTH_PROMPT = "say a short sentence when you eat yummy food or recovered health";
     public static final String CHATGPT_VICTORY_PROMPT = "say a short sentence when you defeat an enemy";
+    public static final String CHATGPT_CELEBRATE_PROMPT = "say a short sentence when you and your friend are victorious";
     public static final String CHATGPT_NPC_COMMENT_PROMPT = "say a short sentence when fighting side by side with your friend";
     public static final String CHATGPT_NPC_JOKE_PROMPT = "say something funny";
     public static final String CHATGPT_NPC_WORRIED_PROMPT = "say a short sentence when you are fighting your way out of a dungeon with your friend";
@@ -20,6 +21,7 @@ public class SpeechService {
         Conversations.put(SpeechType.Danger, "Ouch!!");
         Conversations.put(SpeechType.Victory, "Take that!!");
         Conversations.put(SpeechType.NPCComment, "Lets go!");
+        Conversations.put(SpeechType.Celebrate, "Victory!");
     }
 
     public static void Say(SpeechType type, ArrayList<AnimationRequest> requests, Player player) {
@@ -203,6 +205,31 @@ public class SpeechService {
         }
 
 
+
+        var speech = new AnimationRequest(WorldObjectType.SpeechBubble, player.GetOccupiedCells()[0], 10);
+        speech.Text = message;
+        speech.Player = player;
+        requests.add(speech);
+    }
+
+    public static void BGCSay(SpeechType type, ArrayList<AnimationRequest> requests, Player player) {
+        String message = "";
+        if (type == SpeechType.Celebrate) {
+            if (EnableChatGPT) {
+                try {
+                    var response = ChatGPTConnector.SendRequestToChatGPT(CHATGPT_CELEBRATE_PROMPT);
+                    message = ChatGPTConnector.ExtractGeneratedMessage(response);
+                    if (!(message != null && !message.trim().isEmpty())){
+                        message = Conversations.get(SpeechType.Celebrate);
+                    }
+                } catch (Exception ex) {
+                    System.out.println("ChatGPT error: " + ex.getMessage());
+                    message = Conversations.get(SpeechType.Celebrate);
+                }
+            } else {
+                message = Conversations.get(SpeechType.Celebrate);
+            }
+        }
 
         var speech = new AnimationRequest(WorldObjectType.SpeechBubble, player.GetOccupiedCells()[0], 10);
         speech.Text = message;

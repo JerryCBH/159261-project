@@ -5,5 +5,6 @@ public enum SpeechType {
     Victory,
     NPCComment,
     NPCWorried,
-    NPCJoke
+    NPCJoke,
+    Celebrate
 }

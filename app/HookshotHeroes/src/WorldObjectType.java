@@ -19,5 +19,6 @@ public enum WorldObjectType {
     FlyingTerror,
     NPC,
     Guide,
-    GuideBubble
+    GuideBubble,
+    BGC
 }

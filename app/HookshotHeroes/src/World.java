@@ -438,6 +438,9 @@ public class World implements IWorld {
                     } else if (request.Player != null && request.Player.GetName() == CharacterNames.AVA) {
                         avaList.add(request);
                     }
+                    else {
+                        DrawSpeechBubble(Engine,  request.Player.GetOccupiedCells()[0], request.Text);
+                    }
                 }
                 if (request.Type == WorldObjectType.Notification) {
                     if (request.Player != null && request.Player.GetName() == CharacterNames.LIDIA) {

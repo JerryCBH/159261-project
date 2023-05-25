@@ -1,7 +1,7 @@
 public class LevelTen extends BaseLevel implements ILevel{
     public LevelTen (HookshotHeroesGameEngine engine, GameImage gameImage, GameOptions gameOptions){
         super(engine, gameImage, gameOptions);
-        super.NextLevels = new NextLevelInfo[] { new NextLevelInfo(new GridCell(27, 27), null) };
+        super.NextLevels = new NextLevelInfo[] { new NextLevelInfo(new GridCell(27, 27), new CountryRoad(engine, gameImage, gameOptions)) };
     }
 
     @Override

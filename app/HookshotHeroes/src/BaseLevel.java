@@ -41,6 +41,29 @@ public class BaseLevel {
         AddWallCell(x, y);
     }
 
+    public void drawCastleWallFrontWithCollision(int x, int y) {
+        Engine.drawImage(GameImage.CastleWall, x, y);
+        //Engine.drawRectangle(x, y, 40, 40);
+
+        //Add collision logic here
+        AddWallCell(x, y);
+    }
+
+    public void drawCastleColumnWithCollision(int x, int y) {
+        Engine.drawImage(GameImage.CastleColumn, x, y);
+
+        //Add collision logic here
+        //AddWallCell(x, y);
+    }
+
+    public void drawGrassWithCollision(int x, int y) {
+        Engine.drawImage(GameImage.Grass, x, y);
+        //Engine.drawRectangle(x, y, 40, 40);
+
+        //Add collision logic here
+        AddWallCell(x, y);
+    }
+
     public void wallSideCollision(int x, int y) {
         Engine.drawRectangle(x, y, 40, 40);
 
@@ -88,14 +111,14 @@ public class BaseLevel {
         }
     }
 
-    private void AddWallCell(int x, int y){
+    public void AddWallCell(int x, int y){
         if (!IsLevelRendered) {
            WallCells.add(new GridCell(y / CELL_WIDTH, x / CELL_HEIGHT));
            OccupiedCells.add(new GridCell(y / CELL_WIDTH, x / CELL_HEIGHT));
         }
     }
 
-    private void AddLavaCell(int x, int y){
+    public void AddLavaCell(int x, int y){
         if (!IsLevelRendered) {
             LavaCells.add(new GridCell(y / CELL_WIDTH, x / CELL_HEIGHT));
             OccupiedCells.add(new GridCell(y / CELL_WIDTH, x / CELL_HEIGHT));

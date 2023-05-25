@@ -1,4 +1,6 @@
 import java.awt.*;
+import java.util.HashMap;
+import java.util.Random;
 
 /****************************************************************************************
  * This class load the game's images.
@@ -6,6 +8,16 @@ import java.awt.*;
 public class GameImage {
     public final Image SnakeHead, SnakeDot, Apple, Health, Mine, Broccoli, Explosion, Player, Lidia, Shura, Minotaur, MinotaurWithAxe, Barrels, Cabbage, Bomb, Chests, Skeleton, FlyingTerror, Ava, Sarah;
     public final Image DoorGreyClosed, DoorGreyOpen, floor, lava, wallGreyLeftSide, wallGreyRightSide, wallGreyFront, DoorGreyOpenSide, DoorGreyClosedSide, DoorGreyClosedLeftSide, DoorGreyClosedRightSide, DoorGreyOpenLeftSide, ChestFront, ChestSide, ChestBack;
+    public final Image CastleItems1, CastleItems2, CastleFloor, CastleWall, CastleSideWall, CastleColumn, CastleDoor, CastleWallFlags, CastleRedCarpet, CastleCarpet, CastleKnight, CastleDesk, CastleBookShelf, CastleFlower1, CastleFlower2, SilverChest, Country1;
+    public final Image Grass, Grass2, Water, Terrain, Water1, Road, Wood, Market, Market1, Market2, Wheat, Cobble, Bags;
+    public HashMap<Integer, NPCSprites> Aristocrats;
+    public HashMap<Integer, NPCSprites> Kings;
+    public HashMap<Integer, NPCSprites> Queens;
+    public HashMap<Integer, NPCSprites> Princes;
+    public HashMap<Integer, NPCSprites> Princesses;
+    public HashMap<Integer, NPCSprites> Kids;
+    public HashMap<Integer, NPCSprites> Seniors;
+    public HashMap<Integer, NPCSprites> People;
     public Image[] ExplosionSprites;
     public Image[] PlayerLeftRightSprites;
     public Image[] PlayerUpSprites;
@@ -65,6 +77,8 @@ public class GameImage {
     public static final int AVA_HEIGHT = 100;
     public static final int SARAH_WIDTH = 27;
     public static final int SARAH_HEIGHT = 50;
+    public static final int NPC_WIDTH = 24;
+    public static final int NPC_HEIGHT = 32;
 
     public GameImage(HookshotHeroesGameEngine engine){
         SnakeHead = engine.loadImage("head.png");
@@ -87,6 +101,36 @@ public class GameImage {
         FlyingTerror = engine.loadImage("flying_terror.png");
         Ava = engine.loadImage("avalon.png");
         Sarah = engine.loadImage("sarah.png");
+        CastleItems1 = engine.loadImage("castle1.png");
+        CastleItems2 = engine.loadImage("castle2.png");
+        Country1 = engine.loadImage("country1.png");
+        Terrain = engine.loadImage("terrain.png");
+        Water = engine.loadImage("water.png");
+        CastleFloor = engine.subImage(CastleItems1, 79, 95, 32, 32);
+        CastleWall = engine.subImage(CastleItems1, 76, 0, 40, 30);
+        CastleSideWall = engine.subImage(CastleItems1, 169, 0, 7, 40);
+        CastleColumn = engine.subImage(CastleItems1, 64, 96, 16, 50);
+        CastleDoor = engine.subImage(CastleItems1, 145, 71, 16, 24);
+        CastleWallFlags = engine.subImage(CastleItems1, 112, 37, 50, 25);
+        CastleRedCarpet = engine.subImage(CastleItems1, 112, 96, 64, 64);
+        CastleCarpet = engine.subImage(CastleItems1, 0, 97, 47, 31);
+        CastleKnight = engine.subImage(CastleItems2, 47, 75, 16, 23);
+        CastleDesk = engine.subImage(CastleItems2, 80, 122, 30, 23);
+        CastleBookShelf = engine.subImage(CastleItems2, 53, 100, 20, 27);
+        CastleFlower1 = engine.subImage(CastleItems1, 150, 165, 20, 27);
+        CastleFlower2 = engine.subImage(CastleItems1, 127, 165, 16, 27);
+        SilverChest = engine.subImage(Chests, 259, 67, 25, 25);
+        Grass = engine.subImage(Country1, 2, 350, 40, 40);
+        Grass2 = engine.subImage(Terrain, 195, 1186, 50, 25);
+        Water1 = engine.subImage(Water, 390, 290, 100, 50);
+        Road = engine.subImage(Terrain, 580, 1093, 90, 85);
+        Wood = engine.subImage(Country1, 385, 95, 90, 100);
+        Market = engine.subImage(Country1, 400, 0, 112, 95);
+        Wheat = engine.subImage(Country1, 290, 257, 62, 62);
+        Market1 = engine.subImage(Country1, 385, 223, 127, 40);
+        Market2 = engine.subImage(Country1, 385, 290, 127, 40);
+        Cobble = engine.subImage(Terrain, 580, 750, 90, 80);
+        Bags = engine.subImage(Country1, 225, 326, 64, 27);
 
         LoadExplosionSpriteSheet(engine);
         LoadPlayerSpriteSheet(engine);
@@ -102,6 +146,23 @@ public class GameImage {
         LoadAvaSpriteSheet(engine);
         LoadSarahSpriteSheet(engine);
         LoadSmokes(engine);
+
+        Aristocrats = new HashMap<>();
+        Kings = new HashMap<>();
+        Queens = new HashMap<>();
+        Princes = new HashMap<>();
+        Princesses = new HashMap<>();
+        Kids = new HashMap<>();
+        Seniors = new HashMap<>();
+        People = new HashMap<>();
+        LoadNPCSpriteSheets(engine, Aristocrats, "npc/a", 10);
+        LoadNPCSpriteSheets(engine, Kings, "npc/k", 2);
+        LoadNPCSpriteSheets(engine, Queens, "npc/q", 2);
+        LoadNPCSpriteSheets(engine, Princes, "npc/p", 2);
+        LoadNPCSpriteSheets(engine, Princesses, "npc/pr", 2);
+        LoadNPCSpriteSheets(engine, Kids, "npc/c", 7);
+        LoadNPCSpriteSheets(engine, Seniors, "npc/o", 5);
+        LoadNPCSpriteSheets(engine, People, "npc/t", 24);
 
         // Load environment images.
         DoorGreyClosed = engine.loadImage("environment/DoorGreyClosed.png");
@@ -119,6 +180,33 @@ public class GameImage {
         ChestFront = engine.loadImage("environment/ChestFront.png");
         ChestBack = engine.loadImage("environment/ChestBack.png");
         ChestSide = engine.loadImage("environment/ChestSide.png");
+    }
+
+    private void LoadNPCSpriteSheets(HookshotHeroesGameEngine engine, HashMap<Integer, NPCSprites> src, String fileName, int count){
+        for (int i = 1; i <= count; i++){
+            var image = engine.loadImage(fileName + i + ".png");
+            src.put(i, GetNPCSprites(engine, image));
+        }
+    }
+
+    private NPCSprites GetNPCSprites(HookshotHeroesGameEngine engine, Image image){
+        var up = new Image[3];
+        for(int i = 0; i < 3; i++) {
+            up[i] = engine.subImage(image, i*NPC_WIDTH, 0, NPC_WIDTH, NPC_HEIGHT);
+        }
+        var right = new Image[3];
+        for(int i = 0; i < 3; i++) {
+            right[i] = engine.subImage(image, i*NPC_WIDTH, NPC_HEIGHT, NPC_WIDTH, NPC_HEIGHT);
+        }
+        var down = new Image[3];
+        for(int i = 0; i < 3; i++) {
+            down[i] = engine.subImage(image, i*NPC_WIDTH, NPC_HEIGHT*2, NPC_WIDTH, NPC_HEIGHT);
+        }
+        var left = new Image[3];
+        for(int i = 0; i < 3; i++) {
+            left[i] = engine.subImage(image, i*NPC_WIDTH, NPC_HEIGHT*3, NPC_WIDTH, NPC_HEIGHT);
+        }
+        return new NPCSprites(up, left, right, down);
     }
 
     // Load from sprite sheet.
@@ -311,5 +399,12 @@ public class GameImage {
         Smokes[0] = engine.loadImage("smoke1.png");
         Smokes[1] = engine.loadImage("smoke2.png");
         Smokes[2] = engine.loadImage("smoke3.png");
+    }
+
+    public NPCSprites GetRandomNPC(HashMap<Integer, NPCSprites> map){
+        Random r = new Random();
+        int number = map.size();
+        var index = r.nextInt(1, number + 1);
+        return map.get(index);
     }
 }
