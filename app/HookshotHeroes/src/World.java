@@ -146,6 +146,8 @@ public class World implements IWorld {
                         } else {
                             Engine.PauseEngine();
                             // Trigger end game screen.
+                            Minotaur.BossIsDead = false;
+                            LevelSeven.FromLevelSeven = false;
                             IsEndGame = true;
                         }
                         return;
