@@ -37,6 +37,11 @@ public class World implements IWorld {
 
     private int _idx = 0;
 
+    public boolean IsEndGame = false;
+
+    // List to store eliminated players.
+    public ArrayList<Player> EliminatedPlayers;
+
     public World(int width, int height, HookshotHeroesGameEngine engine, GameImage gameImage, GameAudio gameAudio, GameOptions options, ILevel level){
         Engine = engine;
         GameImage = gameImage;
@@ -52,6 +57,7 @@ public class World implements IWorld {
         AudioRequests = new LinkedList<>();
         EliminationRequests = new LinkedList<>();
         SpawnRequests = new LinkedList<>();
+        EliminatedPlayers = new ArrayList<>();
 
         CurrentLevel = level;
     }
@@ -139,10 +145,8 @@ public class World implements IWorld {
                             Engine.InitializeLevel(Engine.GameOptions, nextLevel, GetPlayers(), GetNPCPlayers());
                         } else {
                             Engine.PauseEngine();
-                            JOptionPane.showMessageDialog(Engine.mFrame, "YOU WIN!!!");
-                            // Restart new game.
-                            Engine.InitializeWorld(Engine.GameOptions);
-                            Engine.ResumeEngine();
+                            // Trigger end game screen.
+                            IsEndGame = true;
                         }
                         return;
                     }
@@ -263,16 +267,16 @@ public class World implements IWorld {
         if (player.WhoAmI() == WorldObjectType.Player || player.WhoAmI() == WorldObjectType.NPC) {
             // Player game over.
             Engine.PauseEngine();
-            JOptionPane.showMessageDialog(Engine.mFrame, player.GetName() + " eliminated!!!");
-            Engine.ResumeEngine();
+            JOptionPane.showMessageDialog(Engine.mFrame, player.GetName() + " eliminated!");
+            EliminatedPlayers.add((Player)player);
             RemoveObject(player);
             // Game over - no players left.
             if (GetPlayerCount() == 0 || GameOptions.MissionMode && GetNPCPlayerCount() == 0) {
-                JOptionPane.showMessageDialog(Engine.mFrame, "Mission Failed!!!");
-                // Restart new game.
-                Engine.InitializeWorld(Engine.GameOptions);
                 Minotaur.BossIsDead = false;
                 LevelSeven.FromLevelSeven = false;
+                IsEndGame = true;
+            } else {
+                Engine.ResumeEngine();
             }
         }
         if (player.WhoAmI() == WorldObjectType.Mine || player.WhoAmI() == WorldObjectType.Cabbage
@@ -299,6 +303,50 @@ public class World implements IWorld {
         if (toRemove != null) {
             Objects.removeIf(iWorldObject -> iWorldObject.GetName().equals(toRemove.GetName()));
         }
+    }
+
+    @Override
+    public boolean IsEndGame() {
+        return IsEndGame;
+    }
+
+    @Override
+    public void PrintResults(int width, int height, long time) {
+        Engine.changeBackgroundColor(Color.darkGray);
+        Engine.clearBackground(width, height);
+
+        Engine.changeColor(Color.ORANGE);
+        // Check if we win or lose.
+        if (GetPlayerCount() == 0 || GameOptions.MissionMode && GetNPCPlayerCount() == 0){
+            Engine.drawText(200, 100, "GAME OVER", "Arial", 32);
+
+        } else {
+            Engine.drawText(200, 100, "VICTORY", "Arial", 32);
+        }
+        Engine.drawText(200, 150, "Time: " + time + " Seconds", "Arial", 12);
+        var list = new ArrayList<Player>();
+        list.addAll(GetPlayers());
+        list.addAll(EliminatedPlayers);
+        list.addAll(GetNPCPlayers());
+        Collections.sort(list, new Comparator<Player>(){
+            public int compare(Player p1, Player p2){
+                if(p1.Score == p2.Score)
+                    return 0;
+                return p1.Score < p2.Score ? 1 : -1;
+            }
+        });
+        for (int i = 0; i < list.size(); i++) {
+            Engine.drawText(200, 200 + i * 50, list.get(i).GetName() + "'s Score: " + list.get(i).Score, "Arial", 12);
+        }
+        Engine.changeColor(Color.YELLOW);
+        Engine.drawText(200, 350, "Press Space to Restart", "Arial", 12);
+    }
+
+    @Override
+    public void HandleRestart() {
+        IsEndGame = false;
+        Engine.ResumeEngine();
+        Engine.InitializeWorld(GameOptions);
     }
 
     // Remove played animations.

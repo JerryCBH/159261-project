@@ -80,7 +80,7 @@ public class HookshotHeroesGameEngine extends GameEngine {
 
     @Override
     public void update(double dt) {
-        if (!_pause){
+        if (!_pause && !_world.IsEndGame()){
             // Handle animations and sprites.
             _world.UpdateObjects(dt);
             _world.UpdateAnimationRequests(dt);
@@ -89,19 +89,25 @@ public class HookshotHeroesGameEngine extends GameEngine {
 
     @Override
     public void paintComponent() {
-        changeBackgroundColor(Color.darkGray);
-        clearBackground(_width, _height);
+        if (!_world.IsEndGame()) {
+            changeBackgroundColor(Color.darkGray);
+            clearBackground(_width, _height);
 
-        // Render objects, play animations or audios.
-        _world.RenderLevel();
-        _world.RenderObjects();
-        _world.PlayAnimation();
-        _world.PlayAudio();
+            // Render objects, play animations or audios.
+            _world.RenderLevel();
+            _world.RenderObjects();
+            _world.PlayAnimation();
+            _world.PlayAudio();
 
-        drawText(10, 615, _world.GetLevel().GetLevelName() + " Time: " + _stopWatch.GetTimeInSeconds(), "Arial", 12);
-        var players = _world.GetPlayers();
-        for (int i = 0; i < players.size(); i++) {
-            drawText(350 + i * 120, 615, players.get(i).GetName() + "'s score: " + players.get(i).Score, "Arial", 12);
+            drawText(10, 615, _world.GetLevel().GetLevelName() + " Time: " + _stopWatch.GetTimeInSeconds(), "Arial", 12);
+            var players = _world.GetPlayers();
+            for (int i = 0; i < players.size(); i++) {
+                drawText(350 + i * 120, 615, players.get(i).GetName() + "'s score: " + players.get(i).Score, "Arial", 12);
+            }
+        }
+        else{
+            // Result screen.
+            _world.PrintResults(_width, _height, _stopWatch.GetTimeInSeconds());
         }
     }
 
@@ -113,6 +119,9 @@ public class HookshotHeroesGameEngine extends GameEngine {
         if (!_pause) {
             // Handle key press events.
             _world.HandleKeyEvents(event);
+        }
+        if (event.getKeyCode() == KeyEvent.VK_SPACE){
+            _world.HandleRestart();
         }
     }
 

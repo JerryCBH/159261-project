@@ -40,7 +40,6 @@ public class NPCPlayer extends Player implements IWorldObject{
     public LinkedList<IWorldObject> EliminationRequests;
     public ArrayList<AnimationRequest> AnimationRequests;
     public IWorld World;
-    public int Score = 0;
     public IStateMachine StateMachine;
 
     public NPCPlayer(String name, GridCell startCell, Skin skin, KeyBinding keyBinding,

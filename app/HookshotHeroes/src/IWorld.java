@@ -21,4 +21,7 @@ public interface IWorld {
     ILevel GetLevel();
     ArrayList<Player> GetPlayers();
     void RemoveObject(IWorldObject toRemove);
+    boolean IsEndGame();
+    void PrintResults(int width, int height, long time);
+    void HandleRestart();
 }
