@@ -1,5 +1,5 @@
 # Getting Started
-# Authors
+# Contributors
 In alphabetical order:
 - Bryce Cameron [@bryce496913](https://www.github.com/bryce496913)
 - Helen McCartney [@hmccartney](https://www.github.com/hmccartney)

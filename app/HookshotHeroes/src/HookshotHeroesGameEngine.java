@@ -120,7 +120,7 @@ public class HookshotHeroesGameEngine extends GameEngine {
             // Handle key press events.
             _world.HandleKeyEvents(event);
         }
-        if (event.getKeyCode() == KeyEvent.VK_SPACE){
+        if (event.getKeyCode() == KeyEvent.VK_SPACE && _world.IsEndGame()){
             _world.HandleRestart();
         }
     }
