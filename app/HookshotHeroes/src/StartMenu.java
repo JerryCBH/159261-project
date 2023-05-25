@@ -42,7 +42,7 @@ public class StartMenu{
 
         easyModeButton = new JButton("Single Player Game");
         normalModeButton = new JButton("Double Player Game");
-        missionModeButton = new JButton("Mission Game");
+        missionModeButton = new JButton("Quest Game");
         helpButton = new JButton("Help");
         quitButton = new JButton("Quit");
 
