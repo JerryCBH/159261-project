@@ -70,7 +70,12 @@ public class BaseWorldBuilder {
             }
             if (type == WorldObjectType.Skeleton) {
                 // Can move across lava grids.
-                world.Objects.add(new Skeleton("Lava Guard", world.CurrentLevel.GetNextLevelInfo()[0].Exit,
+                var exit = world.CurrentLevel.GetNextLevelInfo()[0].Exit;
+                if (world.CurrentLevel instanceof LevelEight) {
+                    exit.Row += 1;
+                    exit.Column -= 3;
+                }
+                world.Objects.add(new Skeleton("Lava Guard", exit,
                         new Skin(world.GameImage.SkeletonUpSprites, world.GameImage.SkeletonLeftSprites, world.GameImage.SkeletonRightSprites, world.GameImage.SkeletonDownSprites, world.GameImage.Health, world.CELL_WIDTH, world.CELL_HEIGHT),
                         new KeyBinding(KeyEvent.VK_UP, KeyEvent.VK_LEFT, KeyEvent.VK_RIGHT, KeyEvent.VK_DOWN, KeyEvent.VK_PERIOD),
                         world.CurrentLevel.GetWallCells(), new ArrayList<>(), world.CurrentLevel.GetWallCells(), world.AudioRequests, world.EliminationRequests, world.AnimationRequests, world
