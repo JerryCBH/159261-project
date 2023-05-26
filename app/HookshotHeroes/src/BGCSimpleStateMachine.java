@@ -10,13 +10,13 @@ public class BGCSimpleStateMachine implements IStateMachine{
     private double _commentTime = 0;
 
     // Time of NPC reaction during patrol.
-    public double PATROL_REACTION_TIME = 1;
+    public double PATROL_REACTION_TIME = 0.5;
     // Time of NPC reaction during pursuit.
-    public double SEEK_REACTION_TIME = 0.5;
+    public double SEEK_REACTION_TIME = 0.15;
     // Time it takes to make the next comment
     public double COMMENT_REACTION_TIME = 15;
     // Sight of NPC
-    public int SIGHT = 25;
+    public int SIGHT = 15;
     // Waiting range of NPC.
     public int WAIT_RANGE = 3;
     // NPC current state.
