@@ -1,5 +1,7 @@
 # Hookshot Heroes
 
+<img src="Images/GameLogo.png" alt="app-screen" width="300" />
+
 Hookshot Heroes is a classic maze puzzle solver game with RPG elements and a fun story.
 
 In a realm shrouded in mystery, Lidia, a brave and determined heroine, embarks on a perilous journey. 
@@ -8,7 +10,7 @@ Empowered by the legendary "hookshot," a grappling hook that fused to her arm, L
 With each triumph over enemies and the acquisition of precious loot, she inches closer to the ultimate prize. Driven by unwavering bravery, 
 Lidia's quest for glory unfolds as she unravels the depths of the dungeons, leaving an indelible mark upon the annals of Eldoria's history.
 
-The game can be launched from IntelliJ IDE by electing the "Run" configuration and pressing the green Run button.
+The game can be launched from IntelliJ IDE by selecting the "Run" configuration and pressing the green Run button.
 Alternatively, the game JAR file artifact can be built from the IDE and then run the command:
 
 ```shell
@@ -51,6 +53,30 @@ Source repository: https://github.com/JerryCBH/159261-project
 
 ---
 ## How to play
+
+After launching the game, the main menu screen will be loaded:
+
+<img src="Images/startscreen.png" alt="app-screen" width="250" />
+
+### Single Player Mode
+
+Navigate the dungeons solo, collecting as many coins and treasure, as quickly as
+you can to complete the game with the best score.
+
+### Double Player Mode
+
+You and a friend will compete against each other to see who can get the highest
+score. Pick between collecting coins or opening chests or getting to the exit
+the fastest. The first player to the exit will end the level for both players.
+Level knowledge, speed and tactics, will help you secure the win.
+
+### Quest Mode
+
+Help Avalon escape the Dungeon. This can be played either in Single or Double player.
+Avalon will follow you and your friend. Watch over and guide her through the dungeons.
+
+### Controls
+
 Player One: Use 'W', 'S', 'D' and 'A' to move Lidia around the dungeon.
 Use 'X' to fire the 'hookshot'
 
@@ -71,24 +97,7 @@ Collect plant baskets for extra lives.
 Collision with bombs, results in a loss of life.
 Landing in the lava, results in a loss of life.
 
-### Single Player Mode:
-
-Navigate the dungeons solo, collecting as many coins and treasure, as quickly as
-you can to complete the game with the best score.
-
-### Double Player Mode:
-
-You and a friend will compete against each other to see who can get the highest
-score. Pick between collecting coins or opening chests or getting to the exit
-the fastest. The first player to the exit will end the level for both players.
-Level knowledge, speed and tactics, will help you secure the win.
-
-### Quest Mode:
-
-Help Avalon escape the Dungeon. This can be played either in Single or Double player.
-Avalon will follow you and your friend. Watch over and guide her through the dungeons.
-
-### Game Options:
+### Game Options
 
 - Change from Single Player Mode to Double Player Mode
 - Enable / Disable music
