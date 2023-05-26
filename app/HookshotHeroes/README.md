@@ -9,11 +9,14 @@ With each triumph over enemies and the acquisition of precious loot, she inches 
 Lidia's quest for glory unfolds as she unravels the depths of the dungeons, leaving an indelible mark upon the annals of Eldoria's history.
 
 The game can be launched from IntelliJ IDE by electing the "Run" configuration and pressing the green Run button.
-Alternatively, the game JAR file artifact can be built from the IDE and run the command:
+Alternatively, the game JAR file artifact can be built from the IDE and then run the command:
 
 ```shell
 java -jar HookshotHeroes.jar
 ```
+
+Source repository: https://github.com/JerryCBH/159261-project
+
 ---
 ## Game Features
 - Use Grapple to hook onto walls and jump across obstacles.
@@ -28,7 +31,7 @@ java -jar HookshotHeroes.jar
 - Two end-game levels after defeating all the boss.
 
 ## About Game Design
-- Non-linear game progression. Example: In level 4 we have two doors that lead to different levels. This is makes the game more non-linear. This can be made more complex by adding multiple doors in each level. May be hidden Easter egg level etc.
+- Non-linear game progression. Example: In level 4 we have two doors that lead to different levels. This makes the game more non-linear. This can be made more complex by adding multiple doors in each level, for instance hidden Easter egg levels.
 - NPC AI has patrol, seek, wait states. More states in state machines can be added and more variety of state machines can be added. We have 3 state machines: NPC enemy, NPC follower, BGC (background character) follower / wonderer. There are parameters in state machine classes that tunes the behaviour via reaction time: how long to make a decision during each state. Increasing the reaction time makes the character slower and less agile. Possible improvements outside scope of this project: Introduce cruising state for flying terror that goes around in path of large circle, mimic flying behaviours. Add routing algorithms, currently the NPC calculates the shortest Euclidean distance and not considering path blocked by obstacle, so npc can get stuck from time to time.
 - Friendly NPC can make random comments and reactions. Comments are from chat GPT. Each ChatGPT request runs on a different thread, no penalty on performance. The comments are made when the NPC state machine state changes or if the NPC health / score increase or decrease. There is also an idle timer, so NPC will say something every couple of seconds. This is made more random by adding random number generator to decide to speak or not when comment timer is up. We can make it more realistic by introducing more comment types. We have about 5 comment types to make remarks on different situations. If ChatGPT fails, there is a backup comment dictionary in the code.
 - Comment speech bubble and score notifications are displayed beside characters on the screen in descending order. They follow characters.
