@@ -94,7 +94,7 @@ public class StartMenu{
             public void actionPerformed(ActionEvent e) {
                 try {
                     // Open the help.txt file
-                    File helpFile = new File("app/HookshotHeroes/resources/help.txt");
+                    File helpFile = new File("../../app/HookshotHeroes/resources/help.txt");
                     Desktop.getDesktop().open(helpFile);
                 } catch (IOException ex) {
                     // Handle any exceptions
