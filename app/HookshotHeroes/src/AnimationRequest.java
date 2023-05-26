@@ -1,3 +1,6 @@
+import java.util.Comparator;
+import java.util.Date;
+
 /****************************************************************************************
  * Class for storing animation requests.
  ****************************************************************************************/
@@ -18,9 +21,12 @@ public class AnimationRequest {
     public Guide Guide;
     // Notification Type.
     public NotificationType NotificationType;
+    // Creation timestamp.
+    public final Date CreatedTime;
     public AnimationRequest(WorldObjectType type, GridCell cell, double seconds){
         Type = type;
         Cell = cell;
         SecondsToPlay = seconds;
+        CreatedTime = new Date();
     }
 }

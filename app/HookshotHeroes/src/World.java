@@ -330,13 +330,8 @@ public class World implements IWorld {
         list.addAll(GetPlayers());
         list.addAll(EliminatedPlayers);
         list.addAll(GetNPCPlayers());
-        Collections.sort(list, new Comparator<Player>(){
-            public int compare(Player p1, Player p2){
-                if(p1.Score == p2.Score)
-                    return 0;
-                return p1.Score < p2.Score ? 1 : -1;
-            }
-        });
+        // Sort by scores in descending order.
+        Collections.sort(list, Comparators.GetPlayerComparator());
         for (int i = 0; i < list.size(); i++) {
             Engine.drawText(200, 200 + i * 50, list.get(i).GetName() + "'s Score: " + list.get(i).Score, "Arial", 12);
         }
@@ -463,6 +458,14 @@ public class World implements IWorld {
                     DrawGuideBubble(Engine, request.Guide);
                 }
             }
+            // Sort in descending order.
+            Collections.sort(lidiaList, Comparators.GetAnimationRequestComparator());
+            Collections.sort(shuraList, Comparators.GetAnimationRequestComparator());
+            Collections.sort(avaList, Comparators.GetAnimationRequestComparator());
+            Collections.sort(lidiaNotifications, Comparators.GetAnimationRequestComparator());
+            Collections.sort(shuraNotifications, Comparators.GetAnimationRequestComparator());
+            Collections.sort(avaNotifications, Comparators.GetAnimationRequestComparator());
+
             // Show speech bubbles in sequence.
             DrawSpeechBubblesFromList(lidiaList);
             DrawSpeechBubblesFromList(shuraList);
