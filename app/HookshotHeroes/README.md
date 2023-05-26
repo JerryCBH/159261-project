@@ -49,6 +49,49 @@ Source repository: https://github.com/JerryCBH/159261-project
 - Quest characters follows closet players in quest, can jump with hook-shot, tracks a score.
 - Consumable items like coins / vegetable cabbages / bombs are generated randomly. Improvements can be made such that they spawn on walkable area only. They could spawn inside walls and become inaccessible.
 
+---
+## How to play
+Player One: Use 'W', 'S', 'D' and 'A' to move Lidia around the dungeon.
+Use 'X' to fire the 'hookshot'
+
+Player Two: Use the arrow keys to move Shura around the dungeon
+Use '.' to fire the 'hookshot'
+
+The hookshot can be used to:
+- jump over the lava
+- to collect items
+- destroy bombs
+- attack enemies
+
+Be careful though, as the hookshot only has a limited range.
+
+Collect coins to increase your score.
+Open treasurers to boost your score and health.
+Collect plant baskets for extra lives.
+Collision with bombs, results in a loss of life.
+Landing in the lava, results in a loss of life.
+
+### Single Player Mode:
+
+Navigate the dungeons solo, collecting as many coins and treasure, as quickly as
+you can to complete the game with the best score.
+
+### Double Player Mode:
+
+You and a friend will compete against each other to see who can get the highest
+score. Pick between collecting coins or opening chests or getting to the exit
+the fastest. The first player to the exit will end the level for both players.
+Level knowledge, speed and tactics, will help you secure the win.
+
+### Quest Mode:
+
+Help Avalon escape the Dungeon. This can be played either in Single or Double player.
+Avalon will follow you and your friend. Watch over and guide her through the dungeons.
+
+### Game Options:
+
+- Change from Single Player Mode to Double Player Mode
+- Enable / Disable music
 
 ---
 ## Group Member's Contributions
