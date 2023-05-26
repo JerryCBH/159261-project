@@ -33,7 +33,7 @@ public class CountryRoad extends BaseLevel implements ILevel{
                 Engine.drawImage(GameImage.Cobble, x, y);
             }
         }
-        for (int i = 0; i < 17; i++){
+        for (int i = 0; i < 16; i++){
             Engine.drawImage(GameImage.Road, 250,0 + i*30);
         }
         for (int x = 0; x < 600; x += 100) {
@@ -61,6 +61,8 @@ public class CountryRoad extends BaseLevel implements ILevel{
         super.AddWallCell(500, 150);
         Engine.drawImage(GameImage.Bags, 390, 220);
         super.AddWallCell(390, 220);
+        Engine.drawImage(GameImage.Island, 450, 275);
+        super.AddWallCell(450, 275);
 
         Engine.drawImage(GameImage.CastleDoor, 290,565);
         Engine.drawImage(GameImage.CastleDoor, 305,565);

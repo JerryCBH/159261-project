@@ -9,7 +9,7 @@ public class GameImage {
     public final Image SnakeHead, SnakeDot, Apple, Health, Mine, Broccoli, Explosion, Player, Lidia, Shura, Minotaur, MinotaurWithAxe, Barrels, Cabbage, Bomb, Chests, Skeleton, FlyingTerror, Ava, Sarah;
     public final Image DoorGreyClosed, DoorGreyOpen, floor, lava, wallGreyLeftSide, wallGreyRightSide, wallGreyFront, DoorGreyOpenSide, DoorGreyClosedSide, DoorGreyClosedLeftSide, DoorGreyClosedRightSide, DoorGreyOpenLeftSide, ChestFront, ChestSide, ChestBack;
     public final Image CastleItems1, CastleItems2, CastleFloor, CastleWall, CastleSideWall, CastleColumn, CastleDoor, CastleWallFlags, CastleRedCarpet, CastleCarpet, CastleKnight, CastleDesk, CastleBookShelf, CastleFlower1, CastleFlower2, SilverChest, Country1;
-    public final Image Grass, Grass2, Water, Terrain, Water1, Road, Wood, Market, Market1, Market2, Wheat, Cobble, Bags;
+    public final Image Grass, Grass2, Water, Terrain, Water1, Road, Wood, Market, Market1, Market2, Wheat, Cobble, Bags, Island;
     public HashMap<Integer, NPCSprites> Aristocrats;
     public HashMap<Integer, NPCSprites> Kings;
     public HashMap<Integer, NPCSprites> Queens;
@@ -131,6 +131,7 @@ public class GameImage {
         Market2 = engine.subImage(Country1, 385, 290, 127, 40);
         Cobble = engine.subImage(Terrain, 580, 750, 90, 80);
         Bags = engine.subImage(Country1, 225, 326, 64, 27);
+        Island = engine.subImage(Water, 416, 35, 65, 60);
 
         LoadExplosionSpriteSheet(engine);
         LoadPlayerSpriteSheet(engine);
