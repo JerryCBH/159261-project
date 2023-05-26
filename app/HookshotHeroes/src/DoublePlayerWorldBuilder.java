@@ -114,6 +114,8 @@ public class DoublePlayerWorldBuilder extends BaseWorldBuilder implements IWorld
             super.AddBGC(world, NPCType.Child, 9);
             super.AddBGC(world, NPCType.Old, 5);
             super.AddBGC(world, NPCType.Townfolk, 15);
+            super.AddObjects(world, WorldObjectType.Cabbage, 5);
+            super.AddObjects(world, WorldObjectType.Coin, 15);
             if (world.GameOptions.MissionMode) {
                 world.Objects.add(new Guide(CharacterNames.SARAH, "You made it!!!", new GridCell(50, 39),
                         new Skin(world.GameImage.SarahSprites, world.CELL_WIDTH, world.CELL_HEIGHT)));

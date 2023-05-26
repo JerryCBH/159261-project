@@ -9,7 +9,7 @@ public class GameImage {
     public final Image SnakeHead, SnakeDot, Apple, Health, Mine, Broccoli, Explosion, Player, Lidia, Shura, Minotaur, MinotaurWithAxe, Barrels, Cabbage, Bomb, Chests, Skeleton, FlyingTerror, Ava, Sarah;
     public final Image DoorGreyClosed, DoorGreyOpen, floor, lava, wallGreyLeftSide, wallGreyRightSide, wallGreyFront, DoorGreyOpenSide, DoorGreyClosedSide, DoorGreyClosedLeftSide, DoorGreyClosedRightSide, DoorGreyOpenLeftSide, ChestFront, ChestSide, ChestBack;
     public final Image CastleItems1, CastleItems2, CastleFloor, CastleWall, CastleSideWall, CastleColumn, CastleDoor, CastleWallFlags, CastleRedCarpet, CastleCarpet, CastleKnight, CastleDesk, CastleBookShelf, CastleFlower1, CastleFlower2, SilverChest, Country1;
-    public final Image Grass, Grass2, Water, Terrain, Water1, Road, Wood, Market, Market1, Market2, Wheat, Cobble, Bags, Island;
+    public final Image Grass, Grass2, Water, Terrain, Water1, Road, Wood, Market, Market1, Market2, Wheat, Cobble, Bags, Island, Lake, Waterfall, Cliff;
     public HashMap<Integer, NPCSprites> Aristocrats;
     public HashMap<Integer, NPCSprites> Kings;
     public HashMap<Integer, NPCSprites> Queens;
@@ -55,6 +55,7 @@ public class GameImage {
     public Image[] AvaDownSprites;
     public Image[] SarahSprites;
     public Image[] Smokes;
+    public Image[] WaterfallSprites;
     public static final int PLAYER_WIDTH = 48;
     public static final int PLAYER_HEIGHT = 56;
     public static final int LIDIA_WIDTH = 64;
@@ -132,6 +133,9 @@ public class GameImage {
         Cobble = engine.subImage(Terrain, 580, 750, 90, 80);
         Bags = engine.subImage(Country1, 225, 326, 64, 27);
         Island = engine.subImage(Water, 416, 35, 65, 60);
+        Lake = engine.subImage(Terrain, 96, 516, 95, 90);
+        Waterfall = engine.subImage(Water, 10, 0, 90, 160);
+        Cliff = engine.subImage(Terrain, 865, 739, 95, 90);
 
         LoadExplosionSpriteSheet(engine);
         LoadPlayerSpriteSheet(engine);
@@ -147,6 +151,7 @@ public class GameImage {
         LoadAvaSpriteSheet(engine);
         LoadSarahSpriteSheet(engine);
         LoadSmokes(engine);
+        LoadWaterfallSpriteSheet(engine);
 
         Aristocrats = new HashMap<>();
         Kings = new HashMap<>();
@@ -217,6 +222,13 @@ public class GameImage {
             for (int j = 0; j < 10; j++) {
                 ExplosionSprites[j + 10 * i] = engine.subImage(Explosion, j*100, i*100, 100, 100);
             }
+        }
+    }
+
+    private void LoadWaterfallSpriteSheet(HookshotHeroesGameEngine engine){
+        WaterfallSprites = new Image[4];
+        for (int j = 0; j < 4; j++) {
+            WaterfallSprites[j] = engine.subImage(Water, j*96, 0, 96, 193);
         }
     }
 

@@ -1,4 +1,5 @@
 public class CountryRoad extends BaseLevel implements ILevel{
+    private int _idx = 0;
     public CountryRoad (HookshotHeroesGameEngine engine, GameImage gameImage, GameOptions gameOptions){
         super(engine, gameImage, gameOptions);
         super.NextLevels = new NextLevelInfo[] { new NextLevelInfo(new GridCell(0, 27), new HeroWelcome(engine, gameImage, gameOptions)) };
@@ -40,6 +41,13 @@ public class CountryRoad extends BaseLevel implements ILevel{
             Engine.drawImage(GameImage.Water1, x, 250);
             Engine.drawImage(GameImage.Water1, x, 300);
         }
+        for (int x = 0; x < 200; x += 70) {
+            Engine.drawImage(GameImage.Cliff, x, 350);
+            super.AddWallCell(x, 350);
+            super.AddWallCell(x + 40, 350);
+            super.AddWallCell(x, 390);
+            super.AddWallCell(x + 40, 390);
+        }
         Engine.drawImage(GameImage.Wood, 250,250);
         Engine.drawImage(GameImage.Market, 450, 20);
         super.AddWallCell(450, 20);
@@ -63,9 +71,19 @@ public class CountryRoad extends BaseLevel implements ILevel{
         super.AddWallCell(390, 220);
         Engine.drawImage(GameImage.Island, 450, 275);
         super.AddWallCell(450, 275);
+        Engine.drawImage(GameImage.Lake, 55, 460);
 
         Engine.drawImage(GameImage.CastleDoor, 290,565);
         Engine.drawImage(GameImage.CastleDoor, 305,565);
+
+        var offset = 10;
+        if (_idx / offset >= GameImage.WaterfallSprites.length) {
+            _idx = 0;
+        }
+        Engine.drawImage(GameImage.WaterfallSprites[_idx / offset], 55, 350);
+        if (!Engine.IsPause()) {
+            _idx++;
+        }
     }
 
     @Override
