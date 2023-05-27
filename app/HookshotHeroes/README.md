@@ -17,7 +17,7 @@ Alternatively, the game JAR file artifact can be built from the IDE and then run
 java -jar HookshotHeroes.jar
 ```
 
-Source repository: https://github.com/JerryCBH/159261-project
+GitHub repository (private): https://github.com/JerryCBH/159261-project
 
 ---
 ## Game Features
@@ -51,6 +51,8 @@ Source repository: https://github.com/JerryCBH/159261-project
 - Quest characters follows closet players in quest, can jump with hook-shot, tracks a score.
 - Consumable items like coins / vegetable cabbages / bombs are generated randomly. Improvements can be made such that they spawn on walkable area only. They could spawn inside walls and become inaccessible.
 
+## Game Architecture
+![architecture.png](Images%2Farchitecture.png)
 ---
 ## How to play
 
