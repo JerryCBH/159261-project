@@ -1,6 +1,12 @@
 import javax.swing.*;
+import javax.swing.text.DefaultCaret;
+import javax.swing.text.Style;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 
 /****************************************************************************************
  * Builder for the default menu bar.
@@ -125,64 +131,11 @@ public class DefaultMenuBarBuilder implements IMenuBarBuilder{
         var menuHelpHow = new JMenuItem(new AbstractAction("How to play") {
             @Override
             public void actionPerformed(ActionEvent e) {
-                engine.PauseEngine();
-                JOptionPane.showMessageDialog(engine.mFrame, """
-                        Welcome to Hookshot Heroes!
-                                                
-                        In a realm shrouded in mystery, Lidia, Shura, brave and determined heroines,
-                        embarks on a perilous journey. Drawn by the allure of hidden treasures
-                        and ancient secrets, they fearlessly enter the dungeons. Empowered by the
-                        legendary "hookshot," a grappling hook that fused to her arm, Lidia defies
-                        danger and navigates treacherous terrain. With each triumph over enemies
-                        and the acquisition of precious loot, she inches closer to the ultimate prize.
-                        Driven by unwavering bravery, Lidia's quest for glory unfolds as she unravels
-                        the depths of the dungeons, leaving an indelible mark upon the annals of
-                        Eldoria's history.
-                                                
-                        Instructions:
-                                                
-                        Player One: Use 'W', 'S', 'D' and 'A' to move Linda around the dungeon.
-                        Use 'X' to fire the 'hookshot'
-                                                
-                        Player Two: Use the arrow keys to move Shura around the dungeon
-                        Use '.' to fire the 'hookshot'
-                            The hookshot can be used to:
-                                - jump over the lava
-                                - to collect items
-                                - destroy bombs
-                                - attack enemies
-                            Be careful though, as the hookshot only has a limited range.
-                                                
-                        Collect coins to increase your score
-                        Open treasurers to boost your score
-                        Collect plant baskets for extra lives
-                        Collision with bombs, results in a loss of life
-                        Landing in the lava, results in a loss of life
-                                                
-                        Single Player Mode:
-                                                
-                        Navigate the dungeons solo, collecting as many coins and treasure, as quickly as
-                        you can to complete the game with the best score.
-                                                
-                        Double Player Mode:
-                                                
-                        You and a friend will compete against each other to see who can get the highest
-                        score. Pick between collecting coins or opening chests or getting to the exit
-                        the fastest. The first player to the exit will end the level for both players.
-                        Level knowledge, speed and tactics, will help you secure the win.
-                                                
-                        Quest Mode:
-                                                
-                        Help Ava escape the Dungeon. This can be played either in Single or Double player.
-                        Ava will follow you and your friend. Watch over and guide her through the dungeons.
-                                                
-                        Game Options:
-                                                
-                        - Change from Single Player Mode to Double Player Mode
-                        - Enable / Disable music
-                                                
-                        """);
-                engine.ResumeEngine();
+                try {
+                    CreateHelpScreen();
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
             }
         });
         var menuHelpAbout = new JMenuItem(new AbstractAction("About") {
@@ -268,5 +221,40 @@ public class DefaultMenuBarBuilder implements IMenuBarBuilder{
     // Copy data from game options to check box.
     private void SetCheckBox(boolean state, JCheckBox checkBox){
         checkBox.setSelected(state);
+    }
+
+    public static void CreateHelpScreen() throws IOException {
+        JFrame frame = new JFrame("Help");
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        JPanel panel = new JPanel();
+        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+        JTextArea textArea = new JTextArea(15, 50);
+        textArea.setWrapStyleWord(true);
+        textArea.setEditable(false);
+        Font defaultFont = new JMenu().getFont();
+        textArea.setFont(defaultFont);
+        JScrollPane scroller = new JScrollPane(textArea);
+        scroller.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+        scroller.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        panel.add(scroller);
+        frame.getContentPane().add(BorderLayout.CENTER, panel);
+        frame.pack();
+        frame.setVisible(true);
+        frame.setResizable(false);
+        frame.setLocationRelativeTo(null);
+
+        var stream = DefaultMenuBarBuilder.class.getResourceAsStream("help.txt");
+        var streamReader = new InputStreamReader(stream, "UTF-8");
+        BufferedReader in = new BufferedReader(streamReader);
+        var sb = new StringBuilder();
+        for (String line; (line = in.readLine()) != null;) {
+            sb.append(line);
+            sb.append(System.lineSeparator());
+        }
+        textArea.setText(sb.toString());
+        textArea.setCaretPosition(0);
+        in.close();
+        streamReader.close();
+        stream.close();
     }
 }

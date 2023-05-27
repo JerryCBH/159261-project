@@ -118,7 +118,6 @@ Destroy bombs or damage enemy with hookshot increases score by 10.
 
 ---
 ## Group Member's Contributions
-In alphabetical order.
 
 Bryce:
 -	level layout design.
@@ -127,6 +126,11 @@ Bryce:
 -	Boss fights design.
 -	Documentations.
 -	General bug fixes.
+-	Play testing.
+
+Josh:
+-	Game design and ideas.
+-	Grapple mechanism and design.
 -	Play testing.
 
 Helen:
@@ -142,9 +146,4 @@ Jerry:
 -	Game AI designs.
 -	GitHub repository setup and integration of code from team members.
 -	Bug fixes.
--	Play testing.
-
-Josh:
--	Game design and ideas.
--	Grapple mechanism and design.
 -	Play testing.
