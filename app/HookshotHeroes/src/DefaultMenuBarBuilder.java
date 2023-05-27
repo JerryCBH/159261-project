@@ -190,11 +190,23 @@ public class DefaultMenuBarBuilder implements IMenuBarBuilder{
             public void actionPerformed(ActionEvent e) {
                 engine.PauseEngine();
                 JOptionPane.showMessageDialog(engine.mFrame, """
-                        Icons, sprites and sound effects: https://opengameart.org/
+                        Icons, terrain sprites and sound effects: https://opengameart.org/
                         
-                        Lidia and Shura sprite models:
+                        Lidia, Shura and characters sprite models:
                         https://opengameart.org/content/lpc-heroine
                         https://opengameart.org/content/lpc-heroine-2
+                        https://opengameart.org/content/whispers-of-avalon-archer-sprite
+                        https://opengameart.org/content/edited-and-extended-24x32-character-pack
+                        https://opengameart.org/content/sara-2-0
+                        
+                        Theme Music:
+                        https://soundcloud.com/video-background-music/scarey-atmospheres-chapter-3
+                        https://opengameart.org/content/lava-area-theme
+                        https://opengameart.org/content/pretty-maiden-medievalfantasy-game-cheerful-opening
+                        
+                        MIT License
+                        
+                        Copyright (c) 2023 Jerry Hsiung
                         
                         Permission is hereby granted, free of charge, to any person obtaining a copy
                         of this software and associated documentation files (the "Software"), to deal

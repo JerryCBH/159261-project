@@ -54,7 +54,7 @@ Source repository: https://github.com/JerryCBH/159261-project
 ---
 ## How to play
 
-After launching the game, the main menu screen will be loaded:
+Choose the game mode from the main menu screen and enter the maze:
 
 <img src="Images/startscreen.png" alt="app-screen" width="250" />
 
@@ -75,6 +75,8 @@ Level knowledge, speed and tactics, will help you secure the win.
 Help Avalon escape the Dungeon. This can be played either in Single or Double player.
 Avalon will follow you and your friend. Watch over and guide her through the dungeons.
 
+<img src="Images/quest.png" alt="app-screen" width="600" />
+
 ### Controls
 
 Player One: Use 'W', 'S', 'D' and 'A' to move Lidia around the dungeon.
@@ -91,16 +93,28 @@ The hookshot can be used to:
 
 Be careful though, as the hookshot only has a limited range.
 
-Collect coins to increase your score.
-Open treasurers to boost your score and health.
+Collect coins to increase your score by 10.
+
+Open treasurers to boost your score by 100 and health by 2.
+
 Collect plant baskets for extra lives.
+
 Collision with bombs, results in a loss of life.
+
 Landing in the lava, results in a loss of life.
+
+Each player starts with 3 lives and can gain a maximum of 6 lives.
+
+Destroy bombs or damage enemy with hookshot increases score by 10.
+
+![img.png](Images/gameplay.png)
 
 ### Game Options
 
 - Change from Single Player Mode to Double Player Mode
 - Enable / Disable music
+
+<img src="Images/options.png" alt="app-screen" width="250" />
 
 ---
 ## Group Member's Contributions

@@ -27,7 +27,7 @@ public class StartMenu{
         frame = new JFrame("Hookshot Heroes");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(300, 600);
-        frame.setLocation(200,200);
+        frame.setLocationRelativeTo(null);
         frame.setResizable(false);
 
         // Create a panel with a BorderLayout
