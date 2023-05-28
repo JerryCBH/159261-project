@@ -479,6 +479,7 @@ public class Player implements IWorldObject {
                 SpeechService.Say(SpeechType.Danger, AnimationRequests, this);
             });
             DrawNotification(object.GetOccupiedCells()[0], NotificationType.Health, -1);
+            HandleVoice(WorldObjectType.Mine);
             // No more health. The player is removed from the game.
             if (_lives <= 0) {
                 toRemove = this;
@@ -593,6 +594,15 @@ public class Player implements IWorldObject {
                 req.VoiceType = AudioVoiceType.ShuraHealed;
             } else if (_name == CharacterNames.AVA) {
                 req.VoiceType = AudioVoiceType.AvaHealed;
+            }
+        }
+        if (type == WorldObjectType.Mine) {
+            if (_name == CharacterNames.LIDIA) {
+                req.VoiceType = AudioVoiceType.LidiaDamaged;
+            } else if (_name == CharacterNames.SHURA) {
+                req.VoiceType = AudioVoiceType.ShuraDamaged;
+            } else if (_name == CharacterNames.AVA) {
+                req.VoiceType = AudioVoiceType.AvaDamaged;
             }
         }
 

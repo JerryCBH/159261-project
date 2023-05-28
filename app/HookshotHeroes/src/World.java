@@ -173,12 +173,12 @@ public class World implements IWorld {
                     // Special case here as both collided objects need to be removed.
                     if (info.Remove != null && info.Remove.WhoAmI() == WorldObjectType.Player &&
                             info.Target.WhoAmI() == WorldObjectType.Mine) {
-                        HandleCollision(info.Target);
+                        HandleCollision(info.Target, info.Source);
                     }
                 }
             }
             // Remove the collided object.
-            HandleCollision(toRemove);
+            HandleCollision(toRemove, collisionCheckInfo.Source);
         }
     }
 
@@ -235,7 +235,7 @@ public class World implements IWorld {
     // Handle the aftermath of the collisions.
     // Prompt message popup if game over.
     // Decide if we need to play sound effects after collision.
-    public void HandleCollision(IWorldObject collidedObject){
+    public void HandleCollision(IWorldObject collidedObject, IWorldObject src){
         var offset = 5;
         if (collidedObject != null) {
             var type = collidedObject.WhoAmI();
@@ -245,6 +245,8 @@ public class World implements IWorld {
             else if (type == WorldObjectType.Apple || type == WorldObjectType.Broccoli || type == WorldObjectType.Cabbage) {
                 // Play eat apple sound effects.
                 AudioRequests.add(new AudioRequest(WorldObjectType.Apple));
+                if (src != null)
+                    ((Player)src).HandleVoice(WorldObjectType.Cabbage);
                 // Spawn new random apple.
                 //collidedObject.SetGridCell(GridCell.GetRandomCell(offset, GridRows - offset, offset, GridColumns - offset));
                 RemoveObject(collidedObject);
@@ -253,6 +255,8 @@ public class World implements IWorld {
                 // Play explosion sound effects.
                 AnimationRequests.add(new AnimationRequest(type, collidedObject.GetOccupiedCells()[0], 10));
                 AudioRequests.add(new AudioRequest(WorldObjectType.Mine));
+                if (src != null)
+                    ((Player)src).HandleVoice(WorldObjectType.Mine);
                 // Spawn new random mine.
                 //collidedObject.SetGridCell(GridCell.GetRandomCell(offset, GridRows - offset, offset, GridColumns - offset));
                 RemoveObject(collidedObject);
@@ -518,13 +522,22 @@ public class World implements IWorld {
             }
 
             if (request.VoiceType == AudioVoiceType.LidiaHealed) {
-                Engine.playAudio(GameAudio.LidiaHealedAudio, 0);
+                Engine.playAudio(GameAudio.LidiaHealedAudio, -10);
             }
             if (request.VoiceType == AudioVoiceType.ShuraHealed) {
-                Engine.playAudio(GameAudio.ShuraHealedAudio, 0);
+                Engine.playAudio(GameAudio.ShuraHealedAudio, -10);
             }
             if (request.VoiceType == AudioVoiceType.AvaHealed) {
-                Engine.playAudio(GameAudio.AvaHealedAudio, 0);
+                Engine.playAudio(GameAudio.AvaHealedAudio, -10);
+            }
+            if (request.VoiceType == AudioVoiceType.LidiaDamaged) {
+                Engine.playAudio(GameAudio.LidiaDamagedAudio, -10);
+            }
+            if (request.VoiceType == AudioVoiceType.ShuraDamaged) {
+                Engine.playAudio(GameAudio.ShuraDamagedAudio, -10);
+            }
+            if (request.VoiceType == AudioVoiceType.AvaDamaged) {
+                Engine.playAudio(GameAudio.AvaDamagedAudio, -10);
             }
         }
     }

@@ -105,7 +105,7 @@ public class Ball implements IWorldObject{
         return false;
     }
 
-    // Check snake collision
+    // Check collision
     public static boolean CheckCollision(Ball ball, IWorld world) {
         var result = false;
         for (IWorldObject object : world.GetObjects()) {
@@ -116,7 +116,7 @@ public class Ball implements IWorldObject{
                     if (newCell.Row == cells[j].Row && newCell.Column == cells[j].Column) {
                         // Call each objects specific handle collision function.
                         var collidedObject = object.HandleCollision(ball);
-                        world.HandleCollision(collidedObject);
+                        world.HandleCollision(collidedObject, null);
                         result = true;
                         break;
                     }

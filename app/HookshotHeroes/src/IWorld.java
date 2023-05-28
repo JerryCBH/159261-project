@@ -17,7 +17,7 @@ public interface IWorld {
     void UpdateAnimationRequests(double dt);
     void PlayAnimation();
     void PlayAudio();
-    void HandleCollision(IWorldObject collidedObject);
+    void HandleCollision(IWorldObject collidedObject, IWorldObject src);
     ILevel GetLevel();
     ArrayList<Player> GetPlayers();
     void RemoveObject(IWorldObject toRemove);

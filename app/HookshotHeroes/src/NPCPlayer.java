@@ -351,6 +351,7 @@ public class NPCPlayer extends Player implements IWorldObject{
                     AnimationRequests.add(new AnimationRequest(WorldObjectType.Mine, object.GetOccupiedCells()[0], 10));
                     AudioRequests.add(new AudioRequest(WorldObjectType.Mine));
                     EliminationRequests.push(object);
+                    HandleVoice(WorldObjectType.Mine);
                 }
             }
             if (object.WhoAmI() == WorldObjectType.Coin) {
@@ -362,6 +363,7 @@ public class NPCPlayer extends Player implements IWorldObject{
                     DrawNotification(currentCell, NotificationType.Score, PLAYER_COIN_SCORE);
                     AudioRequests.add(new AudioRequest(WorldObjectType.Coin));
                     EliminationRequests.push(object);
+                    HandleVoice(WorldObjectType.Cabbage);
                 }
             }
             if (object.WhoAmI() == WorldObjectType.Cabbage) {
@@ -375,6 +377,7 @@ public class NPCPlayer extends Player implements IWorldObject{
                     AudioRequests.add(new AudioRequest(WorldObjectType.Cabbage));
                     EliminationRequests.push(object);
                     DrawNotification(currentCell, NotificationType.Health, 1);
+                    HandleVoice(WorldObjectType.Cabbage);
                 }
             }
             if (object.WhoAmI() == WorldObjectType.Minotaur || object.WhoAmI() == WorldObjectType.Skeleton
@@ -402,6 +405,7 @@ public class NPCPlayer extends Player implements IWorldObject{
             if(_lives < MAX_LIFE) {
                 _lives += 1;
                 DrawNotification(object.GetOccupiedCells()[0], NotificationType.Health, 1);
+                HandleVoice(WorldObjectType.Cabbage);
             }
             toRemove = object;
         }
@@ -416,6 +420,7 @@ public class NPCPlayer extends Player implements IWorldObject{
                 SpeechService.NPCSay(SpeechType.Danger, AnimationRequests, this);
             });
             DrawNotification(object.GetOccupiedCells()[0], NotificationType.Health, -1);
+            HandleVoice(WorldObjectType.Mine);
             // No more health. The player is removed from the game.
             if (_lives <= 0) {
                 toRemove = this;
@@ -431,6 +436,7 @@ public class NPCPlayer extends Player implements IWorldObject{
             DrawNotification(object.GetOccupiedCells()[0], NotificationType.Health, 1);
             if(_lives < MAX_LIFE) {
                 _lives += 1;
+                HandleVoice(WorldObjectType.Cabbage);
             }
             toRemove = object;
         } else if (type == WorldObjectType.Coin) {
@@ -438,6 +444,7 @@ public class NPCPlayer extends Player implements IWorldObject{
                 SpeechService.NPCSay(SpeechType.Happy, AnimationRequests, this);
             });
             DrawNotification(object.GetOccupiedCells()[0], NotificationType.Score, PLAYER_COIN_SCORE);
+            HandleVoice(WorldObjectType.Cabbage);
             Score += PLAYER_COIN_SCORE;
             toRemove = object;
         }
