@@ -164,6 +164,8 @@ The ```SpeechService``` will send an ```AnimationRequest``` to animation queue t
 
 The animation request objects are sorted based on created time stamp in descending order. So the speech bubbles will appear in descending order with the latest comment or score notifications on the top.
 
+We can add more comment types as reaction to different game events to make the AI player more realistic. This can be done by extending the ```SpeechService```.
+
 ## NPC Character Generation
 
 The game loads 30+ character sprites and can randomly generate NPC players. The character sprites are stored in ```HashMap``` with the key being the type of character.
@@ -173,6 +175,14 @@ This is loaded by ```GameImage``` class's ```GetRandomNPC()``` method.
 ![img.png](Images/npc.png)
 
 ![img.png](Images/palacenpc.png)
+
+## Game Extensibility
+
+The game code was written with SOLID principles in mind. It is designed to highly extensible through the use of interfaces. Although we had no time to put in a DI framework, the code can be easily adapted.
+
+For example, new levels can be easily added by implementing the ```ILevel``` interface, same for new state machines and the ```IStateMachine``` interface to introduce new AI behaviours. 
+
+New NPC characters can be added by inheriting the ```Player``` class.
 
 ---
 ## How to play
