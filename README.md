@@ -318,6 +318,8 @@ Lidia's quest for glory unfolds as she unravels the depths of the dungeons, leav
 
 AntumDeluge. (2017). Barrel Sprites [Digital image]. OpenGameArt. Retrieved from https://opengameart.org/content/barrels-mage-city-arcanos-remix
 
+Blarumyrran. (2012). Sara Sprite Sheet [Digital image]. OpenGameArt. Retrieved from https://opengameart.org/content/sara-2-0
+
 bluecarrot16. (2018). LPC Medieval Village Decorations [Digital image]. OpenGameArt. Retrieved from https://opengameart.org/content/lpc-medieval-village-decorations
 
 bluecarrot16. (2018). LPC Terrains [Digital image]. OpenGameArt. Retrieved from https://opengameart.org/content/lpc-terrains
@@ -344,6 +346,8 @@ K0huro. (2022). Mage Sprite Sheet [Digital image]. Reddit. Retrieved from https:
 
 Leonard Pabin. (2012). Avalon Sprite [Digital image]. OpenGameArt. Retrieved from https://opengameart.org/content/whispers-of-avalon-archer-sprite
 
+Mageonduty. (2021). Pretty Maiden - Medieval Fantasy Game Cheerful Opening [Audio file]. OpenGameArt. Retrieved from https://opengameart.org/content/pretty-maiden-medievalfantasy-game-cheerful-opening
+
 morgan3d. (2013). Coin Sprite [Digital image]. OpenGameArt. Retrieved from https://opengameart.org/content/spinning-gold-coin
 
 Redshrike. (2011). Castle Interior Sprites [Digital image]. OpenGameArt. Retrieved from https://opengameart.org/content/rpg-indoor-tileset-expansion-1
@@ -367,7 +371,3 @@ Yamilian. (2012). Shura Sprite Sheet [Digital image]. OpenGameArt. Retrieved fro
 ZaPaper. (2014). Animated Water and Waterfalls [Digital image]. OpenGameArt. Retrieved from https://opengameart.org/content/lpc-animated-water-and-waterfalls
 
 Zabin. (2013). RPG Tiles - Cobble Stone Paths, Town Objects [Digital image]. OpenGameArt. Retrieved from https://opengameart.org/content/rpg-tiles-cobble-stone-paths-town-objects
-
-Blarumyrran. (2012). Sara Sprite Sheet [Digital image]. OpenGameArt. Retrieved from https://opengameart.org/content/sara-2-0
-
-Mageonduty. (2021). Pretty Maiden - Medieval Fantasy Game Cheerful Opening [Audio file]. OpenGameArt. Retrieved from https://opengameart.org/content/pretty-maiden-medievalfantasy-game-cheerful-opening
