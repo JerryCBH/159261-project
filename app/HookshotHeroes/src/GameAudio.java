@@ -18,6 +18,8 @@ public class GameAudio {
     public final GameEngine.AudioClip LidiaDamagedAudio;
     public final GameEngine.AudioClip ShuraDamagedAudio;
     public final GameEngine.AudioClip AvaDamagedAudio;
+    public final GameEngine.AudioClip LidiaAttackAudio;
+    public final GameEngine.AudioClip ShuraAttackAudio;
     public GameEngine.AudioClip Theme;
 
     public GameAudio(HookshotHeroesGameEngine engine){
@@ -38,6 +40,8 @@ public class GameAudio {
         LidiaDamagedAudio = engine.loadAudio("t3-damaged1.wav");
         ShuraDamagedAudio = engine.loadAudio("t2-damaged1.wav");
         AvaDamagedAudio = engine.loadAudio("t1-damaged1.wav");
+        LidiaAttackAudio = engine.loadAudio("t3-attack3.wav");
+        ShuraAttackAudio = engine.loadAudio("t2-attack3.wav");
     }
 
     public void ApplyTheme(HookshotHeroesGameEngine engine, String theme, float volume){

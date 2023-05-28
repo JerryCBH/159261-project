@@ -475,6 +475,7 @@ public class NPCPlayer extends Player implements IWorldObject{
             SpeechService.NPCSay(SpeechType.Danger, AnimationRequests, this);
         });
         DrawNotification(_body.get(0), NotificationType.Health, -1);
+        HandleVoice(WorldObjectType.Mine);
         // No more health. The player is removed from the game.
         if (_lives <= 0) {
             EliminationRequests.push(this);

@@ -443,6 +443,7 @@ public class Player implements IWorldObject {
                     Score += PLAYER_HIT_SCORE;
                     _isGrappling = false;
                     DrawNotification(currentCell, NotificationType.Score, PLAYER_HIT_SCORE);
+                    HandleVoice(WorldObjectType.Skeleton);
                 }
             }
         }
@@ -533,6 +534,7 @@ public class Player implements IWorldObject {
             SpeechService.Say(SpeechType.Danger, AnimationRequests, this);
         });
         DrawNotification(_body.get(0), NotificationType.Health, -1);
+        HandleVoice(WorldObjectType.Mine);
         // No more health. The player is removed from the game.
         if (_lives <= 0) {
             EliminationRequests.push(this);
@@ -603,6 +605,13 @@ public class Player implements IWorldObject {
                 req.VoiceType = AudioVoiceType.ShuraDamaged;
             } else if (_name == CharacterNames.AVA) {
                 req.VoiceType = AudioVoiceType.AvaDamaged;
+            }
+        }
+        if (type == WorldObjectType.Skeleton) {
+            if (_name == CharacterNames.LIDIA) {
+                req.VoiceType = AudioVoiceType.LidiaAttack;
+            } else if (_name == CharacterNames.SHURA) {
+                req.VoiceType = AudioVoiceType.ShuraAttack;
             }
         }
 

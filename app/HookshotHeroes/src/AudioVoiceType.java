@@ -5,5 +5,7 @@ public enum AudioVoiceType {
     AvaHealed,
     LidiaDamaged,
     ShuraDamaged,
-    AvaDamaged
+    AvaDamaged,
+    LidiaAttack,
+    ShuraAttack
 }

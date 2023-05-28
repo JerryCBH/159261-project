@@ -539,6 +539,12 @@ public class World implements IWorld {
             if (request.VoiceType == AudioVoiceType.AvaDamaged) {
                 Engine.playAudio(GameAudio.AvaDamagedAudio, -10);
             }
+            if (request.VoiceType == AudioVoiceType.LidiaAttack) {
+                Engine.playAudio(GameAudio.LidiaAttackAudio, -10);
+            }
+            if (request.VoiceType == AudioVoiceType.ShuraAttack) {
+                Engine.playAudio(GameAudio.ShuraAttackAudio, -10);
+            }
         }
     }
 
