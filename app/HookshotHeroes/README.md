@@ -172,9 +172,9 @@ The game loads 30+ character sprites and can randomly generate NPC players. The 
 
 This is loaded by ```GameImage``` class's ```GetRandomNPC()``` method.
 
-![img.png](images/npc.png)
+![img.png](Images/npc.png)
 
-![img.png](images/palacenpc.png)
+![img.png](Images/palacenpc.png)
 
 ## Game Extensibility
 
@@ -203,9 +203,9 @@ score. Pick between collecting coins or opening chests or getting to the exit
 the fastest. The first player to the exit will end the level for both players.
 Level knowledge, speed and tactics, will help you secure the win.
 
-![img.png](images/doubleplayer1.png)
+![img.png](Images/doubleplayer1.png)
 
-![img.png](images/doubleplayer2.png)
+![img.png](Images/doubleplayer2.png)
 
 ### Quest Mode
 
@@ -274,11 +274,11 @@ Empowered by the legendary "hookshot," a grappling hook that fused to her arm, L
 With each triumph over enemies and the acquisition of precious loot, she inches closer to the ultimate prize. Driven by unwavering bravery,
 Lidia's quest for glory unfolds as she unravels the depths of the dungeons, leaving an indelible mark upon the annals of Eldoria's history.
 
-![img.png](images/characters.png)
+![img.png](Images/characters.png)
 
-![img.png](images/villains.png)
+![img.png](Images/villains.png)
 
-![img.png](images/consumables.png)
+![img.png](Images/consumables.png)
 
 ---
 ## Group Member's Contributions
