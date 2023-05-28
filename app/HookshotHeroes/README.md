@@ -27,27 +27,25 @@ When discussing with our team, we all showed interested in puzzle games. With th
 
 The room-based puzzles of Zelda’s dungeons were the source of inspiration for us to build a game, that has players complete grid-based maze puzzles to procced to the next level.
 
-![img.png](Images/zelda.png)
+<img src="Images/zelda.png" alt="app-screen" width="250" />
 
-![img.png](Images/zelda2.png)
+<img src="Images/zelda2.png" alt="app-screen" width="250" />
 
 To enhance the game and the player’s experience, we wanted to add an ability that improved the players simple grid-based movement. To achieve this, we decided to give the player a grappling hook ability. Not only does this make the player’s movements more enjoyable, but it also allowed us to develop the level / maze design around this ability.
 
-![img.png](Images/grapple1.png)
-
-![img.png](Images/grapple2.png)
-
-![img.png](Images/grapple3.png)
+<img src="Images/grapple1.png" alt="app-screen" width="200" />
+<img src="Images/grapple2.png" alt="app-screen" width="200" />
+<img src="Images/grapple3.png" alt="app-screen" width="200" />
 
 ## Level Design
 With the key ideas of a rooms, where the player needs to navigate a maze, using standard movement and a grappling ability, we were able to start working on the game design.  
 This started with researching different maze ideas and applying this knowledge to our game’s mechanic. From here we were able to start to design each room’s layout and make sure the maze and game play fitted together.
 
-![img.png](Images/maze1.png)
+<img src="Images/maze1.png" alt="app-screen" width="250" />
 
-![img.png](Images/maze2.png)
+<img src="Images/maze2.png" alt="app-screen" width="250" />
 
-![img.png](Images/maze3.png)
+<img src="Images/maze3.png" alt="app-screen" />
 
 To merry the maze style and grappling ability together, we used a ground hazard in which the player would need to traverse with their grabbling ability in order to continue. Rules were placed on the grappling ability in order to define what was achievable for the player while using the ability. This then helped us fine tune the room design.
 
@@ -166,6 +164,15 @@ The ```SpeechService``` will send an ```AnimationRequest``` to animation queue t
 
 The animation request objects are sorted based on created time stamp in descending order. So the speech bubbles will appear in descending order with the latest comment or score notifications on the top.
 
+## NPC Character Generation
+
+The game loads 30+ character sprites and can randomly generate NPC players. The character sprites are stored in ```HashMap``` with the key being the type of character.
+
+This is loaded by ```GameImage``` class's ```GetRandomNPC()``` method.
+
+![img.png](Images/npc.png)
+
+![img.png](Images/palacenpc.png)
 
 ---
 ## How to play
@@ -229,15 +236,15 @@ Destroy bombs or damage enemy with hookshot increases score by 10.
 
 Navigate 10 unique dungeons!
 
-![img.png](Images/dungeon1.png)
+<img src="Images/dungeon1.png" alt="app-screen" width="300" />
 
-![img.png](Images/dungeon2.png)
+<img src="Images/dungeon2.png" alt="app-screen" width="300" />
 
 Two unique boss fights:
 
-![img.png](Images/boss1.png)
+<img src="Images/boss1.png" alt="app-screen" width="300" />
 
-![img_1.png](Images/boss2.png)
+<img src="Images/boss2.png" alt="app-screen" width="300" />
 
 ### Game Options
 
@@ -245,6 +252,23 @@ Two unique boss fights:
 - Enable / Disable music
 
 <img src="Images/options.png" alt="app-screen" width="250" />
+
+<img src="Images/menubar.png" alt="app-screen" width="250" />
+
+---
+## Game Story
+
+In a realm shrouded in mystery, Lidia, a brave and determined heroine, embarks on a perilous journey.
+Drawn by the allure of hidden treasures and ancient secrets, she fearlessly enters the dungeons.
+Empowered by the legendary "hookshot," a grappling hook that fused to her arm, Lidia defies danger and navigates treacherous terrain.
+With each triumph over enemies and the acquisition of precious loot, she inches closer to the ultimate prize. Driven by unwavering bravery,
+Lidia's quest for glory unfolds as she unravels the depths of the dungeons, leaving an indelible mark upon the annals of Eldoria's history.
+
+![img.png](Images/characters.png)
+
+![img.png](Images/villains.png)
+
+![img.png](Images/consumables.png)
 
 ---
 ## Group Member's Contributions
