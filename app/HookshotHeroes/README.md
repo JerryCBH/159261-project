@@ -358,3 +358,6 @@ ZaPaper. (2014). Animated Water and Waterfalls [Digital image]. OpenGameArt. Ret
 
 Zabin. (2013). RPG Tiles - Cobble Stone Paths, Town Objects [Digital image]. OpenGameArt. Retrieved from https://opengameart.org/content/rpg-tiles-cobble-stone-paths-town-objects
 
+Blarumyrran. (2012). Sara Sprite Sheet [Digital image]. OpenGameArt. Retrieved from https://opengameart.org/content/sara-2-0
+
+Mageonduty. (2021). Pretty Maiden - Medieval Fantasy Game Cheerful Opening [Audio file]. OpenGameArt. Retrieved from https://opengameart.org/content/pretty-maiden-medievalfantasy-game-cheerful-opening
