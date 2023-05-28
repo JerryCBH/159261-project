@@ -516,6 +516,16 @@ public class World implements IWorld {
             else if (request.Type == WorldObjectType.FlyingTerror) {
                 Engine.playAudio(GameAudio.FTAudio, GameOptions.SoundEffectsVolume);
             }
+
+            if (request.VoiceType == AudioVoiceType.LidiaHealed) {
+                Engine.playAudio(GameAudio.LidiaHealedAudio, 0);
+            }
+            if (request.VoiceType == AudioVoiceType.ShuraHealed) {
+                Engine.playAudio(GameAudio.ShuraHealedAudio, 0);
+            }
+            if (request.VoiceType == AudioVoiceType.AvaHealed) {
+                Engine.playAudio(GameAudio.AvaHealedAudio, 0);
+            }
         }
     }
 

@@ -251,6 +251,7 @@ public class Player implements IWorldObject {
                     if (_lives <= 5) {
                         _lives += chest.CHEST_LIVES;
                         DrawNotification(newCell, NotificationType.Health, chest.CHEST_LIVES);
+                        HandleVoice(WorldObjectType.Cabbage);
                     }
                 }
             }
@@ -428,6 +429,7 @@ public class Player implements IWorldObject {
                     AudioRequests.add(new AudioRequest(WorldObjectType.Cabbage));
                     EliminationRequests.push(object);
                     DrawNotification(currentCell, NotificationType.Health, 1);
+                    HandleVoice(WorldObjectType.Cabbage);
                 }
             }
             if (object.WhoAmI() == WorldObjectType.Minotaur || object.WhoAmI() == WorldObjectType.Skeleton
@@ -462,6 +464,7 @@ public class Player implements IWorldObject {
             if(_lives < MAX_LIFE) {
                 _lives += 1;
                 DrawNotification(object.GetOccupiedCells()[0], NotificationType.Health, 1);
+                HandleVoice(WorldObjectType.Cabbage);
             }
             toRemove = object;
         }
@@ -491,6 +494,7 @@ public class Player implements IWorldObject {
             DrawNotification(object.GetOccupiedCells()[0], NotificationType.Health, 1);
             if(_lives < MAX_LIFE) {
                 _lives += 1;
+                HandleVoice(WorldObjectType.Cabbage);
             }
             toRemove = object;
         } else if (type == WorldObjectType.Coin) {
@@ -576,5 +580,22 @@ public class Player implements IWorldObject {
     // Set player health. Only invoke from initialize world.
     public void SetHealth(int lives){
         _lives = lives;
+    }
+
+    // Handle player voices.
+    public void HandleVoice(WorldObjectType type){
+        var req = new AudioRequest(WorldObjectType.Player);
+
+        if (type == WorldObjectType.Cabbage) {
+            if (_name == CharacterNames.LIDIA) {
+                req.VoiceType = AudioVoiceType.LidiaHealed;
+            } else if (_name == CharacterNames.SHURA) {
+                req.VoiceType = AudioVoiceType.ShuraHealed;
+            } else if (_name == CharacterNames.AVA) {
+                req.VoiceType = AudioVoiceType.AvaHealed;
+            }
+        }
+
+        AudioRequests.add(req);
     }
 }

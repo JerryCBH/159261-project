@@ -12,6 +12,9 @@ public class GameAudio {
     public final GameEngine.AudioClip MonsterDamageAudio;
     public final GameEngine.AudioClip SkeletonAudio;
     public final GameEngine.AudioClip FTAudio;
+    public final GameEngine.AudioClip LidiaHealedAudio;
+    public final GameEngine.AudioClip ShuraHealedAudio;
+    public final GameEngine.AudioClip AvaHealedAudio;
     public GameEngine.AudioClip Theme;
 
     public GameAudio(HookshotHeroesGameEngine engine){
@@ -26,6 +29,9 @@ public class GameAudio {
         MonsterDamageAudio = engine.loadAudio("monsterdamage.wav");
         SkeletonAudio = engine.loadAudio("skeleton.wav");
         FTAudio = engine.loadAudio("ft.wav");
+        LidiaHealedAudio = engine.loadAudio("t3-healed3.wav");
+        ShuraHealedAudio = engine.loadAudio("t2-healed3.wav");
+        AvaHealedAudio = engine.loadAudio("t3-healed3.wav");
     }
 
     public void ApplyTheme(HookshotHeroesGameEngine engine, String theme, float volume){

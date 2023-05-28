@@ -328,6 +328,8 @@ Bryce. (2023). Floor Sprite [Digital image].
 
 Bryce. (2023). Main Image [Digital image].
 
+cicifyre. (2019). Female voices [Audio file]. OpenGameArt. Retrieved from https://opengameart.org/content/female-rpg-voice-starter-pack
+
 davesch. (2014). Lava Sprite [Digital image]. OpenGameArt. Retrieved from https://opengameart.org/content/16x16-and-animated-lava-tile-45-frames
 
 Danimal. (2021). Flying Terror [Digital image]. OpenGameArt. Retrieved from https://opengameart.org/content/flying-terror
@@ -359,6 +361,8 @@ Reemax. (2019). Whip Sound Effect [Audio file]. OpenGameArt. Retrieved from http
 Siegmund, D. (2011). Dungeon Wall Sprite Sheet [Digital image]. OpenGameArt. Retrieved from https://opengameart.org/content/16x16-pixel-art-dungeon-wall-and-cobblestone-floor-tiles
 
 StarNinjas. (2021). Crunch Sound Effect [Audio file]. OpenGameArt. Retrieved from https://opengameart.org/content/7-eating-crunches
+
+tridentkeep. (2019). Start Theme [Audio file]. OpenGameArt. Retrieved from https://opengameart.org/content/frostbite-medieval-soundtrack
 
 Unnamed. (2016). Explosion Sound Effect [Audio file]. OpenGameArt. Retrieved from https://opengameart.org/content/9-explosion-sounds
 

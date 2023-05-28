@@ -218,6 +218,7 @@ public class StartMenu{
             } catch(Exception exception) {
                 // Display Error Message
                 System.out.println("Error: could not play Audio Clip\n");
+                System.out.println(exception.getMessage());
             }
         }
 

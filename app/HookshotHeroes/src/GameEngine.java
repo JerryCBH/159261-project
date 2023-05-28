@@ -727,6 +727,7 @@ public abstract class GameEngine implements KeyListener, MouseListener, MouseMot
 		} catch(Exception exception) {
 			// Display Error Message
 			System.out.println("Error: could not play Audio Clip\n");
+			System.out.println(exception.getMessage());
 		}
 	}
 
@@ -761,6 +762,7 @@ public abstract class GameEngine implements KeyListener, MouseListener, MouseMot
 			} catch(Exception exception) {
 				// Display Error Message
 				System.out.println("Error: could not play Audio Clip\n");
+				System.out.println(exception.getMessage());
 			}
 		}
 
@@ -812,6 +814,7 @@ public abstract class GameEngine implements KeyListener, MouseListener, MouseMot
 			} catch(Exception exception) {
 				// Display Error Message
 				System.out.println("Error: could not play Audio Clip\n");
+				System.out.println(exception.getMessage());
 			}
 		}
 
