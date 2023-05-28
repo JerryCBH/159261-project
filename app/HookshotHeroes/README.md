@@ -273,7 +273,7 @@ Lidia's quest for glory unfolds as she unravels the depths of the dungeons, leav
 ---
 ## Group Member's Contributions
 
-Bryce:
+### Bryce Cameron
 -	level layout design.
 -	Level layout coding.
 -	Menu design.
@@ -282,17 +282,17 @@ Bryce:
 -	General bug fixes.
 -	Play testing.
 
-Josh:
+### Josh Anderson
 -	Game design and ideas.
 -	Grapple mechanism and design.
 -	Play testing.
 
-Helen:
+### Helen McCartney
 -	Game design and ideas.
 -	Story ideas
 -	Play testing.
 
-Jerry:
+### Jerry Hsiung
 -	Game software architecture design, core classes and base game functionalities.
 -	Animations, audio and sound.
 -	Game object interactions / collisions / scores.
