@@ -18,11 +18,6 @@ public class DefaultMenuBarBuilder implements IMenuBarBuilder{
     @Override
     public JMenuBar BuildMenuBar(HookshotHeroesGameEngine src) {
         Engine = src;
-        LocalOptions = new GameOptions();
-        LocalOptions.EnableMusic = Engine.GameOptions.EnableMusic;
-        LocalOptions.DoublePlayerMode = Engine.GameOptions.DoublePlayerMode;
-        LocalOptions.SinglePlayerMode = Engine.GameOptions.SinglePlayerMode;
-        LocalOptions.EnableBouncingBalls = Engine.GameOptions.EnableBouncingBalls;
 
         var menuBar = new JMenuBar();
         var menuFile = new JMenu("File");
@@ -31,6 +26,14 @@ public class DefaultMenuBarBuilder implements IMenuBarBuilder{
         var menuOptionsConfig = new JMenuItem(new AbstractAction("Game Configuration") {
             @Override
             public void actionPerformed(ActionEvent e) {
+                Engine.PauseEngine();
+
+                LocalOptions = new GameOptions();
+                LocalOptions.EnableMusic = Engine.GameOptions.EnableMusic;
+                LocalOptions.DoublePlayerMode = Engine.GameOptions.DoublePlayerMode;
+                LocalOptions.SinglePlayerMode = Engine.GameOptions.SinglePlayerMode;
+                LocalOptions.EnableBouncingBalls = Engine.GameOptions.EnableBouncingBalls;
+
                 var singleGameButton = new JRadioButton("Single Player");
                 singleGameButton.setActionCommand("Single");
                 var doubleGameButton = new JRadioButton("Double Player");
@@ -81,7 +84,6 @@ public class DefaultMenuBarBuilder implements IMenuBarBuilder{
                 var configPanel = new JPanel();
                 configPanel.add(radioPanel, BorderLayout.LINE_START);
 
-                Engine.PauseEngine();
                 var result = JOptionPane.showConfirmDialog(null, configPanel,"Game Configuration",JOptionPane.OK_CANCEL_OPTION);
                 if (result == 0){
                     // Check for UI changes.
@@ -117,28 +119,21 @@ public class DefaultMenuBarBuilder implements IMenuBarBuilder{
                 Engine.InitializeWorld(Engine.GameOptions);
             }
         });
-        var menuFileStartMenu = new JMenuItem(new AbstractAction("Start Menu") {
+        var menuFileReturnToMenu = new JMenuItem(new AbstractAction("Return to Menu") {
             @Override
             public void actionPerformed(ActionEvent e) {
+                // Close current game window.
                 Engine.GameOptions.EnableMusic = false;
                 Engine.ToggleMusic();
                 Engine.mFrame.setJMenuBar(null);
                 Engine.mFrame.dispose();
                 Engine = null;
+                // Open start menu.
                 var menu = new StartMenu();
                 menu.show();
+                // Persist options.
                 Engine = menu.Engine;
                 LocalOptions = menu.Engine.GameOptions;
-            }
-        });
-        var menuFileReturnToMenu = new JMenuItem(new AbstractAction("Return to Menu") {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // Close current game window
-                engine.close();
-                // Open new start menu
-                StartMenu startMenu = new StartMenu();
-                startMenu.show();
             }
         });
         var menuPauseGame = new JMenuItem(new AbstractAction("Pause / Resume (P)") {
@@ -212,7 +207,6 @@ public class DefaultMenuBarBuilder implements IMenuBarBuilder{
         menuBar.add(menuOptions);
         menuBar.add(menuHelp);
         menuFile.add(menuPauseGame);
-        menuFile.add(menuFileStartMenu);
         menuFile.add(menuFileNewGame);
         menuFile.add(menuFileReturnToMenu);
         menuFile.add(menuFileExit);
