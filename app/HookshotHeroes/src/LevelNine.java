@@ -76,11 +76,6 @@ public class LevelNine extends BaseLevel implements ILevel{
                 drawWallFrontWithCollision(x, y);
             }
         }
-        for (int x = 360; x < 440; x += environmentSpriteSize) {
-            for (int y = 80; y < 160; y += environmentSpriteSize) {
-                drawWallFrontWithCollision(x, y);
-            }
-        }
         for (int x = 80; x < 560; x += environmentSpriteSize) {
             drawWallFrontWithCollision(x, 280);
         }
@@ -128,6 +123,12 @@ public class LevelNine extends BaseLevel implements ILevel{
         drawWallFrontWithCollision(400, 240);
         drawWallFrontWithCollision(240, 160);
         drawWallFrontWithCollision(320, 120);
+        drawWallFrontWithCollision(440, 40);
+        drawWallFrontWithCollision(440, 80);
+        drawWallFrontWithCollision(120, 320);
+        drawWallFrontWithCollision(160, 320);
+        drawWallFrontWithCollision(360, 80);
+        drawWallFrontWithCollision(360, 120);
 
         //Draw doors
         Engine.drawImage(GameImage.DoorGreyOpenLeftSide, 0,80);

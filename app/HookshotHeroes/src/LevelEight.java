@@ -45,6 +45,7 @@ public class LevelEight extends BaseLevel implements ILevel{
         }
         drawLavaWithCollision(400, 320);
         drawLavaWithCollision(400, 520);
+        drawLavaWithCollision(120, 360);
 
         //Draw internal walls
         for (int y = 40; y < 200; y += environmentSpriteSize) {
@@ -70,10 +71,10 @@ public class LevelEight extends BaseLevel implements ILevel{
         for (int y = 40; y < 320; y += environmentSpriteSize) {
             drawWallFrontWithCollision(520, y);
         }
-        for (int y = 360; y < 560; y += environmentSpriteSize) {
+        for (int y = 360; y < 520; y += environmentSpriteSize) {
             drawWallFrontWithCollision(360, y);
         }
-        for (int y = 240; y < 400; y += environmentSpriteSize) {
+        for (int y = 240; y < 360; y += environmentSpriteSize) {
             drawWallFrontWithCollision(120, y);
         }
         for (int y = 200; y < 280; y += environmentSpriteSize) {

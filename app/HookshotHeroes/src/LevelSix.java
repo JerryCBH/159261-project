@@ -21,7 +21,7 @@ public class LevelSix extends BaseLevel implements ILevel{
             }
         }
         for (int x = 400; x < 520; x += environmentSpriteSize) {
-            for (int y = 200; y < 360; y += environmentSpriteSize) {
+            for (int y = 200; y < 320; y += environmentSpriteSize) {
                 drawLavaWithCollision(x, y);
             }
         }
@@ -30,7 +30,7 @@ public class LevelSix extends BaseLevel implements ILevel{
                 drawLavaWithCollision(x, y);
             }
         }
-        for (int y = 240; y < 440; y += environmentSpriteSize) {
+        for (int y = 240; y < 320; y += environmentSpriteSize) {
             drawLavaWithCollision(520, y);
         }
         for (int y = 200; y < 280; y += environmentSpriteSize) {
@@ -50,6 +50,8 @@ public class LevelSix extends BaseLevel implements ILevel{
         }
         drawLavaWithCollision(360, 320);
         drawLavaWithCollision(320, 320);
+        drawLavaWithCollision(480, 320);
+        drawLavaWithCollision(400, 320);
 
         //Draw internal walls
         for (int x = 80; x < 200; x += environmentSpriteSize) {

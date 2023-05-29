@@ -61,7 +61,7 @@ public class LevelFive extends BaseLevel implements ILevel {
         for (int x = 320; x < 440; x += environmentSpriteSize) {
             drawWallFrontWithCollision(x, 160);
         }
-        for (int x = 40; x < 280; x += environmentSpriteSize) {
+        for (int x = 80; x < 280; x += environmentSpriteSize) {
             drawWallFrontWithCollision(x, 160);
         }
         for (int x = 40; x < 280; x += environmentSpriteSize) {
