@@ -8,7 +8,7 @@ import org.json.JSONObject;
 public class ChatGPTConnector {
 
     private static final String API_ENDPOINT = "https://api.openai.com/v1/completions";
-    private static final String API_KEY = "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";
+    private static final String API_KEY = "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";
 
     public static String SendRequestToChatGPT(String prompt) {
         try {
