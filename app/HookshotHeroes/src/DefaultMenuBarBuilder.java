@@ -1,125 +1,140 @@
 import javax.swing.*;
-import javax.swing.text.DefaultCaret;
-import javax.swing.text.Style;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
 
 /****************************************************************************************
  * Builder for the default menu bar.
  ****************************************************************************************/
 public class DefaultMenuBarBuilder implements IMenuBarBuilder{
 
+    public HookshotHeroesGameEngine Engine;
+    public GameOptions LocalOptions;
+
     // Create the menu bar and its items.
     // Add event handlers for each menu bar items.
     @Override
-    public JMenuBar BuildMenuBar(HookshotHeroesGameEngine engine) {
-        var options = new GameOptions();
-        options.EnableMusic = engine.GameOptions.EnableMusic;
-        options.DoublePlayerMode = engine.GameOptions.DoublePlayerMode;
-        options.SinglePlayerMode = engine.GameOptions.SinglePlayerMode;
-        options.EnableBouncingBalls = engine.GameOptions.EnableBouncingBalls;
+    public JMenuBar BuildMenuBar(HookshotHeroesGameEngine src) {
+        Engine = src;
+        LocalOptions = new GameOptions();
+        LocalOptions.EnableMusic = Engine.GameOptions.EnableMusic;
+        LocalOptions.DoublePlayerMode = Engine.GameOptions.DoublePlayerMode;
+        LocalOptions.SinglePlayerMode = Engine.GameOptions.SinglePlayerMode;
+        LocalOptions.EnableBouncingBalls = Engine.GameOptions.EnableBouncingBalls;
 
         var menuBar = new JMenuBar();
         var menuFile = new JMenu("File");
         var menuOptions = new JMenu("Options");
 
-        var singleGameButton = new JRadioButton("Single Player");
-        singleGameButton.setActionCommand("Single");
-        var doubleGameButton = new JRadioButton("Double Player");
-        doubleGameButton.setActionCommand("Double");
-        SetButtons(engine.GameOptions, singleGameButton, doubleGameButton);
-        var group = new ButtonGroup();
-        group.add(singleGameButton);
-        group.add(doubleGameButton);
-        singleGameButton.addActionListener(new AbstractAction() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                ConfigHandler(e, options);
-            }
-        });
-        doubleGameButton.addActionListener(new AbstractAction() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                ConfigHandler(e, options);
-            }
-        });
-
-        var enableMusic = new JCheckBox("Enable Music");
-        enableMusic.setActionCommand("Music");
-        SetCheckBox(engine.GameOptions.EnableMusic, enableMusic);
-        enableMusic.addActionListener(new AbstractAction() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                options.EnableMusic = enableMusic.isSelected();
-            }
-        });
-
-        var enableBalls = new JCheckBox("Enable Bouncing Balls");
-        enableBalls.setActionCommand("Balls");
-        SetCheckBox(engine.GameOptions.EnableBouncingBalls, enableBalls);
-        enableBalls.addActionListener(new AbstractAction() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                options.EnableBouncingBalls = enableBalls.isSelected();
-            }
-        });
-
-        var  radioPanel = new JPanel(new GridLayout(0, 1));
-        radioPanel.add(singleGameButton);
-        radioPanel.add(doubleGameButton);
-        radioPanel.add(enableMusic);
-        //radioPanel.add(enableBalls);
-
-        var configPanel = new JPanel();
-        configPanel.add(radioPanel, BorderLayout.LINE_START);
-
         var menuOptionsConfig = new JMenuItem(new AbstractAction("Game Configuration") {
             @Override
             public void actionPerformed(ActionEvent e) {
-                engine.PauseEngine();
+                var singleGameButton = new JRadioButton("Single Player");
+                singleGameButton.setActionCommand("Single");
+                var doubleGameButton = new JRadioButton("Double Player");
+                doubleGameButton.setActionCommand("Double");
+                SetButtons(Engine.GameOptions, singleGameButton, doubleGameButton);
+                var group = new ButtonGroup();
+                group.add(singleGameButton);
+                group.add(doubleGameButton);
+                singleGameButton.addActionListener(new AbstractAction() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        ConfigHandler(e, LocalOptions);
+                    }
+                });
+                doubleGameButton.addActionListener(new AbstractAction() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        ConfigHandler(e, LocalOptions);
+                    }
+                });
+
+                var enableMusic = new JCheckBox("Enable Music");
+                enableMusic.setActionCommand("Music");
+                SetCheckBox(Engine.GameOptions.EnableMusic, enableMusic);
+                enableMusic.addActionListener(new AbstractAction() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        LocalOptions.EnableMusic = enableMusic.isSelected();
+                    }
+                });
+
+                var enableBalls = new JCheckBox("Enable Bouncing Balls");
+                enableBalls.setActionCommand("Balls");
+                SetCheckBox(Engine.GameOptions.EnableBouncingBalls, enableBalls);
+                enableBalls.addActionListener(new AbstractAction() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        LocalOptions.EnableBouncingBalls = enableBalls.isSelected();
+                    }
+                });
+
+                var  radioPanel = new JPanel(new GridLayout(0, 1));
+                radioPanel.add(singleGameButton);
+                radioPanel.add(doubleGameButton);
+                radioPanel.add(enableMusic);
+                //radioPanel.add(enableBalls);
+
+                var configPanel = new JPanel();
+                configPanel.add(radioPanel, BorderLayout.LINE_START);
+
+                Engine.PauseEngine();
                 var result = JOptionPane.showConfirmDialog(null, configPanel,"Game Configuration",JOptionPane.OK_CANCEL_OPTION);
                 if (result == 0){
                     // Check for UI changes.
-                    if(options.SinglePlayerMode != engine.GameOptions.SinglePlayerMode ||
-                            options.DoublePlayerMode != engine.GameOptions.DoublePlayerMode ||
-                            options.EnableBouncingBalls != engine.GameOptions.EnableBouncingBalls) {
-                        engine.GameOptions.SinglePlayerMode = options.SinglePlayerMode;
-                        engine.GameOptions.DoublePlayerMode = options.DoublePlayerMode;
-                        engine.GameOptions.EnableBouncingBalls = options.EnableBouncingBalls;
-                        engine.InitializeWorld(engine.GameOptions);
+                    if(LocalOptions.SinglePlayerMode != Engine.GameOptions.SinglePlayerMode ||
+                            LocalOptions.DoublePlayerMode != Engine.GameOptions.DoublePlayerMode ||
+                            LocalOptions.EnableBouncingBalls != Engine.GameOptions.EnableBouncingBalls) {
+                        Engine.GameOptions.SinglePlayerMode = LocalOptions.SinglePlayerMode;
+                        Engine.GameOptions.DoublePlayerMode = LocalOptions.DoublePlayerMode;
+                        Engine.GameOptions.EnableBouncingBalls = LocalOptions.EnableBouncingBalls;
+                        Engine.InitializeWorld(Engine.GameOptions);
                     }
-                    if(options.EnableMusic != engine.GameOptions.EnableMusic) {
-                        engine.GameOptions.EnableMusic = options.EnableMusic;
-                        engine.ToggleMusic();
+                    if(LocalOptions.EnableMusic != Engine.GameOptions.EnableMusic) {
+                        Engine.GameOptions.EnableMusic = LocalOptions.EnableMusic;
+                        Engine.ToggleMusic();
                     }
                 }
                 else{
-                    options.SinglePlayerMode = engine.GameOptions.SinglePlayerMode;
-                    options.DoublePlayerMode = engine.GameOptions.DoublePlayerMode;
-                    options.EnableMusic = engine.GameOptions.EnableMusic;
-                    options.EnableBouncingBalls = engine.GameOptions.EnableBouncingBalls;
-                    SetButtons(engine.GameOptions, singleGameButton, doubleGameButton);
-                    SetCheckBox(engine.GameOptions.EnableMusic, enableMusic);
-                    SetCheckBox(engine.GameOptions.EnableBouncingBalls, enableBalls);
+                    LocalOptions.SinglePlayerMode = Engine.GameOptions.SinglePlayerMode;
+                    LocalOptions.DoublePlayerMode = Engine.GameOptions.DoublePlayerMode;
+                    LocalOptions.EnableMusic = Engine.GameOptions.EnableMusic;
+                    LocalOptions.EnableBouncingBalls = Engine.GameOptions.EnableBouncingBalls;
+                    SetButtons(Engine.GameOptions, singleGameButton, doubleGameButton);
+                    SetCheckBox(Engine.GameOptions.EnableMusic, enableMusic);
+                    SetCheckBox(Engine.GameOptions.EnableBouncingBalls, enableBalls);
                 }
-                engine.ResumeEngine();
+                Engine.ResumeEngine();
             }
         });
         var menuHelp = new JMenu("Help");
         var menuFileNewGame = new JMenuItem(new AbstractAction("New Game") {
             @Override
             public void actionPerformed(ActionEvent e) {
-                engine.InitializeWorld(engine.GameOptions);
+                Engine.InitializeWorld(Engine.GameOptions);
+            }
+        });
+        var menuFileStartMenu = new JMenuItem(new AbstractAction("Start Menu") {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Engine.GameOptions.EnableMusic = false;
+                Engine.ToggleMusic();
+                Engine.mFrame.setJMenuBar(null);
+                Engine.mFrame.dispose();
+                Engine = null;
+                var menu = new StartMenu();
+                menu.show();
+                Engine = menu.Engine;
+                LocalOptions = menu.Engine.GameOptions;
             }
         });
         var menuPauseGame = new JMenuItem(new AbstractAction("Pause / Resume (P)") {
             @Override
             public void actionPerformed(ActionEvent e) {
-                engine.TogglePause();
+                Engine.TogglePause();
             }
         });
         var menuFileExit = new JMenuItem(new AbstractAction("Exit") {
@@ -141,8 +156,8 @@ public class DefaultMenuBarBuilder implements IMenuBarBuilder{
         var menuHelpAbout = new JMenuItem(new AbstractAction("About") {
             @Override
             public void actionPerformed(ActionEvent e) {
-                engine.PauseEngine();
-                JOptionPane.showMessageDialog(engine.mFrame, """
+                Engine.PauseEngine();
+                JOptionPane.showMessageDialog(Engine.mFrame, """
                         Icons, terrain sprites and sound effects: https://opengameart.org/
                         
                         Lidia, Shura and characters sprite models:
@@ -179,7 +194,7 @@ public class DefaultMenuBarBuilder implements IMenuBarBuilder{
                         OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
                         SOFTWARE.
                         """);
-                engine.ResumeEngine();
+                Engine.ResumeEngine();
             }
         });
 
@@ -187,6 +202,7 @@ public class DefaultMenuBarBuilder implements IMenuBarBuilder{
         menuBar.add(menuOptions);
         menuBar.add(menuHelp);
         menuFile.add(menuPauseGame);
+        menuFile.add(menuFileStartMenu);
         menuFile.add(menuFileNewGame);
         menuFile.add(menuFileExit);
         menuOptions.add(menuOptionsConfig);

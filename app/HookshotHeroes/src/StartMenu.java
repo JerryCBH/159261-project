@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.util.concurrent.CompletableFuture;
 
 public class StartMenu{
+    private final int _width = 600, _height = 650, _fps = 120;
     private JFrame frame;
     private JPanel panel;
     private JButton easyModeButton;
@@ -21,12 +22,18 @@ public class StartMenu{
     private Image mainImage;
     private Image gameTitle;
     private final AudioClip startTheme;
+    public HookshotHeroesGameEngine Engine;
+    public GameOptions GameOptions;
 
     public StartMenu() {
         mainImage = loadImage("MainImage.png");
         gameTitle = loadImage("GameTitle.png");
         startTheme = loadAudio("start.wav");
         startAudioLoop(startTheme, 0);
+        GameOptions = new GameOptions();
+        GameOptions.Width = _width;
+        GameOptions.Height = _height;
+        Engine = new HookshotHeroesGameEngine(GameOptions);
     }
 
     public void show() {
@@ -59,11 +66,9 @@ public class StartMenu{
                 stopAudioLoop(startTheme);
 
                 // Start single player mode game
-                var options = new GameOptions();
-                options.SinglePlayerMode = true;
+                GameOptions.SinglePlayerMode = true;
 
-                var theGame = new HookshotHeroesGameEngine(options);
-                theGame.createGame(theGame, 120);
+                Engine.createGame(Engine, 120);
                 frame.dispose(); // Close the start menu window;
             }
         });
@@ -75,12 +80,10 @@ public class StartMenu{
 
                 // Start the 2 player mode game
                 // Start single player mode game
-                var options = new GameOptions();
-                options.SinglePlayerMode = false;
-                options.DoublePlayerMode = true;
+                GameOptions.SinglePlayerMode = false;
+                GameOptions.DoublePlayerMode = true;
 
-                var theGame = new HookshotHeroesGameEngine(options);
-                theGame.createGame(theGame, 120);
+                Engine.createGame(Engine, 120);
                 frame.dispose(); // Close the start menu window
             }
         });
@@ -91,13 +94,11 @@ public class StartMenu{
                 stopAudioLoop(startTheme);
 
                 // Start quest game.
-                var options = new GameOptions();
-                options.SinglePlayerMode = true;
-                options.DoublePlayerMode = false;
-                options.MissionMode = true;
+                GameOptions.SinglePlayerMode = true;
+                GameOptions.DoublePlayerMode = false;
+                GameOptions.MissionMode = true;
 
-                var theGame = new HookshotHeroesGameEngine(options);
-                theGame.createGame(theGame, 120);
+                Engine.createGame(Engine, 120);
                 frame.dispose(); // Close the start menu window
             }
         });
