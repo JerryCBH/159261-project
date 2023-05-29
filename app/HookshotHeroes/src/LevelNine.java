@@ -6,7 +6,7 @@ public class LevelNine extends BaseLevel implements ILevel{
         AddEmitter(135, 405);
         AddEmitter(300, 90);
         AddChest(40, 520, true, "You made it!", false);
-        super.NextLevels = new NextLevelInfo[] { new NextLevelInfo(new GridCell(7, 3), new LevelTen(Engine, GameImage, GameOptions)) };
+        super.NextLevels = new NextLevelInfo[] { new NextLevelInfo(new GridCell(7, 1), new LevelTen(Engine, GameImage, GameOptions)) };
     }
 
     @Override
