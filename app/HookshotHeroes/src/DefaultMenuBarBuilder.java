@@ -1,12 +1,9 @@
 import javax.swing.*;
-import javax.swing.text.DefaultCaret;
-import javax.swing.text.Style;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
 
 /****************************************************************************************
  * Builder for the default menu bar.
@@ -116,6 +113,16 @@ public class DefaultMenuBarBuilder implements IMenuBarBuilder{
                 engine.InitializeWorld(engine.GameOptions);
             }
         });
+        var menuFileReturnToMenu = new JMenuItem(new AbstractAction("Return to Menu") {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Close current game window
+                engine.close();
+                // Open new start menu
+                StartMenu startMenu = new StartMenu();
+                startMenu.show();
+            }
+        });
         var menuPauseGame = new JMenuItem(new AbstractAction("Pause / Resume (P)") {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -188,6 +195,7 @@ public class DefaultMenuBarBuilder implements IMenuBarBuilder{
         menuBar.add(menuHelp);
         menuFile.add(menuPauseGame);
         menuFile.add(menuFileNewGame);
+        menuFile.add(menuFileReturnToMenu);
         menuFile.add(menuFileExit);
         menuOptions.add(menuOptionsConfig);
         menuHelp.add(menuHelpHow);
