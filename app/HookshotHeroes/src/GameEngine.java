@@ -23,6 +23,9 @@ public abstract class GameEngine implements KeyListener, MouseListener, MouseMot
 	Graphics2D mGraphics;
 	boolean initialised = false;
 
+	// This will be removed explicitly when disposing engine object.
+	KeyEventDispatcher keyEventDispatcher;
+
 	//-------------------------------------------------------
 	// Time-Related functions
 	//-------------------------------------------------------
@@ -84,25 +87,27 @@ public abstract class GameEngine implements KeyListener, MouseListener, MouseMot
 
 		// Register a key event dispatcher to get a turn in handling all
 		// key events, independent of which component currently has the focus
+		// A reference is declared and stored for removal when disposing engine object.
+		keyEventDispatcher = new KeyEventDispatcher() {
+			@Override
+			public boolean dispatchKeyEvent(KeyEvent e) {
+				switch (e.getID()) {
+					case KeyEvent.KEY_PRESSED:
+						GameEngine.this.keyPressed(e);
+						return false;
+					case KeyEvent.KEY_RELEASED:
+						GameEngine.this.keyReleased(e);
+						return false;
+					case KeyEvent.KEY_TYPED:
+						GameEngine.this.keyTyped(e);
+						return false;
+					default:
+						return false; // do not consume the event
+				}
+			}
+		};
 		KeyboardFocusManager.getCurrentKeyboardFocusManager()
-				.addKeyEventDispatcher(new KeyEventDispatcher() {
-					@Override
-					public boolean dispatchKeyEvent(KeyEvent e) {
-						switch (e.getID()) {
-						case KeyEvent.KEY_PRESSED:
-							GameEngine.this.keyPressed(e);
-							return false;
-						case KeyEvent.KEY_RELEASED:
-							GameEngine.this.keyReleased(e);
-							return false;
-						case KeyEvent.KEY_TYPED:
-							GameEngine.this.keyTyped(e);
-							return false;
-						default:
-							return false; // do not consume the event
-						}
-					}
-				});
+				.addKeyEventDispatcher(keyEventDispatcher);
 
 		// Resize the window (insets are just the boarders that the Operating System puts on the board)
 		Insets insets = mFrame.getInsets();

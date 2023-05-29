@@ -127,6 +127,8 @@ public class DefaultMenuBarBuilder implements IMenuBarBuilder{
                 Engine.ToggleMusic();
                 Engine.mFrame.setJMenuBar(null);
                 Engine.mFrame.dispose();
+                // Explicitly remove the dispatcher of previous engine object.
+                KeyboardFocusManager.getCurrentKeyboardFocusManager().removeKeyEventDispatcher(Engine.keyEventDispatcher);
                 Engine = null;
                 // Open start menu.
                 var menu = new StartMenu();

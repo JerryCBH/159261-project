@@ -239,7 +239,12 @@ public class World implements IWorld {
         var offset = 5;
         if (collidedObject != null) {
             var type = collidedObject.WhoAmI();
-            if (type == WorldObjectType.Apple || type == WorldObjectType.Broccoli || type == WorldObjectType.Cabbage) {
+            if (type == WorldObjectType.Player) {
+                if (((Player)collidedObject).GetHealth() <= 0) {
+                    HandleElimination(collidedObject);
+                }
+            }
+            else if (type == WorldObjectType.Apple || type == WorldObjectType.Broccoli || type == WorldObjectType.Cabbage) {
                 // Play eat apple sound effects.
                 AudioRequests.add(new AudioRequest(WorldObjectType.Apple));
                 if (src != null)
@@ -253,7 +258,7 @@ public class World implements IWorld {
                 AnimationRequests.add(new AnimationRequest(type, collidedObject.GetOccupiedCells()[0], 10));
                 AudioRequests.add(new AudioRequest(WorldObjectType.Mine));
                 if (src != null)
-                    ((Player)src).HandleVoice(WorldObjectType.Mine);
+                    ((Player) src).HandleVoice(WorldObjectType.Mine);
                 // Spawn new random mine.
                 //collidedObject.SetGridCell(GridCell.GetRandomCell(offset, GridRows - offset, offset, GridColumns - offset));
                 RemoveObject(collidedObject);
