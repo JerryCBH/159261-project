@@ -2,7 +2,7 @@
 
 <img src="Images/GameLogo.png" alt="app-screen" width="300" />
 
-Hookshot Heroes is a classic maze puzzle solver game with RPG elements and a fun story.
+Hookshot Heroes is a classic maze puzzle game with RPG elements and a fun story!
 
 In a realm shrouded in mystery, Lidia, a brave and determined heroine, embarks on a perilous journey. 
 Drawn by the allure of hidden treasures and ancient secrets, she fearlessly enters the dungeons. 
@@ -18,6 +18,26 @@ java -jar HookshotHeroes.jar
 ```
 
 GitHub repository (private): https://github.com/JerryCBH/159261-project
+
+## Table of Contents
+- [Ideas and Inspiration](#ideas-and-inspiration)
+- [Level Design](#level-design)
+- [Game Features](#game-features)
+- [About Game Design](#about-game-design)
+- [Game Architecture](#game-architecture)
+- [Game AI](#game-ai)
+- [ChatGPT and NPC Reactions](#chatgpt-and-npc-reactions)
+- [NPC Character Generation](#npc-character-generation)
+- [Game Extensibility](#game-extensibility)
+- [How to play](#how-to-play)
+- - [Single Player Mode](#single-player-mode)
+- - [Double Player Mode](#double-player-mode)
+- - [Quest Mode](#quest-mode)
+- - [Controls](#controls)
+- - [Game Options](#game-options)
+- [Game Story](#game-story)
+- [Group Member's Contributions](#group-members-contributions)
+- [Game Assets](#game-assets)
 
 ---
 ## Ideas and Inspiration
@@ -284,33 +304,39 @@ Lidia's quest for glory unfolds as she unravels the depths of the dungeons, leav
 ## Group Member's Contributions
 
 ### Bryce Cameron
--	level layout design.
--	Level layout coding.
--	Menu design.
--	Boss fights design.
--	Documentations.
--	General bug fixes.
--	Play testing.
+- Level layout design.
+- Level layout coding.
+- Game story. 
+- Menu design. 
+- Boss fights design. 
+- Documentations and presentation. 
+- Video compilation. 
+- General bug fixes. 
+- Play testing.
 
 ### Josh Anderson
--	Game design and ideas.
--	Grapple mechanism and design.
--	Play testing.
+- Game design and ideas. 
+- Story ideas. 
+- Grapple mechanism coding and design. 
+- Documentations and presentation. 
+- Play testing.
 
 ### Helen McCartney
--	Game design and ideas.
--	Story ideas
--	Play testing.
+- Game design and ideas. 
+- Story ideas. 
+- Menu design. 
+- Documentations and presentation. 
+- Play testing.
 
 ### Jerry Hsiung
--	Game software architecture design, core classes and base game functionalities.
--	Animations, audio and sound.
--	Game object interactions / collisions / scores.
--	NPC dialogues / Chat GPT / notifications.
--	Game AI designs.
--	GitHub repository setup and integration of code from team members.
--	Bug fixes.
--	Play testing.
+- Game architecture design, core classes and base game functionalities. 
+- Animations / Audio effects / Game object interaction and collision. 
+- NPC players generation / NPC dialogue / ChatGPT / Score notification.
+- Game AI / End-game levels layout design.
+- GitHub repository setup / Code integration. 
+- Documentation and presentation. 
+- Bug fixes. 
+- Play testing.
 
 ---
 
