@@ -131,6 +131,16 @@ public class DefaultMenuBarBuilder implements IMenuBarBuilder{
                 LocalOptions = menu.Engine.GameOptions;
             }
         });
+        var menuFileReturnToMenu = new JMenuItem(new AbstractAction("Return to Menu") {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Close current game window
+                engine.close();
+                // Open new start menu
+                StartMenu startMenu = new StartMenu();
+                startMenu.show();
+            }
+        });
         var menuPauseGame = new JMenuItem(new AbstractAction("Pause / Resume (P)") {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -204,6 +214,7 @@ public class DefaultMenuBarBuilder implements IMenuBarBuilder{
         menuFile.add(menuPauseGame);
         menuFile.add(menuFileStartMenu);
         menuFile.add(menuFileNewGame);
+        menuFile.add(menuFileReturnToMenu);
         menuFile.add(menuFileExit);
         menuOptions.add(menuOptionsConfig);
         menuHelp.add(menuHelpHow);
