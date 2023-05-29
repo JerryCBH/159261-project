@@ -249,8 +249,8 @@ public class FlyingTerror implements IWorldObject{
         var center = _body.get(0);
         var area = new ArrayList<GridCell>();
         area.add(center);
-        for (int i = -3; i < 3; i++){
-            for (int j = -3; j < 3; j++){
+        for (int i = -3; i < 5; i++){
+            for (int j = -3; j < 5; j++){
                 area.add(new GridCell(center.Row + i, center.Column + j));
             }
         }
