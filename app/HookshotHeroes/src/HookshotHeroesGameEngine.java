@@ -107,6 +107,11 @@ public class HookshotHeroesGameEngine extends GameEngine {
             for (int i = 0; i < players.size(); i++) {
                 drawText(350 + i * 120, 615, players.get(i).GetName() + "'s score: " + players.get(i).Score, "Arial", 12);
             }
+
+            if (_pause) {
+                drawText(200, 150, "PAUSED", "Arial", 50);
+                drawText(200, 250, "Press P to continue", "Arial", 22);
+            }
         }
         else{
             // Result screen.
