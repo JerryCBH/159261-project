@@ -239,10 +239,7 @@ public class World implements IWorld {
         var offset = 5;
         if (collidedObject != null) {
             var type = collidedObject.WhoAmI();
-            if (type == WorldObjectType.Player) {
-                HandleElimination(collidedObject);
-            }
-            else if (type == WorldObjectType.Apple || type == WorldObjectType.Broccoli || type == WorldObjectType.Cabbage) {
+            if (type == WorldObjectType.Apple || type == WorldObjectType.Broccoli || type == WorldObjectType.Cabbage) {
                 // Play eat apple sound effects.
                 AudioRequests.add(new AudioRequest(WorldObjectType.Apple));
                 if (src != null)
