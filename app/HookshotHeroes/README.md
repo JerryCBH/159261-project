@@ -186,6 +186,10 @@ The animation request objects are sorted based on created time stamp in descendi
 
 We can add more comment types as reaction to different game events to make the AI players more realistic. This can be done by extending the ```SpeechService```.
 
+![img.png](Images/bgccomments.png)
+
+![img.png](Images/playercomments.png)
+
 ## NPC Character Generation
 
 The game loads 30+ character sprites and can randomly generate NPC players. The character sprites are stored in ```HashMap``` with the key being the type of character.
