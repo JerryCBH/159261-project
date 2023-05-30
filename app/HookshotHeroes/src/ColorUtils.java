@@ -11,7 +11,8 @@ public class ColorUtils {
     }
 
     public static Color GetContrastColor(Color color){
-        return (color.getRed() * 0.299 + color.getGreen() * 0.587 + color.getBlue() * 0.114) > 186
+        // https://stackoverflow.com/questions/3942878/how-to-decide-font-color-in-white-or-black-depending-on-background-color/3943023#3943023
+        return (color.getRed() * 0.299 + color.getGreen() * 0.587 + color.getBlue() * 0.114) > 150
                 ? Color.BLACK
                 : Color.WHITE;
     }
