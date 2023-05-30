@@ -258,7 +258,7 @@ public class World implements IWorld {
                 AnimationRequests.add(new AnimationRequest(type, collidedObject.GetOccupiedCells()[0], 10));
                 AudioRequests.add(new AudioRequest(WorldObjectType.Mine));
                 if (src != null)
-                    ((Player) src).HandleVoice(WorldObjectType.Mine);
+                    ((Player)src).HandleVoice(WorldObjectType.Mine);
                 // Spawn new random mine.
                 //collidedObject.SetGridCell(GridCell.GetRandomCell(offset, GridRows - offset, offset, GridColumns - offset));
                 RemoveObject(collidedObject);
@@ -445,7 +445,7 @@ public class World implements IWorld {
                         avaList.add(request);
                     }
                     else {
-                        DrawSpeechBubble(Engine,  request.Player.GetOccupiedCells()[0], request.Text);
+                        DrawBGCSpeechBubble(Engine,  request.Player.GetOccupiedCells()[0], request.Text, request.Color);
                     }
                 }
                 if (request.Type == WorldObjectType.Notification) {
@@ -553,7 +553,7 @@ public class World implements IWorld {
     public void DrawSpeechBubblesFromList(ArrayList<AnimationRequest> requests){
         for (int i = 0; i < requests.size(); i++) {
             var grid = new GridCell(requests.get(i).Player.GetOccupiedCells()[0].Row + 5 * i, requests.get(i).Player.GetOccupiedCells()[0].Column);
-            DrawSpeechBubble(Engine,  grid, requests.get(i).Text);
+            DrawBGCSpeechBubble(Engine,  grid, requests.get(i).Text, requests.get(i).Color);
         }
     }
 
@@ -599,6 +599,44 @@ public class World implements IWorld {
         }
 
         engine.restoreLastTransform();
+    }
+
+    public void DrawBGCSpeechBubble(GameEngine engine, GridCell cell, String text, Color color){
+        var offsetX = 50;
+        var offsetY = 0;
+        engine.saveCurrentTransform();
+        var graphics2D = engine.mGraphics;
+        graphics2D.translate(cell.Column * CELL_WIDTH + offsetX, cell.Row * CELL_HEIGHT + offsetY);
+        RenderingHints qualityHints = new RenderingHints(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        qualityHints.put(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+        graphics2D.setRenderingHints(qualityHints);
+        graphics2D.setPaint(color);
+        // Get lines from text.
+        var lines = StringUtils.GetLines(text, 5);
+        int width = (lines.size() == 1)? 5 * text.length() + 10 : 135;
+        int height = 25 + 10 * (lines.size() - 1);
+        GeneralPath path = new GeneralPath();
+        path.moveTo(5, 10);
+        path.curveTo(5, 10, 7, 5, 0, 0);
+        path.curveTo(0, 0, 12, 0, 12, 5);
+        path.curveTo(12, 5, 12, 0, 20, 0);
+        path.lineTo(width - 10, 0);
+        path.curveTo(width - 10, 0, width, 0, width, 10);
+        path.lineTo(width, height - 10);
+        path.curveTo(width, height - 10, width, height, width - 10, height);
+        path.lineTo(15, height);
+        path.curveTo(15, height, 5, height, 5, height - 10);
+        path.lineTo(5, 15);
+        path.closePath();
+        graphics2D.fill(path);
+        engine.changeColor(ColorUtils.GetContrastColor(color));
+
+        for(int i = 0; i < lines.size(); i++){
+            engine.drawText(10, 15 + i*10, lines.get(i), "Arial", 10);
+        }
+
+        engine.restoreLastTransform();
+        engine.changeColor(Color.WHITE);
     }
 
     public void DrawChestBubble(GameEngine engine, Chest chest){

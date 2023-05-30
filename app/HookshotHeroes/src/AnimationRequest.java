@@ -1,3 +1,4 @@
+import java.awt.*;
 import java.util.Comparator;
 import java.util.Date;
 
@@ -23,10 +24,13 @@ public class AnimationRequest {
     public NotificationType NotificationType;
     // Creation timestamp.
     public final Date CreatedTime;
+    // Color of speech bubble.
+    public final Color Color;
     public AnimationRequest(WorldObjectType type, GridCell cell, double seconds){
         Type = type;
         Cell = cell;
         SecondsToPlay = seconds;
         CreatedTime = new Date();
+        Color = ColorUtils.GetRandomColor();
     }
 }
