@@ -37,7 +37,7 @@ GitHub repository (private): https://github.com/JerryCBH/159261-project
 - - [Game Options](#game-options)
 - [Game Story](#game-story)
 - [Group Member's Contributions](#group-members-contributions)
-- [Game Assets](#game-assets)
+- [Game Assets](#game-artworks)
 
 ---
 ## Ideas and Inspiration
@@ -344,7 +344,7 @@ Lidia's quest for glory unfolds as she unravels the depths of the dungeons, leav
 
 ---
 
-## Game Assets
+## Game Artworks
 
 AntumDeluge. (2017). Barrel Sprites [Digital image]. OpenGameArt. Retrieved from https://opengameart.org/content/barrels-mage-city-arcanos-remix
 
