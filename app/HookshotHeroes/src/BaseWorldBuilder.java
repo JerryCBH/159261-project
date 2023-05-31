@@ -101,7 +101,7 @@ public class BaseWorldBuilder {
         }
     }
 
-    // Initialize NPC player
+    // Initialize NPC player.
     public void InitializeNPCPlayers(GameOptions options, World world, ArrayList<Player> npcplayers, GridCell grid) {
         Player npc;
         if (options.MissionMode && npcplayers != null && npcplayers.size() > 0) {
@@ -129,11 +129,12 @@ public class BaseWorldBuilder {
         }
     }
 
+    // Add Background Characters.
     public void AddBGC(World world, NPCType type, int count){
         for (int i = 0; i < count; i++) {
             if (type == NPCType.Aristocrat) {
                 var sprites = world.GameImage.GetRandomNPC(world.GameImage.Aristocrats);
-                world.Objects.add(new BGCPlayer("Aristocrat", GridCell.GetRandomCell(startOffset, world.GridRows - endOffset*2, startOffset, world.GridColumns - endOffset*2, world.CurrentLevel.GetOccupiedCells()),
+                world.Objects.add(new BGCPlayer("Aristocrat", GridCell.GetRandomCell(world.CurrentLevel.GetUnoccupiedCells()),
                         new Skin(sprites.UpSprites, sprites.LeftSprites, sprites.RightSprites, sprites.DownSprites, world.GameImage.Health, world.CELL_WIDTH, world.CELL_HEIGHT),
                         new KeyBinding(KeyEvent.VK_UP, KeyEvent.VK_LEFT, KeyEvent.VK_RIGHT, KeyEvent.VK_DOWN, KeyEvent.VK_PERIOD),
                         world.CurrentLevel.GetWallCells(), world.CurrentLevel.GetLavaCells(), world.CurrentLevel.GetOccupiedCells(), world.AudioRequests, world.EliminationRequests, world.AnimationRequests, world, new BGCSimpleStateMachine()

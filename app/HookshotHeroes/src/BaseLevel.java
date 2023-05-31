@@ -192,10 +192,10 @@ public class BaseLevel {
 
     // Get unoccupied grid cells.
     public ArrayList<GridCell> GetUnoccupiedCells(){
-        var offsetYL = 4;
-        var offsetYU = 0;
+        var offsetYL = 7;
+        var offsetYU = 2;
         var offsetXL = 3;
-        var offsetXU = 1;
+        var offsetXU = 3;
 
         var all = new ArrayList<GridCell>();
         var free = new ArrayList<GridCell>();
