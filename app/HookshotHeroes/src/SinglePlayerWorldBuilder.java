@@ -11,7 +11,7 @@ public class SinglePlayerWorldBuilder extends BaseWorldBuilder implements IWorld
 
         var world = super.CreateWorld(engine, gameImage, gameAudio, options, level);
         var grid = level.GetStartPos() == LevelStartPos.Top ? level.GetTopStartingPos()[0] : level.GetBottomStartingPos()[0];
-
+        world.CurrentLevel.RenderLevel();
         Player player;
         if (players != null && players.size() > 0) {
             player = players.get(0);

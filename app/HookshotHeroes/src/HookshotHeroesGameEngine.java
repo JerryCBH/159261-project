@@ -23,6 +23,7 @@ public class HookshotHeroesGameEngine extends GameEngine {
     private final JMenuBar _menuBar;
 
     private StopWatch _stopWatch;
+    private boolean _IsInitialized = false;
 
     public GameOptions GameOptions;
 
@@ -73,8 +74,6 @@ public class HookshotHeroesGameEngine extends GameEngine {
         mFrame.setJMenuBar(_menuBar);
         // Start playing theme song.
         ToggleMusic();
-        // Create the game world.
-        InitializeWorld(GameOptions);
     }
 
     public void close() {
@@ -92,6 +91,11 @@ public class HookshotHeroesGameEngine extends GameEngine {
 
     @Override
     public void paintComponent() {
+        if (!_IsInitialized) {
+            // Create the game world.
+            InitializeWorld(GameOptions);
+            _IsInitialized = true;
+        }
         if (!_world.IsEndGame()) {
             changeBackgroundColor(Color.darkGray);
             clearBackground(_width, _height);

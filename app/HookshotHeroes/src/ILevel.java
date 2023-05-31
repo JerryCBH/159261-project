@@ -22,4 +22,5 @@ public interface ILevel {
     void AddEmitter(int x, int y);
     void Update(double dt);
     void RenderEmitters();
+    ArrayList<GridCell> GetUnoccupiedCells();
 }

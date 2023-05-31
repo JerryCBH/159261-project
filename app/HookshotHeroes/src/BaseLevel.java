@@ -189,4 +189,50 @@ public class BaseLevel {
         }
         Engine.changeColor(Color.WHITE);
     }
+
+    // Get unoccupied grid cells.
+    public ArrayList<GridCell> GetUnoccupiedCells(){
+        var offsetYL = 4;
+        var offsetYU = 0;
+        var offsetXL = 3;
+        var offsetXU = 1;
+
+        var all = new ArrayList<GridCell>();
+        var free = new ArrayList<GridCell>();
+        for (int i = 6; i <= 50; i++){
+            for (int j = 6; j <= 50; j++) {
+                all.add(new GridCell(i, j));
+            }
+        }
+        // Check wall cells.
+        for(int i = 0; i < all.size(); i++){
+            var bFound = false;
+            var cur = all.get(i);
+            for (int j = 0; j < WallCells.size(); j++) {
+                var w = WallCells.get(j);
+                if ((w.Row - offsetYL <= cur.Row && cur.Row <= w.Row + offsetYU)
+                        && (w.Column - offsetXL <= cur.Column && cur.Column <= w.Column + offsetXU)) {
+                    bFound = true;
+                    break;
+                }
+            }
+            // Check Lava.
+            if (!bFound) {
+                for (int j = 0; j < LavaCells.size(); j++) {
+                    var l = LavaCells.get(j);
+                    if ((l.Row - offsetYL <= cur.Row && cur.Row <= l.Row + offsetYU)
+                            && (l.Column - offsetXL <= cur.Column && cur.Column <= l.Column + offsetXU)) {
+                        bFound = true;
+                        break;
+                    }
+                }
+            }
+            // Cell unoccupied.
+            if (!bFound) {
+                free.add(new GridCell(cur.Row, cur.Column));
+            }
+        }
+
+        return free;
+    }
 }

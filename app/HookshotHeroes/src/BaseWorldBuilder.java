@@ -23,8 +23,7 @@ public class BaseWorldBuilder {
                         new Skin(world.GameImage.Apple, world.CELL_WIDTH, world.CELL_HEIGHT)));
             }
             if (type == WorldObjectType.Mine) {
-                world.Objects.add(new Mine(java.util.UUID.randomUUID().toString(), GridCell.GetRandomCell(startOffset, world.GridRows - endOffset, startOffset, world.GridColumns - endOffset,
-                        world.CurrentLevel.GetOccupiedCells()),
+                world.Objects.add(new Mine(java.util.UUID.randomUUID().toString(), GridCell.GetRandomCell(world.CurrentLevel.GetUnoccupiedCells()),
                         new Skin(world.GameImage.BombSprites, world.CELL_WIDTH, world.CELL_HEIGHT)));
             }
             if (type == WorldObjectType.Ball) {
@@ -45,13 +44,11 @@ public class BaseWorldBuilder {
                         new Skin(world.GameImage.Broccoli, world.CELL_WIDTH, world.CELL_HEIGHT)));
             }
             if (type == WorldObjectType.Coin) {
-                world.Objects.add(new Coin(java.util.UUID.randomUUID().toString(), GridCell.GetRandomCell(startOffset, world.GridRows - endOffset, startOffset, world.GridColumns - endOffset,
-                        world.CurrentLevel.GetOccupiedCells()),
+                world.Objects.add(new Coin(java.util.UUID.randomUUID().toString(), GridCell.GetRandomCell(world.CurrentLevel.GetUnoccupiedCells()),
                         new Skin(world.GameImage.CoinSprites, world.CELL_WIDTH, world.CELL_HEIGHT)));
             }
             if (type == WorldObjectType.Cabbage) {
-                world.Objects.add(new Cabbage(java.util.UUID.randomUUID().toString(), GridCell.GetRandomCell(startOffset, world.GridRows - endOffset, startOffset, world.GridColumns - endOffset,
-                        world.CurrentLevel.GetOccupiedCells()),
+                world.Objects.add(new Cabbage(java.util.UUID.randomUUID().toString(), GridCell.GetRandomCell(world.CurrentLevel.GetUnoccupiedCells()),
                         new Skin(world.GameImage.Cabbage, world.CELL_WIDTH, world.CELL_HEIGHT)));
             }
             if (type == WorldObjectType.Minotaur) {

@@ -30,4 +30,13 @@ public class GridCell {
         col = r.nextInt(cUpper - cLower) + cLower;
         return new GridCell(row, col);
     }
+
+    // Generates a random grid cell using unoccupied list.
+    public static GridCell GetRandomCell(ArrayList<GridCell> unoccupiedCells) {
+        var r = new Random();
+        int lower = 0;
+        int upper = unoccupiedCells.size();
+        var idx = r.nextInt(lower, upper);
+        return new GridCell(unoccupiedCells.get(idx).Row, unoccupiedCells.get(idx).Column);
+    }
 }
