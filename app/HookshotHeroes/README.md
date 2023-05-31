@@ -37,7 +37,7 @@ GitHub repository (private): https://github.com/JerryCBH/159261-project
 - - [Game Options](#game-options)
 - [Game Story](#game-story)
 - [Group Member's Contributions](#group-members-contributions)
-- [Game Assets](#game-artworks)
+- [Game Artworks and Credits](#game-artworks)
 
 ---
 ## Ideas and Inspiration
