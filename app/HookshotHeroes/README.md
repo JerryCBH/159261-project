@@ -323,6 +323,7 @@ Lidia's quest for glory unfolds as she unravels the depths of the dungeons, leav
 - Story ideas. 
 - Grapple mechanism coding and design. 
 - Documentations and presentation. 
+- Minor bug fixing
 - Play testing.
 
 ### Helen McCartney
