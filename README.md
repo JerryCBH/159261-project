@@ -310,11 +310,12 @@ Lidia's quest for glory unfolds as she unravels the depths of the dungeons, leav
 ### Bryce Cameron
 - Level layout design.
 - Level layout coding.
+- Level generation.
 - Game story. 
-- Menu design. 
-- Boss fights design. 
-- Documentations and presentation. 
-- Video compilation. 
+- Menu design and coding. 
+- Boss fights design and coding. 
+- Documentations and presentation / Design document preparation.
+- Video compilation and presentation slides.
 - General bug fixes. 
 - Play testing.
 
@@ -323,15 +324,15 @@ Lidia's quest for glory unfolds as she unravels the depths of the dungeons, leav
 - Story ideas. 
 - Grapple mechanism coding and design. 
 - Documentations and presentation. 
-- Minor bug fixing
+- Minor bug fixing / level design fix / item spawn fix.
 - Play testing.
 
 ### Helen McCartney
 - Game design and ideas. 
 - Story ideas. 
 - Menu design coding. 
-- Documentations and presentation. 
-- Minor bug fixing.
+- Documentations and presentation / Design document preparation.
+- Bug fixing.
 - Play testing.
 
 ### Jerry Hsiung
