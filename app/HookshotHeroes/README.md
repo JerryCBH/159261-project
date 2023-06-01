@@ -329,8 +329,9 @@ Lidia's quest for glory unfolds as she unravels the depths of the dungeons, leav
 ### Helen McCartney
 - Game design and ideas. 
 - Story ideas. 
-- Menu design. 
+- Menu design coding. 
 - Documentations and presentation. 
+- Minor bug fixing.
 - Play testing.
 
 ### Jerry Hsiung
