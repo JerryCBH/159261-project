@@ -1,7 +1,6 @@
 import javax.imageio.ImageIO;
 import javax.sound.sampled.*;
 import javax.swing.*;
-import javax.swing.text.DefaultCaret;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -10,6 +9,9 @@ import java.io.File;
 import java.io.IOException;
 import java.util.concurrent.CompletableFuture;
 
+/****************************************************************************************
+ * Entry Point.
+ ****************************************************************************************/
 public class StartMenu{
     private final int _width = 600, _height = 650, _fps = 120;
     private JFrame frame;
