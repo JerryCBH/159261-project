@@ -35,7 +35,7 @@ java -jar HookshotHeroes.jar
 - - [Game Options](#game-options)
 - [Game Story](#game-story)
 - [Group Member's Contributions](#group-members-contributions)
-- [Game Artworks and Credits](#game-artworks)
+- [Game Artworks and Credits](#game-artworks-and-credits)
 
 ---
 ## Ideas and Inspiration
