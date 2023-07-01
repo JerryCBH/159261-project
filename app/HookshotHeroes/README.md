@@ -17,6 +17,11 @@ Alternatively, the game JAR file artifact can be built from the IDE and then run
 java -jar HookshotHeroes.jar
 ```
 
+## About the Game Engine
+This game uses Massey University 159261 Course Game Engine. 
+
+https://www.massey.ac.nz/study/courses/games-programming-159261/
+
 ## Table of Contents
 - [Ideas and Inspiration](#ideas-and-inspiration)
 - [Level Design](#level-design)

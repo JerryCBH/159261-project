@@ -2,11 +2,11 @@
   <library name="json" type="repository">
     <properties maven-id="org.json:json:LATEST" />
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/lib/json-20230227.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/json-20230618.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
-      <root url="jar://$PROJECT_DIR$/lib/json-20230227-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/json-20230618-sources.jar!/" />
     </SOURCES>
   </library>
 </component>
