@@ -19,7 +19,7 @@ java -jar HookshotHeroes.jar
 ## About the Game Engine
 This game uses Massey University 159261 Course Game Engine: 
 
-https://www.massey.ac.nz/study/courses/games-programming-159261/
+https://github.com/a159x36/GameEngine
 
 ## Requirements
 - Java SE 17 or above
