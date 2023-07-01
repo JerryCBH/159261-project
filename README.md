@@ -16,14 +16,14 @@ Alternatively, the game JAR file artifact can be built from the IDE and then run
 ```shell
 java -jar HookshotHeroes.jar
 ```
-## Requirements
-- Java SE 17 or above
-- IntelliJ
-
 ## About the Game Engine
 This game uses Massey University 159261 Course Game Engine. 
 
 https://www.massey.ac.nz/study/courses/games-programming-159261/
+
+## Requirements
+- Java SE 17 or above
+- IntelliJ
 
 ## Table of Contents
 - [Ideas and Inspiration](#ideas-and-inspiration)
