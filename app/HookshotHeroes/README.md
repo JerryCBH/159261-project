@@ -17,8 +17,6 @@ Alternatively, the game JAR file artifact can be built from the IDE and then run
 java -jar HookshotHeroes.jar
 ```
 
-GitHub repository (private): https://github.com/JerryCBH/159261-project
-
 ## Table of Contents
 - [Ideas and Inspiration](#ideas-and-inspiration)
 - [Level Design](#level-design)
@@ -347,7 +345,7 @@ Lidia's quest for glory unfolds as she unravels the depths of the dungeons, leav
 
 ---
 
-## Game Artworks
+## Game Artworks and Credits
 
 AntumDeluge. (2017). Barrel Sprites [Digital image]. OpenGameArt. Retrieved from https://opengameart.org/content/barrels-mage-city-arcanos-remix
 
