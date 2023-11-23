@@ -21,6 +21,11 @@ This game uses Massey University 159261 Course Game Engine:
 
 https://github.com/a159x36/GameEngine
 
+## Copyright
+Under no circumstances can any code or information from this repository be used or copied without written consent.
+
+Contact https://github.com/JerryCBH
+
 ## Requirements
 - Java SE 17 or above
 - IntelliJ
