@@ -1,0 +1,28 @@
+steps:
+  - name: Checkout repository
+    uses: actions/checkout@v4
+
+  - name: Set up Python
+    uses: actions/setup-python@v4
+    with:
+      python-version: '3.10'
+
+  - name: Install dependencies
+    run: |
+      python -m pip install --upgrade pip
+      pip install pillow
+
+  - name: Run asset generator script
+    run: |
+      python assets/scripts/generate_assets.py
+
+  - name: Zip generated outputs
+    run: |
+      mkdir -p artifacts
+      zip -r artifacts/generated_assets_preview.zip assets/output_images assets/output_audio || true
+
+  - name: Upload generated zip
+    uses: actions/upload-artifact@v4
+    with:
+      name: generated_assets_preview
+      path: artifacts/generated_assets_preview.zip
